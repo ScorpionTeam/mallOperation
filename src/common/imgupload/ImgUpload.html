@@ -1,15 +1,16 @@
 <div class="pic_content">
   <form nz-form>
-    <div class="pic_contain">
+    <div class="pic_contain" [class.unique]="type=='0'?false:true">
       <div class="pic_wapper">
         <img src="{{imgPreview}}" alt="" class="pic">
         <input type="file" class="pic_file_input" (change)="imgUpload($event)"  *ngIf="!isUpload">
+        <span class="upload_tip" *ngIf="!isUpload">请上传图片</span>
         <div class="img_modal" *ngIf="isUpload">
           <i class="anticon anticon-delete del_icon" (click)="delPic()"></i>
         </div>
       </div>
     </div>
-    <div class="pic_config" >
+    <div class="pic_config" *ngIf="type=='0'?true:false" >
       <div nz-row [nzGutter]="40">
         <div nz-col [nzSpan]="12">
           <div nz-form-item nz-row>

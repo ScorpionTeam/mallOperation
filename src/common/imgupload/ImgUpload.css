@@ -1,4 +1,4 @@
-/*商品图片*/
+/*图片*/
 .pic_content{
   margin-bottom: 60px;
 }
@@ -9,7 +9,19 @@
   width: 30%;
   text-align: center;
 }
+.upload_tip{
+  position: absolute;
+  top:40%;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.unique{
+  width: 100%;
+}
 
+/*图片配置*/
 .pic_config{
   display: inline-block;
   width: 68%;
@@ -32,6 +44,7 @@
   position: absolute;
   top:0;
   opacity: 0;
+  cursor: pointer;
 }
 .img_modal{
   display: inline-block;

@@ -14,6 +14,7 @@ export class ImgUpload implements OnInit,OnChanges{
   @Output() uploadSuccess = new EventEmitter();//上传成功回调
   @Output() delSuccess = new EventEmitter();//删除图片成功回调
 
+  publicUrl:string='';//图片公共地址
   imgPreview:any;
   isUpload:boolean=false;//是否上传标志
   imgObj:any={
@@ -70,7 +71,7 @@ export class ImgUpload implements OnInit,OnChanges{
    * 图片
    */
   imgUpload = (val)=>{
-    if(this.imgObj.watermark&&this.imgObj.cutSizeList.length==0){
+    if(this.imgObj.watermark&&this.imgObj.cut&&this.imgObj.cutSizeList.length==0){
       this.nzMessage.warning("添加水印必须选择裁剪尺寸!");
       return;
     }

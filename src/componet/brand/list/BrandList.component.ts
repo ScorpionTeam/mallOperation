@@ -16,6 +16,8 @@ export class BrandListComponent{
   searchKey:string='';//关键字
   brandList:any[]=[];//订单列表
   isCollapse:boolean=false;
+  idList:any=[];//批量操作id集合
+  checkAll:boolean=false;//全选标志
   //分页对象
   page:any={
     pageNo:1,
@@ -169,4 +171,90 @@ export class BrandListComponent{
     return endValue.getTime() <= this.condition.startDate.getTime();
   };
 
+  /**
+   * 选择
+   * @param flag 选中标志
+   * @param val 商品id
+   * @param type 类型 0:全选，1:单选
+   */
+  selectItem(flag,val,type,index?){
+    if(type==1){
+      if(flag){
+        this.idList.push(val);
+      }else {
+        let index = this.idList.indexOf(val);
+        this.idList.splice(index,1);
+      }
+    }else {
+      /*全选或全不选*/
+      if(flag){
+        for(let i =0;i<val.length;i++){
+          if(this.idList.length==0){
+            this.brandList[i]['checked']=true;
+            this.idList.push(val[i].id);
+            continue;
+          }
+          //检测是否在idList中已存在
+          for(let index in this.idList){
+            if(val[i].id==this.idList[index]){
+              break;
+            }else if((Number(index)+1)==this.idList.length){
+              this.brandList[i]['checked']=true;
+              this.idList.push(val[i].id);
+            }
+          }
+        }
+      }else {
+        for(let i =0;i<val.length;i++){
+          this.brandList[i]['checked']=false;
+        }
+        this.idList=[]
+      }
+    }
+    console.log(this.idList);
+  };
+
+  /**
+   * 批量上架
+   */
+  inStore(){
+    if(this.idList.length==0){
+      this.nzMessage.warning("请先勾选要上架的品牌");
+      return
+    }
+    this.http.post("backstage/brand/batchModifyStatus",{status:'1',idList:this.idList}).subscribe(
+      res=>{
+        if(res["result"]==1){
+          this.nzMessage.success("上架成功");
+          this.pageChangeHandler(1);
+          this.idList = [];
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+
+  /**
+   * 批量下架
+   */
+  outStore(){
+    if(this.idList.length==0){
+      this.nzMessage.warning("请先勾选要下架的品牌");
+      return
+    }
+    this.http.post("backstage/brand/batchModifyStatus",{status:'0',idList:this.idList}).subscribe(
+      res=>{
+        if(res["result"]==1){
+          this.nzMessage.success("下架成功");
+          this.pageChangeHandler(1);
+          this.idList = [];
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
 }

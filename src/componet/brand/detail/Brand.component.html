@@ -28,8 +28,8 @@
         </div>
         <div nz-form-control nz-col [nzSpan]="15">
           <nz-select [(ngModel)]="brand.country" formControlName="country">
-            <nz-option [nzLabel]="'中国'" [nzValue]="0"></nz-option>
-            <nz-option [nzLabel]="'美国'" [nzValue]="1"></nz-option>
+            <nz-option [nzLabel]="'中国'" [nzValue]="'0'"></nz-option>
+            <nz-option [nzLabel]="'美国'" [nzValue]="'1'"></nz-option>
           </nz-select>
         </div>
       </div>
@@ -52,7 +52,7 @@
         <div nz-form-control nz-col [nzSpan]="15">
           <nz-input type="text" [(ngModel)]="brand.contactPhone" formControlName="contactPhone"></nz-input>
         </div>
-        <div nz-form-explain nz-col [nzSpan]="3" *ngIf="validateForm.controls.contactPhone.dirty&&validateForm.controls.contactPhone.hasError('pattern')">格式错误</div>
+        <div nz-form-explain nz-col class="form-error-tip" [nzSpan]="3" *ngIf="validateForm.controls.contactPhone.dirty&&validateForm.controls.contactPhone.hasError('pattern')">格式错误</div>
       </div>
     </div>
     <div nz-col [nzSpan]="8">
