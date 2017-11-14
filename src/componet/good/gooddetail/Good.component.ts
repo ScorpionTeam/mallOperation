@@ -100,6 +100,7 @@ export class GoodComponent implements OnInit{
       if(res["result"]==1){
         this.nzMessage.success("添加成功");
         this.validateForm.reset();
+        this.initUrl='';
       }else {
         this.transStr();
         this.nzMessage.error(res["error"].message);
@@ -162,10 +163,10 @@ export class GoodComponent implements OnInit{
       isHot:'',
       isNew:'',
       isOnSale:''
-    })
+    });
     this.validateImg = this.fb.group({
       imageType:['',[Validators.required]]
-    })
+    });
   }
 
   /**

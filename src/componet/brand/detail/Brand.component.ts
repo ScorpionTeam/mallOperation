@@ -5,6 +5,7 @@ import {Http} from "../../../common/http/Http";
 import {NzMessageService} from "ng-zorro-antd";
 import {isUndefined} from "util";
 import {DataTool} from "../../../common/data/DataTool";
+import {isNull} from "util";
 @Component({
   selector:"brand-detail",
   templateUrl:"Brand.component.html",
@@ -36,8 +37,11 @@ export class BrandDetailComponent implements OnInit{
           if(res['result']==1){
             this.brand = res['data'];
             this.brand.status = this.dataTool.strTransBool(this.brand.status);
-            /*this.initUrl = this.brand.brandImg;*/
+            if(!isNull(this.brand.brandImg)){
+              this.initUrl = this.brand.brandImg;
+            }
           }
+          console.log(this.initUrl);
         },
         err=>{
           console.log(err);
@@ -86,6 +90,7 @@ export class BrandDetailComponent implements OnInit{
         if(res["result"]==1){
           this.nzMessage.success("新增成功");
           this.validateForm.reset();
+          this.initUrl='';
         }
         this.brand.status = this.dataTool.strTransBool(this.brand.status);
       },

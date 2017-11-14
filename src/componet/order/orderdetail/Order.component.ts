@@ -9,6 +9,8 @@ import {Http} from "../../../common/http/Http";
 
 export class OrderComponent implements OnInit{
   order:any={};
+  good:any={};
+  customer:any={};
   constructor(private route:ActivatedRoute,private http:Http){}
   ngOnInit(){
     this.init();

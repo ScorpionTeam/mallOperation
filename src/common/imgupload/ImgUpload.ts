@@ -42,6 +42,8 @@ export class ImgUpload implements OnInit,OnChanges{
     //图片有初始值进行初始化
     if(!isUndefined(this.initUrl)){
       this.previewPic(this.initUrl);
+    }else if(this.initUrl==''||isUndefined(this.initUrl)){
+      this.imgPreview='';
     }
     console.log(this.isUpload);
   }
