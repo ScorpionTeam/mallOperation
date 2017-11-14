@@ -26,6 +26,7 @@ import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
      {path:'user-detail/:id',component:UserComponent},
      {path:'activity-list',component:ActivityListComponent},
      {path:'activity-add',component:ActivityComponent},
+     {path:'activity-detail/:id',component:ActivityComponent},
      {path:'brand-list',component:BrandListComponent},
      {path:'brand-detail/:id',component:BrandDetailComponent},
      {path:'brand-add',component:BrandDetailComponent},

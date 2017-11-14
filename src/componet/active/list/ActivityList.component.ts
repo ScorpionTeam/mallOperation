@@ -22,9 +22,9 @@ export class ActivityListComponent{
     pageSize:10,
     total:0
   };
-  returnMoney:number=0;
-  failRemark:string;
   condition:any={};
+  idList:any=[];//批量操作id集合
+  checkAll:boolean=false;
   constructor(private pageObj:PageService,private router:Router,private http:Http,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
 
@@ -171,4 +171,70 @@ export class ActivityListComponent{
     return endValue.getTime() <= this.condition.startDate.getTime();
   };
 
+  /**
+   * 选择
+   * @param flag 选中标志
+   * @param val 商品id
+   * @param type 类型 0:全选，1:单选
+   */
+  selectItem(flag,val,type,index?){
+    if(type==1){
+      if(flag){
+        this.idList.push(val);
+      }else {
+        let index = this.idList.indexOf(val);
+        this.idList.splice(index,1);
+      }
+    }else {
+      /*全选或全不选*/
+      if(flag){
+        for(let i =0;i<val.length;i++){
+          if(this.idList.length==0){
+            this.activityList[i]['checked']=true;
+            this.idList.push(val[i].id);
+            continue;
+          }
+          //检测是否在idList中已存在
+          for(let index in this.idList){
+            if(val[i].id==this.idList[index]){
+              break;
+            }else if((Number(index)+1)==this.idList.length){
+              this.activityList[i]['checked']=true;
+              this.idList.push(val[i].id);
+            }
+          }
+        }
+      }else {
+        for(let i =0;i<val.length;i++){
+          this.activityList[i]['checked']=false;
+        }
+        this.idList=[]
+      }
+    }
+    console.log(this.idList);
+  };
+
+  /**
+   * 改变活动状态
+   * @param status
+   */
+  changeActivityStatus(status){
+    if(this.idList.length==0){
+      this.nzMessage.warning("请勾选要开启/结束的活动");
+      return
+    }
+    this.http.post("backstage/activity/batchModifyStatus",{status:status,idList:this.idList}).subscribe(
+      res=>{
+        if(res["result"]==1){
+          this.nzMessage.success("操作成功");
+          this.pageChangeHandler(1);
+          this.checkAll=false;
+          this.idList=[];
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
 }

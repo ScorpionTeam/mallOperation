@@ -231,6 +231,7 @@ export class GoodListComponent implements OnInit{
       if(res["result"]==1){
         this.nzMessage.success(res["data"])
         this.pageChangeHandler(1);
+        this.idList=[];
       }else {
         this.nzMessage.error(res["data"])
       }
