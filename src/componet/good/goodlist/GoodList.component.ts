@@ -116,7 +116,7 @@ export class GoodListComponent implements OnInit{
    * 关键字查询
    */
   search(){
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&search='+this.searchKey;
+    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+this.searchKey;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;

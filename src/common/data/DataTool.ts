@@ -8,4 +8,21 @@ export  class DataTool{
   strTransBool(val){
     return val=='1'?true:false;
   }
+
+  /**
+   * 分转元
+   * @param val
+   */
+  fTransYuan(val){
+    return (val/100);
+  }
+
+  /**
+   * 元转分
+   * @param val
+   */
+  yTransFen(val){
+    return (val*100);
+  }
+
 }
