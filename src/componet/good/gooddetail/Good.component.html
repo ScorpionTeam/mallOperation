@@ -57,7 +57,7 @@
           <label nz-form-item-required>单价</label>
         </div>
         <div nz-form-control nz-col [nzSpan]="15">
-          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'输入单价'" [(ngModel)]="good.price"  name="price" formControlName="price"></nz-input-number>
+          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'输入单价'" [(ngModel)]="good.price"  name="price" formControlName="price" (nzBlur)="priceChange()"></nz-input-number>
           <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.price.dirty&&validateForm.controls.price.hasError('required')">必填</div>
         </div>
       </div>
@@ -68,7 +68,7 @@
           <label >促销价</label>
         </div>
         <div nz-form-control nz-col [nzSpan]="15">
-          <nz-input-number [nzSize]="'large'" [style.width]="'100%'"  [nzPlaceHolder]="'促销价'"  [(ngModel)]="good.promotion"  formControlName="promotion" name="promotion" ></nz-input-number>
+          <nz-input-number [nzSize]="'large'" [style.width]="'100%'" [nzDisabled]="true" [nzPlaceHolder]="'促销价'"  [(ngModel)]="good.promotion"  formControlName="promotion" name="promotion" ></nz-input-number>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
           <label >折扣</label>
         </div>
         <div nz-form-control nz-col [nzSpan]="15">
-          <nz-input-number [nzSize]="'large'"  [nzPlaceHolder]="'折扣'"  [(ngModel)]="good.discount"  formControlName="discount" name="discount" [style.width]="'100%'"></nz-input-number>
+          <nz-input-number [nzSize]="'large'"  [nzPlaceHolder]="'折扣'"  [(ngModel)]="good.discount"  formControlName="discount" name="discount" [style.width]="'100%'" (nzBlur)="priceChange()"></nz-input-number>
         </div>
       </div>
     </div>

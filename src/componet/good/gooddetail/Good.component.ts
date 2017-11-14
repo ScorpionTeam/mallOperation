@@ -57,7 +57,8 @@ export class GoodComponent implements OnInit{
       this.https.get(url).subscribe(res=>{
         console.log(res);
         this.good=res["data"];
-        this.good.price = this.dataTool.fTransYuan(this.good.price);//分转圆显示
+        this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
+        this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
         this.imgUrlList = res["data"].imgList;
         //图片初始化
         if(this.imgUrlList.length!=0){
@@ -87,6 +88,10 @@ export class GoodComponent implements OnInit{
     }
   }
 
+  priceChange(){
+    this.good.promotion = (this.good.price) * this.good.discount/100;
+    console.log(this.good.promotion);
+  }
   /**
    * 新增
    */
@@ -97,6 +102,7 @@ export class GoodComponent implements OnInit{
       return;
     }
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
+    this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
     this.https.post('backstage/good/add',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
       console.log(res)
       if(res["result"]==1){
@@ -108,10 +114,12 @@ export class GoodComponent implements OnInit{
         this.nzMessage.error(res["error"].message);
       }
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
+      this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
     },err=>{
       this.transStr();
       console.log("error="+err);
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
+      this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
     })
   }
 
@@ -125,6 +133,7 @@ export class GoodComponent implements OnInit{
     }
     this.transBool();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
+    this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
     this.https.post('backstage/good/update',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
       console.log(res)
       if(res["result"]==1){
@@ -135,9 +144,11 @@ export class GoodComponent implements OnInit{
         this.nzMessage.error(res["error"].message);
       }
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
+      this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
     },err=>{
       this.transStr();
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
+      this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
       console.log(err);
     })
   }
