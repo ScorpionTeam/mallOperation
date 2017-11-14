@@ -25,4 +25,24 @@ export  class DataTool{
     return (val*100);
   }
 
+  /**
+   * 获取订单状态字符串
+   * @param val
+   */
+  getOrderStatusStr(val){
+
+  }
+
+  /**
+   * 获取订单类型字符串
+   * @param val
+   */
+  getOrderTypeStr(val){
+    switch (val){
+      case "1":
+        return "PC订单";
+      case "2":
+        return "手机订单";
+    }
+  }
 }

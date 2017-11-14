@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Http} from "../../../common/http/Http";
+import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:'order-detail',
   templateUrl:'./Order.component.html',
@@ -9,9 +10,8 @@ import {Http} from "../../../common/http/Http";
 
 export class OrderComponent implements OnInit{
   order:any={};
-  good:any={};
-  customer:any={};
-  constructor(private route:ActivatedRoute,private http:Http){}
+  constructor(private router:Router,private route:ActivatedRoute,
+              private http:Http,private dataTool:DataTool){}
   ngOnInit(){
     this.init();
   }
@@ -23,8 +23,23 @@ export class OrderComponent implements OnInit{
     console.log(this.route.params['value'].id)
     this.http.get("backstage/order/findById?id="+this.route.params['value'].id).subscribe(res=>{
       console.log(res);
+      this.order = res["data"];
     },err=>{
       console.log(err);
     })
+  }
+
+  /**
+   * 保存
+   */
+  save(){
+
+  }
+
+  /**
+   * 返回
+   */
+  back(){
+    this.router.navigate(["../../order-list"],{relativeTo:this.route});
   }
 }
