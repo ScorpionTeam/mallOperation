@@ -1,0 +1,42 @@
+.index_container{
+  height: 100%;
+  overflow: hidden;
+}
+/*导航栏*/
+.index_sider{
+  background:#fff;
+  overflow: hidden;
+}
+.index_sider .menu{
+  height:100%;
+  width:calc(100% + 17px);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.menu span{
+  font-size: 14px;
+}
+.menu i{
+  font-size: 20px;
+}
+
+/*内容部分*/
+.index_content{
+  padding:12px 12px 0;
+  position: relative;
+  overflow: hidden;
+}
+.sub_out{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.index_content .sub_container{
+  background:#fff;
+  padding: 24px;
+  min-height: 280px;
+  height: 100%;
+  overflow-y: scroll;
+  width: calc(100% + 17px);
+}

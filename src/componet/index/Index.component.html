@@ -1,0 +1,53 @@
+<nz-layout class="layout index_container">
+  <nz-header>
+    <div class="logo"></div>
+    <nz-dropdown style="float: right">
+      <a class="ant-dropdown-link" nz-dropdown>
+       张三 <i class="anticon anticon-down"></i>
+      </a>
+      <ul nz-menu>
+        <li nz-menu-item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">个人资料</a>
+        </li>
+        <li nz-menu-item>
+          <a target="_blank" rel="noopener noreferrer" (click)="logout()">退出</a>
+        </li>
+      </ul>
+    </nz-dropdown>
+  </nz-header>
+  <nz-layout>
+    <nz-sider [nzWidth]="180" class="index_sider">
+      <ul nz-menu [nzMode]="'inline'" class="menu">
+        <li nz-submenu>
+          <span title><i class="anticon anticon-user"></i>商品</span>
+          <ul>
+            <li nz-menu-item (click)="skipToPage('good-list')">商品列表</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-laptop"></i> 订单</span>
+          <ul>
+            <li nz-menu-item (click)="skipToPage('order-list')">订单列表</li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-notification"></i>用户</span>
+          <ul>
+            <li nz-menu-item (click)="skipToPage('user-list')">用户列表</li>
+            <li nz-menu-item (click)="skipToPage('activity-list')">活动列表</li>
+            <li nz-menu-item (click)="skipToPage('brand-list')">品牌列表</li>
+            <li nz-menu-item>option12</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout class="index_content">
+      <div class="sub_out">
+        <nz-content class="sub_container">
+          <router-outlet></router-outlet>
+        </nz-content>
+      </div>
+    </nz-layout>
+  </nz-layout>
+  <nz-footer style="text-align: center;">Ant Design ©2017 妆口袋</nz-footer>
+</nz-layout>

@@ -1,0 +1,22 @@
+/*工具栏*/
+.userList_tool{
+  margin-bottom: 20px;
+}
+.userList_tool .btn{
+  width: 70px;
+  height:28px;
+  float: right;
+  margin-right: 15px;
+}
+.userList_tool .ant-btn-danger{
+  color: #fff;
+  background:#f04134;
+}
+.search_input{
+  display:inline-table;
+  width: 300px;
+  vertical-align: top;
+}
+.search{
+  cursor: pointer;
+}

@@ -1,0 +1,31 @@
+<form nz-form  [formGroup]="validateForm" class="login-form" >
+  <div nz-form-item>
+    <div nz-form-control [nzValidateStatus]="validateForm.controls.userName">
+      <nz-input  formControlName="userName" [(ngModel)]="userName"
+                 [nzPlaceHolder]="'Username'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-user"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="validateForm.controls.userName.dirty&&validateForm.controls.userName.hasError('required')">请填写姓名!</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div  nz-form-control [nzValidateStatus]="validateForm.controls.password">
+      <nz-input  [nzType]="'password'" formControlName ='password'
+                 [(ngModel)]="password" [nzPlaceHolder]="'Password'"
+                  [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-lock"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('required')">请填写密码!</div>
+      <div nz-form-explain *ngIf="validateForm.controls.password.dirty&&validateForm.controls.password.hasError('minlength')">密码不少于6位</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" (click)="login()">登录</button>
+    </div>
+  </div>
+</form>

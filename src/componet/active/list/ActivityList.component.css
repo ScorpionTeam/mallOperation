@@ -1,0 +1,18 @@
+/*工具栏*/
+.activityList_tool{
+  margin-bottom: 20px;
+}
+
+/*图片*/
+.condition_template{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.hide{
+  display: none;
+}
+/*表格操作*/
+.activity_list_action span{
+  margin-right: 10px;
+}
+

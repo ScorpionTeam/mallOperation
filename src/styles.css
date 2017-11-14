@@ -1,0 +1,37 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+textarea{
+  height: 100px!important;
+}
+/*主题色*/
+.err{
+  color:red;
+}
+.success{
+  color:green;
+}
+
+/*列表搜索栏输入框样式*/
+.search_input{
+  display:inline-table;
+  width: 300px;
+  vertical-align: middle;
+}
+.search{
+  cursor: pointer;
+}
+
+/*列表搜索栏按钮样式*/
+.btn_search_tool{
+  width: 70px;
+  height:28px;
+  float: right;
+  margin-right: 15px;
+}
+
+.btn-danger{
+  color: #fff!important;
+  background:#f04134!important;
+}

@@ -1,0 +1,35 @@
+/*工具栏*/
+.orderList_tool{
+  margin-bottom: 20px;
+}
+.orderList_tool .btn{
+  width: 70px;
+  height:28px;
+  float: right;
+  margin-right: 15px;
+}
+.orderList_tool .ant-btn-danger{
+  color: #fff;
+  background:#f04134;
+}
+.search_input{
+  display:inline-table;
+  width: 300px;
+  vertical-align: middle;
+}
+.search{
+  cursor: pointer;
+}
+/*图片*/
+.condition_template{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.hide{
+  display: none;
+}
+/*表格操作*/
+.order_list_action span{
+  margin-right: 10px;
+}
+

@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+redis-server --service-install redis.windows.conf --loglevel verbose
+.idea/
+node_modules/
+dist/

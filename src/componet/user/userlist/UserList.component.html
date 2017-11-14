@@ -1,0 +1,53 @@
+<div class="userList_tool">
+  <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"
+            [(ngModel)]="searchKey" [class]="'search_input'">
+    <ng-template #addOnAfter>
+      <i class="anticon anticon-search search" (click)="search()"></i>
+    </ng-template>
+  </nz-input>
+  <button nz-button [nzType]="'danger'" class="btn" (click)="delete()">
+    <span>删除</span>
+  </button>
+  <button nz-button [nzType]="'primary'" class="btn" (click)="skipToPage('/user-add')">
+    <span>新增</span>
+  </button>
+</div>
+<nz-table #userListTable [nzAjaxData]="userList" [nzPageSize]="10" [nzLoading]="ngLoad"
+          [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
+          [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
+  <thead nz-thead>
+  <tr>
+    <th nz-th [nzCheckbox]="true">
+      <label #checkboxAll nz-checkbox  [ngModel]="false" (ngModelChange)="selectItem(checkboxAll,userList,0)">
+      </label>
+    </th>
+    <th nz-th><span>姓名</span></th>
+    <th nz-th><span>年龄</span></th>
+    <th nz-th><span>手机号</span></th>
+    <th nz-th><span>地址</span></th>
+    <th nz-th><span>城市</span></th>
+    <th nz-th><span>实名认证</span></th>
+    <th nz-th><span>状态</span></th>
+    <th nz-th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of userListTable.data;let index = index;">
+    <td nz-td [nzCheckbox]="true">
+      <label #checkbox  nz-checkbox [ngModel]="userList.checked"   (ngModelChange)="selectItem(checkbox,data.userNo,data.id,index)">
+      </label>
+    </td>
+    <td nz-td>{{data.name}}</td>
+    <td nz-td>
+      <a>{{data.age}}</a>
+    </td>
+    <td nz-td>{{data.mobile}}</td>
+    <td nz-td>{{data.address}}</td>
+    <td nz-td>{{data.city}}</td>
+    <td nz-td>{{data.certification=="0"?"未认证":data.certification=="1"?"认证不通过":"已认证"}}</td>
+    <td nz-td>{{data.status=="1"?"正常":"注销"}}</td>
+    <td nz-td><span><a (click)="skipToPage('/user-detail',data.id)">编辑</a></span></td>
+  </tr>
+  </tbody>
+</nz-table>
+

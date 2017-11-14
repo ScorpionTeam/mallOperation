@@ -1,0 +1,6 @@
+angular-demo@0.0.0 D:\webstormWorkplace\angularDemo
++-- UNMET PEER DEPENDENCY @angular/common@5.0.0
++-- UNMET PEER DEPENDENCY @angular/compiler@5.0.0
++-- UNMET PEER DEPENDENCY @angular/core@5.0.0
+`-- install@0.10.1 
+

@@ -1,0 +1,31 @@
+/*工具栏*/
+.goodList_tool{
+  margin-bottom: 20px;
+}
+.goodList_tool .btn{
+  width: 70px;
+  height:28px;
+  float: right;
+  margin-right: 15px;
+}
+.goodList_tool .ant-btn-danger{
+  color: #fff;
+  background:#f04134;
+}
+.search_input{
+  display:inline-table;
+  width: 300px;
+  vertical-align: middle;
+}
+.search{
+  cursor: pointer;
+}
+
+/*条件模板*/
+.condition_template{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.hide{
+  display: none;
+}
