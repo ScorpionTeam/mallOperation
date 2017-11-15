@@ -1,4 +1,4 @@
-<upload-pic (uploadSuccess)="uploadPicSuccess($event)" (delSuccess)="delPicSuccess($event)" [type]="'1'" [initUrl]="initUrl"></upload-pic>
+<!--<upload-pic (uploadSuccess)="uploadPicSuccess($event)" (delSuccess)="delPicSuccess($event)" [type]="'1'" [initUrl]="initUrl"></upload-pic>
 <form nz-form [formGroup]="validateForm">
   <div nz-row [nzGutter]="40">
     <div nz-col [nzSpan]="8">
@@ -72,6 +72,61 @@
 </form>
 <div nz-row>
   <div nz-col [nzSpan]="24" style="text-align: center;">
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+    <button nz-button (click)="back()">返回</button>
+  </div>
+</div>-->
+<div class="hk_detail_form">
+  <div class="hk_form_title">图片信息</div>
+  <upload-pic (uploadSuccess)="uploadPicSuccess($event)" (delSuccess)="delPicSuccess($event)" [type]="'1'" [initUrl]="initUrl"></upload-pic>
+  <div class="hk_form_title">基本信息</div>
+  <form nz-form  [formGroup]="validateForm">
+    <div nz-form-item nz-row>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">名称</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1" nz-form-control>
+          <nz-input type="text" [(ngModel)]="brand.brandName" formControlName="brandName"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">简称</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1">
+          <nz-input type="text" [(ngModel)]="brand.shortName" formControlName="shortName"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">国家</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1" nz-form-control>
+          <nz-select [(ngModel)]="brand.country" formControlName="country">
+            <nz-option [nzLabel]="'中国'" [nzValue]="'0'"></nz-option>
+            <nz-option [nzLabel]="'美国'" [nzValue]="'1'"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">负责人</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1" nz-form-control>
+          <nz-input type="text" [(ngModel)]="brand.contact" formControlName="contact"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">负责人电话</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1" nz-form-control>
+          <nz-input type="text" [(ngModel)]="brand.contactPhone" formControlName="contactPhone"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" nz-col [nzSpan]="12">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="4">状态</label>
+        <div nz-col [nzSpan]="16"  [nzOffset]="1" nz-form-control>
+          <nz-switch [(ngModel)]="brand.status" formControlName="status">
+            <span checked>入驻</span>
+            <span unchecked>退出</span>
+          </nz-switch>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="hk_detail_form_footer">
     <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
     <button nz-button (click)="back()">返回</button>
   </div>

@@ -46,3 +46,9 @@ textarea{
 .hk_form_item{
   margin: 15px 0;
 }
+.hk_detail_form{
+  padding:0 220px
+}
+.hk_detail_form_footer{
+  text-align: center;
+}

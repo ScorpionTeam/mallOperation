@@ -41,7 +41,6 @@ export class BrandDetailComponent implements OnInit{
               this.initUrl = this.brand.brandImg;
             }
           }
-          console.log(this.initUrl);
         },
         err=>{
           console.log(err);
