@@ -45,4 +45,17 @@ export  class DataTool{
         return "手机订单";
     }
   }
+
+  getPayTypeStr(val){
+    switch (val){
+      case "0":
+        return "支付宝";
+      case "1":
+        return "微信";
+      case "2":
+        return "信用卡";
+      case "3":
+        return "储蓄卡";
+    }
+  }
 }

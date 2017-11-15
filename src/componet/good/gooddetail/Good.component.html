@@ -1,4 +1,11 @@
+<!--
+<div class="hk_form_title">
+  图片信息
+</div>
 <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event)" (delSuccess)="delPic()"></upload-pic>
+<div class="hk_form_title">
+  基本信息
+</div>
 <form nz-form  [formGroup]="validateForm">
   <div nz-row [nzGutter]="40">
     <div nz-col [nzSpan]="8">
@@ -163,3 +170,118 @@
     </div>
   </div>
 </form>
+-->
+
+<div class="good_content">
+  <div class="hk_form_title">
+    图片信息
+  </div>
+  <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event)" (delSuccess)="delPic()"></upload-pic>
+  <div class="hk_form_title">
+    基本信息
+  </div>
+  <form nz-form  [formGroup]="validateForm">
+    <div nz-form-item>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">名称</label>
+        <div nz-col [nzSpan]="12"  [nzOffset]="1" nz-form-control>
+          <nz-input [(ngModel)]="good.goodName" formControlName="name"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item" style="line-height: 0;">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">商品描述</label>
+        <div nz-col [nzSpan]="12"  [nzOffset]="1">
+          <nz-input [nzType]="'textarea'" [nzRows]="'4'" [(ngModel)]="good.description" formControlName="description" name="describe"></nz-input>`
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">商品编码</label>
+        <div nz-col [nzSpan]="12"  [nzOffset]="1" nz-form-control>
+          <nz-input [(ngModel)]="good.goodNo " formControlName="goodNo"></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">类目</label>
+        <div nz-col [nzSpan]="8"  [nzOffset]="1" nz-form-control>
+          <nz-select  [nzPlaceHolder]="'请选择'" [(ngModel)]="good.categoryId" name="categoryId" formControlName="categoryId">
+            <nz-option [nzLabel]="'请选择'" [nzValue]="0"></nz-option>
+            <nz-option [nzLabel]="'饮料'" [nzValue]="1"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">品牌</label>
+        <div nz-col [nzSpan]="8"  [nzOffset]="1" nz-form-control>
+          <nz-select  [nzPlaceHolder]="'请选择'" [(ngModel)]="good.brandId" name="brandId" formControlName="brandId">
+            <nz-option [nzLabel]="'请选择'" [nzValue]="0"></nz-option>
+            <nz-option [nzLabel]="'耐克'" [nzValue]="1"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">单价</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'输入单价'" [(ngModel)]="good.price"  name="price" formControlName="price" (nzBlur)="priceChange()"></nz-input-number>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">折扣</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-input-number [nzSize]="'large'"  [nzPlaceHolder]="'折扣'"  [(ngModel)]="good.discount"  formControlName="discount" name="discount" [style.width]="'100%'" (nzBlur)="priceChange()"></nz-input-number>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">促销价</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-input-number [nzSize]="'large'" [style.width]="'100%'" [nzDisabled]="true" [nzPlaceHolder]="'促销价'"  [(ngModel)]="good.promotion"  formControlName="promotion" name="promotion" ></nz-input-number>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">库存</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'库存'"  [(ngModel)]="good.stock" name="stock" formControlName="stock"></nz-input-number>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">上架状态</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-switch [(ngModel)]="good.isOnSale" formControlName="isOnSale" name="OnSale">
+            <span checked>是</span>
+            <span unchecked>否</span>
+          </nz-switch>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">热销</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-switch [(ngModel)]="good.isHot"formControlName="isHot" name="hot">
+            <span checked>是</span>
+            <span unchecked>否</span>
+          </nz-switch>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">新品</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-switch [(ngModel)]="good.isNew"formControlName="isNew" name="new">
+            <span checked>是</span>
+            <span unchecked>否</span>
+          </nz-switch>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">包邮</label>
+        <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
+          <nz-switch [(ngModel)]="good.isFreight" formControlName="isFreight" name="mail">
+            <span checked>是</span>
+            <span unchecked>否</span>
+          </nz-switch>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div style="text-align: center;">
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+    <button nz-button (click)="back()">返回</button>
+  </div>
+</div>

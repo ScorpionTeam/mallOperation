@@ -34,7 +34,6 @@ export class ImgUpload implements OnInit,OnChanges{
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.init();
-    console.log(changes);
   }
 
   init(){
@@ -45,7 +44,6 @@ export class ImgUpload implements OnInit,OnChanges{
     }else if(this.initUrl==''||isUndefined(this.initUrl)){
       this.imgPreview='';
     }
-    console.log(this.isUpload);
   }
   /**
    * 选取图片尺寸

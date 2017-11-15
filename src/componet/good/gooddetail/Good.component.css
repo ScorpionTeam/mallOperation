@@ -1,3 +1,7 @@
+/*内容页*/
+.good_content{
+  padding:0 220px
+}
 /*表单样式*/
 .ant-advanced-search-form {
   padding: 24px;
@@ -22,58 +26,5 @@
   color:red;
   text-align: center;
 }
-/*商品图片*/
-.good_pic_content{
-  margin-bottom: 60px;
-}
-.pic_contain{
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
-  width: 30%;
-  text-align: center;
-}
 
-.good_pic_config{
-  display: inline-block;
-  width: 68%;
-}
-.good_pic_wapper{
-  margin: 0 auto;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  border: 1px solid #f1f1f1;
-}
-.good_pic{
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
-.pic_file_input{
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top:0;
-  opacity: 0;
-}
-.img_modal{
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top:0;
-  left: 0;
-  font-size:0;
-  line-height: 150px;
-}
-.img_modal:hover{
-  font-size:20px;
-  background:#000;
-  opacity: 0.8;
-}
-.del_icon{
-  color: #fff;
-  cursor: pointer;
-}
 

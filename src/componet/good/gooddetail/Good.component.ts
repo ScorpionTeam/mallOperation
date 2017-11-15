@@ -32,12 +32,6 @@ export class GoodComponent implements OnInit{
     brandId:0,
     goodNo: ''
   };
-  imgObj:any={
-    cutSizeList:[],
-    watermark:true,
-    cut:true,
-    imageType:'0'
-  };
   imgUrlList:any=[];
   initUrl:any;
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
@@ -64,7 +58,6 @@ export class GoodComponent implements OnInit{
         if(this.imgUrlList.length!=0){
           this.initUrl= this.imgUrlList[0].url;
         }
-        console.log(this.initUrl);
         this.transStr();
       });
     }
@@ -204,28 +197,7 @@ export class GoodComponent implements OnInit{
     this.good.isOnSale = this.dataTool.strTransBool(this.good.isOnSale);
   }
 
-  /**
-   * 选取图片尺寸
-   * @param val
-   */
-  selectImgSize(val){
-    for(let index in val){
-      let i = this.imgObj.cutSizeList.indexOf(val[index]["value"]);
-      if(val[index]["checked"]){
-        //判断是否已存在
-        if(i!=-1){
-          continue;
-        }
-        this.imgObj.cutSizeList.push(val[index]["value"])
-      }else {
-        //判断是否存在
-        if(i==-1){
-          continue;
-        }
-        this.imgObj.cutSizeList.splice(i,1);
-      }
-    }
-  }
+
   /**
    * 图片
    */

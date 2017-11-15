@@ -36,3 +36,13 @@ textarea{
   background:#f04134!important;
 }
 
+/*表单*/
+.hk_form_title{
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 20px;
+  color: #000;
+}
+.hk_form_item{
+  margin: 15px 0;
+}

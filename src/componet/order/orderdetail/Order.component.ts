@@ -42,4 +42,12 @@ export class OrderComponent implements OnInit{
   back(){
     this.router.navigate(["../../order-list"],{relativeTo:this.route});
   }
+
+  /**
+   * 查看商品详情
+   * @param id 商品id
+   */
+  checkGoodDetail(id){
+    this.router.navigate(["../../good-detail",id],{relativeTo:this.route});
+  }
 }
