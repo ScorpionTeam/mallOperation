@@ -24,8 +24,10 @@ import {BrandListComponent} from "../componet/brand/list/BrandList.component";
 import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
 import {ImgUpload} from "../common/imgupload/ImgUpload";
 import { CKEditorModule } from 'ng2-ckeditor';
+import {HKeditor} from "../common/editor/editor";
 @NgModule({
   declarations: [
+    HKeditor,
     ImgUpload,
     AppComponent,
     LoginComponent,

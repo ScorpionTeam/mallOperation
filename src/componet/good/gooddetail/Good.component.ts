@@ -212,12 +212,4 @@ export class GoodComponent implements OnInit{
   delPic(){
     this.imgUrlList=[];
   }
-
-  /**
-   * 获取富文本内容
-   * @param val
-   */
-  getRichContent(val){
-    console.log(this.good.richContent);
-  }
 }

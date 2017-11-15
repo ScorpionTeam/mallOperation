@@ -277,13 +277,7 @@
     </div>
   </form>
   <div class="hk_form_title">产品信息</div>
-  <ckeditor
-    [(ngModel)]="good.richContent"
-    [config]="{uiColor: '#f1f1f1'}"
-    [readonly]="false"
-    (blur)="getRichContent($event)"
-    debounce="500">
-  </ckeditor>
+  <hk-editor [ckeditorContent]="good.richContent"></hk-editor>
   <div class="good_foot">
     <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
     <button nz-button (click)="back()">返回</button>

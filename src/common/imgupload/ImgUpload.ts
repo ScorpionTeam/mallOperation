@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit, AfterViewInit, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges} from "@angular/core";
 import {Http} from "../http/Http";
 import {DataTool} from "../data/DataTool";
 import {NzMessageService} from "ng-zorro-antd";

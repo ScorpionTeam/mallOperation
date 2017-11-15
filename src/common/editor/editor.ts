@@ -1,24 +1,22 @@
-import {Component} from "@angular/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 @Component({
-  selector:'editor',
+  selector:'hk-editor',
   template:`<ckeditor
     [(ngModel)]="ckeditorContent"
     [config]="config"
     [readonly]="false"
+    (blur)="blurHandler()"
     debounce="500">
   </ckeditor>`
 })
 
 export class HKeditor{
-  ckeditorContent:any;
-  config:any={
-    uiColor:"#f1f1f1",
-    toobar:"Hk",
-    toobar_Hk:this.toobarConfig
-  };
+  @Input() ckeditorContent:any;
+  @Output() blur = new EventEmitter();
   toobarConfig:any=[
-    { name: 'document', items : [ 'Source','-','Save','NewPage','DocProps','Preview','-','Templates' ] },
-    { name: 'clipboard', items : [ '-','Undo','Redo' ] },
+    { name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','Print','-','Templates' ] },
+    { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+    { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
     { name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
       'HiddenField' ] },
     '/',
@@ -32,7 +30,16 @@ export class HKeditor{
     { name: 'colors', items : [ 'TextColor','BGColor' ] },
     { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] }
   ];
+  config:any={
+    uiColor:"#f1f1f1",
+    toobar:'full',
+    toobar_full:this.toobarConfig,
+    toolbarCanCollapse:true
+  };
   constructor(){
+  }
 
+  blurHandler(){
+    this.blur.emit(this.ckeditorContent);
   }
 }
