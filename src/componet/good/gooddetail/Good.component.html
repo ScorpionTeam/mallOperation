@@ -173,13 +173,9 @@
 -->
 
 <div class="good_content">
-  <div class="hk_form_title">
-    图片信息
-  </div>
+  <div class="hk_form_title">图片信息</div>
   <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event)" (delSuccess)="delPic()"></upload-pic>
-  <div class="hk_form_title">
-    基本信息
-  </div>
+  <div class="hk_form_title">基本信息</div>
   <form nz-form  [formGroup]="validateForm">
     <div nz-form-item>
       <div nz-row class="hk_form_item">
@@ -280,7 +276,15 @@
       </div>
     </div>
   </form>
-  <div style="text-align: center;">
+  <div class="hk_form_title">产品信息</div>
+  <ckeditor
+    [(ngModel)]="good.richContent"
+    [config]="{uiColor: '#f1f1f1'}"
+    [readonly]="false"
+    (blur)="getRichContent($event)"
+    debounce="500">
+  </ckeditor>
+  <div class="good_foot">
     <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
     <button nz-button (click)="back()">返回</button>
   </div>

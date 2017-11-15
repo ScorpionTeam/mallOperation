@@ -18,7 +18,6 @@ export class GoodComponent implements OnInit{
   isDetail:boolean;
   //初始化商品详情
   good:any= {
-    categoryId: 0,
     goodName: '',
     description: '',
     promotion:0,
@@ -29,8 +28,8 @@ export class GoodComponent implements OnInit{
     isHot: false,
     isNew: false,
     isFreight: false,
-    brandId:0,
-    goodNo: ''
+    goodNo: '',
+    richContent:''
   };
   imgUrlList:any=[];
   initUrl:any;
@@ -212,5 +211,13 @@ export class GoodComponent implements OnInit{
    */
   delPic(){
     this.imgUrlList=[];
+  }
+
+  /**
+   * 获取富文本内容
+   * @param val
+   */
+  getRichContent(val){
+    console.log(this.good.richContent);
   }
 }

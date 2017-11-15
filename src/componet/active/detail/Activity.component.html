@@ -1,3 +1,54 @@
-<form >
-
+<form nz-form [formGroup]="validateForm">
+  <div nz-row [nzGutter]="40">
+    <div nz-col [nzSpan]="8" nz-row>
+      <div nz-col nz-form-label [nzSpan]="5">
+        <label nz-form-item-required>活动名称</label>
+      </div>
+      <div nz-col nz-form-item [nzSpan]="15">
+        <nz-input type="text" [(ngModel)]="activity.name" formControlName="name"></nz-input>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8" nz-row>
+      <div nz-col nz-form-label [nzSpan]="5">
+        <label nz-form-item-required>活动类型</label>
+      </div>
+      <div nz-col nz-form-item [nzSpan]="15">
+        <nz-select [(ngModel)]="activity.activityType" formControlName="activityType">
+          <nz-option [nzLabel]="'秒杀'" [nzValue]="'0'"></nz-option>
+          <nz-option [nzLabel]="'拼团'" [nzValue]="'1'"></nz-option>
+          <nz-option [nzLabel]="'优选'" [nzValue]="'2'"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8" nz-row>
+      <div nz-col nz-form-label [nzSpan]="5">
+        <label nz-form-item-required>活动平台</label>
+      </div>
+      <div nz-col nz-form-item [nzSpan]="15">
+        <nz-select [(ngModel)]="activity.target" formControlName="target">
+          <nz-option [nzLabel]="'全部'" [nzValue]="'3'"></nz-option>
+          <nz-option [nzLabel]="'小程序'" [nzValue]="'0'"></nz-option>
+          <nz-option [nzLabel]="'app'" [nzValue]="'1'"></nz-option>
+          <nz-option [nzLabel]="'网站'" [nzValue]="'2'"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="8" nz-row>
+      <div nz-col nz-form-label [nzSpan]="5">
+        <label nz-form-item-required>状态</label>
+      </div>
+      <div nz-col nz-form-item [nzSpan]="15">
+        <nz-switch [(ngModel)]="activity.status"  formControlName="status">
+          <span checked>开启</span>
+          <span unchecked>结束</span>
+        </nz-switch>
+      </div>
+    </div>
+  </div>
 </form>
+<div nz-row>
+  <div nz-col [nzSpan]="24" style="text-align: center;">
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+    <button nz-button (click)="back()">返回</button>
+  </div>
+</div>

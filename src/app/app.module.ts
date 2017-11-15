@@ -23,6 +23,7 @@ import {ActivityComponent} from "../componet/active/detail/Activity.component";
 import {BrandListComponent} from "../componet/brand/list/BrandList.component";
 import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
 import {ImgUpload} from "../common/imgupload/ImgUpload";
+import { CKEditorModule } from 'ng2-ckeditor';
 @NgModule({
   declarations: [
     ImgUpload,
@@ -47,7 +48,8 @@ import {ImgUpload} from "../common/imgupload/ImgUpload";
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot()
+    NgZorroAntdModule.forRoot(),
+    CKEditorModule
   ],
   providers: [PageService,
                HttpData,
