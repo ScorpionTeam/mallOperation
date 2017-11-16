@@ -171,7 +171,6 @@
   </div>
 </form>
 -->
-
 <div class="good_content">
   <div class="hk_form_title">图片信息</div>
   <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event)" (delSuccess)="delPic()"></upload-pic>
@@ -276,10 +275,166 @@
       </div>
     </div>
   </form>
+  <div class="hk_form_title" *ngIf="isDetail">规格配置</div>
+  <button nz-button [nzType]="'primary'" (click)="addAttr(0)" *ngIf="isDetail">
+    <span>新增规格</span>
+  </button>
+  <!--  <button nz-button [nzType]="'primary'" (click)="addAttr(1)">
+      <span>新增规格值</span>
+    </button>-->
+  <div nz-row class="good_attr" *ngIf="isDetail">
+    <div nz-col [nzSpan]="24" class="hk_form_item">
+      <nz-table #attrList [nzAjaxData]="good.goodAttrExts" [nzIsPagination]="false" [style]="'text-align:center;'">
+        <thead nz-thead>
+        <tr>
+          <th nz-th><span>属性名</span></th>
+          <th nz-th><span>版本号</span></th>
+          <th nz-th><span>操作</span></th>
+        </tr>
+        </thead>
+        <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of good.goodAttrExts;let i=index;">
+          <td nz-td >{{data.attrName}}</td>
+          <td nz-td>{{data.verNo}}</td>
+          <td nz-td>
+            <a (click)="editAttr(i,data)">修改</a>
+            <span nz-table-divider></span>
+            <a (click)="delAttr(i)">删除</a>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <!--    <div nz-col [nzSpan]="24" class="hk_form_item">
+          <nz-table #attrList [nzAjaxData]="good.attrList" [nzIsPagination]="false" [style]="'text-align:center;'">
+            <thead nz-thead>
+            <tr>
+              <th nz-th><span>属性名</span></th>
+              <th nz-th><span>版本号</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of good.attrList;let i=index;" (click)="selectAttr(i,data.id)">
+              <td nz-td *ngIf="i!=editRow">{{data.attrName}}</td>
+              <td nz-td *ngIf="i!=editRow">{{data.verNo}}</td>
+              <td nz-td *ngIf="i==editRow">
+                <nz-input [(ngModel)]="editObj.attrName"></nz-input>
+              </td>
+              <td nz-td *ngIf="i==editRow">
+                <nz-input [(ngModel)]="editObj.verNo"></nz-input>
+              </td>
+              <td nz-td>
+                <span *ngIf="i==editRow&&isAddAttr">
+                  <a (click)="saveAttr(0,2)">保存</a>
+                  <span nz-table-divider></span>
+                  <a (click)="cancAttr(2)">取消</a>
+                </span>
+                <span *ngIf="i!=editRow">
+                  <a (click)="editAttr(i,data,0)">修改</a>
+                  <span nz-table-divider></span>
+                  <a (click)="delAttr(i)">删除</a>
+                </span>
+                <span *ngIf="i==editRow&&!isAddAttr">
+                  <a (click)="saveAttr(data.id,0)">保存</a>
+                  <span nz-table-divider></span>
+                  <a (click)="cancAttr(0)">取消</a>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </div>
+        <div nz-col [nzSpan]="10" [nzOffset]="2" class="hk_form_item">
+          <nz-table #attrValueList [nzAjaxData]="curAttrValueList" [nzIsPagination]="false">
+            <thead nz-thead>
+            <tr>
+              <th nz-th><span>属性值</span></th>
+              <th nz-th><span>操作</span></th>
+            </tr>
+            </thead>
+            <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of attrValueList.data;let i=index;">
+              <td nz-td *ngIf="i!=editValueRow">{{data.attrValueName}}</td>
+              <td nz-td *ngIf="i==editValueRow">
+                <nz-input [(ngModel)]="editObj.attrValueName"></nz-input>
+              </td>
+              <td nz-td>
+                <span *ngIf="i!=editValueRow">
+                  <a (click)="editAttr(i,data,1)">修改</a>
+                  <span nz-table-divider></span>
+                  <a (click)="delAttr(i,1)">删除</a>
+                </span>
+                <span *ngIf="i==editValueRow&&!isAddAttrValue">
+                  <a (click)="saveAttr(data.id,1)">保存</a>
+                  <span nz-table-divider></span>
+                  <a (click)="cancAttr(1)">取消</a>
+                </span>
+                <span *ngIf="i==editValueRow&&isAddAttrValue">
+                  <a (click)="saveAttr(0,3)">保存</a>
+                  <span nz-table-divider></span>
+                  <a (click)="cancAttr(3)">取消</a>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </nz-table>
+        </div>-->
+  </div>
   <div class="hk_form_title">产品信息</div>
   <hk-editor [ckeditorContent]="good.richContent"></hk-editor>
+  <div [class]="'editor'"></div>
   <div class="good_foot">
     <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
     <button nz-button (click)="back()">返回</button>
   </div>
 </div>
+<nz-modal [nzVisible]="isAttrShow" [nzContent]="modalContent"
+          [nzFooter]="modalFooter" [nzMaskClosable]="false"
+          [nzTitle]="AttrModalTit" (nzOnCancel)="closeModal()">
+  <ng-template #modalContent>
+    <div class="content_attr">
+      <form nz-form>
+        <div nz-row class="hk_form_item">
+          <label nz-form-label nz-form-item-required nz-col [nzSpan]="5">属性名</label>
+          <div nz-form-control nz-form-item nz-col [nzSpan]="13" [nzOffset]="1">
+            <nz-input [(ngModel)]="modalObj.attrName" name="name"></nz-input>
+          </div>
+        </div>
+        <div nz-row class="hk_form_item">
+          <label nz-form-label nz-form-item-required nz-col [nzSpan]="5">版本号</label>
+          <div nz-form-control nz-form-item nz-col [nzSpan]="13" [nzOffset]="1">
+            <nz-input [(ngModel)]="modalObj.verNo" name="name"></nz-input>
+          </div>
+        </div>
+        <div nz-row class="hk_form_item">
+          <label nz-form-label nz-form-item-required nz-col [nzSpan]="5">属性值</label>
+          <div class="good_attrValueList_warpper" nz-col [nzSpan]="15" [nzOffset]="1">
+            <div class="good_attrValueList">
+              <div nz-row *ngFor="let attrVData of modalArray;let i = index;">
+                <div class="hk_form_item" nz-col [nzSpan]="5">
+                  <nz-input [(ngModel)]="modalArray[i].attrValue" [name]="'attrValue'+i" [nzPlaceHolder]="'属性值'"></nz-input>
+                </div>
+                <div class="hk_form_item" nz-col [nzSpan]="13" [nzOffset]="1">
+                  <nz-input [(ngModel)]="modalArray[i].attrValueName" [name]="'attrValueName'+i" [nzPlaceHolder]="'属性值名称'"></nz-input>
+                </div>
+                <button nz-button [nzShape]="'circle'" class="good_attrValueList_del" (click)="delAttr(1,i)">
+                  <i class="anticon anticon-minus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="hk_detail_form_footer">
+        <button nz-button [nzSize]="large" class="good_attrValueList_add" (click)="addAttr(1)">
+          <span>新增属性值</span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button [nzType]="'primary'" (click)="saveAttr()">确认</button>
+    <button nz-button [nzType]="'default'" (click)="closeModal()">取消</button>
+  </ng-template>
+</nz-modal>

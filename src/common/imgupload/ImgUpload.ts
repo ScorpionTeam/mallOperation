@@ -106,7 +106,7 @@ export class ImgUpload implements OnInit,OnChanges{
   previewPic(url){
     console.log(url);
     this.isUpload = !this.isUpload;
-    this.imgPreview ="http://4d3ih8.natappfree.cc"+ url;
+    this.imgPreview ="http://2cjhzf.natappfree.cc"+ url;
   }
 
   /**

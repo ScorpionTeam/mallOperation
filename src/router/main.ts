@@ -12,6 +12,7 @@ import {ActivityListComponent} from "../componet/active/list/ActivityList.compon
 import {ActivityComponent} from "../componet/active/detail/Activity.component";
 import {BrandListComponent} from "../componet/brand/list/BrandList.component";
 import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
+import {TicketListComponent} from "../componet/ticket/list/TicketList.component";
 
  const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full'},
@@ -30,6 +31,7 @@ import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
      {path:'brand-list',component:BrandListComponent},
      {path:'brand-detail/:id',component:BrandDetailComponent},
      {path:'brand-add',component:BrandDetailComponent},
+     {path:'ticket-list',component:TicketListComponent}
    ]},
   {path:'login',component:LoginComponent}
 ]

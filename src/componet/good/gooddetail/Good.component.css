@@ -33,3 +33,31 @@
   margin-top: 20px;
 }
 
+/*规格标题*/
+.good_attr_tit{
+  font-size: 14px;
+  font-weight: 500;
+
+}
+/*规格*/
+.good_attr{
+  margin-bottom: 50px;
+}
+
+.good_attrValueList_warpper{
+  overflow: hidden;
+}
+.good_attrValueList{
+  width: calc(100% + 17px);
+  padding: 10px;
+  background: #f1f1f1;
+  height: 140px;
+  overflow-y: scroll;
+}
+.good_attrValueList_add{
+  width: 100px;
+  height: 35px;
+}
+.good_attrValueList_del{
+  margin: 15px;
+}
