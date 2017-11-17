@@ -1,10 +1,13 @@
 import {HttpClient} from "@angular/common/http";
 import {HttpData} from "../../http/HttpData";
 import {Injectable} from "@angular/core";
+import {Interceptor} from "../interceptor/interceptor";
+import {HttpHandler} from "@angular/common/http";
 
 @Injectable()
 export class Http{
-  constructor(private http:HttpClient,private httpData:HttpData){}
+  constructor(private http:HttpClient,private httpData:HttpData,
+              private interceptor:Interceptor){}
 
 
   /**
@@ -28,4 +31,5 @@ export class Http{
     let urls = this.httpData.Host+url
     return this.http.get(urls);
   }
+
 }

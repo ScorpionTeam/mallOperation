@@ -78,6 +78,7 @@ export class TicketComponent implements OnInit{
           /*转换时间格式*/
           this.ticket.startDate = new Date(this.ticket.startDate);
           this.ticket.endDate = new Date(this.ticket.endDate);
+          this.ticket.status = this.dataTool.strTransBool(this.ticket.status);
         }
       },
       err=>{
@@ -123,6 +124,8 @@ export class TicketComponent implements OnInit{
         if(res["result"]==1){
           this.validateForm.reset();
           this.nzMessage.success("新增成功");
+        }else {
+          this.nzMessage.warning(res['error'].message);
         }
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
       },
@@ -144,6 +147,8 @@ export class TicketComponent implements OnInit{
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
+        }else {
+          this.nzMessage.warning(res['error'].message);
         }
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
       },

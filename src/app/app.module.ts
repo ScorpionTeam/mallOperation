@@ -27,6 +27,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import {HKeditor} from "../common/editor/editor";
 import {TicketListComponent} from "../componet/ticket/list/TicketList.component";
 import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
+import {Interceptor} from "../common/interceptor/interceptor";
 @NgModule({
   declarations: [
     HKeditor,
@@ -60,6 +61,7 @@ import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
   providers: [PageService,
                HttpData,
                Http,
+               Interceptor,
                DataTool,
               { provide: NZ_MESSAGE_CONFIG, useValue: { nzMaxStack:1 }} ],
   bootstrap: [AppComponent]

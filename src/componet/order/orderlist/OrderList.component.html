@@ -145,6 +145,7 @@
       <span><a (click)="skipToPage('/order-detail',data.id)">编辑</a></span>
       <span *ngIf="data.orderStatus=='5'?true:false"><a (click)="returnMoneySuccessConfirm(data.id,modalSuccess,data.totalFee,modalTitle)">同意退款</a></span>
       <span *ngIf="data.orderStatus=='5'?true:false"><a (click)="returnMoneyFailConfirm(data.id,modalFail,modalTitle)">拒绝退款</a></span>
+      <span *ngIf="data.orderStatus=='2'?true:false"><a (click)="openDeliveyModal(data.id)">发货 </a></span>
     </td>
   </tr>
   </tbody>
@@ -162,5 +163,31 @@
     拒绝原因:<nz-input [(ngModel)]='failRemark' [style.width]="'60%'"></nz-input>
   </div>
 </ng-template>
+
+<nz-modal [nzStyle]="style" [nzVisible]="isDeliveryShow"
+          [nzContent]="deliveryModal" [nzFooter]="footer"
+         (nzOnCancel)="isDeliveryShow=false;" [nzTitle]="modalTitle">
+  <ng-template #deliveryModal>
+    <form nz-form class="deliveryForm">
+      <div nz-row>
+        <div nz-col nz-row [nzSpan]="24">
+          <label nz-form-label nz-form-item-required nz-col [nzSpan]="6">运单号</label>
+          <div nz-form-item nz-col [nzSpan]="15" [nzOffset]="1">
+            <nz-input [(ngModel)]="deliveryObj.deliveryNo" name="deliveyNo"></nz-input>
+          </div>
+        </div>
+        <div nz-col nz-row [nzSpan]="24">
+          <label nz-form-label nz-form-item-required nz-col [nzSpan]="6" >快递公司名</label>
+          <div nz-form-item nz-col [nzSpan]="15" [nzOffset]="1">
+            <nz-input [(ngModel)]="deliveryObj.expressName" name="expressName"></nz-input>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template  #footer>
+    <button nz-button [nzType]="'primary'" (click)="sendGoood()">确认</button>
+  </ng-template>
+</nz-modal>
 
 

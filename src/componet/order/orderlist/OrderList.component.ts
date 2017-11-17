@@ -17,6 +17,7 @@ export class OrderListComponent implements OnInit{
   searchKey:string='';//关键字
   orderList:any[]=[];//订单列表
   isCollapse:boolean=false;
+  isDeliveryShow:boolean=false;
   //分页对象
   page:any={
     pageNo:1,
@@ -26,6 +27,7 @@ export class OrderListComponent implements OnInit{
   returnMoney:number=0;
   failRemark:string;
   condition:any={};
+  deliveryObj:any={};
   constructor(private pageObj:PageService,private router:Router,private http:Http,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
 
@@ -205,7 +207,7 @@ export class OrderListComponent implements OnInit{
     )
   }
   returnMoneyFailConfirm(id,content,title){
-    this.nzModal.confirm({
+   let fail =  this.nzModal.confirm({
       title:"操作提示",
       content:content,
       iconType:"waring",
@@ -213,7 +215,7 @@ export class OrderListComponent implements OnInit{
       onOk:()=>{
         this.returnMoneyFail(id);
       }
-    })
+    });
   }
   returnMoneyFail(id){
     console.log(this.failRemark);
@@ -225,6 +227,40 @@ export class OrderListComponent implements OnInit{
         }
       },
       err=>{console.log(err)}
+    )
+  }
+
+  /**
+   * 打开模态
+   * @param orderId
+   */
+  openDeliveyModal(orderId){
+    this.deliveryObj.orderId = orderId;
+    this.isDeliveryShow=!this.isDeliveryShow;
+  }
+  /**
+   * 发货
+   * @param orderId
+   */
+  sendGoood(orderId){
+    if(isUndefined(this.deliveryObj['expressName'])||isUndefined(this.deliveryObj['deliveryNo'])){
+      this.nzMessage.warning("请将表单填写完整");
+      return;
+    }
+    let url = "backstage/order/sendGood?orderId="+this.deliveryObj.orderId+"&deliveryNo="+this.deliveryObj.deliveryNo+"&expressName="+this.deliveryObj.expressName;
+    this.http.post(url).subscribe(
+      res=>{
+        if(res["result"]==1){
+          this.pageChangeHandler(1);
+          this.deliveryObj={};
+          this.isDeliveryShow=!this.isDeliveryShow;
+        }else {
+          this.nzMessage.warning(res["error"].message);
+        }
+      },
+      err=>{
+        console.log(err);
+      }
     )
   }
 }

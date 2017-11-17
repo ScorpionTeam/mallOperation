@@ -32,4 +32,8 @@
 .order_list_action span{
   margin-right: 10px;
 }
-
+/*发货表单*/
+.deliveryForm{
+  margin-top: 30px;
+  margin-left: -42px;
+}

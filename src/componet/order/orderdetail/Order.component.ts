@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Http} from "../../../common/http/Http";
 import {DataTool} from "../../../common/data/DataTool";
+import {NzMessageService, NzModalService} from "ng-zorro-antd";
 @Component({
   selector:'order-detail',
   templateUrl:'./Order.component.html',
@@ -10,8 +11,8 @@ import {DataTool} from "../../../common/data/DataTool";
 
 export class OrderComponent implements OnInit{
   order:any={};
-  constructor(private router:Router,private route:ActivatedRoute,
-              private http:Http,private dataTool:DataTool){}
+  constructor(private router:Router,private route:ActivatedRoute,private nzMessage:NzMessageService,
+              private http:Http,private dataTool:DataTool,private nzModal:NzModalService){}
   ngOnInit(){
     this.init();
   }
@@ -33,7 +34,13 @@ export class OrderComponent implements OnInit{
    * 保存
    */
   save(){
-
+    this.nzModal.confirm({
+      title:"提示",
+      content:"确认进行修改吗？",
+      onOk:()=>{
+        this.update();
+      }
+    })
   }
 
   /**
@@ -49,5 +56,23 @@ export class OrderComponent implements OnInit{
    */
   checkGoodDetail(id){
     this.router.navigate(["../../good-detail",id],{relativeTo:this.route});
+  }
+
+  /**
+   * 修改订单
+   */
+  update(){
+    this.http.post("backstage/order/modify",this.order).subscribe(
+      res=>{
+        if(res["result"]==1){
+          this.nzMessage.success("修改成功");
+        }else {
+          this.nzMessage.error(res["error"].message);
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 }
