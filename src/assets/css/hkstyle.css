@@ -1,0 +1,18 @@
+/*按钮*/
+.hk_btn_lg{
+  font-size: 16px;
+  width: 85px;
+  height: 32px;
+}
+
+.hk_btn_default{
+  font-size: 14px!important;
+  width: 72px!important;
+  height: 30px!important;
+}
+
+.hk_btn_sm{
+  font-size: 12px;
+  width: 53px;
+  height: 26px;
+}

@@ -1,0 +1,86 @@
+<form nz-form class="hk_detail_form" [formGroup]="validateForm">
+  <div nz-row *ngIf="route.params['value'].id">
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >优惠券编码</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-input  [(ngModel)]="ticket.ticketNo" [nzSize]="'large'" [nzReadonly]="true" formControlName="ticketNo"></nz-input>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >券名称</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-input [nzSize]="'large'" [(ngModel)]="ticket.ticketName" formControlName="ticketName"></nz-input>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >类型</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-select [(ngModel)]="ticket.type" formControlName="type">
+        <nz-option [nzLabel]="'平台'" [nzValue]="'1'"></nz-option>
+        <nz-option [nzLabel]="'商家'" [nzValue]="'2'"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >开始时间</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-datepicker style="width: 40%;"  [(ngModel)]="ticket.startDate" [nzDisabledDate]="disabledStartDate"
+                     [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'" formControlName="startDate"></nz-datepicker>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >结束时间</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-datepicker style="width: 40%;" [(ngModel)]="ticket.endDate" [nzDisabledDate]="disabledEndDate"
+                     [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'" formControlName="endDate"></nz-datepicker>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >金额</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.money" [nzMin]="0" formControlName="money"></nz-input-number>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >数量</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.num" [nzMin]="0" formControlName="num"></nz-input-number>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >状态</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-switch [nzSize]="'large'" [(ngModel)]="ticket.status" formControlName="status">
+        <span checked>正常</span>
+        <span unchecked>删除</span>
+      </nz-switch>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >说明</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-input [nzSize]="'large'"  [nzType]="'textarea'" [(ngModel)]="ticket.content" formControlName="content"></nz-input>
+    </div>
+  </div>
+</form>
+<div class="hk_detail_form_footer">
+  <button nz-button [nzType]="'primary'" class="hk_btn_default" (click)="save()">保存</button>
+  <button nz-button  class="hk_btn_default" (click)="back()">返回</button>
+</div>

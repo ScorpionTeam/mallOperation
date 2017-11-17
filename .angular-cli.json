@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "src/assets/css/hkstyle.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

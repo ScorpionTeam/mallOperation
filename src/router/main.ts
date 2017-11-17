@@ -13,6 +13,7 @@ import {ActivityComponent} from "../componet/active/detail/Activity.component";
 import {BrandListComponent} from "../componet/brand/list/BrandList.component";
 import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
 import {TicketListComponent} from "../componet/ticket/list/TicketList.component";
+import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
 
  const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full'},
@@ -31,7 +32,9 @@ import {TicketListComponent} from "../componet/ticket/list/TicketList.component"
      {path:'brand-list',component:BrandListComponent},
      {path:'brand-detail/:id',component:BrandDetailComponent},
      {path:'brand-add',component:BrandDetailComponent},
-     {path:'ticket-list',component:TicketListComponent}
+     {path:'ticket-list',component:TicketListComponent},
+     {path:'ticket-add',component:TicketComponent},
+     {path:'ticket-detail/:id',component:TicketComponent}
    ]},
   {path:'login',component:LoginComponent}
 ]

@@ -69,7 +69,7 @@ export class GoodComponent implements OnInit{
       this.https.get(url).subscribe(res=>{
         console.log(res);
         this.good=res["data"];
-        this.good.goodAttrExts=[];
+        /*this.good.goodAttrExts=[];*/
         this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
         this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
         this.imgUrlList = res["data"].imgList;
@@ -121,6 +121,7 @@ export class GoodComponent implements OnInit{
         this.nzMessage.success("添加成功");
         this.validateForm.reset();
         this.initUrl='';
+        this.good.richContent = '';
       }else {
         this.transStr();
         this.nzMessage.error(res["error"].message);
@@ -141,6 +142,9 @@ export class GoodComponent implements OnInit{
   update(){
     if(!this.validateForm.valid||this.imgUrlList.length==0){
       this.nzMessage.error("请将检查图片与表单信息是否都已录入");
+      return;
+    }else if(this.good.goodAttrExts.length==0){
+      this.nzMessage.error("请先配置商品规格");
       return;
     }
     this.transBool();
@@ -230,6 +234,16 @@ export class GoodComponent implements OnInit{
   }
 
   /**
+   * 查找规格
+   */
+   findAttr(){
+    let url = "backstage/good/findById?id="+this.route.params['value'].id;
+    this.https.get(url).subscribe(res=> {
+      console.log(res);
+      this.good.goodAttrExts = res["data"].goodAttrExts;
+    });
+  }
+  /**
    * 新增规格
    * @param flag 0:新增规格，1:新增属性
    */
@@ -249,11 +263,16 @@ export class GoodComponent implements OnInit{
    * @param data
    */
   editAttr(index,data){
+    console.log(data);
       this.isAttrShow = !this.isAttrShow;
       this.AttrModalTit = '规格详情';
       this.modalObj = Object.assign(data);
-      console.log(data);
-      this.modalArray = data.attrValueList.concat();
+      console.log(this.modalObj);
+      if(data.attrExts.length==0){
+        this.modalArray = [];
+      }else {
+        this.modalArray = data.attrExts[0].attrValueList.concat();
+      }
   }
 
   /**
@@ -277,7 +296,7 @@ export class GoodComponent implements OnInit{
         if(res["result"]==1){
           this.isAttrShow =false;
           this.nzMessage.success("新增规格成功");
-          this.good.goodAttrExts.push(this.modalObj);
+          this.findAttr();
         }
       },
       err=>{
