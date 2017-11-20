@@ -18,6 +18,7 @@ export class IndexComponent{
     this.http.get(url).subscribe(res=>{
       console.log(res)
       if(res["result"]==1){
+        localStorage.removeItem("token");
         localStorage.removeItem("mobile");
         this.router.navigate(['../login'],{relativeTo:this.route})
       }else {

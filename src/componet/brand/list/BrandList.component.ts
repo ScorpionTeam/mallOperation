@@ -5,6 +5,7 @@ import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {isUndefined} from "util";
 import {isNull} from "util";
+import {HttpData} from "../../../http/HttpData";
 @Component({
   selector:"brand-list",
   templateUrl:"./BrandList.component.html",
@@ -12,6 +13,7 @@ import {isNull} from "util";
 })
 
 export class BrandListComponent{
+  picUrl:string;
   ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   brandList:any[]=[];//订单列表
@@ -25,10 +27,11 @@ export class BrandListComponent{
     total:0
   };
   condition:any={};
-  constructor(private pageObj:PageService,private router:Router,private http:Http,
+  constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
 
   ngOnInit(){
+    this.picUrl = this.PicUrl.PicUrl;
     this.init();
   }
 

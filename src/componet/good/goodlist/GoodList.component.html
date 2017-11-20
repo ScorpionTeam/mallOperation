@@ -165,6 +165,7 @@
       <label #checkboxAll nz-checkbox  [(ngModel)]="checkAll" [nzDisabled]="doCheckAll" (ngModelChange)="selectItem(checkAll,goodList,0)">
       </label>
     </th>
+    <th nz-th [nzWidth]="'130'"><span>商品图片</span></th>
     <th nz-th [nzWidth]="'130'"><span>商品编码</span></th>
     <th nz-th [nzWidth]="'130'"><span>名称</span></th>
     <th nz-th [nzWidth]="'60'"><span>单价</span></th>
@@ -179,6 +180,7 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
+    <td nz-td><img [src]="picUrl+data.mainImgUrl" alt="" class="list_pic"></td>
     <td nz-td>{{data.goodNo}}</td>
     <td nz-td>{{data.goodName}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>

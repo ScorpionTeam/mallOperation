@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {NzModalService, NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {isNull} from "util";
+import {HttpData} from "../../../http/HttpData";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
@@ -11,6 +12,7 @@ import {isNull} from "util";
 })
 
 export class GoodListComponent implements OnInit{
+  picUrl:string;//图片公共地址
   goodList:Array<any> = [];
   ngLoad:Boolean = false;
   checkAll:boolean = false;//全选
@@ -28,11 +30,11 @@ export class GoodListComponent implements OnInit{
   isCollapse:boolean = false;
   idList:any=[];//id集合
   constructor(private pageObj : PageService,private http:Http,
-              private router:Router,private route :ActivatedRoute,
-              private nzService :NzModalService ,private nzMessage:NzMessageService){
-  }
+              private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
+              private nzService :NzModalService ,private nzMessage:NzMessageService){}
 
   ngOnInit(){
+    this.picUrl = this.PicUrl.PicUrl;
     this.init();
   }
 

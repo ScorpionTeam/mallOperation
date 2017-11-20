@@ -36,6 +36,12 @@ textarea{
   background:#f04134!important;
 }
 
+.list_pic{
+  width: 115px;
+  height: 75px;
+  object-fit: cover;
+}
+
 /*表单*/
 .hk_form_title{
   font-size: 18px;

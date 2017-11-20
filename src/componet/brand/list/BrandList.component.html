@@ -85,6 +85,7 @@
       <label #checkboxAll nz-checkbox  [(ngModel)]="checkAll"  (ngModelChange)="selectItem(checkAll,brandList,0)">
       </label>
     </th>
+    <th nz-th><span>图片</span></th>
     <th nz-th><span>品牌名</span></th>
     <th nz-th><span>品牌简称</span></th>
     <th nz-th><span>创建时间</span></th>
@@ -98,6 +99,7 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
+    <td nz-td><img [src]="picUrl+data.brandImg" alt="" class="list_pic"></td>
     <td nz-td>{{data.brandName}}</td>
     <td nz-td>{{data.shortName}}</td>
     <td nz-td>{{data.createDate|date:"yyyy-mm-dd hh:mm:ss"}}</td>

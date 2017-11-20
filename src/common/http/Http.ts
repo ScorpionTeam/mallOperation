@@ -3,11 +3,12 @@ import {HttpData} from "../../http/HttpData";
 import {Injectable} from "@angular/core";
 import {Interceptor} from "../interceptor/interceptor";
 import {HttpHandler} from "@angular/common/http";
+import {HttpRequest} from "@angular/common/http";
 
 @Injectable()
 export class Http{
   constructor(private http:HttpClient,private httpData:HttpData,
-              private interceptor:Interceptor){}
+              private interceptor:Interceptor,private next :HttpHandler){}
 
 
   /**
@@ -15,7 +16,7 @@ export class Http{
    */
   post(url,body?){
      let urls = this.httpData.Host+url;
-     let headers = this.httpData.Header
+     let headers = this.httpData.Header;
       return this.http.post(urls,JSON.stringify(body),{headers:headers});
   }
 
@@ -28,7 +29,16 @@ export class Http{
    * Get请求
    */
   get(url){
-    let urls = this.httpData.Host+url
+    let urls = this.httpData.Host+url;
+    let request = new HttpRequest("GET",urls);
+    this.interceptor.intercept(request,this.next).subscribe(
+      res=>{
+        console.log(res);
+      },
+      err=>{
+        console.log(err);
+      }
+    );
     return this.http.get(urls);
   }
 

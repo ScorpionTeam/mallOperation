@@ -60,10 +60,11 @@ export class LoginComponent implements  OnInit{
       let params = new HttpParams().set("mobile",this.userName).set("password",this.password);
       this.http.post(url,null,{params:params}).subscribe(res=>{
         if(res["result"]==1){
-            this.router.navigate(['./index'])
-            localStorage.setItem("mobile",res["data"]);
+          this.router.navigate(['./index'])
+          localStorage.setItem("token",res["data"]);
+          localStorage.setItem("mobile",this.userName);
         }else{
-            this.nzMessage.error(res['error'].message)
+          this.nzMessage.error(res['error'].message)
         }
       },err=>{
         console.log("err"+err);
