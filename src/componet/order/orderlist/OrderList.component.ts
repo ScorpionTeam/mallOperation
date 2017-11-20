@@ -5,6 +5,7 @@ import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {isNull} from "util";
 import {isUndefined} from "util";
 import {Http} from "../../../common/http/Http";
+import {HttpData} from "../../../http/HttpData";
 
 @Component({
   selector:"order-list",
@@ -13,6 +14,7 @@ import {Http} from "../../../common/http/Http";
 })
 
 export class OrderListComponent implements OnInit{
+  picUrl:string;
   ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   orderList:any[]=[];//订单列表
@@ -28,10 +30,11 @@ export class OrderListComponent implements OnInit{
   failRemark:string;
   condition:any={};
   deliveryObj:any={};
-  constructor(private pageObj:PageService,private router:Router,private http:Http,
+  constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
 
   ngOnInit(){
+    this.picUrl = this.PicUrl.PicUrl;
     this.init();
   }
 
