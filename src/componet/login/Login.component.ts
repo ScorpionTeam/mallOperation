@@ -61,8 +61,10 @@ export class LoginComponent implements  OnInit{
       this.http.post(url,null,{params:params}).subscribe(res=>{
         if(res["result"]==1){
           this.router.navigate(['./index'])
-          localStorage.setItem("token",res["data"]);
+          localStorage.setItem("token",res["data"].token);
           localStorage.setItem("mobile",this.userName);
+          localStorage.setItem("id",res["data"].id);
+          localStorage.setItem("city",res["data"].city);
         }else{
           this.nzMessage.error(res['error'].message)
         }

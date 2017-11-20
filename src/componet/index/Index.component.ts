@@ -8,7 +8,10 @@ import {Http} from "../../common/http/Http";
   styleUrls:['./Index.component.css']
 })
 export class IndexComponent{
-  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,private http:Http){}
+  userId:string;
+  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,private http:Http){
+    this.userId = localStorage.getItem('id');
+  }
 
   skipToPage(url){
     this.router.navigate([url],{relativeTo:this.route});
@@ -20,6 +23,8 @@ export class IndexComponent{
       if(res["result"]==1){
         localStorage.removeItem("token");
         localStorage.removeItem("mobile");
+        localStorage.removeItem("id");
+        localStorage.removeItem("city");
         this.router.navigate(['../login'],{relativeTo:this.route})
       }else {
         this.nzMessage.error(res["error"].message);

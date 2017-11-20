@@ -78,7 +78,8 @@
 </div>-->
 <div class="hk_detail_form">
   <div class="hk_form_title">图片信息</div>
-  <upload-pic (uploadSuccess)="uploadPicSuccess($event)" (delSuccess)="delPicSuccess($event)" [type]="'1'" [initUrl]="initUrl"></upload-pic>
+  <upload-pic (uploadSuccess)="uploadPicSuccess($event)" (delSuccess)="delPicSuccess($event)" [alt]="'上传图片'"
+              [type]="'1'" [initUrl]="initUrl"></upload-pic>
   <div class="hk_form_title">基本信息</div>
   <form nz-form  [formGroup]="validateForm">
     <div nz-form-item nz-row>

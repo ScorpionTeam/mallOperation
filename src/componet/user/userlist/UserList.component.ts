@@ -33,10 +33,12 @@ export class UserListComponent{
    * 初始化
    */
   init(){
+    this.ngLoad=true;
     let url = 'backstage/user/userList?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+this.searchKey;
     /*数据初始化*/
     this.http.get(url).subscribe(res=>{
         console.log(res)
+        this.ngLoad=false;
         this.userList = res["list"];
         this.page.total =res["total"];
       },

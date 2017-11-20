@@ -173,13 +173,21 @@
 -->
 <div class="good_content">
   <div class="hk_form_title">主图信息</div>
-  <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event,0)" (delSuccess)="delPic($event)"></upload-pic>
+  <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event,0)" (delSuccess)="delPic($event)" [alt]="'上传主图'"></upload-pic>
   <div class="hk_form_title">辅图信息</div>
   <div nz-row>
-    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=2?initLittleUrl[1].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
-    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=3?initLittleUrl[2].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
-    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=4?initLittleUrl[3].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
-    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=5?initLittleUrl[4].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=2?initLittleUrl[1].url:undefined"
+                (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" [alt]="'上传辅图'"
+                nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=3?initLittleUrl[2].url:undefined"
+                (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" [alt]="'上传辅图'"
+                nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=4?initLittleUrl[3].url:undefined"
+                (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" [alt]="'上传辅图'"
+                nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=5?initLittleUrl[4].url:undefined"
+                (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" [alt]="'上传辅图'"
+                nz-col [nzSpan]="5"></upload-pic>
   </div>
   <div class="hk_form_title">基本信息</div>
   <form nz-form  [formGroup]="validateForm">
