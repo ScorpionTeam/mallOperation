@@ -172,8 +172,15 @@
 </form>
 -->
 <div class="good_content">
-  <div class="hk_form_title">图片信息</div>
-  <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event)" (delSuccess)="delPic()"></upload-pic>
+  <div class="hk_form_title">主图信息</div>
+  <upload-pic [type]="'0'"  [initUrl]="initUrl" (uploadSuccess)="imgUpload($event,0)" (delSuccess)="delPic($event)"></upload-pic>
+  <div class="hk_form_title">辅图信息</div>
+  <div nz-row>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=2?initLittleUrl[1].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=3?initLittleUrl[2].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=4?initLittleUrl[3].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5" [nzOffset]="1"></upload-pic>
+    <upload-pic [type]="'1'"  [initUrl]="initLittleUrl.length>=5?initLittleUrl[4].url:undefined" (uploadSuccess)="imgUpload($event,1)" (delSuccess)="delPic($event)" nz-col [nzSpan]="5"></upload-pic>
+  </div>
   <div class="hk_form_title">基本信息</div>
   <form nz-form  [formGroup]="validateForm">
     <div nz-form-item>
@@ -275,13 +282,13 @@
       </div>
     </div>
   </form>
-  <div class="hk_form_title" *ngIf="isDetail">规格配置</div>
+<!--  <div class="hk_form_title" *ngIf="isDetail">规格配置</div>
   <button nz-button [nzType]="'primary'" (click)="addAttr(0)" *ngIf="isDetail">
     <span>新增规格</span>
   </button>
-  <!--  <button nz-button [nzType]="'primary'" (click)="addAttr(1)">
+  &lt;!&ndash;  <button nz-button [nzType]="'primary'" (click)="addAttr(1)">
       <span>新增规格值</span>
-    </button>-->
+    </button>&ndash;&gt;
   <div nz-row class="good_attr" *ngIf="isDetail">
     <div nz-col [nzSpan]="24" class="hk_form_item">
       <nz-table #attrList [nzAjaxData]="good.goodAttrExts" [nzIsPagination]="false" [style]="'text-align:center;'">
@@ -305,7 +312,7 @@
         </tbody>
       </nz-table>
     </div>
-    <!--    <div nz-col [nzSpan]="24" class="hk_form_item">
+    &lt;!&ndash;    <div nz-col [nzSpan]="24" class="hk_form_item">
           <nz-table #attrList [nzAjaxData]="good.attrList" [nzIsPagination]="false" [style]="'text-align:center;'">
             <thead nz-thead>
             <tr>
@@ -379,8 +386,8 @@
             </tr>
             </tbody>
           </nz-table>
-        </div>-->
-  </div>
+        </div>&ndash;&gt;
+  </div>-->
   <div class="hk_form_title">产品信息</div>
   <hk-editor [ckeditorContent]="good.richContent"></hk-editor>
   <div [class]="'editor'"></div>

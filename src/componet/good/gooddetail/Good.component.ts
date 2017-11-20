@@ -48,9 +48,9 @@ export class GoodComponent implements OnInit{
   AttrModalTit:string;//模态标题
   modalObj:any={};//模态中的对象
   modalArray:any= [];//模态中的数组
-
   imgUrlList:any=[];
   initUrl:any;
+  initLittleUrl:any=[];
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
               private fb :FormBuilder,private https:Http,private dataTool:DataTool,
               private render:Renderer2,private element : ElementRef,){}
@@ -76,6 +76,7 @@ export class GoodComponent implements OnInit{
         //图片初始化
         if(this.imgUrlList.length!=0){
           this.initUrl= this.imgUrlList[0].url;
+          this.initLittleUrl = this.imgUrlList.concat();
         }
         this.transStr();
       });
@@ -142,9 +143,6 @@ export class GoodComponent implements OnInit{
   update(){
     if(!this.validateForm.valid||this.imgUrlList.length==0){
       this.nzMessage.error("请将检查图片与表单信息是否都已录入");
-      return;
-    }else if(this.good.goodAttrExts.length==0){
-      this.nzMessage.error("请先配置商品规格");
       return;
     }
     this.transBool();
@@ -453,16 +451,32 @@ export class GoodComponent implements OnInit{
 
   /**
    * 图片
+   * @param flag 0:主图  1:小图
    */
-  imgUpload = (val)=>{
-    this.imgUrlList = val;
-    this.good.mainImgUrl = val[0].url;
+  imgUpload = (val,flag)=>{
+    if(flag==0){
+      this.good.mainImgUrl = val[0].url;
+      this.imgUrlList.push(val[0]);
+    }else {
+      this.imgUrlList = this.imgUrlList.concat(val);
+    }
   };
+
 
   /**
    * 删除图片
+   * @param flag 0:主图  1:小图
    */
-  delPic(){
-    this.imgUrlList=[];
+  delPic(val,flag){
+    console.log(val);
+    let index ;
+    for(let i in this.imgUrlList){
+      if(this.imgUrlList[i].url==val){
+        console.log(i);
+        index = i;
+      }
+    }
+    this.imgUrlList.splice(index,1);
+    /*this.imgUrlList=[];*/
   }
 }

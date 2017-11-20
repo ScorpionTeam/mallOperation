@@ -106,7 +106,7 @@ export class ImgUpload implements OnInit,OnChanges{
   previewPic(url){
     console.log(url);
     this.isUpload = !this.isUpload;
-    this.imgPreview ="http://2cjhzf.natappfree.cc"+ url;
+    this.imgPreview ="http://4mnkwf.natappfree.cc"+ url;
   }
 
   /**
@@ -120,7 +120,7 @@ export class ImgUpload implements OnInit,OnChanges{
         if(res["result"]==1){
           this.isUpload=!this.isUpload;
           this.imgPreview = "";
-          this.delSuccess.emit("1");
+          this.delSuccess.emit(delName);
         }else{
           this.nzMessage.error("删除失败")
         }
