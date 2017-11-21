@@ -67,11 +67,11 @@ export class UserListComponent{
     this.page.pageNo=val;
     this.pageObj.pageChange(url,val,this.page.pageNo).subscribe(res=>{
         this.ngLoad=false;
-        for(let i =0;i<res["data"].length;i++){
-          res["data"].checked=false
+        for(let i =0;i<res["list"].length;i++){
+          res["list"].checked=false
         }
-        this.userList = res["data"];
-        this.page.total=11;
+        this.userList = res["list"];
+        this.page.total=res["total"];
       },
       err=>{
         this.ngLoad=false;
@@ -85,8 +85,11 @@ export class UserListComponent{
     this.page.pageSize=val;
     this.pageObj.pageChange(url,this.page.pageSize,val).subscribe(res=>{
         this.ngLoad=false;
-        this.userList = res["data"];
-        this.page.total=res["data"].total;
+        for(let i =0;i<res["list"].length;i++){
+          res["list"].checked=false
+        }
+        this.userList = res["list"];
+        this.page.total=res["total"];
       },
       err=>{
         this.ngLoad=false;
@@ -100,10 +103,17 @@ export class UserListComponent{
   search(){
     let url = 'backstage/user/userList';
     this.page.pageNo=1;
+    this.ngLoad = true;
     this.pageObj.pageChange(url,this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        console.log(res)
+        for(let i =0;i<res["list"].length;i++){
+          res["list"].checked=false
+        }
+        this.userList = res["list"];
+        this.page.total=res["total"];
+        this.ngLoad = false;
       },
       err=>{
+        this.ngLoad = false;
         console.log(err);
       });
     console.log(this.searchKey);

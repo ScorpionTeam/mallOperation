@@ -397,8 +397,7 @@
         </div>&ndash;&gt;
   </div>-->
   <div class="hk_form_title">产品信息</div>
-  <hk-editor [ckeditorContent]="good.richContent"></hk-editor>
-  <div [class]="'editor'"></div>
+  <hk-editor [ckeditorContent]="good.richContent" (blur)="getRitchContent($event)"></hk-editor>
   <div class="good_foot">
     <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
     <button nz-button (click)="back()">返回</button>

@@ -32,10 +32,17 @@
           </ul>
         </li>
         <li nz-submenu>
+          <span title><i class="anticon anticon-laptop"></i>活动</span>
+          <ul>
+            <li nz-menu-item (click)="skipToPage('activity-list')">活动列表</li>
+            <li nz-menu-item (click)="skipToPage('activity-list')">新增商品关联</li>
+            <li nz-menu-item (click)="skipToPage('activity-list')">关联商品操作</li>
+          </ul>
+        </li>
+        <li nz-submenu>
           <span title><i class="anticon anticon-notification"></i>用户</span>
           <ul>
             <li nz-menu-item (click)="skipToPage('user-list')">用户列表</li>
-            <li nz-menu-item (click)="skipToPage('activity-list')">活动列表</li>
             <li nz-menu-item (click)="skipToPage('brand-list')">品牌列表</li>
             <li nz-menu-item (click)="skipToPage('ticket-list')">优惠券列表</li>
           </ul>

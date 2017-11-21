@@ -52,8 +52,7 @@ export class GoodComponent implements OnInit{
   initUrl:any;
   initLittleUrl:any=[];
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
-              private fb :FormBuilder,private https:Http,private dataTool:DataTool,
-              private render:Renderer2,private element : ElementRef,){}
+              private fb :FormBuilder,private https:Http,private dataTool:DataTool){}
   ngOnInit(){
     this.init();
     this.createValidatorGroup();
@@ -122,6 +121,7 @@ export class GoodComponent implements OnInit{
         this.nzMessage.success("添加成功");
         this.validateForm.reset();
         this.initUrl='';
+        this.initLittleUrl=[];
         this.good.richContent = '';
       }else {
         this.transStr();
@@ -167,6 +167,13 @@ export class GoodComponent implements OnInit{
     })
   }
 
+  /**
+   * 获取富文本内容
+   * @param richContent
+   */
+  getRitchContent(richContent){
+    this.good.richContent = richContent;
+  }
   /**
    * 返回列表
    */
