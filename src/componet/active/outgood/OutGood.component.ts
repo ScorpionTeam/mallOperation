@@ -20,6 +20,7 @@ export class OutGoodComponent implements OnInit{
   ngLoad:boolean=false;
   checkAll:boolean = false;//全选
   doCheckAll:boolean=false;//是否可以全选
+  openFlag:boolean=false;
   searchKey:any= '';
   page:any = {
     pageNo:1,
@@ -39,9 +40,13 @@ export class OutGoodComponent implements OnInit{
   }
   /**
    * 改变活动
+   * @param flag 打开开关
    */
-  changeActType(){
-    console.log(1);
+  changeActType(flag){
+    this.openFlag=!this.openFlag;
+    if(flag){
+      return;
+    }
     let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
       '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     /*数据初始化*/
@@ -87,7 +92,7 @@ export class OutGoodComponent implements OnInit{
         if(res["total"]!=0){
           this.activityList = res["list"];
           this.curActivity = this.activityList[0].id;
-          this.changeActType();
+          this.changeActType(false);
         }
       },
       err=>{

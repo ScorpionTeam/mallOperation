@@ -8,9 +8,12 @@
   <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="concatConfirm()">
     <span>关联</span>
   </button>
-  <nz-select [(ngModel)]="curActivity" class="activity-select">
-    <nz-option *ngFor="let item of activityList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
-  </nz-select>
+  <div class="select-contain">
+    <span class="tool_item_label">活动</span>
+    <nz-select [(ngModel)]="curActivity" class="activity-select">
+      <nz-option *ngFor="let item of activityList" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+    </nz-select>
+  </div>
   <a style="margin-left:8px;font-size:12px;" (click)="isCollapse =!isCollapse">
     条件
     <i  [class]="!isCollapse?'anticon anticon-down':'anticon anticon-up'"></i>

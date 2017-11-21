@@ -20,8 +20,13 @@
   display: none;
 }
 /*活动下拉框*/
-.activity-select{
+/*活动下拉框*/
+.select-contain{
   float: right;
   margin-right: 15px;
+}
+
+.activity-select{
+  margin-left: 5px;
   width: 100px;
 }

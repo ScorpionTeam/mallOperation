@@ -36,11 +36,17 @@ textarea{
   background:#f04134!important;
 }
 
+.tool_item_label{
+  display: inline-block;
+  font-size: 15px;
+}
+
 .list_pic{
   width: 115px;
   height: 75px;
   object-fit: cover;
 }
+
 
 /*表单*/
 .hk_form_title{
@@ -58,3 +64,4 @@ textarea{
 .hk_detail_form_footer{
   text-align: center;
 }
+
