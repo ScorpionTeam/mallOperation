@@ -14,6 +14,8 @@ import {BrandListComponent} from "../componet/brand/list/BrandList.component";
 import {BrandDetailComponent} from "../componet/brand/detail/Brand.component";
 import {TicketListComponent} from "../componet/ticket/list/TicketList.component";
 import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
+import {ConcatGoodComponent} from "../componet/active/withgood/ConcatGood.component";
+import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
 
  const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full'},
@@ -29,6 +31,8 @@ import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
      {path:'activity-list',component:ActivityListComponent},
      {path:'activity-add',component:ActivityComponent},
      {path:'activity-detail/:id',component:ActivityComponent},
+     {path:'activity-good-concat',component:ConcatGoodComponent},
+     {path:'activity-good-action',component:OutGoodComponent},
      {path:'brand-list',component:BrandListComponent},
      {path:'brand-detail/:id',component:BrandDetailComponent},
      {path:'brand-add',component:BrandDetailComponent},

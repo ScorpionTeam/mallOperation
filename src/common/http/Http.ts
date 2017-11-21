@@ -31,7 +31,7 @@ export class Http{
   get(url){
     let urls = this.httpData.Host+url;
     let request = new HttpRequest("GET",urls);
- /*   this.interceptor.intercept(request,this.next).subscribe(
+/*    this.interceptor.intercept(request,this.next).subscribe(
       res=>{
         console.log(res);
       },

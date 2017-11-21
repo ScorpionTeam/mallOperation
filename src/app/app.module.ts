@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from "../componet/login/Login.component";
@@ -28,6 +28,8 @@ import {HKeditor} from "../common/editor/editor";
 import {TicketListComponent} from "../componet/ticket/list/TicketList.component";
 import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
 import {Interceptor} from "../common/interceptor/interceptor";
+import {ConcatGoodComponent} from "../componet/active/withgood/ConcatGood.component";
+import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -43,6 +45,8 @@ import {Interceptor} from "../common/interceptor/interceptor";
     UserComponent,
     ActivityListComponent,
     ActivityComponent,
+    ConcatGoodComponent,
+    OutGoodComponent,
     BrandListComponent,
     BrandDetailComponent,
     TicketListComponent,
