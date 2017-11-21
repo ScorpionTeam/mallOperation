@@ -1,18 +1,18 @@
 import {Component, OnInit} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
-import {Router, ActivatedRoute} from "@angular/router";
-import {NzModalService, NzMessageService} from "ng-zorro-antd";
-import {HttpData} from "../../../http/HttpData";
 import {Http} from "../../../common/http/Http";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HttpData} from "../../../http/HttpData";
+import {NzMessageService, NzModalService} from "ng-zorro-antd";
+import {PageService} from "../../../service/page/Page.service";
 import {isNull} from "util";
 import {isUndefined} from "util";
 @Component({
-  selector:"act-concat-good",
-  templateUrl:"ConcatGood.component.html",
-  styleUrls:["ConcatGood.component.css"]
+  selector:'out-good-activity',
+  templateUrl:'OutGood.component.html',
+  styleUrls:['OutGood.component.css']
 })
 
-export class  ConcatGoodComponent implements OnInit{
+export class OutGoodComponent implements OnInit{
   curActivity:any;//当前活动
   goodList:any=[];//商品列表
   activityList:any=[];//活动列表
@@ -29,24 +29,21 @@ export class  ConcatGoodComponent implements OnInit{
   picUrl:string = '';//图片公共地址
   condition:any={};//条件
   idList:any=[];//选中商品ID集合
-  nowDate:any;//当前时间
   constructor(private pageObj : PageService,private http:Http,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzModal :NzModalService ,private nzMessage:NzMessageService){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
-    let date = new Date();
-    this.nowDate = date.getTime();
-    this.init();
     this.getActivityList();
   }
   /**
-   * 初始化
+   * 改变活动
    */
-  init(){
+  changeActType(){
+    console.log(1);
     let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     /*数据初始化*/
     this.ngLoad=true;
     this.http.get(url).subscribe(res=>{
@@ -55,6 +52,9 @@ export class  ConcatGoodComponent implements OnInit{
         if(res["total"]!=0){
           this.goodList = res["list"];
           this.page.total=res["total"];
+        }else {
+          this.goodList = [];
+          this.page.total=0;
         }
       },
       err=>{
@@ -86,6 +86,8 @@ export class  ConcatGoodComponent implements OnInit{
       res=>{
         if(res["total"]!=0){
           this.activityList = res["list"];
+          this.curActivity = this.activityList[0].id;
+          this.changeActType();
         }
       },
       err=>{
@@ -100,7 +102,7 @@ export class  ConcatGoodComponent implements OnInit{
     this.page.pageNo=val;
     //拼接地址
     let url = 'backstage/good/findByCondition?pageNo='+val+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -136,7 +138,7 @@ export class  ConcatGoodComponent implements OnInit{
     this.page.pageSize=val;
     //拼接地址
     let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+val+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -173,7 +175,7 @@ export class  ConcatGoodComponent implements OnInit{
     this.page.pageNo=1;
     //拼接地址
     let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -201,20 +203,6 @@ export class  ConcatGoodComponent implements OnInit{
       });
   }
 
-  /**
-   * 比较时间
-   * @param date
-   */
-  compareDate(startDate,endDate){
-    let sDate = new Date(startDate).getTime();
-    let eDate = new Date(endDate).getTime();
-    let now =new Date().getTime();
-     if(now<sDate||now<eDate&&now>sDate){
-       return false ;
-     }else {
-       return true;
-     }
-  }
 
   /**
    * 选择
@@ -295,9 +283,9 @@ export class  ConcatGoodComponent implements OnInit{
   }
 
   /**
-   * 取消关联商品
+   * 关联商品
    */
-  concatConfirm(){
+  unconcatConfirm(){
     if(this.idList.length==0){
       this.nzMessage.warning("请先选择商品");
       return;
@@ -306,26 +294,26 @@ export class  ConcatGoodComponent implements OnInit{
       return;
     }
     this.nzModal.warning({
-      title:"关联提示",
-      content:"是否确认关联已选商品",
+      title:"解绑提示",
+      content:"是否确认解绑已选商品",
       onOk:()=>{
-        this.concatHandler();
+        this.unconcatHandler();
       }
     });
   }
 
   /**
-   * 取消关联操作
+   * 关联操作
    */
-  concatHandler(){
-    this.http.post("backstage/activity/bindActivityWithGood",{activityId:this.curActivity,goodIdList:this.idList}).subscribe(
+  unconcatHandler(){
+    this.http.post("backstage/activity/unbindActivityWithGood",{activityId:this.curActivity,goodIdList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
-          this.nzMessage.success("关联成功");
+          this.nzMessage.success("解绑成功");
           this.pageChangeHandler(1);
           this.idList=[];//清空选中的id
         }else{
-          this.nzMessage.success("关联失败");
+          this.nzMessage.success("解绑失败");
         }
       },
       err=>{

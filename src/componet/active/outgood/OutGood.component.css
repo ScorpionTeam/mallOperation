@@ -1,0 +1,27 @@
+/*工具栏*/
+.good_activity_tool{
+  margin-bottom: 20px;
+}
+
+.good_activity_tool .ant-btn-danger{
+  color: #fff;
+  background:#f04134;
+}
+.search{
+  cursor: pointer;
+}
+
+/*条件模板*/
+.condition_template{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.hide{
+  display: none;
+}
+/*活动下拉框*/
+.activity-select{
+  float: right;
+  margin-right: 15px;
+  width: 100px;
+}
