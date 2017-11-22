@@ -57,7 +57,6 @@ export class  TicketListComponent{
    * @param val
    */
   skipToPage(name,val){
-    console.log(name);
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{

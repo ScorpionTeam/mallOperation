@@ -34,7 +34,7 @@
 }
 .index_content .sub_container{
   background:#fff;
-  padding: 24px;
+  padding: 24px 41px 24px 24px;
   min-height: 280px;
   height: 100%;
   overflow-y: scroll;

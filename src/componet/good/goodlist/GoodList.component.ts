@@ -64,7 +64,6 @@ export class GoodListComponent implements OnInit{
    * @param val
    */
   skipToPage(name,val){
-    console.log(name);
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -87,6 +86,7 @@ export class GoodListComponent implements OnInit{
           this.goodList = res["list"];
           this.page.total=res["total"]
         }
+        this.idList=[];
       },
       err=>{
         this.ngLoad=false;
@@ -107,6 +107,7 @@ export class GoodListComponent implements OnInit{
           this.goodList = res["list"];
           this.page.total=res["total"]
         }
+        this.idList=[];
       },
       err=>{
         this.ngLoad=false;
@@ -138,6 +139,7 @@ export class GoodListComponent implements OnInit{
           this.goodList = res["list"];
           this.page.total=res["total"]
         }
+        this.idList=[];
     },
     err=>{
       console.log(err);
@@ -154,9 +156,13 @@ export class GoodListComponent implements OnInit{
       if(type==1){
         if(flag){
           this.idList.push(val);
+          if(this.idList.length==this.goodList.length){
+            this.checkAll = true;
+          }
         }else {
           let index = this.idList.indexOf(val);
           this.idList.splice(index,1);
+          this.checkAll = false;
         }
       }else {
         /*全选或全不选*/

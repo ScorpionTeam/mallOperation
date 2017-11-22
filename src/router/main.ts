@@ -16,30 +16,36 @@ import {TicketListComponent} from "../componet/ticket/list/TicketList.component"
 import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
 import {ConcatGoodComponent} from "../componet/active/withgood/ConcatGood.component";
 import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
+import {MenuListComponent} from "../componet/system/menu/list/MenuList.component";
+import {RouteGuard} from "../service/guard/RouteGuard";
+import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
 
- const appRoute :Routes = [
-  {path:'',redirectTo:'/index',pathMatch: 'full'},
-   {path:'index',component:IndexComponent,children:[
-     {path:'good-list',component:GoodListComponent},
-     {path:'good-detail/:id',component:GoodComponent},
-     {path:'good-add',component:GoodComponent},
-     {path:'order-list',component:OrderListComponent},
-     {path:'order-detail/:id',component:OrderComponent},
-     {path:'user-list',component:UserListComponent},
-     {path:'user-add',component:UserComponent},
-     {path:'user-detail/:id',component:UserComponent},
-     {path:'activity-list',component:ActivityListComponent},
-     {path:'activity-add',component:ActivityComponent},
-     {path:'activity-detail/:id',component:ActivityComponent},
-     {path:'activity-good-concat',component:ConcatGoodComponent},
-     {path:'activity-good-action',component:OutGoodComponent},
-     {path:'brand-list',component:BrandListComponent},
-     {path:'brand-detail/:id',component:BrandDetailComponent},
-     {path:'brand-add',component:BrandDetailComponent},
-     {path:'ticket-list',component:TicketListComponent},
-     {path:'ticket-add',component:TicketComponent},
-     {path:'ticket-detail/:id',component:TicketComponent}
-   ]},
+const appRoute :Routes = [
+  {path:'',redirectTo:'/index',pathMatch: 'full',},
+  {path:'index',component:IndexComponent,canActivate:[RouteGuard],canActivateChild:[RouteGuard],
+    children:[
+      {path:'good-list',component:GoodListComponent},
+      {path:'good-detail/:id',component:GoodComponent},
+      {path:'good-add',component:GoodComponent},
+      {path:'order-list',component:OrderListComponent},
+      {path:'order-detail/:id',component:OrderComponent},
+      {path:'user-list',component:UserListComponent},
+      {path:'user-add',component:UserComponent},
+      {path:'user-detail/:id',component:UserComponent},
+      {path:'activity-list',component:ActivityListComponent},
+      {path:'activity-add',component:ActivityComponent},
+      {path:'activity-detail/:id',component:ActivityComponent},
+      {path:'activity-good-concat',component:ConcatGoodComponent},
+      {path:'activity-good-action',component:OutGoodComponent},
+      {path:'brand-list',component:BrandListComponent},
+      {path:'brand-detail/:id',component:BrandDetailComponent},
+      {path:'brand-add',component:BrandDetailComponent},
+      {path:'ticket-list',component:TicketListComponent},
+      {path:'ticket-add',component:TicketComponent},
+      {path:'ticket-detail/:id',component:TicketComponent},
+      {path:'banner-list',component:AdvertisementListComonent},
+      {path:'menu-list',component:MenuListComponent}
+    ]},
   {path:'login',component:LoginComponent}
 ]
 

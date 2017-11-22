@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "assets/css/hkstyle.css"
+        "assets/css/hkstyle.css",
+        "assets/css/liststyle.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

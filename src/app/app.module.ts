@@ -30,6 +30,9 @@ import {TicketComponent} from "../componet/ticket/detail/Ticket.component";
 import {Interceptor} from "../common/interceptor/interceptor";
 import {ConcatGoodComponent} from "../componet/active/withgood/ConcatGood.component";
 import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
+import {MenuListComponent} from "../componet/system/menu/list/MenuList.component";
+import {RouteGuard} from "../service/guard/RouteGuard";
+import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -50,7 +53,9 @@ import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
     BrandListComponent,
     BrandDetailComponent,
     TicketListComponent,
-    TicketComponent
+    TicketComponent,
+    MenuListComponent,
+    AdvertisementListComonent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +70,7 @@ import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
   providers: [PageService,
                HttpData,
                Http,
+               RouteGuard,
                Interceptor,
                DataTool,
               { provide: NZ_MESSAGE_CONFIG, useValue: { nzMaxStack:1 }} ],

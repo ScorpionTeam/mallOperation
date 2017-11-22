@@ -6,7 +6,7 @@ export class HttpData{
   /*Host:string="http://ka82zd.natappfree.cc/mall/";*/
   /*Host:string="http://localhost:8088/mall/";*/
   Header:HttpHeaders;
-  PicUrl:string = "http://4mnkwf.natappfree.cc";
+  PicUrl:string = "http://ajijkh.natappfree.cc";
   constructor(){
     this.Header = new HttpHeaders().append("Content-Type", "application/json;charset=UTF-8")
   }

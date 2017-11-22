@@ -45,8 +45,7 @@ export class  ConcatGoodComponent implements OnInit{
    * 初始化
    */
   init(){
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+    let url = 'backstage/good/findForActivity?pageNo=1&pageSize=10&searchKey='+this.searchKey;
     /*数据初始化*/
     this.ngLoad=true;
     this.http.get(url).subscribe(res=>{
@@ -81,7 +80,7 @@ export class  ConcatGoodComponent implements OnInit{
    * 获取活动列表
    */
   getActivityList(){
-    let url = 'backstage/activity/findByCondition?pageNo=1&pageSize=10000&status=0&type=3';
+    let url = '/backstage/activity/findByCondition?pageNo=1&pageSize=10000&status=0&type=4';
     this.http.get(url).subscribe(
       res=>{
         if(res["total"]!=0){
@@ -99,8 +98,8 @@ export class  ConcatGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+val+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+    let url = 'backstage/good/findForActivity?pageNo='+val+'&pageSize='+this.page.pageSize+
+      '&searchKey='+this.searchKey;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -135,8 +134,8 @@ export class  ConcatGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+val+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+    let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+val+
+      '&searchKey='+this.searchKey;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -172,8 +171,8 @@ export class  ConcatGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=1;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&saleStatus=1';
+    let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
+      '&searchKey='+this.searchKey;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
         continue;
@@ -220,13 +219,24 @@ export class  ConcatGoodComponent implements OnInit{
    * 选择
    * @param flag 选中标志
    * @param val 商品id
+   * @param stock 参加活动库存
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag,val,type,stock?,index?){
     if(type==1){
       if(flag){
         //单选勾选操作
-        this.idList.push(val);
+        //封装good选中的good对象
+        if(isUndefined(stock)||stock<=0){
+          this.nzMessage.warning("请先将参加活动库存填写完毕");
+          setTimeout(()=>{this.goodList[index]['checked']=false;},0);
+          return;
+        }
+        let good:any={};
+        good.id = val;
+        good.stock = stock;
+        this.idList.push(good);
+
         if(this.idList.length==this.goodList.length){
           this.checkAll = true;
         }else {
@@ -241,19 +251,35 @@ export class  ConcatGoodComponent implements OnInit{
     }else {
       if(flag){
         //全选
+        let good :any ={};
         for(let i =0;i<val.length;i++){
+          //判断是否已经填写了参加活动库存
+          if(isUndefined(val[i].inStock)||val[i].inStock<=0){
+            console.log(val);
+            this.nzMessage.warning("请先将参加活动库存填写完毕");
+            setTimeout(()=>{this.checkAll=false;},0);
+            for(let j =0;j<val.length-1-i;i++){
+              this.goodList[i]['checked']=false;
+            }
+            return;
+          }
+          //判断是否加入的id是否是列表里的第一个
           if(this.idList.length==0){
             this.goodList[i]['checked']=true;
-            this.idList.push(val[i].id);
+            good.id=val[i].id;
+            good.stock=val[i].inStock;
+            this.idList.push(Object.assign({},good));
             continue;
           }
           //检测是否在idList中已存在
           for(let index in this.idList){
-            if(val[i].id==this.idList[index]){
+            if(val[i].id==this.idList[index].goodId){
               break;
             }else if((Number(index)+1)==this.idList.length){
               this.goodList[i]['checked']=true;
-              this.idList.push(val[i].id);
+              good.id=val[i].id;
+              good.stock=val[i].inStock;
+              this.idList.push(Object.assign({},good));
             }
           }
         }
@@ -268,6 +294,19 @@ export class  ConcatGoodComponent implements OnInit{
     console.log(this.idList);
   };
 
+  /**
+   * 比较库存
+   * @param inStock 参加活动库存
+   * @param allStock 总库存
+   * @param index 序列号
+   */
+  compareStock(inStock,allStock,index){
+    console.log(this.goodList);
+    if(Number(inStock)>allStock){
+      this.goodList[index].inStock=0;
+      this.nzMessage.warning("参加活动库存不得大于库存总量!")
+    }
+  }
 
   /**
    * 禁止开始时间
@@ -318,7 +357,7 @@ export class  ConcatGoodComponent implements OnInit{
    * 取消关联操作
    */
   concatHandler(){
-    this.http.post("backstage/activity/bindActivityWithGood",{activityId:this.curActivity,goodIdList:this.idList}).subscribe(
+    this.http.post("backstage/activity/bindActivityWithGood",{activityId:this.curActivity,goodList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("关联成功");
