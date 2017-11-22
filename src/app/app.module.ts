@@ -33,6 +33,7 @@ import {OutGoodComponent} from "../componet/active/outgood/OutGood.component";
 import {MenuListComponent} from "../componet/system/menu/list/MenuList.component";
 import {RouteGuard} from "../service/guard/RouteGuard";
 import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
+import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -55,7 +56,8 @@ import {AdvertisementListComonent} from "../componet/advertisement/list/Advertis
     TicketListComponent,
     TicketComponent,
     MenuListComponent,
-    AdvertisementListComonent
+    AdvertisementListComonent,
+    AdvertisementComponent
   ],
   imports: [
     BrowserModule,
