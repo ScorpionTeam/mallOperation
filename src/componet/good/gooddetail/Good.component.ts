@@ -105,12 +105,12 @@ export class GoodComponent implements OnInit{
 
   priceChange(){
     this.good.promotion = (this.good.price) * this.good.discount/100;
-    console.log(this.good.promotion);
   }
   /**
    * 新增
    */
   add(){
+    this.initLittleUrl = this.imgUrlList.concat();
     this.transBool();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
@@ -121,11 +121,13 @@ export class GoodComponent implements OnInit{
         this.validateForm.reset();
         this.initUrl='';//清空主图
         //清空辅图
+        console.log(this.initLittleUrl);
         for(let i =0 ;i<this.initLittleUrl.length;i++){
+          console.log(i);
           this.initLittleUrl[i]='';
         }
+        this.imgUrlList = [];//清空图片列表
         this.good.richContent = '';
-        console.log(this.initLittleUrl);
       }else {
         this.transStr();
         this.nzMessage.error(res["error"].message);
@@ -462,7 +464,7 @@ export class GoodComponent implements OnInit{
   imgUpload = (val,flag)=>{
     if(flag==0){
       this.good.mainImgUrl = val[0].url;
-      this.imgUrlList.push(val[0]);
+      this.imgUrlList.unshift(val[0]);
     }else {
       this.imgUrlList = this.imgUrlList.concat(val);
     }
@@ -478,11 +480,9 @@ export class GoodComponent implements OnInit{
     let index ;
     for(let i in this.imgUrlList){
       if(this.imgUrlList[i].url==val){
-        console.log(i);
         index = i;
       }
     }
     this.imgUrlList.splice(index,1);
-    /*this.imgUrlList=[];*/
   }
 }
