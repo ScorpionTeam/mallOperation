@@ -63,7 +63,7 @@ export class OrderListComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val){
+  skipToPage(name,val?){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{

@@ -22,6 +22,24 @@ export class AdvertisementComponent implements OnInit{
                 private router:Router,private route:ActivatedRoute,private dataTool:DataTool){}
   ngOnInit(){
     this.crateValidate();
+    this.init();
+  }
+
+  init(){
+    if(this.route.params["value"].id){
+      this.http.get("backstage/banner/findById?id="+this.route.params["value"].id).subscribe(
+        res=>{
+          if(res["result"]==1){
+            this.banner = res["data"];
+          }else {
+            this.nzMessage.error(res["error"].message);
+          }
+        },
+        err=>{
+          console.log(err);
+        }
+      )
+    }
   }
 
   /**

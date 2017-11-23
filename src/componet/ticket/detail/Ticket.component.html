@@ -1,5 +1,5 @@
 <form nz-form class="hk_detail_form" [formGroup]="validateForm">
-  <div nz-row *ngIf="route.params['value'].id">
+  <div nz-row *ngIf="isDetail">
     <div nz-col [nzSpan]="2">
       <label nz-form-label nz-form-item-required >优惠券编码</label>
     </div>

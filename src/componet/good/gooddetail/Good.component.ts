@@ -474,7 +474,7 @@ export class GoodComponent implements OnInit{
    * 删除图片
    * @param flag 0:主图  1:小图
    */
-  delPic(val,flag){
+  delPic(val,flag?){
     console.log(val);
     let index ;
     for(let i in this.imgUrlList){

@@ -6,7 +6,7 @@ import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:'app-detail',
-  templateUrl:'/Activity.component.html',
+  templateUrl:'Activity.component.html',
   styleUrls:['Activity.component.css']
 })
 

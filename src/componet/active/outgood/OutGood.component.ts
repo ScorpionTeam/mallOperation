@@ -73,7 +73,7 @@ export class OutGoodComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val){
+  skipToPage(name,val?){
     console.log(name);
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});

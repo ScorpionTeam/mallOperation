@@ -13,6 +13,7 @@ import {DataTool} from "../../../common/data/DataTool";
 export class TicketComponent implements OnInit{
   ticket:any={};
   validateForm:FormGroup;
+  isDetail:boolean=false;
   constructor(private fb:FormBuilder,private router:Router,private dataTool:DataTool,
               private route:ActivatedRoute,private http:Http,private nzMessage:NzMessageService){
 
@@ -20,6 +21,7 @@ export class TicketComponent implements OnInit{
 
   ngOnInit(){
     if(this.route.params["value"].id){
+      this.isDetail=!this.isDetail;
       this.detail();
     }
     this.creatValidate();
