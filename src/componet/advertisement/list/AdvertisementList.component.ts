@@ -14,7 +14,6 @@ export class AdvertisementListComonent{
   ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   bannerList:any[]=[];//广告列表
-  isCollapse:boolean=false;
   //分页对象
   page:any={
     pageNo:1,
