@@ -153,23 +153,21 @@
   </thead>
   <tbody nz-tbody>
   <tr nz-tbody-tr *ngFor="let data of goodListTable.data;let index = index;">
-    <ng-container *ngIf="compareDate(data.startDate,data.endDate)">
-      <td nz-td [nzCheckbox]="true">
-        <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,data.inStock,index)">
-        </label>
-      </td>
-      <td nz-td><img [src]="picUrl+data.mainImgUrl" alt="" class="list_pic"></td>
-      <td nz-td>{{data.goodNo}}</td>
-      <td nz-td>{{data.goodName}}</td>
-      <td nz-td>{{(data.price/100).toFixed(2)}}</td>
-      <td nz-td>
-        <nz-input-number [(ngModel)]="data.inStock" (nzBlur)="compareStock($event.target.value,data.stock,index)"></nz-input-number>
-      </td>
-      <td nz-td>{{data.stock}}</td>
-      <td nz-td>
-        <a>编辑</a>
-      </td>
-    </ng-container>
+    <td nz-td [nzCheckbox]="true">
+      <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,data.inStock,index)">
+      </label>
+    </td>
+    <td nz-td><img [src]="picUrl+data.mainImgUrl" alt="" class="list_pic"></td>
+    <td nz-td>{{data.goodNo}}</td>
+    <td nz-td>{{data.goodName}}</td>
+    <td nz-td>{{(data.price/100).toFixed(2)}}</td>
+    <td nz-td>
+      <nz-input-number [(ngModel)]="data.inStock" (nzBlur)="compareStock($event.target.value,data.stock,index)"></nz-input-number>
+    </td>
+    <td nz-td>{{data.stock}}</td>
+    <td nz-td>
+      <a>编辑</a>
+    </td>
   </tr>
   </tbody>
 </nz-table>

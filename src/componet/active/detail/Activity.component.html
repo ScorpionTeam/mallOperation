@@ -57,7 +57,7 @@
           <label nz-form-item-required>人数</label>
         </div>
         <div nz-col nz-form-item [nzSpan]="12">
-          <nz-input-number [(ngModel)]="activity.num" formControlName="number"></nz-input-number>
+          <nz-input-number [(ngModel)]="activity.num" [nzMin]="0" formControlName="number"></nz-input-number>
         </div>
       </div>
       <div nz-col [nzSpan]="12" nz-row [nzOffset]="6">
@@ -65,7 +65,7 @@
           <label nz-form-item-required>活动折扣</label>
         </div>
         <div nz-col nz-form-item [nzSpan]="12">
-          <nz-input-number [(ngModel)]="activity.discount" formControlName="discount"></nz-input-number>
+          <nz-input-number [(ngModel)]="activity.discount"  [nzMin]="0" formControlName="discount"></nz-input-number>
         </div>
       </div>
       <div nz-col [nzSpan]="12" nz-row [nzOffset]="6">

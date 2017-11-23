@@ -231,25 +231,25 @@
       <div nz-row class="hk_form_item">
         <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">单价</label>
         <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
-          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'输入单价'" [(ngModel)]="good.price"  name="price" formControlName="price" (nzBlur)="priceChange()"></nz-input-number>
+          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzMin]="0" [nzPlaceHolder]="'输入单价'" [(ngModel)]="good.price"  name="price" formControlName="price" (nzBlur)="priceChange()"></nz-input-number>
         </div>
       </div>
       <div nz-row class="hk_form_item">
         <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">折扣</label>
         <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
-          <nz-input-number [nzSize]="'large'"  [nzPlaceHolder]="'折扣'"  [(ngModel)]="good.discount"  formControlName="discount" name="discount" [style.width]="'100%'" (nzBlur)="priceChange()"></nz-input-number>
+          <nz-input-number [nzSize]="'large'"  [nzPlaceHolder]="'折扣'" [nzMin]="0" [(ngModel)]="good.discount"  formControlName="discount" name="discount" [style.width]="'100%'" (nzBlur)="priceChange()"></nz-input-number>
         </div>
       </div>
       <div nz-row class="hk_form_item">
         <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">促销价</label>
         <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
-          <nz-input-number [nzSize]="'large'" [style.width]="'100%'" [nzDisabled]="true" [nzPlaceHolder]="'促销价'"  [(ngModel)]="good.promotion"  formControlName="promotion" name="promotion" ></nz-input-number>
+          <nz-input-number [nzSize]="'large'" [style.width]="'100%'" [nzMin]="0" [nzDisabled]="true" [nzPlaceHolder]="'促销价'"  [(ngModel)]="good.promotion"  formControlName="promotion" name="promotion" ></nz-input-number>
         </div>
       </div>
       <div nz-row class="hk_form_item">
         <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">库存</label>
         <div nz-col [nzSpan]="6"  [nzOffset]="1" nz-form-control>
-          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzPlaceHolder]="'库存'"  [(ngModel)]="good.stock" name="stock" formControlName="stock"></nz-input-number>
+          <nz-input-number [style.width]="'100%'" [nzSize]="'large'" [nzMin]="0" [nzPlaceHolder]="'库存'"  [(ngModel)]="good.stock" name="stock" formControlName="stock"></nz-input-number>
         </div>
       </div>
       <div nz-row class="hk_form_item">

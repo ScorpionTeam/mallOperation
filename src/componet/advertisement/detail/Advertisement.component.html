@@ -6,7 +6,7 @@
           <label nz-form-item-required>图片</label>
         </div>
         <div nz-col nz-form-item [nzSpan]="12">
-          <upload-pic [type]="'1'"  [initUrl]="banner.imgUrl" (uploadsuccess)="uploadSuccess($event)" [alt]="'上传图片'"></upload-pic>
+          <upload-pic [type]="'1'"  [initUrl]="initPicUrl" (uploadSuccess)="uploadSuccess($event)" [alt]="'上传图片'"></upload-pic>
         </div>
       </div>
       <div nz-col [nzSpan]="12" nz-row [nzOffset]="6">
@@ -30,7 +30,7 @@
           <label nz-form-item-required>排序</label>
         </div>
         <div nz-col nz-form-item [nzSpan]="12">
-          <nz-input-number  [(ngModel)]="banner.sort" formControlName="sort"></nz-input-number>
+          <nz-input-number [nzMin]="0" [(ngModel)]="banner.sort" formControlName="sort"></nz-input-number>
         </div>
       </div>
       <div nz-col [nzSpan]="12" nz-row [nzOffset]="6">
@@ -47,3 +47,10 @@
     </div>
   </form>
 </div>
+<div nz-row>
+  <div nz-col [nzSpan]="24" style="text-align: center;">
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+    <button nz-button (click)="back()">返回</button>
+  </div>
+</div>
+
