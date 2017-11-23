@@ -1,0 +1,41 @@
+/*列表页面,工具栏样式*/
+
+.search_tool{
+  margin-bottom: 20px;
+}
+
+.btn_search_tool{
+  width: 72px;
+  height:30px;
+  float: right;
+  margin-right: 15px;
+}
+
+.btn-danger{
+  color: #fff!important;
+  background:#f04134!important;
+}
+
+.tool_item_label{
+  display: inline-block;
+  font-size: 15px;
+}
+
+.list_pic{
+  width: 115px;
+  height: 75px;
+  object-fit: cover;
+}
+
+/*条件筛选面板*/
+.condition_template{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.hide{
+  display: none;
+}
+/*表格操作*/
+.activity_list_action span{
+  margin-right: 10px;
+}
