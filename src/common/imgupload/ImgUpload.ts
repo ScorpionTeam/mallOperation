@@ -3,6 +3,7 @@ import {Http} from "../http/Http";
 import {DataTool} from "../data/DataTool";
 import {NzMessageService} from "ng-zorro-antd";
 import {isUndefined} from "util";
+import {HttpData} from "../../http/HttpData";
 @Component({
   selector:"upload-pic",
   templateUrl:"ImgUpload.html",
@@ -28,12 +29,13 @@ export class ImgUpload implements OnInit,OnChanges{
     { label: '商品列表(大:220*220)', value:{height:220,width:220}, checked: false },
     { label: '商品详情(大:400*400)', value:{height:400,width:400}, checked: false }
   ];//图片尺寸列表
-  constructor(private https : Http,private dataTool:DataTool,private nzMessage:NzMessageService){}
+  constructor(private https : Http,private dataTool:DataTool,private nzMessage:NzMessageService,private httpData :HttpData){}
 
   ngOnInit(){
 
   }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.initUrl);
     this.init();
   }
 
@@ -105,16 +107,15 @@ export class ImgUpload implements OnInit,OnChanges{
    * @param url
    */
   previewPic(url){
-    console.log(url);
     this.isUpload = !this.isUpload;
-    this.imgPreview ="http://ajijkh.natappfree.cc"+ url;
+    this.imgPreview =this.httpData.PicUrl+ url;
   }
 
   /**
    * 删除图片
    */
   delPic(){
-    let delName = this.imgPreview.substring(27);
+    let delName = this.imgPreview.substring(18);
     console.log(delName);
     this.https.get("file/deleteImage?imageName="+delName).subscribe(
       res=>{

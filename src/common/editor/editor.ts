@@ -5,14 +5,14 @@ import {Component, Input, Output, EventEmitter} from "@angular/core";
     [(ngModel)]="ckeditorContent"
     [config]="config"
     [readonly]="false"
-    (blur)="blurHandler()"
+    (change)="changeHandler()"
     debounce="500">
   </ckeditor>`
 })
 
 export class HKeditor{
   @Input() ckeditorContent:any;
-  @Output() blur = new EventEmitter();
+  @Output() change = new EventEmitter();
   toobarConfig:any=[
     { name: 'document', items : [ 'Source','-','NewPage','DocProps','Preview','Print','-','Templates' ] },
     { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
@@ -39,7 +39,7 @@ export class HKeditor{
   constructor(){
   }
 
-  blurHandler(){
-    this.blur.emit(this.ckeditorContent);
+  changeHandler(){
+    this.change.emit(this.ckeditorContent);
   }
 }

@@ -81,11 +81,9 @@ export class GoodListComponent implements OnInit{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
-        if(res["total"]!=0){
-          this.checkAll=false;
-          this.goodList = res["list"];
-          this.page.total=res["total"]
-        }
+        this.checkAll=false;
+        this.goodList = res["list"];
+        this.page.total=res["total"]
         this.idList=[];
       },
       err=>{
@@ -102,11 +100,9 @@ export class GoodListComponent implements OnInit{
           res["list"].checked=false
         }
         this.ngLoad=false;
-        if(res["total"]!=0){
-          this.checkAll=false;
-          this.goodList = res["list"];
-          this.page.total=res["total"]
-        }
+        this.checkAll=false;
+        this.goodList = res["list"];
+        this.page.total=res["total"]
         this.idList=[];
       },
       err=>{
@@ -134,16 +130,14 @@ export class GoodListComponent implements OnInit{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
-        if(res["total"]!=0){
-          this.checkAll=false;
-          this.goodList = res["list"];
-          this.page.total=res["total"]
-        }
+        this.checkAll=false;
+        this.goodList = res["list"];
+        this.page.total=res["total"]
         this.idList=[];
-    },
-    err=>{
-      console.log(err);
-    });
+      },
+      err=>{
+        console.log(err);
+      });
   }
 
   /**
@@ -153,43 +147,43 @@ export class GoodListComponent implements OnInit{
    * @param type 类型 0:全选，1:单选
    */
   selectItem(flag,val,type,index?){
-      if(type==1){
-        if(flag){
-          this.idList.push(val);
-          if(this.idList.length==this.goodList.length){
-            this.checkAll = true;
-          }
-        }else {
-          let index = this.idList.indexOf(val);
-          this.idList.splice(index,1);
-          this.checkAll = false;
+    if(type==1){
+      if(flag){
+        this.idList.push(val);
+        if(this.idList.length==this.goodList.length){
+          this.checkAll = true;
         }
       }else {
-        /*全选或全不选*/
-        if(flag){
-          for(let i =0;i<val.length;i++){
-            if(this.idList.length==0){
+        let index = this.idList.indexOf(val);
+        this.idList.splice(index,1);
+        this.checkAll = false;
+      }
+    }else {
+      /*全选或全不选*/
+      if(flag){
+        for(let i =0;i<val.length;i++){
+          if(this.idList.length==0){
+            this.goodList[i]['checked']=true;
+            this.idList.push(val[i].id);
+            continue;
+          }
+          //检测是否在idList中已存在
+          for(let index in this.idList){
+            if(val[i].id==this.idList[index]){
+              break;
+            }else if((Number(index)+1)==this.idList.length){
               this.goodList[i]['checked']=true;
               this.idList.push(val[i].id);
-              continue;
-            }
-            //检测是否在idList中已存在
-            for(let index in this.idList){
-              if(val[i].id==this.idList[index]){
-                break;
-              }else if((Number(index)+1)==this.idList.length){
-                this.goodList[i]['checked']=true;
-                this.idList.push(val[i].id);
-              }
             }
           }
-        }else {
-          for(let i =0;i<val.length;i++){
-            this.goodList[i]['checked']=false;
-          }
-          this.idList=[]
         }
+      }else {
+        for(let i =0;i<val.length;i++){
+          this.goodList[i]['checked']=false;
+        }
+        this.idList=[]
       }
+    }
     console.log(this.idList);
   };
 
@@ -212,11 +206,11 @@ export class GoodListComponent implements OnInit{
    * @returns {boolean}
    */
   disabledStartDate=(startValue)=>{
-  if(!startValue||!this.condition.endDate){
-    return false;
+    if(!startValue||!this.condition.endDate){
+      return false;
+    }
+    return startValue.getTime()>=this.condition.endDate.getTime();
   }
-  return startValue.getTime()>=this.condition.endDate.getTime();
-}
   /**
    * 禁止结束时间
    * @param endValue
@@ -224,7 +218,6 @@ export class GoodListComponent implements OnInit{
    */
   disabledEndDate=(endValue)=>{
     if(!this.condition.startDate||!endValue){
-      console.log(1);
       return false
     }
     return endValue.getTime() <= this.condition.startDate.getTime();
@@ -248,32 +241,32 @@ export class GoodListComponent implements OnInit{
       this.nzMessage.error("系统错误");
     })
   }
-/*  delete(){
-    if(this.idList.length==0){
-      this.nzService.warning({
-        title:"提示",
-        content:"请先选择要删除的商品!"
-      });
-      return;
-    }
-    let url = 'backstage/good/bathDeleteGoods';
-    let self = this;
-    this.nzService.confirm({
-      title:"删除提醒",
-      content:"确认进行删除吗?",
-      maskClosable:false,
-      onOk:function(){
-        self.http.post(url,{idList:self.idList}).subscribe(res=>{
-          if(res['result']==1){
-            self.nzMessage.success("删除成功");
-            self.pageChangeHandler(1);
-          }else {
-            self.nzMessage.error(res["error"].message);
-          }
-        },err=>{
-          console.log(err);
-        })
-      }
-    });
-  }*/
+  /*  delete(){
+   if(this.idList.length==0){
+   this.nzService.warning({
+   title:"提示",
+   content:"请先选择要删除的商品!"
+   });
+   return;
+   }
+   let url = 'backstage/good/bathDeleteGoods';
+   let self = this;
+   this.nzService.confirm({
+   title:"删除提醒",
+   content:"确认进行删除吗?",
+   maskClosable:false,
+   onOk:function(){
+   self.http.post(url,{idList:self.idList}).subscribe(res=>{
+   if(res['result']==1){
+   self.nzMessage.success("删除成功");
+   self.pageChangeHandler(1);
+   }else {
+   self.nzMessage.error(res["error"].message);
+   }
+   },err=>{
+   console.log(err);
+   })
+   }
+   });
+   }*/
 }

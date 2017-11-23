@@ -140,7 +140,7 @@
               <label >包邮</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
-              <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="isFreight" [nzPlaceHolder]="'包邮'"  [style.height]="'29px'" name="email">
+              <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isFreight" [nzPlaceHolder]="'包邮'"  [style.height]="'29px'" name="email">
                 <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
                 <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
               </nz-select>

@@ -22,7 +22,7 @@ export class GoodComponent implements OnInit{
     goodName: '',
     description: '',
     promotion:0,
-    discount:0,
+    discount:100,
     price: 0,
     stock: 0,
     isOnSale: false,
@@ -86,11 +86,14 @@ export class GoodComponent implements OnInit{
    */
   save(){
     console.log(this.good);
-    if(!this.validateForm.valid){
+    if(!this.validateForm.valid||this.imgUrlList.length==0||this.good.richContent==''||isUndefined(this.good.richContent)){
       this.nzMessage.error("请将表单填写完整");
       for(const i in this.validateForm.controls){
         this.validateForm.controls[ i ].markAsDirty();
       }
+      return;
+    }else if(!this.validateForm.valid){
+      this.nzMessage.error("请将检查主图是否上传");
       return;
     }
     if(this.isDetail){
@@ -109,10 +112,6 @@ export class GoodComponent implements OnInit{
    */
   add(){
     this.transBool();
-    if(!this.validateForm.valid||this.imgUrlList.length==0){
-      this.nzMessage.error("请将检查图片与表单信息是否都已录入");
-      return;
-    }
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
     this.https.post('backstage/good/add',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
@@ -120,9 +119,13 @@ export class GoodComponent implements OnInit{
       if(res["result"]==1){
         this.nzMessage.success("添加成功");
         this.validateForm.reset();
-        this.initUrl='';
-        this.initLittleUrl=[];
+        this.initUrl='';//清空主图
+        //清空辅图
+        for(let i =0 ;i<this.initLittleUrl.length;i++){
+          this.initLittleUrl[i]='';
+        }
         this.good.richContent = '';
+        console.log(this.initLittleUrl);
       }else {
         this.transStr();
         this.nzMessage.error(res["error"].message);
@@ -141,10 +144,6 @@ export class GoodComponent implements OnInit{
    * 修改
    */
   update(){
-    if(!this.validateForm.valid||this.imgUrlList.length==0){
-      this.nzMessage.error("请将检查图片与表单信息是否都已录入");
-      return;
-    }
     this.transBool();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传

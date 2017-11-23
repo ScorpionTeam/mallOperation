@@ -34,6 +34,7 @@ import {MenuListComponent} from "../componet/system/menu/list/MenuList.component
 import {RouteGuard} from "../service/guard/RouteGuard";
 import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
 import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 @NgModule({
   declarations: [
     HKeditor,
@@ -73,7 +74,8 @@ import {AdvertisementComponent} from "../componet/advertisement/detail/Advertise
                HttpData,
                Http,
                RouteGuard,
-               Interceptor,
+              /*{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },*/
+              Interceptor,
                DataTool,
               { provide: NZ_MESSAGE_CONFIG, useValue: { nzMaxStack:1 }} ],
   bootstrap: [AppComponent]

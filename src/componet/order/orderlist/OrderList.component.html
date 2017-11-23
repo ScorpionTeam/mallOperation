@@ -141,7 +141,7 @@
     <td nz-td>{{data.orderType=="1"?"pc订单":"手机订单"}}</td>
     <td nz-td>{{data.payType=="0"?"支付宝":data.payType=="1"?"微信":data.payType=="2"?"信用卡":"储蓄卡"}}</td>
     <td nz-td  [class]="data.orderStatus=='0'?'err':data.orderStatus=='7'?'err':'success'">{{data.orderStatus=="1"?"待支付":data.orderStatus=="2"?" 待发货":data.orderStatus=="3"?"待收货":data.orderStatus=="4"?"已完成":
-      data.orderStatus=="5"?"退货申请":data.orderStatus=="6"?"已退货":"退货失败"}}</td>
+      data.orderStatus=="5"?"退货申请":data.orderStatus=="6"?"关闭":data.orderStatus=="7"?"待评价":"已评价"}}</td>
     <td nz-td>{{data.stock}}</td>
     <td nz-td class="order_list_action">
       <span><a (click)="skipToPage('/order-detail',data.id)">编辑</a></span>
