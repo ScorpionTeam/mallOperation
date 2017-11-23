@@ -32,13 +32,7 @@
               <label>订单状态</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">已付款款</span>
-              <!--<nz-select [nzDisabled]="true" [ngModel]="order.orderStatus" name="orderStatus">
-                <nz-option [nzLabel]="'待付款'" [nzValue]="'1'"></nz-option>
-                <nz-option [nzLabel]="'待发货'" [nzValue]="'2'"></nz-option>
-                <nz-option [nzLabel]="'待收货'" [nzValue]="'3'"></nz-option>
-                <nz-option [nzLabel]="'已完成'" [nzValue]="'4'"></nz-option>
-              </nz-select>-->
+              <span class="order_item">{{justifyPayStatus(order.orderStatus)}}</span>
             </div>
           </div>
         </div>

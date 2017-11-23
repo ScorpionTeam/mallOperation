@@ -31,14 +31,14 @@ export class Http{
   get(url){
     let urls = this.httpData.Host+url;
     let request = new HttpRequest("GET",urls);
-/*    this.interceptor.intercept(request,this.next).subscribe(
+    let i = 1;
+ /*   this.interceptor.intercept(request,this.next).subscribe(
       res=>{
+        console.log(i++);
         console.log(res);
-      },
-      err=>{
-        console.log(err);
       }
     );*/
+
     return this.http.get(urls);
   }
 

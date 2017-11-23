@@ -75,4 +75,39 @@ export class OrderComponent implements OnInit{
       }
     )
   }
+
+  /**
+   * 判断付款状态
+   * @param val
+   * *1 待付款
+   * 2 待发货
+   * 3 待收货
+   * 4 已完成
+   * 5 退款
+   * 6 关闭
+   * 7 待评价
+   * 8 已评价
+   */
+  justifyPayStatus(val){
+    switch(val)
+    {
+      case '1':
+        return "待付款";
+      case '2':
+        return "待发货";
+      case '3':
+        return "待收货";
+      case '4':
+        return "已完成";
+      case '5':
+        return "退款";
+      case '6':
+        return "关闭";
+      case '7':
+        return "待评价";
+      case '8':
+        return "已评价";
+    }
+
+  }
 }

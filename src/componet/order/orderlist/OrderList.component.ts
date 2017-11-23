@@ -170,7 +170,6 @@ export class OrderListComponent implements OnInit{
    */
   disabledEndDate=(endValue)=>{
     if(!this.condition.startDate||!endValue){
-      console.log(1);
       return false
     }
     return endValue.getTime() <= this.condition.startDate.getTime();
@@ -193,7 +192,6 @@ export class OrderListComponent implements OnInit{
     })
   }
   returnMoneySuccess(id,totalFee){
-    console.log(this.returnMoney);
     if(this.returnMoney>totalFee){
       this.nzMessage.error("退款金额无法大于订单总额");
       return;
