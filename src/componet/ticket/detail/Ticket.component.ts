@@ -68,7 +68,8 @@ export class TicketComponent implements OnInit{
       reduce:["",[Validators.required]],
       num:["",[Validators.required]],
       startDate:["",[Validators.required]],
-      endDate:["",[Validators.required]]
+      endDate:["",[Validators.required]],
+      numLimit:""
     });
   }
 
@@ -108,9 +109,10 @@ export class TicketComponent implements OnInit{
           /*转换时间格式*/
           this.ticket.startDate = new Date(this.ticket.startDate);
           this.ticket.endDate = new Date(this.ticket.endDate);
-          this.ticket.status = this.dataTool.strTransBool(this.ticket.status);
+          this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
           this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
           this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
+          this.ticket.numLimit = !this.dataTool.strTransBool(this.ticket.numLimit);
         }
       },
       err=>{
@@ -150,6 +152,7 @@ export class TicketComponent implements OnInit{
    */
   add(){
     this.ticket.status = this.dataTool.boolTransStr(!this.ticket.status);
+    this.ticket.numLimit = this.dataTool.boolTransStr(!this.ticket.numLimit);
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduceMoney = this.dataTool.yTransFen(this.ticket.reduceMoney);
     this.http.post('backstage/ticket/add',this.ticket).subscribe(
@@ -163,12 +166,14 @@ export class TicketComponent implements OnInit{
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
+        this.ticket.numLimit = !this.dataTool.strTransBool(this.ticket.numLimit);
       },
       err=>{
         console.log(err);
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
+        this.ticket.numLimit = !this.dataTool.strTransBool(this.ticket.numLimit);
         this.nzMessage.error("新增失败");
       }
     );
@@ -178,7 +183,7 @@ export class TicketComponent implements OnInit{
    * 修改优惠券
    */
   update(){
-    //Todo:判断修改条件
+    this.ticket.numLimit = this.dataTool.boolTransStr(!this.ticket.numLimit);
     this.ticket.status = this.dataTool.boolTransStr(!this.ticket.status);
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduceMoney = this.dataTool.yTransFen(this.ticket.reduceMoney);
@@ -191,11 +196,13 @@ export class TicketComponent implements OnInit{
         }
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
+        this.ticket.numLimit = !this.dataTool.strTransBool(this.ticket.numLimit);
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
       },
       err=>{
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
+        this.ticket.numLimit = !this.dataTool.strTransBool(this.ticket.numLimit);
         this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
         this.nzMessage.error("修改失败");
       }

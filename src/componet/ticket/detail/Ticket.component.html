@@ -63,6 +63,17 @@
   </div>
   <div nz-row>
     <div nz-col [nzSpan]="2">
+      <label nz-form-label nz-form-item-required >是否限量</label>
+    </div>
+    <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
+      <nz-switch [nzSize]="'large'" [(ngModel)]="ticket.numLimit" formControlName="numLimit">
+        <span checked>是</span>
+        <span unchecked>否</span>
+      </nz-switch>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="2">
       <label nz-form-label nz-form-item-required >数量</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
