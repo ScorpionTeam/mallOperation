@@ -1,5 +1,5 @@
 <div class="ticketList_tool">
-  <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"
+  <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入优惠券名称'" [nzSize]="'large'"
             [(ngModel)]="searchKey" [class]="'search_input'">
     <ng-template #addOnAfter>
       <i class="anticon anticon-search search" (click)="search()"></i>
@@ -130,6 +130,10 @@
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>
   <tr>
+    <th nz-th [nzCheckbox]="true">
+      <label #checkboxAll nz-checkbox  [(ngModel)]="checkAll"  (ngModelChange)="selectItem(checkAll,ticketList,0)">
+      </label>
+    </th>
     <th nz-th><span>券编码</span></th>
     <th nz-th><span>券名称</span></th>
     <th nz-th><span>类型</span></th>
@@ -144,6 +148,10 @@
   </thead>
   <tbody nz-tbody>
   <tr nz-tbody-tr *ngFor="let data of ticketListTable.data;let index = index;">
+    <td nz-td [nzCheckbox]="true">
+      <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
+      </label>
+    </td>
     <td nz-td>{{data.ticketNo}}</td>
     <td nz-td>{{data.ticketName}}</td>
     <td nz-td>{{data.type=="1"?"平台":"商家"}}</td>
@@ -152,7 +160,7 @@
     <td nz-td>{{dataTool.fTransYuan(data.reduceMoney)}}</td>
     <td nz-td>{{dataTool.fTransYuan(data.money)}}</td>
     <td nz-td>{{data.num}}</td>
-    <td nz-td>{{data.status=="1"?"删除":"正常"}}</td>
+    <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="1"?"删除":"正常"}}</td>
     <td nz-td class="ticket_list_action">
       <span><a (click)="skipToPage('/ticket-detail',data.id)">编辑</a></span>
     </td>

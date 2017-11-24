@@ -180,9 +180,13 @@ export class  TicketListComponent{
     if(type==1){
       if(flag){
         this.idList.push(val);
+        if(this.idList.length==this.ticketList.length){
+          this.checkAll = true;
+        }
       }else {
         let index = this.idList.indexOf(val);
         this.idList.splice(index,1);
+        this.checkAll = false;
       }
     }else {
       /*全选或全不选*/
@@ -236,17 +240,17 @@ export class  TicketListComponent{
   }
 
   /**
-   * 批量下架
+   * 批量删除
    */
   outStore(){
     if(this.idList.length==0){
-      this.nzMessage.warning("请先勾选要下架的品牌");
+      this.nzMessage.warning("请先勾选要删除的优惠券");
       return
     }
-    this.http.post("backstage/ticket/batchModifyStatus",{status:'0',idList:this.idList}).subscribe(
+    this.http.post("backstage/ticket/batchDelete",{idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
-          this.nzMessage.success("下架成功");
+          this.nzMessage.success("删除成功");
           this.pageChangeHandler(1);
           this.idList = [];
         }

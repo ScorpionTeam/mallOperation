@@ -151,6 +151,11 @@ export class TicketComponent implements OnInit{
    * 新增优惠券
    */
   add(){
+    let curDate=new Date();
+    if(this.ticket.endDate.getTime()<curDate.getTime()){
+      this.nzMessage.error("结束时间早于当前时期,无法创建");
+      return;
+    }
     this.ticket.status = this.dataTool.boolTransStr(!this.ticket.status);
     this.ticket.numLimit = this.dataTool.boolTransStr(!this.ticket.numLimit);
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);

@@ -22,8 +22,8 @@
 }
 
 .list_pic{
-  width: 115px;
-  height: 75px;
+  width:60px;
+  height:60px;
   object-fit: cover;
 }
 
@@ -38,4 +38,12 @@
 /*表格操作*/
 .activity_list_action span{
   margin-right: 10px;
+}
+
+/*状态颜色*/
+.sta_del{
+  color:red;
+}
+.sta_normal{
+  color:#108ee9;
 }
