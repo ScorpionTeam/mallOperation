@@ -176,9 +176,11 @@ export class OrderListComponent implements OnInit{
   }
 
   /**
-   * 成功退款
-   * @param id
-   * @param flag
+   *
+   * @param id 订单id
+   * @param content 内容
+   * @param totalFee
+   * @param title
    */
   returnMoneySuccessConfirm(id,content,totalFee,title){
     this.nzModal.confirm({
