@@ -68,10 +68,11 @@ export class ActivityComponent implements OnInit{
    * 保存
    */
   save(){
-    if(!this.validateForm.valid){
+    console.log(this.validateForm);
+/*    if(!this.validateForm.valid){
       this.nzMessage.warning("请将表单填写完整!");
       return;
-    }
+    }*/
     if(this.route.params["value"].id){
       this.update();
     }else {

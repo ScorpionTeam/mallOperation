@@ -140,7 +140,7 @@
   </thead>
   <tbody nz-tbody>
   <tr nz-tbody-tr *ngFor="let data of orderListTable.data;let index = index;">
-    <td nz-td><img [src]="picUrl+data.goodMainImage.replace('.','_60x60.')" alt="" class="list_pic"></td>
+    <!--<td nz-td><img [src]="picUrl+data.goodMainImage.replace('.','_60x60.')" alt="" class="list_pic"></td>-->
     <td nz-td>{{data.orderNo}}</td>
     <td nz-td>{{data.orderType=="1"?"pc订单":"手机订单"}}</td>
     <td nz-td>{{data.payType=="0"?"支付宝":data.payType=="1"?"微信":data.payType=="2"?"信用卡":data.payType=="3"?"储蓄卡":""}}</td>

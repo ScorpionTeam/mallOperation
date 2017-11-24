@@ -147,7 +147,7 @@
     <th nz-th [nzWidth]="'130'"><span>商品编码</span></th>
     <th nz-th [nzWidth]="'130'"><span>名称</span></th>
     <th nz-th [nzWidth]="'60'"><span>单价</span></th>
-    <th nz-th [nzWidth]="'60'"><span>库存</span></th>
+    <th nz-th [nzWidth]="'60'"><span>参加活动库存</span></th>
   </tr>
   </thead>
   <tbody nz-tbody>
@@ -160,7 +160,7 @@
     <td nz-td>{{data.goodNo}}</td>
     <td nz-td>{{data.goodName}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
-    <td nz-td>{{data.stock}}</td>
+    <td nz-td>{{data.activityStock}}</td>
   </tr>
   </tbody>
 </nz-table>

@@ -47,7 +47,7 @@ export class OutGoodComponent implements OnInit{
     if(flag){
       return;
     }
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
+    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
       '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     /*数据初始化*/
     this.ngLoad=true;
@@ -106,7 +106,7 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+val+'&pageSize='+this.page.pageSize+
+    let url = 'backstage/good/findByActivityId?pageNo='+val+'&pageSize='+this.page.pageSize+
       '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
@@ -142,7 +142,7 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+val+
+    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+val+
       '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
@@ -179,7 +179,7 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=1;
     //拼接地址
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
+    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
       '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
     for(let key in this.condition){
       if(isNull(this.condition[key])){
