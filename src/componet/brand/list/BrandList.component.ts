@@ -6,6 +6,7 @@ import {Http} from "../../../common/http/Http";
 import {isUndefined} from "util";
 import {isNull} from "util";
 import {HttpData} from "../../../http/HttpData";
+import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:"brand-list",
   templateUrl:"./BrandList.component.html",
@@ -28,7 +29,8 @@ export class BrandListComponent{
   };
   condition:any={};
   constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
+              private route:ActivatedRoute,private nzMessage:NzMessageService,
+              private dataTool:DataTool,private nzModal:NzModalService){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;

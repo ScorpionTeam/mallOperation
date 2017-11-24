@@ -186,7 +186,7 @@
     <td nz-td>{{data.goodName}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
     <td nz-td>{{data.stock}}</td>
-    <td nz-td [class]="data.isOnSale=='1'?'':'err'">{{data.isOnSale=="1"?"上架":"下架"}}</td>
+    <td nz-td [class]="dataTool.getStatus(data.isOnSale)?'sta_normal':'sta_del'">{{data.isOnSale=="1"?"上架":"下架"}}</td>
     <td nz-td><span><a (click)="skipToPage('/good-detail',data.id)">编辑</a></span></td>
   </tr>
   </tbody>

@@ -5,6 +5,7 @@ import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {isUndefined} from "util";
 import {isNull} from "util";
+import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:"banner-list",
   templateUrl:"./AdvertisementList.component.html"
@@ -23,7 +24,7 @@ export class AdvertisementListComonent{
   condition:any={};
   idList:any=[];//批量操作id集合
   checkAll:boolean=false;
-  constructor(private pageObj:PageService,private router:Router,private http:Http,
+  constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
 
   ngOnInit(){

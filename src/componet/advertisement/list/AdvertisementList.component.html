@@ -42,7 +42,7 @@
     <td nz-td>{{data.imgUrl}}</td>
     <td nz-td>{{data.actionUrl}}</td>
     <td nz-td>{{data.visitTotal}}</td>
-    <td nz-td>{{data.status=='0'?"正常":"删除"}}</td>
+    <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=='0'?"正常":"删除"}}</td>
     <td nz-td class="banner_list_action">
       <span><a (click)="skipToPage('/banner-detail',data.id)">编辑</a></span>
     </td>

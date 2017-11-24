@@ -5,6 +5,7 @@ import {NzModalService, NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {isNull} from "util";
 import {HttpData} from "../../../http/HttpData";
+import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
@@ -29,7 +30,7 @@ export class GoodListComponent implements OnInit{
   //是否展开
   isCollapse:boolean = false;
   idList:any=[];//id集合
-  constructor(private pageObj : PageService,private http:Http,
+  constructor(private pageObj : PageService,private http:Http,private dataTool:DataTool,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzService :NzModalService ,private nzMessage:NzMessageService){}
 

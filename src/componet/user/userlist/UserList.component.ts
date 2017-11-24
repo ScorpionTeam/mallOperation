@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {PageService} from "../../../service/page/Page.service";
 import {NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
+import {DataTool} from "../../../common/data/DataTool";
 
 @Component({
   selector:'user-list',
@@ -20,7 +21,7 @@ export class UserListComponent{
     total:0
   };
   idList:any=[];//id集合
-  constructor(private pageObj : PageService,private http:Http,
+  constructor(private pageObj : PageService,private http:Http,private dataTool:DataTool,
               private router:Router,private route :ActivatedRoute,
               private nzService :NzModalService ){
   }

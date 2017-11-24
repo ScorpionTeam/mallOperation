@@ -45,7 +45,7 @@
     <td nz-td>{{data.address}}</td>
     <td nz-td>{{data.city}}</td>
     <td nz-td>{{data.certification=="0"?"未认证":data.certification=="1"?"认证不通过":"已认证"}}</td>
-    <td nz-td>{{data.status=="0"?"正常":"注销"}}</td>
+    <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="0"?"正常":"注销"}}</td>
     <td nz-td><span><a (click)="skipToPage('/user-detail',data.id)">编辑</a></span></td>
   </tr>
   </tbody>
