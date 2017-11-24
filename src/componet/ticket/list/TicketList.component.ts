@@ -5,6 +5,7 @@ import {PageService} from "../../../service/page/Page.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
+import {DataTool} from "../../../common/data/DataTool";
 @Component({
   selector:"ticket-list",
   templateUrl:"TicketList.component.html",
@@ -24,7 +25,7 @@ export class  TicketListComponent{
     total:0
   };
   condition:any={};
-  constructor(private pageObj:PageService,private router:Router,private http:Http,
+  constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
               private route:ActivatedRoute,private nzMessage:NzMessageService){}
 
   ngOnInit(){

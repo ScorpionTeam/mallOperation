@@ -3,8 +3,8 @@
     <div class="pic_contain" [class.unique]="type=='0'?false:true">
       <div class="pic_wapper">
         <img src="{{imgPreview}}" alt="" class="pic">
+        <span class="upload_tip" *ngIf="!isUpload" >{{alt}}</span>
         <input type="file" class="pic_file_input" (change)="imgUpload($event)"  *ngIf="!isUpload">
-        <span class="upload_tip" *ngIf="!isUpload">{{alt}}</span>
         <div class="img_modal" *ngIf="isUpload">
           <i class="anticon anticon-delete del_icon" (click)="delPic()"></i>
         </div>

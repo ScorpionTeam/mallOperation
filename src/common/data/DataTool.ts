@@ -46,6 +46,11 @@ export  class DataTool{
     }
   }
 
+  /**
+   * 判断支付类型
+   * @param val
+   * @returns {any}
+   */
   getPayTypeStr(val){
     switch (val){
       case "0":
@@ -56,6 +61,18 @@ export  class DataTool{
         return "信用卡";
       case "3":
         return "储蓄卡";
+    }
+  }
+
+  /**
+   * 获取状态
+   * @param val
+   */
+  getStatus(val){
+    if(val=='1'){
+      return false;
+    }else if(val=='0'){
+      return true;
     }
   }
 }

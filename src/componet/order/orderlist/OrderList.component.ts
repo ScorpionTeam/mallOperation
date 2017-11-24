@@ -6,6 +6,7 @@ import {isNull} from "util";
 import {isUndefined} from "util";
 import {Http} from "../../../common/http/Http";
 import {HttpData} from "../../../http/HttpData";
+import {DataTool} from "../../../common/data/DataTool";
 
 @Component({
   selector:"order-list",
@@ -31,7 +32,8 @@ export class OrderListComponent implements OnInit{
   condition:any={};
   deliveryObj:any={};
   constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,
+              private  dataTool:DataTool){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;

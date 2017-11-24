@@ -227,6 +227,10 @@ export class GoodListComponent implements OnInit{
    * 上、下架商品
    */
   batchGoodDown(status){
+    if(this.idList.length==0){
+      this.nzMessage.warning("请先选择商品");
+      return;
+    }
     this.http.post('backstage/good/batchModifySaleStatus',{saleStatus:status,goodsIdList:this.idList}).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
@@ -234,7 +238,7 @@ export class GoodListComponent implements OnInit{
         this.pageChangeHandler(1);
         this.idList=[];
       }else {
-        this.nzMessage.error(res["data"])
+        this.nzMessage.error(res["error"].message)
       }
     },err=>{
       console.log(err);

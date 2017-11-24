@@ -133,10 +133,10 @@
     <th nz-th><span>券编码</span></th>
     <th nz-th><span>券名称</span></th>
     <th nz-th><span>类型</span></th>
-    <th nz-th><span>说明</span></th>
     <th nz-th><span>开始时间</span></th>
     <th nz-th><span>结束时间</span></th>
-    <th nz-th><span>金额</span></th>
+    <th nz-th><span>优惠金额</span></th>
+    <th nz-th><span>使用金额</span></th>
     <th nz-th><span>数量</span></th>
     <th nz-th><span>状态</span></th>
     <th nz-th><span>操作</span></th>
@@ -147,10 +147,10 @@
     <td nz-td>{{data.ticketNo}}</td>
     <td nz-td>{{data.ticketName}}</td>
     <td nz-td>{{data.type=="1"?"平台":"商家"}}</td>
-    <td nz-td>{{data.content}}</td>
     <td nz-td>{{data.startDate}}</td>
     <td nz-td>{{data.endDate}}</td>
-    <td nz-td>{{data.money}}</td>
+    <td nz-td>{{dataTool.fTransYuan(data.reduceMoney)}}</td>
+    <td nz-td>{{dataTool.fTransYuan(data.money)}}</td>
     <td nz-td>{{data.num}}</td>
     <td nz-td>{{data.status=="1"?"删除":"正常"}}</td>
     <td nz-td class="ticket_list_action">
