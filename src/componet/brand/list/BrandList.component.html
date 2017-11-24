@@ -76,7 +76,8 @@
     </div>
   </ng-template>
 </nz-card>-->
-<nz-table #brandTable [nzAjaxData]="brandList" [nzPageSize]="10" [nzLoading]="ngLoad"
+<nz-table #brandTable [nzAjaxData]="brandList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
           [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>

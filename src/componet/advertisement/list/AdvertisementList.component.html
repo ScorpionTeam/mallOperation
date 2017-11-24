@@ -15,7 +15,8 @@
     <span>新增</span>
   </button>
 </div>
-<nz-table #bannerListTable [nzAjaxData]="bannerList" [nzPageSize]="10" [nzLoading]="ngLoad"
+<nz-table #bannerListTable [nzAjaxData]="bannerList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
           [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>

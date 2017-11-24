@@ -50,6 +50,7 @@
                 <nz-option [nzLabel]="'秒杀'" [nzValue]="'0'"></nz-option>
                 <nz-option [nzLabel]="'拼团 '" [nzValue]="'1'"></nz-option>
                 <nz-option [nzLabel]="'优选'" [nzValue]="'2'"></nz-option>
+                <nz-option [nzLabel]="'试用'" [nzValue]="'3'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -79,7 +80,8 @@
     </div>
   </ng-template>
 </nz-card>
-<nz-table #activityListTable [nzAjaxData]="activityList" [nzPageSize]="10" [nzLoading]="ngLoad"
+<nz-table #activityListTable [nzAjaxData]="activityList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
           [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>
@@ -103,7 +105,7 @@
       </label>
     </td>
     <td nz-td>{{data.name}}</td>
-    <td nz-td>{{data.activityType=="0"?"秒杀":data.activityType=="1"?"拼团":"优选"}}</td>
+    <td nz-td>{{data.activityType=="0"?"秒杀":data.activityType=="1"?"拼团":data.activityType=="2"?"优选":"试用"}}</td>
     <td nz-td>{{data.startDate}}</td>
     <td nz-td>{{data.endDate}}</td>
     <td nz-td  [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="1"?"删除":"正常"}}</td>

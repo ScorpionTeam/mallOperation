@@ -156,7 +156,8 @@
     </div>
   </ng-template>
 </nz-card>
-<nz-table #goodListTable [nzAjaxData]="goodList" [nzPageSize]="10" [nzLoading]="ngLoad"
+<nz-table #goodListTable [nzAjaxData]="goodList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
           [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>
@@ -170,6 +171,7 @@
     <th nz-th [nzWidth]="'130'"><span>名称</span></th>
     <th nz-th [nzWidth]="'60'"><span>单价</span></th>
     <th nz-th [nzWidth]="'60'"><span>库存</span></th>
+    <th nz-th [nzWidth]="'60'"><span>访问量</span></th>
     <th nz-th [nzWidth]="'60'"><span>状态</span></th>
     <th nz-th [nzWidth]="'60'"><span>操作</span></th>
   </tr>
@@ -180,13 +182,14 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
-    <td nz-td><img [src]="picUrl+data.mainImgUrl" alt="" class="list_pic"></td>
+    <td nz-td><img [src]="picUrl+data.mainImgUrl.replace('.','_60x60.')" alt="" class="list_pic"></td>
     <!--<td nz-td><img [src]="picUrl+data.mainImgUrl.replace('.','_220x220.')" alt="" class="list_pic"></td>-->
     <td nz-td>{{data.goodNo}}</td>
     <td nz-td>{{data.goodName}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
     <td nz-td>{{data.stock}}</td>
-    <td nz-td [class]="dataTool.getStatus(data.isOnSale)?'sta_normal':'sta_del'">{{data.isOnSale=="1"?"上架":"下架"}}</td>
+    <td nz-td>{{data.visitTotal}}</td>
+    <td nz-td [class]="!dataTool.getStatus(data.isOnSale)?'sta_normal':'sta_del'">{{data.isOnSale=="1"?"上架":"下架"}}</td>
     <td nz-td><span><a (click)="skipToPage('/good-detail',data.id)">编辑</a></span></td>
   </tr>
   </tbody>

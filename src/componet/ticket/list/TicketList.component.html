@@ -125,9 +125,10 @@
     </div>
   </ng-template>
 </nz-card>-->
-<nz-table #ticketListTable [nzAjaxData]="ticketList" [nzPageSize]="10" [nzLoading]="ngLoad"
-          [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
-          [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
+<nz-table #ticketListTable [nzAjaxData]="ticketList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad" [nzShowSizeChanger]="true" [nzShowTotal]="true"
+          (nzPageIndexChange)="pageChangeHandler($event)" [nzTotal]="page.total"
+          [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>
   <tr>
     <th nz-th [nzCheckbox]="true">
