@@ -316,6 +316,7 @@ export class OutGoodComponent implements OnInit{
         if(res["result"]==1){
           this.nzMessage.success("解绑成功");
           this.pageChangeHandler(1);
+          this.checkAll=false;
           this.idList=[];//清空选中的id
         }else{
           this.nzMessage.success("解绑失败");

@@ -163,7 +163,7 @@
     <td nz-td>{{data.goodName}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
     <td nz-td>
-      <nz-input-number [(ngModel)]="data.inStock" (nzBlur)="compareStock($event.target.value,data.stock,index)"></nz-input-number>
+      <nz-input-number [(ngModel)]="data.inStock" [nzMin]="0" (nzBlur)="compareStock($event.target.value,data.stock,index)"></nz-input-number>
     </td>
     <td nz-td>{{data.stock}}</td>
     <td nz-td>

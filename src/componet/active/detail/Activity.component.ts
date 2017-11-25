@@ -4,6 +4,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {Http} from "../../../common/http/Http";
 import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
+import {isUndefined} from "util";
 @Component({
   selector:'app-detail',
   templateUrl:'Activity.component.html',
@@ -16,11 +17,10 @@ export class ActivityComponent implements OnInit{
   activity:any={
     status:true,
     activityType:'0',
-    target:'3',
-    num:1
+    target:'3'
   };
   constructor(private fb:FormBuilder,private router:Router,private nzMessage:NzMessageService,
-                private route:ActivatedRoute,private http:Http,private dataTool:DataTool){}
+              private route:ActivatedRoute,private http:Http,private dataTool:DataTool){}
   ngOnInit() {
     this.init();
     this.createdFormValidate();
@@ -58,7 +58,7 @@ export class ActivityComponent implements OnInit{
       status:"",
       end:["",[Validators.required]],
       start:["",[Validators.required]],
-      number:["",[Validators.required]],
+      number:"",
       discount:["",[Validators.required]],
       description:["",[Validators.required]]
     })
@@ -69,10 +69,13 @@ export class ActivityComponent implements OnInit{
    */
   save(){
     console.log(this.validateForm);
-/*    if(!this.validateForm.valid){
+    if(!this.validateForm.valid){
       this.nzMessage.warning("请将表单填写完整!");
       return;
-    }*/
+    }else  if(this.activity.activityType=='1'&&(this.activity.number==0||isUndefined(this.activity.number))){
+      this.nzMessage.warning("请将表单填写完整!");
+      return;
+    }
     if(this.route.params["value"].id){
       this.update();
     }else {
