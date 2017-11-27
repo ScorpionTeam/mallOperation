@@ -11,10 +11,18 @@ import {NzMessageService, NzModalService} from "ng-zorro-antd";
 
 export class OrderComponent implements OnInit{
   order:any={};
+  orderLogList:any=[];//订单日志列表
+  page:any={
+    pageNo:1,
+    pageSize:10,
+    total:0
+  };
+  ngLoad:boolean=false;
   constructor(private router:Router,private route:ActivatedRoute,private nzMessage:NzMessageService,
               private http:Http,private dataTool:DataTool,private nzModal:NzModalService){}
   ngOnInit(){
     this.init();
+    this.pageChangeHandler(1);
   }
 
   /**
@@ -108,6 +116,49 @@ export class OrderComponent implements OnInit{
       case '8':
         return "已评价";
     }
-
   }
+
+  /*分页*/
+  pageChangeHandler(val){
+    this.ngLoad=true;
+    this.page.pageNo=val;
+    let url = 'backstage/order/findOrderLogByOrderId?orderId='+this.route.params['value'].id+'&pageNo='
+      +this.page.pageNo+'&pageSize='+this.page.pageSize;
+    this.http.get(url).subscribe(res=>{
+        this.ngLoad=false;
+        if(res["total"]!=0){
+          this.orderLogList = res["list"];
+          this.page.total = res["total"];
+        }else {
+          this.orderLogList = res["list"];
+          this.page.total = res["total"];
+        }
+      },
+      err=>{
+        this.ngLoad=false;
+        console.log(err);
+      });
+  };
+  /*size改变*/
+  pageSizeChangeHandler(val){
+    this.ngLoad=true;
+    this.page.pageSize=val;
+    let url = 'backstage/order/findOrderLogByOrderId?orderId='+this.route.params['value'].id+'&pageNo='
+      +this.page.pageNo+'&pageSize='+this.page.pageSize;
+    this.http.get(url).subscribe(res=>{
+        this.ngLoad=false;
+        if(res["total"]!=0){
+          this.orderLogList = res["list"];
+          this.page.total = res["total"];
+        }else {
+          this.orderLogList = res["list"];
+          this.page.total = res["total"];
+        }
+      },
+      err=>{
+        this.ngLoad=false;
+        console.log(err);
+      });
+  };
+
 }
