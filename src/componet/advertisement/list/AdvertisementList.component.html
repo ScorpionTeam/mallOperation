@@ -40,9 +40,9 @@
       </label>
     </td>
     <td nz-td>{{data.name}}</td>
-    <td nz-td>{{data.imgUrl}}</td>
-    <td nz-td>{{data.actionUrl}}</td>
-    <td nz-td>{{data.visitTotal}}</td>
+    <td nz-td>{{data.image_url}}</td>
+    <td nz-td>{{data.action_url}}</td>
+    <td nz-td>{{data.visit_total}}</td>
     <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=='0'?"正常":"删除"}}</td>
     <td nz-td class="banner_list_action">
       <span><a (click)="skipToPage('/banner-detail',data.id)">编辑</a></span>

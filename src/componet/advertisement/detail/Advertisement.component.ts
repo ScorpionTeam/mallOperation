@@ -31,6 +31,7 @@ export class AdvertisementComponent implements OnInit{
         res=>{
           if(res["result"]==1){
             this.banner = res["data"];
+            this.initPicUrl=res["data"].image_url;
           }else {
             this.nzMessage.error(res["error"].message);
           }
@@ -59,22 +60,22 @@ export class AdvertisementComponent implements OnInit{
    * @param val
    */
   uploadSuccess(val){
-    this.banner.imgUrl = val[0].url;
-    console.log(this.banner.imgUrl);
+    this.banner.image_url = val[0].url;
+    console.log(this.banner.image_url);
   }
 
   /**
    * 图片删除成功
    */
   delSuccess(){
-    this.banner.imgUrl = '';
+    this.banner.image_url = '';
   }
 
   /**
    * 保存
    */
   save(){
-    if(isUndefined(this.banner.imgUrl)){
+    if(isUndefined(this.banner.image_url)){
       this.nzMessage.warning("请上传图片");
       return;
     }else if(!this.validateForm.valid){
