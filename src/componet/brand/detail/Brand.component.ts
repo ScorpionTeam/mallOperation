@@ -39,8 +39,8 @@ export class BrandDetailComponent implements OnInit{
           if(res['result']==1){
             this.brand = res['data'];
             this.brand.status = this.dataTool.strTransBool(this.brand.status);
-            if(!isNull(this.brand.brandImg)){
-              this.initUrl = this.brand.brandImg;
+            if(!isNull(this.brand.brand_image)){
+              this.initUrl = this.brand.brand_image;
             }
           }
         },
@@ -70,7 +70,7 @@ export class BrandDetailComponent implements OnInit{
    */
   save(){
     console.log(this.validateForm.valid);
-    if(!this.validateForm.valid||this.brand.brandImg==''||isUndefined(this.brand.brandImg)){
+    if(!this.validateForm.valid||this.brand.brand_image==''||isUndefined(this.brand.brand_image)){
       this.nzMessage.warning("请将表单填写完整");
       return;
     }
@@ -139,7 +139,7 @@ export class BrandDetailComponent implements OnInit{
    */
   uploadPicSuccess(val){
     console.log(val)
-    this.brand.brandImg = val[0].url;
+    this.brand.brand_image = val[0].url;
   }
 
   /**
@@ -148,6 +148,6 @@ export class BrandDetailComponent implements OnInit{
    */
   delPicSuccess(val){
     console.log(val)
-    this.brand.brandImg="";
+    this.brand.brand_image="";
   }
 }
