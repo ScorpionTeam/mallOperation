@@ -140,20 +140,20 @@
   </thead>
   <tbody nz-tbody>
   <tr nz-tbody-tr *ngFor="let data of orderListTable.data;let index = index;">
-    <td nz-td><img [src]="picUrl+data.goodMainImage.replace('.','_60x60.')" alt="" class="list_pic"></td>
-    <td nz-td>{{data.orderNo}}</td>
-    <td nz-td>{{data.orderType=="1"?"pc订单":"手机订单"}}</td>
-    <td nz-td>{{data.payType=="0"?"支付宝":data.payType=="1"?"微信":data.payType=="2"?"信用卡":data.payType=="3"?"储蓄卡":""}}</td>
-    <td nz-td  [class]="data.orderStatus=='0'?'err':data.orderStatus=='7'?'err':'success'">{{data.orderStatus=="1"?"待支付":data.orderStatus=="2"?" 待发货":data.orderStatus=="3"?"待收货":data.orderStatus=="4"?"已完成":
-      data.orderStatus=="5"?"退货申请":data.orderStatus=="6"?"关闭":data.orderStatus=="7"?"待评价":"已评价"}}</td>
-    <td nz-td>{{dataTool.fTransYuan(data.orderFee)}}</td>
-    <td nz-td>{{dataTool.fTransYuan(data.reduceFee)}}</td>
-    <td nz-td>{{data.createDate}}</td>
+    <td nz-td><img [src]="picUrl+data.good_main_image.replace('.','_60x60.')" alt="" class="list_pic"></td>
+    <td nz-td>{{data.order_no}}</td>
+    <td nz-td>{{data.order_type=="1"?"pc订单":"手机订单"}}</td>
+    <td nz-td>{{data.pay_type=="0"?"支付宝":data.pay_type=="1"?"微信":data.pay_type=="2"?"信用卡":data.pay_type=="3"?"储蓄卡":""}}</td>
+    <td nz-td  [class]="data.order_status=='0'?'err':data.order_status=='7'?'err':'success'">{{data.order_status=="1"?"待支付":data.order_status=="2"?" 待发货":data.order_status=="3"?"待收货":data.order_status=="4"?"已完成":
+      data.order_status=="5"?"退货申请":data.order_status=="6"?"关闭":data.order_status=="7"?"待评价":"已评价"}}</td>
+    <td nz-td>{{dataTool.fTransYuan(data.order_fee)}}</td>
+    <td nz-td>{{dataTool.fTransYuan(data.reduce_fee)}}</td>
+    <td nz-td>{{data.create_date}}</td>
     <td nz-td class="order_list_action">
       <span><a (click)="skipToPage('/order-detail',data.id)">编辑</a></span>
-      <span *ngIf="data.orderStatus=='5'?true:false"><a (click)="returnMoneySuccessConfirm(data.id,modalSuccess,data.totalFee,modalTitle)">同意退款</a></span>
-      <span *ngIf="data.orderStatus=='5'?true:false"><a (click)="returnMoneyFailConfirm(data.id,modalFail,modalTitle)">拒绝退款</a></span>
-      <span *ngIf="data.orderStatus=='2'?true:false"><a (click)="openDeliveyModal(data.id)">发货 </a></span>
+      <span *ngIf="data.order_status=='5'?true:false"><a (click)="returnMoneySuccessConfirm(data.id,modalSuccess,data.total_fee,modalTitle)">同意退款</a></span>
+      <span *ngIf="data.order_status=='5'?true:false"><a (click)="returnMoneyFailConfirm(data.id,modalFail,modalTitle)">拒绝退款</a></span>
+      <span *ngIf="data.order_status=='2'?true:false"><a (click)="openDeliveyModal(data.id)">发货 </a></span>
     </td>
   </tr>
   </tbody>

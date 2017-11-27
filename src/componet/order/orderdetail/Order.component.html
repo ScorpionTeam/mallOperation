@@ -12,7 +12,7 @@
               <label>订单号</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.orderNo}}</span>
+              <span class="order_item">{{order.order_no}}</span>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
               <label>微信订单号</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.wxOrderNo}}</span>
+              <span class="order_item">{{order.wx_order_no}}</span>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
               <label>订单状态</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{justifyPayStatus(order.orderStatus)}}</span>
+              <span class="order_item">{{justifyPayStatus(order.order_status)}}</span>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
               <label>订单类型</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{dataTool.getOrderTypeStr(order.orderType)}}</span>
+              <span class="order_item">{{dataTool.getOrderTypeStr(order.order_type)}}</span>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
               <label>商品金额</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{(order.goodFee/100).toFixed(2)}}</span>
+              <span class="order_item">{{(order.good_fee/100).toFixed(2)}}</span>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
               <label>优惠金额</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{(order.reduceFee/100).toFixed(2)}}</span>
+              <span class="order_item">{{(order.reduce_fee/100).toFixed(2)}}</span>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
               <label> 实付金额</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{(order.paymentFee/100).toFixed(2)}}</span>
+              <span class="order_item">{{(order.payment_fee/100).toFixed(2)}}</span>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
               <label>支付类型</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{dataTool.getPayTypeStr(order.payType)}}</span>
+              <span class="order_item">{{dataTool.getPayTypeStr(order.pay_type)}}</span>
             </div>
           </div>
         </div>
@@ -92,27 +92,27 @@
               <label>下单时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.createDate|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.create_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
             </div>
           </div>
         </div>
-        <div nz-col [nzSpan]="8" *ngIf="order.orderStatus=='1'?false:true">
+        <div nz-col [nzSpan]="8" *ngIf="order.order_status=='1'?false:true">
           <div nz-form-item nz-row>
             <div nz-form-label nz-col [nzSpan]="5">
               <label>支付时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.payDate|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.pay_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
             </div>
           </div>
         </div>
-        <div nz-col [nzSpan]="8" *ngIf="order.orderStatus=='1'?false:order.orderStatus=='2'?false:true">
+        <div nz-col [nzSpan]="8" *ngIf="order.order_status=='1'?false:order.order_status=='2'?false:true">
           <div nz-form-item nz-row>
             <div nz-form-label nz-col [nzSpan]="5">
               <label>发货时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.deliveryDate|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.delivery_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@
               <label>消耗积分</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.operatePoint}}</span>
+              <span class="order_item">{{order.operate_point}}</span>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@
               <label>商品名称</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.goodName}}</span>
+              <span class="order_item">{{order.good_name}}</span>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@
               <label>商品编号</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.goodNo}}</span>
+              <span class="order_item">{{order.good_no}}</span>
               <!--<nz-input [nzSize]="'large'" [nzPlaceHolder]="" [nzReadonly]="true"></nz-input>-->
             </div>
           </div>
@@ -220,7 +220,7 @@
               <label>邮政编码</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.postCode}}</span>
+              <span class="order_item">{{order.post_code}}</span>
             </div>
           </div>
         </div>
