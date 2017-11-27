@@ -16,7 +16,7 @@ export class ActivityComponent implements OnInit{
   validateForm:FormGroup;
   activity:any={
     status:true,
-    activityType:'0',
+    activity_type:'0',
     target:'3'
   };
   constructor(private fb:FormBuilder,private router:Router,private nzMessage:NzMessageService,
@@ -35,8 +35,8 @@ export class ActivityComponent implements OnInit{
           if(res["result"]==1){
             this.activity = res["data"];
             this.activity.status = !this.dataTool.strTransBool(this.activity.status);
-            this.activity.startDate = new Date(res["data"].startDate);
-            this.activity.endDate = new Date(res["data"].endDate);
+            this.activity.start_date = new Date(res["data"].start_date);
+            this.activity.end_date = new Date(res["data"].end_date);
           }
         },
         err=>{
@@ -72,7 +72,7 @@ export class ActivityComponent implements OnInit{
     if(!this.validateForm.valid){
       this.nzMessage.warning("请将表单填写完整!");
       return;
-    }else  if(this.activity.activityType=='1'&&(this.activity.number==0||isUndefined(this.activity.number))){
+    }else  if(this.activity.activity_type=='1'&&(this.activity.number==0||isUndefined(this.activity.number))){
       this.nzMessage.warning("请将表单填写完整!");
       return;
     }
@@ -133,10 +133,10 @@ export class ActivityComponent implements OnInit{
    * @returns {boolean}
    */
   disabledStartDate=(startValue)=>{
-    if(!startValue||!this.activity.endDate){
+    if(!startValue||!this.activity.end_date){
       return false;
     }
-    return startValue.getTime()>=this.activity.endDate.getTime();
+    return startValue.getTime()>=this.activity.end_date.getTime();
   }
 
   /**
@@ -145,9 +145,9 @@ export class ActivityComponent implements OnInit{
    * @returns {boolean}
    */
   disabledEndDate=(endValue)=>{
-    if(!this.activity.startDate||!endValue){
+    if(!this.activity.start_date||!endValue){
       return false
     }
-    return endValue.getTime() <= this.activity.startDate.getTime();
+    return endValue.getTime() <= this.activity.start_date.getTime();
   }
 }

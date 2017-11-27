@@ -105,9 +105,9 @@
       </label>
     </td>
     <td nz-td>{{data.name}}</td>
-    <td nz-td>{{data.activityType=="0"?"秒杀":data.activityType=="1"?"拼团":data.activityType=="2"?"优选":"试用"}}</td>
-    <td nz-td>{{data.startDate}}</td>
-    <td nz-td>{{data.endDate}}</td>
+    <td nz-td>{{data.activity_type=="0"?"秒杀":data.activity_type=="1"?"拼团":data.activity_type=="2"?"优选":"试用"}}</td>
+    <td nz-td>{{data.start_date}}</td>
+    <td nz-td>{{data.end_date}}</td>
     <td nz-td  [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="1"?"删除":"正常"}}</td>
     <td nz-td class="activity_list_action">
       <span><a (click)="skipToPage('/activity-detail',data.id)">编辑</a></span>

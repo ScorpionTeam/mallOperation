@@ -156,11 +156,11 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
-    <td nz-td><img [src]="picUrl+data.mainImgUrl" alt="" class="list_pic"></td>
-    <td nz-td>{{data.goodNo}}</td>
-    <td nz-td>{{data.goodName}}</td>
+    <td nz-td><img [src]="picUrl+data.main_image_url" alt="" class="list_pic"></td>
+    <td nz-td>{{data.good_no}}</td>
+    <td nz-td>{{data.good_name}}</td>
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
-    <td nz-td>{{data.activityStock}}</td>
+    <td nz-td>{{data.activity_stock}}</td>
   </tr>
   </tbody>
 </nz-table>
