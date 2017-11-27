@@ -4,7 +4,7 @@
       <label nz-form-label nz-form-item-required >优惠券编码</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-input  [(ngModel)]="ticket.ticketNo" [nzSize]="'large'" [nzReadonly]="true" formControlName="ticketNo"></nz-input>
+      <nz-input  [(ngModel)]="ticket.ticket_no" [nzSize]="'large'" [nzReadonly]="true" formControlName="ticketNo"></nz-input>
     </div>
   </div>
   <div nz-row>
@@ -12,7 +12,7 @@
       <label nz-form-label nz-form-item-required >券名称</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-input [nzSize]="'large'" [(ngModel)]="ticket.ticketName" formControlName="ticketName"></nz-input>
+      <nz-input [nzSize]="'large'" [(ngModel)]="ticket.ticket_name" formControlName="ticketName"></nz-input>
     </div>
   </div>
   <div nz-row>
@@ -31,7 +31,7 @@
       <label nz-form-label nz-form-item-required >开始时间</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-datepicker style="width: 40%;"  [(ngModel)]="ticket.startDate" [nzDisabledDate]="disabledStartDate"
+      <nz-datepicker style="width: 40%;"  [(ngModel)]="ticket.start_date" [nzDisabledDate]="disabledStartDate"
                      [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'开始时间'" formControlName="startDate"></nz-datepicker>
     </div>
   </div>
@@ -40,7 +40,7 @@
       <label nz-form-label nz-form-item-required >结束时间</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-datepicker style="width: 40%;" [(ngModel)]="ticket.endDate" [nzDisabledDate]="disabledEndDate"
+      <nz-datepicker style="width: 40%;" [(ngModel)]="ticket.end_date" [nzDisabledDate]="disabledEndDate"
                      [nzFormat]="'YYYY-MM-DD HH:mm:ss'" [nzPlaceHolder]="'结束时间'" formControlName="endDate"></nz-datepicker>
     </div>
   </div>
@@ -58,7 +58,7 @@
       <label nz-form-label nz-form-item-required >优惠金额</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.reduceMoney" [nzMin]="0" formControlName="reduce" (nzBlur)="justifyMoney(0,ticket.reduceMoney)">></nz-input-number>
+      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.reduce_money" [nzMin]="0" formControlName="reduce" (nzBlur)="justifyMoney(0,ticket.reduceMoney)">></nz-input-number>
     </div>
   </div>
   <div nz-row>
@@ -66,7 +66,7 @@
       <label nz-form-label nz-form-item-required >是否限量</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-switch [nzSize]="'large'" [(ngModel)]="ticket.numLimit" formControlName="numLimit">
+      <nz-switch [nzSize]="'large'" [(ngModel)]="ticket.num_limit" formControlName="numLimit">
         <span checked>是</span>
         <span unchecked>否</span>
       </nz-switch>

@@ -153,12 +153,12 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
-    <td nz-td>{{data.ticketNo}}</td>
-    <td nz-td>{{data.ticketName}}</td>
+    <td nz-td>{{data.ticket_no}}</td>
+    <td nz-td>{{data.ticket_name}}</td>
     <td nz-td>{{data.type=="1"?"平台":"商家"}}</td>
-    <td nz-td>{{data.startDate}}</td>
-    <td nz-td>{{data.endDate}}</td>
-    <td nz-td>{{dataTool.fTransYuan(data.reduceMoney)}}</td>
+    <td nz-td>{{data.start_date}}</td>
+    <td nz-td>{{data.end_date}}</td>
+    <td nz-td>{{dataTool.fTransYuan(data.reduce_money)}}</td>
     <td nz-td>{{dataTool.fTransYuan(data.money)}}</td>
     <td nz-td>{{data.num}}</td>
     <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="1"?"删除":"正常"}}</td>
