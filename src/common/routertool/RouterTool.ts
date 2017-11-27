@@ -15,8 +15,6 @@ export class RouterTool{
     if(val){
       this.router.navigate([".."+url,val],{relativeTo:route});
     }else {
-      console.log(url);
-      console.log(route);
       this.router.navigate([".."+url],{relativeTo:route});
     }
   }

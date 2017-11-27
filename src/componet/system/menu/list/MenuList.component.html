@@ -6,10 +6,10 @@
     </ng-template>
   </nz-input>
   <button nz-button [nzType]="'danger'" class="btn_search_tool  btn-danger" (click)="outStore()">
-    <span>下架</span>
+    <span>启用</span>
   </button>
   <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="inStore()">
-    <span>上架</span>
+    <span>停用</span>
   </button>
   <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="routerTool.skipToPage('/menu-add',route)">
     <span>新增</span>
@@ -39,13 +39,13 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
-    <td nz-td><img [src]="picUrl+data.menuImg" alt="" class="list_pic"></td>
+    <td nz-td>{{data.id}}</td>
     <td nz-td>{{data.menuName}}</td>
     <td nz-td>{{data.shortName}}</td>
     <td nz-td>{{data.createDate}}</td>
-    <td nz-td  >{{data.status=="0"?"退驻":"入驻"}}</td>
+    <td nz-td  >{{data.status=="0"?"正常":"停用"}}</td>
     <td nz-td class="menu_list_action">
-      <span><a (click)="routerTool.skipToPage('/menu-detail',data.id)">编辑</a></span>
+      <span><a (click)="routerTool.skipToPage('/menu-detail',route,data.id)">编辑</a></span>
     </td>
   </tr>
   </tbody>

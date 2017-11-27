@@ -21,6 +21,7 @@ import {RouteGuard} from "../service/guard/RouteGuard";
 import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
 import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
 import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
+import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
 
 const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full',},
@@ -49,7 +50,8 @@ const appRoute :Routes = [
       {path:'banner-add',component:AdvertisementComponent},
       {path:'banner-detail/:id',component:AdvertisementComponent},
       {path:'menu-list',component:MenuListComponent},
-      {path:'menu-add',component:MenuListComponent},
+      {path:'menu-add',component:MenuComponent},
+      {path:'menu-detail/:id',component:MenuComponent},
       {path:'personal',component:PersonalComponent}
     ]},
   {path:'login',component:LoginComponent}

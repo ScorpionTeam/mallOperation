@@ -37,6 +37,7 @@ import {AdvertisementComponent} from "../componet/advertisement/detail/Advertise
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
 import {RouterTool} from "../common/routertool/RouterTool";
+import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -59,6 +60,7 @@ import {RouterTool} from "../common/routertool/RouterTool";
     TicketListComponent,
     TicketComponent,
     MenuListComponent,
+    MenuComponent,
     AdvertisementListComonent,
     AdvertisementComponent,
     PersonalComponent
