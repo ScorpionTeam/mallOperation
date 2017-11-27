@@ -39,7 +39,7 @@ export class UserComponent{
       this.http.get(url).subscribe(res=>{
         console.log(res);
         this.user=res["data"];
-        this.user.bornDate = new Date(res["data"].bornDate);
+        this.user.born_date = new Date(res["data"].born_date);
       });
     }
   }

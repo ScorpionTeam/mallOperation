@@ -53,7 +53,7 @@
             <label nz-form-item-required>身份证号</label>
           </div>
           <div nz-form-control  nz-col [nzSpan]="15">
-            <nz-input [nzSize]="'large'" formControlName="certificateId" [nzPlaceHolder]="'身份证号'"  [(ngModel)]="user.certificateId" name="certificateId"></nz-input>
+            <nz-input [nzSize]="'large'" formControlName="certificateId" [nzPlaceHolder]="'身份证号'"  [(ngModel)]="user.certificate_id" name="certificateId"></nz-input>
           </div>
           <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.certificateId.dirty&&validateForm.controls.certificateId.hasError('required')">必填</div>
         </div>
@@ -64,7 +64,7 @@
             <label  nz-form-item-required>用户类型</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="15">
-            <nz-select [(ngModel)]="user.userType" formControlName="userType">
+            <nz-select [(ngModel)]="user.user_type" formControlName="userType">
               <nz-option [nzLabel]="'类型1'" [nzValue]="0"></nz-option>
             </nz-select>
           </div>
@@ -76,7 +76,7 @@
             <label >生日</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="15">
-            <nz-datepicker [nzSize]="'large'" [(ngModel)]="user.bornDate" [nzShowTime]="true"
+            <nz-datepicker [nzSize]="'large'" [(ngModel)]="user.born_date" [nzShowTime]="true"
                            formControlName="birthDate" [nzPlaceHolder]="'生日'" [nzFormat]="'YYYY-MM-DD'" name="birthDate"></nz-datepicker>`
           </div>
         </div>
