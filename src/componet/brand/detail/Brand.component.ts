@@ -6,6 +6,8 @@ import {NzMessageService} from "ng-zorro-antd";
 import {isUndefined} from "util";
 import {DataTool} from "../../../common/data/DataTool";
 import {isNull} from "util";
+import {Store} from "@ngrx/store";
+import {num}from"../../../state/StateApplaction"
 @Component({
   selector:"brand-detail",
   templateUrl:"Brand.component.html",
@@ -18,7 +20,7 @@ export class BrandDetailComponent implements OnInit{
   };
   initUrl:any;
   validateForm:FormGroup;
-  constructor(private fb:FormBuilder,private router:Router,private route:ActivatedRoute,
+  constructor(private fb:FormBuilder,private router:Router,private route:ActivatedRoute,private store:Store<any>,
               private http:Http,private  nzMessage :NzMessageService,private dataTool:DataTool){
     this.initFormValidate();
   }

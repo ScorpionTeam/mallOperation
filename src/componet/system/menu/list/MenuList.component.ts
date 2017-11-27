@@ -27,7 +27,7 @@ export class MenuListComponent implements OnInit{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/brand/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
+    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
       this.searchKey;
     this.http.get(url).subscribe(res=>{
         this.ngLoad=false;
@@ -49,7 +49,7 @@ export class MenuListComponent implements OnInit{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/brand/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
+    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
       this.searchKey;
     this.http.get(url).subscribe(res=>{
         this.ngLoad=false;
@@ -68,6 +68,29 @@ export class MenuListComponent implements OnInit{
       });
   };
 
+  /**
+   * 查询
+   */
+  search(){
+    this.ngLoad=true;
+    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
+      this.searchKey;
+    this.http.get(url).subscribe(res=>{
+        this.ngLoad=false;
+        if(res["total"]!=0){
+          this.menuList = res["list"];
+          this.page.total = res["total"];
+        }else {
+          this.menuList = res["list"];
+          this.page.total = res["total"];
+        }
+        this.idList=[];
+      },
+      err=>{
+        this.ngLoad=false;
+        console.log(err);
+      });
+  }
   /**
    * 选择
    * @param flag 选中标志
@@ -114,4 +137,6 @@ export class MenuListComponent implements OnInit{
     }
     console.log(this.idList);
   };
+
+
 }

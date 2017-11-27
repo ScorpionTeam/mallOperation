@@ -38,6 +38,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
 import {RouterTool} from "../common/routertool/RouterTool";
 import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
+import {StoreModule} from "@ngrx/store";
+import {stateReducer}from"../state/StateApplaction"
 @NgModule({
   declarations: [
     HKeditor,
@@ -73,6 +75,7 @@ import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
+    StoreModule.forRoot({counter:stateReducer}),
     CKEditorModule
   ],
   providers: [PageService,

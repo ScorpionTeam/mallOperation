@@ -26,7 +26,7 @@
       </label>
     </th>
     <th nz-th><span>名字</span></th>
-    <th nz-th><span>父菜单</span></th>
+    <th nz-th><span>类型</span></th>
     <th nz-th><span>路径</span></th>
     <th nz-th><span>创建时间</span></th>
     <th nz-th><span>状态</span></th>
@@ -39,9 +39,9 @@
       <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
       </label>
     </td>
-    <td nz-td>{{data.id}}</td>
-    <td nz-td>{{data.menuName}}</td>
-    <td nz-td>{{data.shortName}}</td>
+    <td nz-td>{{data.name}}</td>
+    <td nz-td>{{data.type}}</td>
+    <td nz-td>{{data.url}}</td>
     <td nz-td>{{data.createDate}}</td>
     <td nz-td  >{{data.status=="0"?"正常":"停用"}}</td>
     <td nz-td class="menu_list_action">

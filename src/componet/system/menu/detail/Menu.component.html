@@ -9,18 +9,53 @@
           <div nz-form-control nz-col [nzSpan]="15">
             <nz-input [nzSize]="'large'" [nzPlaceHolder]="'名称'" [(ngModel)]="menu.name"  formControlName="name"></nz-input>
           </div>
-          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.name.dirty&&validateForm.controls.mobile.hasError('required')">必填</div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">必填</div>
         </div>
       </div>
       <div nz-col [nzSpan]="12"  [nzOffset]="6">
         <div nz-form-item  nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label nz-form-item-required>URL</label>
+            <label nz-form-item-required>Icon地址</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="15">
-            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'URL'"  [(ngModel)]="menu.address "  formControlName="address"></nz-input>
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'icon'"  [(ngModel)]="menu.icon "  formControlName="icon"></nz-input>
           </div>
-          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.address .dirty&&validateForm.controls.address .hasError('required')">必填</div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.icon .dirty&&validateForm.controls.icon .hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>排序</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input-number [nzSize]="'large'" [nzMin]="0" [nzPlaceHolder]="'排序'"
+                             formControlName="sort" [(ngModel)]="menu.sort "></nz-input-number>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.sort .dirty&&validateForm.controls.sort .hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label>URL</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'URL'"  [(ngModel)]="menu.url "  formControlName="url"></nz-input>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>菜单类型</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-select [(ngModel)]="menu.type" formControlName="type">
+              <nz-option [nzValue]="'0'" [nzLabel]="'父菜单'"></nz-option>
+              <nz-option [nzValue]="'1'" [nzLabel]="'子菜单'"></nz-option>
+            </nz-select>
+          </div>
         </div>
       </div>
       <div nz-col [nzSpan]="12"  [nzOffset]="6">
@@ -29,9 +64,20 @@
             <label nz-form-item-required>父菜单</label>
           </div>
           <div nz-form-control  nz-col [nzSpan]="15">
-            <nz-input [nzSize]="'large'" formControlName="parentMenu" [nzPlaceHolder]="'姓名'"  [(ngModel)]="menu.parentMenu"></nz-input>
+            <nz-select [(ngModel)]="menu.pid" formControlName="pid">
+              <nz-option [nzValue]="'data.id'" [nzLabel]="'data.name'" *ngFor="let data of rootMenuList"></nz-option>
+            </nz-select>
           </div>
-          <div nz-form-explain nz-col [nzSpan]="5" [class]="'form_tip'" *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>菜单描述</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input [nzType]="'textarea'" [nzSize]="'large'"  [(ngModel)]="menu.description "  formControlName="description"></nz-input>
+          </div>
         </div>
       </div>
       <div nz-col [nzSpan]="12"  [nzOffset]="6">

@@ -19,18 +19,18 @@ export class GoodComponent implements OnInit{
   isDetail:boolean;
   //初始化商品详情
   good:any= {
-    goodName: '',
+    good_name: '',
     description: '',
     promotion:0,
     discount:100,
     price: 0,
     stock: 0,
-    isOnSale: false,
-    isHot: false,
-    isNew: false,
-    isFreight: false,
-    goodNo: '',
-    richContent:'',
+    on_sale: false,
+    hot: false,
+    is_new: false,
+    freight: false,
+    good_no: '',
+    rich_content:'',
     goodAttrExts:[]
   };
 
@@ -86,7 +86,7 @@ export class GoodComponent implements OnInit{
    */
   save(){
     console.log(this.good);
-    if(!this.validateForm.valid||this.imgUrlList.length==0||this.good.richContent==''||isUndefined(this.good.richContent)){
+    if(!this.validateForm.valid||this.imgUrlList.length==0||this.good.rich_content==''||isUndefined(this.good.rich_content)){
       this.nzMessage.error("请将表单填写完整");
       for(const i in this.validateForm.controls){
         this.validateForm.controls[ i ].markAsDirty();
@@ -127,7 +127,7 @@ export class GoodComponent implements OnInit{
           this.initLittleUrl[i]='';
         }
         this.imgUrlList = [];//清空图片列表
-        this.good.richContent = '';
+        this.good.rich_content = '';
       }else {
         this.transStr();
         this.nzMessage.error(res["error"].message);
@@ -173,7 +173,7 @@ export class GoodComponent implements OnInit{
    * @param richContent
    */
   getRitchContent(richContent){
-    this.good.richContent = richContent;
+    this.good.rich_content = richContent;
   }
   /**
    * 返回列表
@@ -220,16 +220,16 @@ export class GoodComponent implements OnInit{
    * 转换bool
    */
   transBool(){
-    this.good.isFreight = this.dataTool.boolTransStr(this.good.isFreight);
-    this.good.isHot = this.dataTool.boolTransStr(this.good.isHot);
-    this.good.isNew = this.dataTool.boolTransStr(this.good.isNew);
-    this.good.isOnSale = this.dataTool.boolTransStr(this.good.isOnSale);
+    this.good.freight = this.dataTool.boolTransStr(this.good.freight);
+    this.good.hot = this.dataTool.boolTransStr(this.good.hot);
+    this.good.is_new = this.dataTool.boolTransStr(this.good.is_new);
+    this.good.on_sale = this.dataTool.boolTransStr(this.good.on_sale);
   }
   transStr(){
-    this.good.isFreight = this.dataTool.strTransBool(this.good.isFreight);
-    this.good.isHot = this.dataTool.strTransBool(this.good.isHot);
-    this.good.isNew = this.dataTool.strTransBool(this.good.isNew);
-    this.good.isOnSale = this.dataTool.strTransBool(this.good.isOnSale);
+    this.good.freight = this.dataTool.strTransBool(this.good.freight);
+    this.good.hot = this.dataTool.strTransBool(this.good.hot);
+    this.good.is_new = this.dataTool.strTransBool(this.good.is_new);
+    this.good.on_sale = this.dataTool.strTransBool(this.good.on_sale);
   }
 
   /**
@@ -463,7 +463,7 @@ export class GoodComponent implements OnInit{
    */
   imgUpload = (val,flag)=>{
     if(flag==0){
-      this.good.mainImgUrl = val[0].url;
+      this.good.main_image_url = val[0].url;
       this.imgUrlList.unshift(val[0]);
     }else {
       this.imgUrlList = this.imgUrlList.concat(val);

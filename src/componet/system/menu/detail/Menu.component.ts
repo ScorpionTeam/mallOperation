@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../../common/http/Http";
+import {DataTool} from "../../../../common/data/DataTool";
 
 @Component({
   selector:'menu-detail',
@@ -17,13 +18,14 @@ export class MenuComponent{
   menu:any={
     status:true
   };
-
+  rootMenuList:any=[];
   constructor(private route:ActivatedRoute,private router :Router,
               private fb :FormBuilder, private nzMessage:NzMessageService,
-              private http:Http){}
+              private http:Http,private dataTool:DataTool){}
   ngOnInit(){
     this.init();
     this.createValidatorGroup();
+    this.findRootMenu();
   }
 
   /**
@@ -63,19 +65,21 @@ export class MenuComponent{
    * 新增
    */
   add(){
-    let url = 'backstage/menu/register';
+    let url = 'backstage/menu/add';
     //转换数据
-    this.menu.status=this.menu.status?"1":"0";
+    this.menu.status=this.dataTool.boolTransStr(this.menu.status);
     this.http.post(url,this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
-        this.nzMessage.success("注册成功");
+        this.nzMessage.success("新建成功");
         this.validateForm.reset();
       }else {
         this.nzMessage.error(res["error"].message);
       }
+      this.menu.status = this.dataTool.strTransBool(this.menu.status);
     },err=>{
       console.log("error:"+err);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status);
     })
   }
   /**
@@ -87,7 +91,7 @@ export class MenuComponent{
   update(){
     let url = 'backstage/menu/modify';
     //转换数据
-    this.menu.status=this.menu.status?"1":"0";
+    this.menu.status=this.dataTool.boolTransStr(this.menu.status);
     this.http.post(url,this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
@@ -95,8 +99,10 @@ export class MenuComponent{
       }else {
         this.nzMessage.error(res["error"].message);
       }
+      this.menu.status = this.dataTool.strTransBool(this.menu.status);
     },err=>{
       console.log("error:"+err);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status);
     })
   }
   back(){
@@ -113,9 +119,29 @@ export class MenuComponent{
   createValidatorGroup(){
     this.validateForm = this.fb.group({
       name:['',[Validators.required]],
-      address:['',[Validators.required]],
-      parentMenu: ['',[Validators.required]],
-      status:''
+      type: ['',[Validators.required]],
+      sort: ['',[Validators.required]],
+      url:'',
+      status:'',
+      description:'',
+      pid:'',
+      icon:''
+
     })
+  }
+
+  /**
+   * 寻找根节点菜单
+   */
+  findRootMenu(){
+    this.http.get("backstage/menu/findRootMenu").subscribe(
+      res=>{
+        console.log(res);
+        this.rootMenuList = res["list"];
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 }
