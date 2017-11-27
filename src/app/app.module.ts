@@ -36,6 +36,7 @@ import {AdvertisementListComonent} from "../componet/advertisement/list/Advertis
 import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
+import {RouterTool} from "../common/routertool/RouterTool";
 @NgModule({
   declarations: [
     HKeditor,
@@ -76,6 +77,7 @@ import { PersonalComponent} from "../componet/user/person/PersonDetail.component
                HttpData,
                Http,
                RouteGuard,
+               RouterTool,
               /*{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },*/
               Interceptor,
                DataTool,

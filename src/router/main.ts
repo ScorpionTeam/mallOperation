@@ -49,6 +49,7 @@ const appRoute :Routes = [
       {path:'banner-add',component:AdvertisementComponent},
       {path:'banner-detail/:id',component:AdvertisementComponent},
       {path:'menu-list',component:MenuListComponent},
+      {path:'menu-add',component:MenuListComponent},
       {path:'personal',component:PersonalComponent}
     ]},
   {path:'login',component:LoginComponent}

@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="search_tool">
+  <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"
+            [(ngModel)]="searchKey" [class]="'search_input'">
+    <ng-template #addOnAfter>
+      <i class="anticon anticon-search search" (click)="search()"></i>
+    </ng-template>
+  </nz-input>
+  <button nz-button [nzType]="'danger'" class="btn_search_tool  btn-danger" (click)="outStore()">
+    <span>下架</span>
+  </button>
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="inStore()">
+    <span>上架</span>
+  </button>
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="routerTool.skipToPage('/menu-add',route)">
+    <span>新增</span>
+  </button>
+</div>
+<nz-table #menuTable [nzAjaxData]="menuList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
+          [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
+          [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
+  <thead nz-thead>
+  <tr>
+    <th nz-th [nzCheckbox]="true">
+      <label #checkboxAll nz-checkbox  [(ngModel)]="checkAll"  (ngModelChange)="selectItem(checkAll,menuList,0)">
+      </label>
+    </th>
+    <th nz-th><span>名字</span></th>
+    <th nz-th><span>父菜单</span></th>
+    <th nz-th><span>路径</span></th>
+    <th nz-th><span>创建时间</span></th>
+    <th nz-th><span>状态</span></th>
+    <th nz-th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of menuTable.data;let index = index;">
+    <td nz-td [nzCheckbox]="true">
+      <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
+      </label>
+    </td>
+    <td nz-td><img [src]="picUrl+data.menuImg" alt="" class="list_pic"></td>
+    <td nz-td>{{data.menuName}}</td>
+    <td nz-td>{{data.shortName}}</td>
+    <td nz-td>{{data.createDate}}</td>
+    <td nz-td  >{{data.status=="0"?"退驻":"入驻"}}</td>
+    <td nz-td class="menu_list_action">
+      <span><a (click)="routerTool.skipToPage('/menu-detail',data.id)">编辑</a></span>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
 
-</body>
-</html>
+
+

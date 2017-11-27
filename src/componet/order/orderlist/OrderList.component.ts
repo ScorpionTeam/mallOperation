@@ -205,6 +205,7 @@ export class OrderListComponent implements OnInit{
         console.log(res)
         if(res["result"]==1){
           this.returnMoney=0;
+          this.pageChangeHandler(1);
         }
       },
       err=>{console.log(err)}

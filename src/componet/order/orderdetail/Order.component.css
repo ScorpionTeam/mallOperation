@@ -15,3 +15,9 @@
 .card_log{
   margin-bottom: 50px;
 }
+.card_log_title{
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 18px;
+}

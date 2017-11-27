@@ -270,7 +270,7 @@
 </nz-card>
 <!--订单日志-->
 <div [ngClass]="'card_log'" >
-  <h3 class="card_title">订单日志</h3>
+  <h3 class="card_log_title">订单日志</h3>
   <nz-table #orderLogListTable [nzAjaxData]="orderLogList" [nzPageSize]="page.pageSize" [nzPageIndex]="page.pageNo"
             [nzLoading]="ngLoad" [nzShowSizeChanger]="true" [nzShowTotal]="true"
             (nzPageIndexChange)="pageChangeHandler($event)" [nzTotal]="page.total"
