@@ -8,10 +8,7 @@ import {Http} from "../../common/http/Http";
   styleUrls:['./Index.component.css']
 })
 export class IndexComponent{
-  userId:string;
-  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,private http:Http){
-    this.userId = localStorage.getItem('id');
-  }
+  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,private http:Http){}
 
   skipToPage(url){
     this.router.navigate([url],{relativeTo:this.route});

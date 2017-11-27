@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="hk_detail_form">
+  <form nz-form [formGroup]="validateForm">
+    <div nz-row [nzGutter]="40">
+      <div nz-col [nzSpan]="12" [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>手机 </label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'手机号'" [(ngModel)]="person.mobile"  name="mobile" formControlName="mobile"></nz-input>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.mobile.dirty&&validateForm.controls.mobile.hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>密码</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'密码'"  [(ngModel)]="person.password " name="password " formControlName="password"></nz-input>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.password .dirty&&validateForm.controls.password .hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>名称</label>
+          </div>
+          <div nz-form-control  nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" formControlName="name" [nzPlaceHolder]="'姓名'"  [(ngModel)]="person.name" name="name"></nz-input>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="5" [class]="'form_tip'" *ngIf="validateForm.controls.name.dirty&&validateForm.controls.name.hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>性别</label>
+          </div>
+          <div nz-form-control  nz-col [nzSpan]="15" style="height:32px;">
+            <nz-switch [(ngModel)]="person.sex" name="sex" formControlName="sex" >
+              <span checked>男</span>
+              <span unchecked>女</span>
+            </nz-switch>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item  nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>身份证号</label>
+          </div>
+          <div nz-form-control  nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" formControlName="certificateId" [nzPlaceHolder]="'身份证号'"  [(ngModel)]="person.certificateId" name="certificateId"></nz-input>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.certificateId.dirty&&validateForm.controls.certificateId.hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label >生日</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-datepicker [nzSize]="'large'" [(ngModel)]="person.bornDate" [nzShowTime]="true"
+                           formControlName="birthDate" [nzPlaceHolder]="'生日'" [nzFormat]="'YYYY-MM-DD'" name="birthDate"></nz-datepicker>`
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label nz-form-item-required>邮箱</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'邮箱'"  [(ngModel)]="person.email" name="email" formControlName="email"></nz-input>
+          </div>
+          <div nz-form-explain nz-col [nzSpan]="3" [class]="'form_tip'" *ngIf="validateForm.controls.email.dirty&&validateForm.controls.email.hasError('required')">必填</div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6" style="height: 56px;">
+        <div nz-form-item nz-row >
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label  nz-form-item-required >城市</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15">
+            <nz-select [nzSize]="'large'" [nzPlaceHolder]="'选择城市'"  [(ngModel)]="person.city" name="city" formControlName="city">
+              <nz-option [nzLabel]="'杭州'" [nzValue]="330100"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12"  [nzOffset]="6">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label >地址</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="15" >
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'地址'"  [(ngModel)]="person.address"  name="address" formControlName="address"></nz-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="hk_detail_form_footer">
+  <button nz-button [nzType]="'primary'" (click)="save()">修改</button>
+</div>

@@ -35,6 +35,7 @@ import {RouteGuard} from "../service/guard/RouteGuard";
 import {AdvertisementListComonent} from "../componet/advertisement/list/AdvertisementList.component";
 import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -58,7 +59,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     TicketComponent,
     MenuListComponent,
     AdvertisementListComonent,
-    AdvertisementComponent
+    AdvertisementComponent,
+    PersonalComponent
   ],
   imports: [
     BrowserModule,
