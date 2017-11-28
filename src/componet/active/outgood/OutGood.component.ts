@@ -47,11 +47,14 @@ export class OutGoodComponent implements OnInit{
     if(flag){
       return;
     }
-    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
+    let url = 'backstage/good/findByActivityId';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize= this.page.pageSize;
+    this.condition.activityId = this.curActivity;
+    this.condition.searchKey = this.searchKey;
     /*数据初始化*/
     this.ngLoad=true;
-    this.http.get(url).subscribe(res=>{
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         console.log(res);
         if(res["total"]!=0){
@@ -106,16 +109,12 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
-    let url = 'backstage/good/findByActivityId?pageNo='+val+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/good/findByActivityId';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize= this.page.pageSize;
+    this.condition.activityId = this.curActivity;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
@@ -142,16 +141,12 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
-    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+val+
-      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/good/findByActivityId';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize= this.page.pageSize;
+    this.condition.activityId = this.curActivity;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -179,16 +174,12 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=1;
     //拼接地址
-    let url = 'backstage/good/findByActivityId?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey+'&activityId='+this.curActivity;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/good/findByActivityId';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize= this.page.pageSize;
+    this.condition.activityId = this.curActivity;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false

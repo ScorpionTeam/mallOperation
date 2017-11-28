@@ -43,10 +43,13 @@ export class GoodListComponent implements OnInit{
    * 初始化
    */
   init(){
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+this.searchKey;
+    let url = 'backstage/good/findByCondition';
+    let conditionObj:any={};
+    conditionObj.pageNo = this.page.pageNo;
+    conditionObj.pageSize = this.page.pageSize;
     /*数据初始化*/
     this.ngLoad=true;
-    this.http.get(url).subscribe(res=>{
+    this.http.post(url,conditionObj).subscribe(res=>{
         this.ngLoad=false;
         console.log(res)
         if(res["total"]!=0){
@@ -76,7 +79,9 @@ export class GoodListComponent implements OnInit{
     console.log(val);
     this.ngLoad=true;
     this.page.pageNo=val;
-    this.pageObj.pageChange('backstage/good/findByCondition',val,this.page.pageSize).subscribe(res=>{
+    this.condition.pageNo=this.page.pageNo;
+    this.condition.pageSize=this.page.pageSize;
+    this.http.post('backstage/good/findByCondition',this.condition).subscribe(res=>{
         this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
@@ -84,7 +89,7 @@ export class GoodListComponent implements OnInit{
         }
         this.checkAll=false;
         this.goodList = res["list"];
-        this.page.total=res["total"]
+        this.page.total=res["total"];
         this.idList=[];
       },
       err=>{
@@ -96,7 +101,9 @@ export class GoodListComponent implements OnInit{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    this.pageObj.pageChange('backstage/good/findByCondition',this.page.pageNo,val).subscribe(res=>{
+    this.condition.pageNo=this.page.pageNo;
+    this.condition.pageSize=this.page.pageSize;
+    this.http.post('backstage/good/findByCondition',this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -116,17 +123,13 @@ export class GoodListComponent implements OnInit{
    * 关键字查询
    */
   search(){
-    let url = 'backstage/good/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+this.searchKey;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-    console.log(url);
+    let url = 'backstage/good/findByCondition';
     this.ngLoad=true;
     this.page.pageNo=1;
-    this.http.get(url).subscribe(res=>{
+    this.condition.pageNo=1;
+    this.condition.searchKey=this.searchKey;
+    this.condition.pageSize=this.page.pageSize;
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false

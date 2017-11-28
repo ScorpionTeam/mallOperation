@@ -98,15 +98,8 @@ export class  ConcatGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
-    let url = 'backstage/good/findForActivity?pageNo='+val+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-
+    let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
+      '&search='+this.searchKey;
     this.http.get(url).subscribe(res=>{
         this.ngLoad=false;
         /*给checkbox赋值*/
@@ -134,15 +127,8 @@ export class  ConcatGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
-    let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+val+
-      '&searchKey='+this.searchKey;
-    for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
-    }
-
+    let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
+      '&search='+this.searchKey;
     this.http.get(url).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -172,14 +158,10 @@ export class  ConcatGoodComponent implements OnInit{
     this.page.pageNo=1;
     //拼接地址
     let url = 'backstage/good/findForActivity?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+
-      '&searchKey='+this.searchKey;
+      '&search='+this.searchKey;
     for(let key in this.condition){
-      if(isNull(this.condition[key])){
-        continue;
-      }
-      url+="&"+key+"="+this.condition[key]
+      url+='&'+key+'='+this.condition[key];
     }
-
     this.http.get(url).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){

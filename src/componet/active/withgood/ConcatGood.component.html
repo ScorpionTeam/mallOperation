@@ -92,8 +92,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isHot"  [nzPlaceHolder]="'热销'"  [style.height]="'29px'" name="hot">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'HOT'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'NOT_HOT'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -105,8 +105,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isNew"  [nzPlaceHolder]="'新品'"  [style.height]="'29px'" name="new">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'IS_NEW'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'NOT_NEW'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -118,8 +118,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="isFreight" [nzPlaceHolder]="'包邮'"  [style.height]="'29px'" name="email">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'FREIGHT'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'UN_FREIGHT'"></nz-option>
               </nz-select>
             </div>
           </div>
