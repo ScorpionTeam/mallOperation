@@ -39,6 +39,7 @@ export class MenuComponent{
         console.log(res);
         this.menu=res["data"];
         this.menu.bornDate = new Date(res["data"].bornDate);
+        this.menu.status=this.dataTool.strTransBool(this.menu.status,'status');
       });
     }
   }
@@ -67,7 +68,7 @@ export class MenuComponent{
   add(){
     let url = 'backstage/menu/add';
     //转换数据
-    this.menu.status=this.dataTool.boolTransStr(this.menu.status);
+    this.menu.status=this.dataTool.boolTransStr(this.menu.status,'status');
     this.http.post(url,this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
@@ -76,10 +77,10 @@ export class MenuComponent{
       }else {
         this.nzMessage.error(res["error"].message);
       }
-      this.menu.status = this.dataTool.strTransBool(this.menu.status);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status,'status');
     },err=>{
       console.log("error:"+err);
-      this.menu.status = this.dataTool.strTransBool(this.menu.status);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status,'status');
     })
   }
   /**
@@ -91,7 +92,7 @@ export class MenuComponent{
   update(){
     let url = 'backstage/menu/modify';
     //转换数据
-    this.menu.status=this.dataTool.boolTransStr(this.menu.status);
+    this.menu.status=this.dataTool.boolTransStr(this.menu.status,'status');
     this.http.post(url,this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
@@ -99,10 +100,10 @@ export class MenuComponent{
       }else {
         this.nzMessage.error(res["error"].message);
       }
-      this.menu.status = this.dataTool.strTransBool(this.menu.status);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status,'status');
     },err=>{
       console.log("error:"+err);
-      this.menu.status = this.dataTool.strTransBool(this.menu.status);
+      this.menu.status = this.dataTool.strTransBool(this.menu.status,'status');
     })
   }
   back(){

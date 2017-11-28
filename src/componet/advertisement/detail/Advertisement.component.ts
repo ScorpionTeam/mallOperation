@@ -32,6 +32,7 @@ export class AdvertisementComponent implements OnInit{
           if(res["result"]==1){
             this.banner = res["data"];
             this.initPicUrl=res["data"].image_url;
+            this.banner.status=this.dataTool.strTransBool(this.banner.status,'status');
           }else {
             this.nzMessage.error(res["error"].message);
           }
@@ -91,11 +92,11 @@ export class AdvertisementComponent implements OnInit{
   }
 
   add(){
-    this.banner.status = this.dataTool.boolTransStr(!this.banner.status);
+    this.banner.status = this.dataTool.boolTransStr(this.banner.status,'status');
     this.http.post("backstage/banner/add",this.banner).subscribe(
       res=>{
         console.log(res);
-        this.banner.status = !this.dataTool.strTransBool(this.banner.status);
+        this.banner.status = !this.dataTool.strTransBool(this.banner.status,'status');
         if(res["result"]==1){
           this.nzMessage.success("新增活动成功");
           this.validateForm.reset();
@@ -103,23 +104,23 @@ export class AdvertisementComponent implements OnInit{
         }
       },
       err=>{
-        this.banner.status = !this.dataTool.strTransBool(this.banner.status);
+        this.banner.status = !this.dataTool.strTransBool(this.banner.status,'status');
         console.log(err);
       }
     )
   }
   update(){
-    this.banner.status = this.dataTool.boolTransStr(!this.banner.status);
+    this.banner.status = this.dataTool.boolTransStr(this.banner.status,'status');
     this.http.post("backstage/banner/modify",this.banner).subscribe(
       res=>{
         console.log(res);
-        this.banner.status = !this.dataTool.strTransBool(this.banner.status);
+        this.banner.status = this.dataTool.strTransBool(this.banner.status,'status');
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
         }
       },
       err=>{
-        this.banner.status = !this.dataTool.strTransBool(this.banner.status);
+        this.banner.status = this.dataTool.strTransBool(this.banner.status,'status');
         console.log(err)
       }
     )

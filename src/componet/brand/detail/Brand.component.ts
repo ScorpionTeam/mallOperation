@@ -40,7 +40,7 @@ export class BrandDetailComponent implements OnInit{
         res=>{
           if(res['result']==1){
             this.brand = res['data'];
-            this.brand.status = this.dataTool.strTransBool(this.brand.status);
+            this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
             if(!isNull(this.brand.brand_image)){
               this.initUrl = this.brand.brand_image;
             }
@@ -87,7 +87,7 @@ export class BrandDetailComponent implements OnInit{
    * 新增
    */
   add(){
-    this.brand.status = this.dataTool.boolTransStr(this.brand.status);
+    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'status');
     this.http.post("backstage/brand/add",this.brand).subscribe(
       res=>{
         if(res["result"]==1){
@@ -95,11 +95,11 @@ export class BrandDetailComponent implements OnInit{
           this.validateForm.reset();
           this.initUrl='';
         }
-        this.brand.status = this.dataTool.strTransBool(this.brand.status);
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
       },
       err=>{
         console.log(err);
-        this.brand.status = this.dataTool.strTransBool(this.brand.status);
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
         this.nzMessage.error("系统错误");
       }
     )
@@ -109,17 +109,17 @@ export class BrandDetailComponent implements OnInit{
    * 更新
    */
   update(){
-    this.brand.status = this.dataTool.boolTransStr(this.brand.status);
+    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'status');
     this.http.post("backstage/brand/modify",this.brand).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
         }
-        this.brand.status = this.dataTool.boolTransStr(this.brand.status);
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
       },
       err=>{
         console.log(err);
-        this.brand.status = this.dataTool.boolTransStr(this.brand.status);
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
       }
     )
   }
@@ -140,7 +140,7 @@ export class BrandDetailComponent implements OnInit{
    * @param val
    */
   uploadPicSuccess(val){
-    console.log(val)
+    console.log(val);
     this.brand.brand_image = val[0].url;
   }
 
@@ -149,7 +149,7 @@ export class BrandDetailComponent implements OnInit{
    * @param val
    */
   delPicSuccess(val){
-    console.log(val)
+    console.log(val);
     this.brand.brand_image="";
   }
 }

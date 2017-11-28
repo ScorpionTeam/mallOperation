@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
+import {DataTool} from "../../../common/data/DataTool";
 
 @Component({
   selector:'personal',
@@ -18,7 +19,7 @@ export class PersonalComponent{
 
   constructor(private route:ActivatedRoute,private router :Router,
               private fb :FormBuilder, private nzMessage:NzMessageService,
-              private http:Http){}
+              private http:Http,private dataTool:DataTool){}
   ngOnInit(){
     this.init();
     this.createValidatorGroup();
@@ -32,6 +33,7 @@ export class PersonalComponent{
     this.http.get(url).subscribe(res=>{
       console.log(res);
       this.person=res["data"];
+      this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');
       this.person.bornDate = new Date(res["data"].bornDate);
     });
   }
@@ -56,12 +58,14 @@ export class PersonalComponent{
   update(){
     let url = 'backstage/user/modify';
     //转换数据
-    this.person.sex=this.person.sex?"0":"1";
+    this.person.sex=this.dataTool.boolTransStr(this.person.sex,'sex');
     this.http.post(url,this.person).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
+        this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');
         this.nzMessage.success("修改成功");
       }else {
+        this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');
         this.nzMessage.error(res["error"].message);
       }
     },err=>{

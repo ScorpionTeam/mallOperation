@@ -34,7 +34,7 @@ export class ActivityComponent implements OnInit{
         res=>{
           if(res["result"]==1){
             this.activity = res["data"];
-            this.activity.status = !this.dataTool.strTransBool(this.activity.status);
+            this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
             this.activity.start_date = new Date(res["data"].start_date);
             this.activity.end_date = new Date(res["data"].end_date);
           }
@@ -84,34 +84,34 @@ export class ActivityComponent implements OnInit{
   }
 
   add(){
-    this.activity.status = this.dataTool.boolTransStr(!this.activity.status);
+    this.activity.status = this.dataTool.boolTransStr(this.activity.status,'status');
     this.http.post("backstage/activity/add",this.activity).subscribe(
       res=>{
         console.log(res);
-        this.activity.status = !this.dataTool.strTransBool(this.activity.status);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         if(res["result"]==1){
           this.nzMessage.success("新增活动成功");
           this.validateForm.reset();
         }
       },
       err=>{
-        this.activity.status = !this.dataTool.strTransBool(this.activity.status);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         console.log(err);
       }
     )
   }
   update(){
-    this.activity.status = this.dataTool.boolTransStr(!this.activity.status);
+    this.activity.status = this.dataTool.boolTransStr(this.activity.status,'status');
     this.http.post("backstage/activity/modify",this.activity).subscribe(
       res=>{
         console.log(res);
-        this.activity.status = !this.dataTool.strTransBool(this.activity.status);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
         }
       },
       err=>{
-        this.activity.status = !this.dataTool.strTransBool(this.activity.status);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         console.log(err)
       }
     )

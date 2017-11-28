@@ -81,8 +81,8 @@ export class ImgUpload implements OnInit,OnChanges{
     let formData= new FormData();
     console.log(this.imgObj)
     //图片上传部分代码
-    this.imgObj.watermark=this.dataTool.boolTransStr(this.imgObj.watermark)
-    this.imgObj.cut=this.dataTool.boolTransStr(this.imgObj.cut);
+    this.imgObj.watermark=this.dataTool.boolTransStr(this.imgObj.watermark,'water')
+    this.imgObj.cut=this.dataTool.boolTransStr(this.imgObj.cut,'cut');
     formData.append("jsonContent",JSON.stringify(this.imgObj));
     formData.append("file",val.target.files[0]);
     this.https.postImg('file/uploadImage',formData).subscribe(
@@ -91,12 +91,12 @@ export class ImgUpload implements OnInit,OnChanges{
           this.uploadSuccess.emit(res["data"]);
           this.previewPic(res["data"][0].url);
         }
-        this.imgObj.watermark = this.dataTool.strTransBool(this.imgObj.watermark);
-        this.imgObj.cut = this.dataTool.strTransBool(this.imgObj.cut);
+        this.imgObj.watermark = this.dataTool.strTransBool(this.imgObj.watermark,'water');
+        this.imgObj.cut = this.dataTool.strTransBool(this.imgObj.cut,'cut');
       },
       err=>{
-        this.imgObj.watermark = this.dataTool.strTransBool(this.imgObj.watermark);
-        this.imgObj.cut = this.dataTool.strTransBool(this.imgObj.cut);
+        this.imgObj.watermark = this.dataTool.strTransBool(this.imgObj.watermark,'water');
+        this.imgObj.cut = this.dataTool.strTransBool(this.imgObj.cut,'cut');
         console.log(err);
       }
     )

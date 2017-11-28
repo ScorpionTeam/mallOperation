@@ -42,8 +42,8 @@
     <td nz-td>{{data.name}}</td>
     <td nz-td>{{data.type}}</td>
     <td nz-td>{{data.url}}</td>
-    <td nz-td>{{data.createDate}}</td>
-    <td nz-td  >{{data.status=="0"?"正常":"停用"}}</td>
+    <td nz-td>{{data.create_date}}</td>
+    <td nz-td  >{{data.status=="NORMAL"?"正常":"停用"}}</td>
     <td nz-td class="menu_list_action">
       <span><a (click)="routerTool.skipToPage('/menu-detail',route,data.id)">编辑</a></span>
     </td>

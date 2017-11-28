@@ -211,7 +211,7 @@ export class GoodListComponent implements OnInit{
       return false;
     }
     return startValue.getTime()>=this.condition.endDate.getTime();
-  }
+  };
   /**
    * 禁止结束时间
    * @param endValue
@@ -222,7 +222,7 @@ export class GoodListComponent implements OnInit{
       return false
     }
     return endValue.getTime() <= this.condition.startDate.getTime();
-  }
+  };
 
   /**
    * 上、下架商品

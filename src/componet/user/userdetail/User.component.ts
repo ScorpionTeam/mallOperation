@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
+import {DataTool} from "../../../common/data/DataTool";
 
 @Component({
   selector:'user-detail',
@@ -20,7 +21,7 @@ export class UserComponent{
     status:true
   };
 
-  constructor(private route:ActivatedRoute,private router :Router,
+  constructor(private route:ActivatedRoute,private router :Router,private dataTool:DataTool,
               private fb :FormBuilder, private nzMessage:NzMessageService,
               private http:Http){}
   ngOnInit(){
@@ -39,7 +40,9 @@ export class UserComponent{
       this.http.get(url).subscribe(res=>{
         console.log(res);
         this.user=res["data"];
-        this.user.born_date = new Date(res["data"].born_date);
+        this.user.born_date = new Date(res["data"].bornDate);
+        this.user.status = this.dataTool.strTransBool(this.user.status,'status');
+        this.user.sex = this.dataTool.strTransBool(this.user.sex,'sex');
       });
     }
   }
@@ -68,14 +71,16 @@ export class UserComponent{
   add(){
     let url = 'backstage/user/register';
     //转换数据
-    this.user.status=this.user.status?"1":"0";
-    this.user.sex=this.user.sex?"0":"1";
+    this.user.status=this.dataTool.boolTransStr(this.user.status,'status');
+    this.user.sex=this.dataTool.boolTransStr(this.user.sex,'sex');
     this.http.post(url,this.user).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.nzMessage.success("注册成功");
         this.validateForm.reset();
+        this.user.status = this.dataTool.strTransBool(this.user.status,'status');
       }else {
+        this.user.status = this.dataTool.strTransBool(this.user.status,'status');
         this.nzMessage.error(res["error"].message);
       }
     },err=>{
@@ -91,13 +96,15 @@ export class UserComponent{
   update(){
     let url = 'backstage/user/modify';
     //转换数据
-    this.user.status=this.user.status?"1":"0";
-    this.user.sex=this.user.sex?"0":"1";
+    this.user.status=this.dataTool.boolTransStr(this.user.status,'status');
+    this.user.sex=this.dataTool.boolTransStr(this.user.sex,'sex');
     this.http.post(url,this.user).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
+        this.user.status = this.dataTool.strTransBool(this.user.status,'status');
         this.nzMessage.success("修改成功");
       }else {
+        this.user.status = this.dataTool.strTransBool(this.user.status,'status');
         this.nzMessage.error(res["error"].message);
       }
     },err=>{

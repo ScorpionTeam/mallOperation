@@ -9,11 +9,11 @@
     &lt;!&ndash;<i class="anticon anticon-close"></i>&ndash;&gt;
     <span>删除</span>
   </button>-->
-  <button nz-button [nzType]="'danger'"  class="btn" (click)="batchGoodDown('0')">
+  <button nz-button [nzType]="'danger'"  class="btn" (click)="batchGoodDown('OFF_SALE')">
     <!--<i class="anticon anticon-close"></i>-->
     <span>下架</span>
   </button>
-  <button nz-button [nzType]="'primary'" class="btn" (click)="batchGoodDown('1')">
+  <button nz-button [nzType]="'primary'" class="btn" (click)="batchGoodDown('ON_SALE')">
     <!--<i class="anticon anticon-close"></i>-->
     <span>上架</span>
   </button>
@@ -89,8 +89,8 @@
                          [nzPlaceHolder]="'商品状态'"
                          nzAllowClear
                          [style.height]="'29px'" name="saleStatus">
-                <nz-option [nzLabel]="'上架'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'下架'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'上架'" [nzValue]="'ON_SALE'"></nz-option>
+                <nz-option [nzLabel]="'下架'" [nzValue]="'OFF_SALE'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -115,8 +115,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isHot"  [nzPlaceHolder]="'热销'"  [style.height]="'29px'" name="hot">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'HOT'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'NOT_HOT'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -128,8 +128,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isNew"  [nzPlaceHolder]="'新品'"  [style.height]="'29px'" name="new">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'IS_NEW'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'NOT_NEW'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -141,8 +141,8 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.isFreight" [nzPlaceHolder]="'包邮'"  [style.height]="'29px'" name="email">
-                <nz-option [nzLabel]="'是'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'否'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="'是'" [nzValue]="'FREIGHT'"></nz-option>
+                <nz-option [nzLabel]="'否'" [nzValue]="'UN_FREIGHT'"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -189,7 +189,7 @@
     <td nz-td>{{(data.price/100).toFixed(2)}}</td>
     <td nz-td>{{data.stock}}</td>
     <td nz-td>{{data.visit_total}}</td>
-    <td nz-td [class]="!dataTool.getStatus(data.on_sale)?'sta_normal':'sta_del'">{{data.on_sale=="1"?"上架":"下架"}}</td>
+    <td nz-td [class]="dataTool.strTransBool(data.on_sale,'onsale')?'sta_normal':'sta_del'">{{data.on_sale=="ON_SALE"?"上架":"下架"}}</td>
     <td nz-td><span><a (click)="skipToPage('/good-detail',data.id)">编辑</a></span></td>
   </tr>
   </tbody>

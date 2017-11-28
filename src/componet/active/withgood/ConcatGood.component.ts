@@ -80,7 +80,7 @@ export class  ConcatGoodComponent implements OnInit{
    * 获取活动列表
    */
   getActivityList(){
-    let url = '/backstage/activity/findByCondition?pageNo=1&pageSize=10000&status=0&type=4';
+    let url = '/backstage/activity/findByCondition?pageNo=1&pageSize=10000&status=NORMAL&type=ALL';
     this.http.get(url).subscribe(
       res=>{
         if(res["total"]!=0){

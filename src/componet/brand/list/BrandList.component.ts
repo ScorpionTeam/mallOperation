@@ -233,7 +233,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要上架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'1',idList:this.idList}).subscribe(
+    this.http.post("backstage/brand/batchModifyStatus",{status:'NORMAL',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("上架成功");
@@ -255,7 +255,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要下架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'0',idList:this.idList}).subscribe(
+    this.http.post("backstage/brand/batchModifyStatus",{status:'UN_NORMAL',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("下架成功");

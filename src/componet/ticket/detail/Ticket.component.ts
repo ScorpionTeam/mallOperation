@@ -109,10 +109,10 @@ export class TicketComponent implements OnInit{
           /*转换时间格式*/
           this.ticket.start_date = new Date(this.ticket.start_date);
           this.ticket.end_date = new Date(this.ticket.end_date);
-          this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
+          this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
           this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
           this.ticket.reduce_money = this.dataTool.fTransYuan(this.ticket.reduce_money);
-          this.ticket.num_limit = !this.dataTool.strTransBool(this.ticket.num_limit);
+          this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
         }
       },
       err=>{
@@ -156,8 +156,8 @@ export class TicketComponent implements OnInit{
       this.nzMessage.error("结束时间早于当前时期,无法创建");
       return;
     }
-    this.ticket.status = this.dataTool.boolTransStr(!this.ticket.status);
-    this.ticket.num_limit = this.dataTool.boolTransStr(!this.ticket.num_limit);
+    this.ticket.status = this.dataTool.boolTransStr(this.ticket.status,'status');
+    this.ticket.num_limit = this.dataTool.boolTransStr(this.ticket.num_limit,'limit');
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduce_money = this.dataTool.yTransFen(this.ticket.reduce_money);
     this.http.post('backstage/ticket/add',this.ticket).subscribe(
@@ -170,15 +170,15 @@ export class TicketComponent implements OnInit{
         }
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduce_money = this.dataTool.fTransYuan(this.ticket.reduce_money);
-        this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
-        this.ticket.num_limit = !this.dataTool.strTransBool(this.ticket.num_limit);
+        this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
+        this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
       },
       err=>{
         console.log(err);
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduce_money = this.dataTool.fTransYuan(this.ticket.reduce_money);
-        this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
-        this.ticket.num_limit = !this.dataTool.strTransBool(this.ticket.num_limit);
+        this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
+        this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
         this.nzMessage.error("新增失败");
       }
     );
@@ -188,8 +188,8 @@ export class TicketComponent implements OnInit{
    * 修改优惠券
    */
   update(){
-    this.ticket.num_limit = this.dataTool.boolTransStr(!this.ticket.num_limit);
-    this.ticket.status = this.dataTool.boolTransStr(!this.ticket.status);
+    this.ticket.num_limit = this.dataTool.boolTransStr(this.ticket.num_limit,'limit');
+    this.ticket.status = this.dataTool.boolTransStr(this.ticket.status,'status');
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduce_money = this.dataTool.yTransFen(this.ticket.reduce_money);
     this.http.post('backstage/ticket/modify',this.ticket).subscribe(
@@ -201,14 +201,14 @@ export class TicketComponent implements OnInit{
         }
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
-        this.ticket.num_limit = !this.dataTool.strTransBool(this.ticket.num_limit);
-        this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
+        this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
+        this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
       },
       err=>{
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
         this.ticket.reduce_money = this.dataTool.fTransYuan(this.ticket.reduce_money);
-        this.ticket.num_limit = !this.dataTool.strTransBool(this.ticket.num_limit);
-        this.ticket.status = !this.dataTool.strTransBool(this.ticket.status);
+        this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
+        this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
         this.nzMessage.error("修改失败");
       }
     )

@@ -77,7 +77,7 @@ export class GoodComponent implements OnInit{
           this.initUrl= this.imgUrlList[0].url;
           this.initLittleUrl = this.imgUrlList.concat();
         }
-        this.transStr();
+        this.transBool();
       });
     }
   }
@@ -111,7 +111,7 @@ export class GoodComponent implements OnInit{
    */
   add(){
     this.initLittleUrl = this.imgUrlList.concat();
-    this.transBool();
+    this.transStr();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
     this.https.post('backstage/good/add',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
@@ -129,13 +129,13 @@ export class GoodComponent implements OnInit{
         this.imgUrlList = [];//清空图片列表
         this.good.rich_content = '';
       }else {
-        this.transStr();
+        this.transBool();
         this.nzMessage.error(res["error"].message);
       }
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
       this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
     },err=>{
-      this.transStr();
+      this.transBool();
       console.log("error="+err);
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
       this.good.promotion = this.dataTool.fTransYuan(this.good.promotion);//分转元显示
@@ -146,16 +146,16 @@ export class GoodComponent implements OnInit{
    * 修改
    */
   update(){
-    this.transBool();
+    this.transStr();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
     this.https.post('backstage/good/update',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
       console.log(res)
       if(res["result"]==1){
-        this.transStr();
+        this.transBool();
         this.nzMessage.success(res["data"]);
       }else {
-        this.transStr();
+        this.transBool();
         this.nzMessage.error(res["error"].message);
       }
       this.good.price = this.dataTool.fTransYuan(this.good.price);//分转元显示
@@ -221,16 +221,16 @@ export class GoodComponent implements OnInit{
    * 转换bool
    */
   transBool(){
-    this.good.freight = this.dataTool.boolTransStr(this.good.freight);
-    this.good.hot = this.dataTool.boolTransStr(this.good.hot);
-    this.good.is_new = this.dataTool.boolTransStr(this.good.is_new);
-    this.good.on_sale = this.dataTool.boolTransStr(this.good.on_sale);
+    this.good.freight = this.good.freight=="FREIGHT"?true:false;
+    this.good.hot = this.good.hot=="HOT"?true:false;
+    this.good.is_new = this.good.is_new=="IS_NEW"?true:false;
+    this.good.on_sale = this.good.on_sale=="ON_SALE"?true:false;
   }
   transStr(){
-    this.good.freight = this.dataTool.strTransBool(this.good.freight);
-    this.good.hot = this.dataTool.strTransBool(this.good.hot);
-    this.good.is_new = this.dataTool.strTransBool(this.good.is_new);
-    this.good.on_sale = this.dataTool.strTransBool(this.good.on_sale);
+    this.good.freight = this.good.freight?"FREIGHT":"UN_FREIGHT";
+    this.good.hot = this.good.hot?"HOT":"NOT_HOT";
+    this.good.is_new = this.good.is_new?"IS_NEW":"NOT_NEW";
+    this.good.on_sale = this.good.on_sale?"ON_SALE":"OFF_SALE"
   }
 
   /**
