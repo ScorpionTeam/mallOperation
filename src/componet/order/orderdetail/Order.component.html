@@ -92,7 +92,7 @@
               <label>下单时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.create_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.create_date}}</span>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
               <label>支付时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.pay_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.pay_date}}</span>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
               <label>发货时间</label>
             </div>
             <div nz-form-control nz-col [nzSpan]="15">
-              <span class="order_item">{{order.delivery_date|date:"yyyy-mm-dd hh:mm:ss"}}</span>
+              <span class="order_item">{{order.delivery_date}}</span>
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@
     <tr nz-tbody-tr *ngFor="let data of orderLogListTable.data;let index = index;">
       <td nz-td>{{data.action}}</td>
       <td nz-td>{{data.ipAddress}}</td>
-      <td nz-td>{{data.create_date|date:"yyyy-mm-dd hh:mm:ss"}}</td>
+      <td nz-td>{{data.create_date}}</td>
     </tr>
     </tbody>
   </nz-table>

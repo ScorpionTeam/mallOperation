@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Http} from "../../../../common/http/Http";
 import {Router, ActivatedRoute} from "@angular/router";
 import {RouterTool} from "../../../../common/routertool/RouterTool";
+import {DataTool} from "../../../../common/data/DataTool";
 @Component({
   selector:"menu-list",
   templateUrl:"MenuList.component.html"
@@ -18,7 +19,8 @@ export class MenuListComponent implements OnInit{
   idList:any=[];
   checkAll:boolean=false;
   searchKey:string='';
-  constructor(private http:Http,private routerTool:RouterTool,private route:ActivatedRoute){}
+  constructor(private http:Http,private routerTool:RouterTool,private route:ActivatedRoute,
+                private dataTool:DataTool){}
   ngOnInit(){
     this.pageChangeHandler(1);
   }

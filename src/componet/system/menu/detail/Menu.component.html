@@ -52,8 +52,8 @@
           </div>
           <div nz-form-control nz-col [nzSpan]="15">
             <nz-select [(ngModel)]="menu.type" formControlName="type">
-              <nz-option [nzValue]="'0'" [nzLabel]="'父菜单'"></nz-option>
-              <nz-option [nzValue]="'1'" [nzLabel]="'子菜单'"></nz-option>
+              <nz-option [nzValue]="'PARENT_MENU'" [nzLabel]="'父菜单'"></nz-option>
+              <nz-option [nzValue]="'SUBMENU'" [nzLabel]="'子菜单'"></nz-option>
             </nz-select>
           </div>
         </div>
@@ -61,11 +61,11 @@
       <div nz-col [nzSpan]="12"  [nzOffset]="6">
         <div nz-form-item  nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label nz-form-item-required>父菜单</label>
+            <label>父菜单</label>
           </div>
           <div nz-form-control  nz-col [nzSpan]="15">
             <nz-select [(ngModel)]="menu.pid" formControlName="pid">
-              <nz-option [nzValue]="'data.id'" [nzLabel]="'data.name'" *ngFor="let data of rootMenuList"></nz-option>
+              <nz-option [nzValue]="data.id" [nzLabel]="data.name" *ngFor="let data of rootMenuList"></nz-option>
             </nz-select>
           </div>
         </div>
@@ -73,7 +73,7 @@
       <div nz-col [nzSpan]="12"  [nzOffset]="6">
         <div nz-form-item  nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label nz-form-item-required>菜单描述</label>
+            <label>菜单描述</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="15">
             <nz-input [nzType]="'textarea'" [nzSize]="'large'"  [(ngModel)]="menu.description "  formControlName="description"></nz-input>

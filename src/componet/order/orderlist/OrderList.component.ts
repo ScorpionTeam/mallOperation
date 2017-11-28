@@ -45,7 +45,7 @@ export class OrderListComponent implements OnInit{
    */
   init(){
     this.ngLoad=true;
-    this.pageObj.pageChange("backstage/order/findByCondition",1,10).subscribe(res=>{
+    this.http.post("backstage/order/findByCondition",{pageNo:1,pageSize:10}).subscribe(res=>{
       console.log(res);
       this.ngLoad=false;
       if(res["total"]!=0){
@@ -77,14 +77,11 @@ export class OrderListComponent implements OnInit{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/order/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-        this.searchKey;
-    for(let key in this.condition){
-     if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-       url+='&'+key+'='+this.condition[key];
-     }
-    }
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/order/findByCondition';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize = this.page.pageSize;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
@@ -103,14 +100,11 @@ export class OrderListComponent implements OnInit{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/order/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/order/findByCondition';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize = this.page.pageSize;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
@@ -131,14 +125,11 @@ export class OrderListComponent implements OnInit{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/order/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    let url = 'backstage/order/findByCondition';
+    this.condition.pageNo = this.page.pageNo;
+    this.condition.pageSize = this.page.pageSize;
+    this.condition.searchKey = this.searchKey;
+    this.http.post(url,this.condition).subscribe(res=>{
       console.log(res);
         this.ngLoad=false;
         if(res["total"]!=0){

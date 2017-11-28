@@ -16,7 +16,8 @@ export class MenuComponent{
   isDetail:boolean;
   //初始化用户详情
   menu:any={
-    status:true
+    status:true,
+    pid:0
   };
   rootMenuList:any=[];
   constructor(private route:ActivatedRoute,private router :Router,
@@ -138,7 +139,7 @@ export class MenuComponent{
     this.http.get("backstage/menu/findRootMenu").subscribe(
       res=>{
         console.log(res);
-        this.rootMenuList = res["list"];
+        this.rootMenuList = res["data"];
       },
       err=>{
         console.log(err);

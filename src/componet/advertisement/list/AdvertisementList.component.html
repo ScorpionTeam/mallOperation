@@ -5,10 +5,10 @@
       <i class="anticon anticon-search search" (click)="search()"></i>
     </ng-template>
   </nz-input>
-  <button nz-button [nzType]="'danger'" class="btn_search_tool  btn-danger" (click)="changeBannerStatus('1')">
+  <button nz-button [nzType]="'danger'" class="btn_search_tool  btn-danger" (click)="changeBannerStatus('UN_NORMAL')">
     <span>结束</span>
   </button>
-  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="changeBannerStatus('0')">
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="changeBannerStatus('NORMAL')">
     <span>开启</span>
   </button>
   <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="skipToPage('/banner-add')">
@@ -43,7 +43,7 @@
     <td nz-td>{{data.image_url}}</td>
     <td nz-td>{{data.action_url}}</td>
     <td nz-td>{{data.visit_total}}</td>
-    <td nz-td [class]="dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=='0'?"正常":"删除"}}</td>
+    <td nz-td [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=='NORMAL'?"正常":"删除"}}</td>
     <td nz-td class="banner_list_action">
       <span><a (click)="skipToPage('/banner-detail',data.id)">编辑</a></span>
     </td>

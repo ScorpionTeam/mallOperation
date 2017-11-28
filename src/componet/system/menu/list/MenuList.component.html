@@ -40,7 +40,7 @@
       </label>
     </td>
     <td nz-td>{{data.name}}</td>
-    <td nz-td>{{data.type}}</td>
+    <td nz-td>{{dataTool.getMenuType(data.type)}}</td>
     <td nz-td>{{data.url}}</td>
     <td nz-td>{{data.create_date}}</td>
     <td nz-td  >{{data.status=="NORMAL"?"正常":"停用"}}</td>
