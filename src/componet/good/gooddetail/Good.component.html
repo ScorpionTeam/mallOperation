@@ -206,6 +206,12 @@
         </div>
       </div>
       <div nz-row class="hk_form_item">
+        <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">SEO</label>
+        <div nz-col [nzSpan]="12"  [nzOffset]="1" nz-form-control>
+          <nz-input [nzType]="'textarea'" [nzRows]="'4'" [(ngModel)]="good.seo" formControlName="seo" ></nz-input>
+        </div>
+      </div>
+      <div nz-row class="hk_form_item">
         <label nz-form-label nz-form-item-required nz-col [nzSpan]="2">商品编码</label>
         <div nz-col [nzSpan]="12"  [nzOffset]="1" nz-form-control>
           <nz-input [(ngModel)]="good.good_no " formControlName="goodNo"></nz-input>

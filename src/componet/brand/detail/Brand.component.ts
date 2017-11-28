@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ChangeDetectionStrategy} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Http} from "../../../common/http/Http";
@@ -7,7 +7,8 @@ import {isUndefined} from "util";
 import {DataTool} from "../../../common/data/DataTool";
 import {isNull} from "util";
 import {Store} from "@ngrx/store";
-import {num}from"../../../state/StateApplaction"
+import {Observable} from "rxjs";
+
 @Component({
   selector:"brand-detail",
   templateUrl:"Brand.component.html",
@@ -20,7 +21,8 @@ export class BrandDetailComponent implements OnInit{
   };
   initUrl:any;
   validateForm:FormGroup;
-  constructor(private fb:FormBuilder,private router:Router,private route:ActivatedRoute,private store:Store<any>,
+  loadingFlag:Observable<boolean>;
+  constructor(private fb:FormBuilder,private router:Router,private route:ActivatedRoute,
               private http:Http,private  nzMessage :NzMessageService,private dataTool:DataTool){
     this.initFormValidate();
   }

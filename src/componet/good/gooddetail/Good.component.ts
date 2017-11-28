@@ -209,7 +209,8 @@ export class GoodComponent implements OnInit{
       isFreight:'',
       isHot:'',
       isNew:'',
-      isOnSale:''
+      isOnSale:'',
+      seo:['',[Validators.required]]
     });
     this.validateImg = this.fb.group({
       imageType:['',[Validators.required]]

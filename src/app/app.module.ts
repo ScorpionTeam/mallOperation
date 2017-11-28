@@ -39,7 +39,7 @@ import { PersonalComponent} from "../componet/user/person/PersonDetail.component
 import {RouterTool} from "../common/routertool/RouterTool";
 import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
 import {StoreModule} from "@ngrx/store";
-import {stateReducer}from"../state/StateApplaction"
+import {reducer}from"../state/reducer/index/StateApplaction"
 @NgModule({
   declarations: [
     HKeditor,
@@ -75,7 +75,7 @@ import {stateReducer}from"../state/StateApplaction"
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    StoreModule.forRoot({counter:stateReducer}),
+    StoreModule.forRoot({loading:reducer}),
     CKEditorModule
   ],
   providers: [PageService,
