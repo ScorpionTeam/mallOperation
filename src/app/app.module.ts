@@ -83,7 +83,6 @@ import {reducer}from"../state/reducer/index/StateApplaction"
                Http,
                RouteGuard,
                RouterTool,
-              /*{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },*/
               Interceptor,
                DataTool,
               { provide: NZ_MESSAGE_CONFIG, useValue: { nzMaxStack:1 }} ],

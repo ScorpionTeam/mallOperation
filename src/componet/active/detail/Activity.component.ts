@@ -1,3 +1,4 @@
+///<reference path="../../../../node_modules/rxjs/add/operator/switchMap.d.ts"/>
 import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -5,10 +6,12 @@ import {Http} from "../../../common/http/Http";
 import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 import {isUndefined} from "util";
+import {ActivityService} from "../../../service/active/Activity.service";
 @Component({
   selector:'app-detail',
   templateUrl:'Activity.component.html',
-  styleUrls:['Activity.component.css']
+  styleUrls:['Activity.component.css'],
+  providers:[ActivityService]
 })
 
 export class ActivityComponent implements OnInit{
@@ -20,7 +23,8 @@ export class ActivityComponent implements OnInit{
     target:'3'
   };
   constructor(private fb:FormBuilder,private router:Router,private nzMessage:NzMessageService,
-              private route:ActivatedRoute,private http:Http,private dataTool:DataTool){}
+              private route:ActivatedRoute,private http:Http,private dataTool:DataTool,
+              private service:ActivityService){}
   ngOnInit() {
     this.init();
     this.createdFormValidate();
@@ -30,7 +34,7 @@ export class ActivityComponent implements OnInit{
    */
   init(){
     if(this.route.params["value"].id){
-      this.http.get("backstage/activity/findById?id="+this.route.params["value"].id).subscribe(
+      this.service.detail(this.route.params['value'].id).subscribe(
         res=>{
           if(res["result"]==1){
             this.activity = res["data"];
@@ -43,7 +47,21 @@ export class ActivityComponent implements OnInit{
           this.nzMessage.error("系统错误");
           console.log(err);
         }
-      )
+      );
+      /*this.http.get("backstage/activity/findById?id="+this.route.params["value"].id).subscribe(
+        res=>{
+          if(res["result"]==1){
+            this.activity = res["data"];
+            this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
+            this.activity.start_date = new Date(res["data"].start_date);
+            this.activity.end_date = new Date(res["data"].end_date);
+          }
+        },
+        err=>{
+          this.nzMessage.error("系统错误");
+          console.log(err);
+        }
+      )*/
     }
   }
 
@@ -85,7 +103,7 @@ export class ActivityComponent implements OnInit{
 
   add(){
     this.activity.status = this.dataTool.boolTransStr(this.activity.status,'status');
-    this.http.post("backstage/activity/add",this.activity).subscribe(
+    this.service.add(this.activity).subscribe(
       res=>{
         console.log(res);
         this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
@@ -98,11 +116,25 @@ export class ActivityComponent implements OnInit{
         this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         console.log(err);
       }
-    )
+    );
+   /* this.http.post("backstage/activity/add",this.activity).subscribe(
+      res=>{
+        console.log(res);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
+        if(res["result"]==1){
+          this.nzMessage.success("新增活动成功");
+          this.validateForm.reset();
+        }
+      },
+      err=>{
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
+        console.log(err);
+      }
+    )*/
   }
   update(){
     this.activity.status = this.dataTool.boolTransStr(this.activity.status,'status');
-    this.http.post("backstage/activity/modify",this.activity).subscribe(
+    this.service.update(this.activity).subscribe(
       res=>{
         console.log(res);
         this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
@@ -114,7 +146,20 @@ export class ActivityComponent implements OnInit{
         this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
         console.log(err)
       }
-    )
+    );
+    /*this.http.post("backstage/activity/modify",this.activity).subscribe(
+      res=>{
+        console.log(res);
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
+        if(res["result"]==1){
+          this.nzMessage.success("修改成功");
+        }
+      },
+      err=>{
+        this.activity.status = this.dataTool.strTransBool(this.activity.status,'status');
+        console.log(err)
+      }
+    )*/
   }
   /**
    * 返回

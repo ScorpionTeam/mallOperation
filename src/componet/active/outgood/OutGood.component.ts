@@ -3,13 +3,14 @@ import {Http} from "../../../common/http/Http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpData} from "../../../http/HttpData";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
-import {PageService} from "../../../service/page/Page.service";
-import {isNull} from "util";
 import {isUndefined} from "util";
+import {ActivityService} from "../../../service/active/Activity.service";
+import {GoodService} from "../../../service/good/Good.service";
 @Component({
   selector:'out-good-activity',
   templateUrl:'OutGood.component.html',
-  styleUrls:['OutGood.component.css']
+  styleUrls:['OutGood.component.css'],
+  providers:[ActivityService,GoodService]
 })
 
 export class OutGoodComponent implements OnInit{
@@ -30,7 +31,7 @@ export class OutGoodComponent implements OnInit{
   picUrl:string = '';//图片公共地址
   condition:any={};//条件
   idList:any=[];//选中商品ID集合
-  constructor(private pageObj : PageService,private http:Http,
+  constructor(private http:Http,private actService:ActivityService,private goodService:GoodService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzModal :NzModalService ,private nzMessage:NzMessageService){}
 
@@ -47,14 +48,13 @@ export class OutGoodComponent implements OnInit{
     if(flag){
       return;
     }
-    let url = 'backstage/good/findByActivityId';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize= this.page.pageSize;
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
     /*数据初始化*/
     this.ngLoad=true;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.goodService.pageByActivityId(this.condition).subscribe(res=>{
         this.ngLoad=false;
         console.log(res);
         if(res["total"]!=0){
@@ -89,8 +89,10 @@ export class OutGoodComponent implements OnInit{
    * 获取活动列表
    */
   getActivityList(){
-    let url = 'backstage/activity/findByCondition?pageNo=1&pageSize=10000&status=NORMAL&type=ALL';
-    this.http.get(url).subscribe(
+    let condition:any={};
+    condition.status='NORMAL';
+    condition.type='ALL';
+    this.actService.pageList(1,10000,'',condition).subscribe(
       res=>{
         if(res["total"]!=0){
           this.activityList = res["list"];
@@ -109,12 +111,11 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
-    let url = 'backstage/good/findByActivityId';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize= this.page.pageSize;
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.goodService.pageByActivityId(this.condition).subscribe(res=>{
         this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
@@ -141,12 +142,11 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
-    let url = 'backstage/good/findByActivityId';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize= this.page.pageSize;
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.goodService.pageByActivityId(this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -174,12 +174,11 @@ export class OutGoodComponent implements OnInit{
     this.ngLoad=true;
     this.page.pageNo=1;
     //拼接地址
-    let url = 'backstage/good/findByActivityId';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize= this.page.pageSize;
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.goodService.pageByActivityId(this.condition).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -276,7 +275,7 @@ export class OutGoodComponent implements OnInit{
       return false
     }
     return endValue.getTime() <= this.condition.startDate.getTime();
-  }
+  };
 
   /**
    * 关联商品
@@ -302,7 +301,7 @@ export class OutGoodComponent implements OnInit{
    * 关联操作
    */
   unconcatHandler(){
-    this.http.post("backstage/activity/unbindActivityWithGood",{activityId:this.curActivity,goodIdList:this.idList}).subscribe(
+    this.actService.unconcatGood(this.curActivity,this.idList).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("解绑成功");

@@ -61,10 +61,11 @@
       <div nz-col [nzSpan]="12"  [nzOffset]="6">
         <div nz-form-item  nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label>父菜单</label>
+            <label nz-form-item-required>父菜单</label>
           </div>
           <div nz-form-control  nz-col [nzSpan]="15">
             <nz-select [(ngModel)]="menu.pid" formControlName="pid">
+              <nz-option [nzValue]="0" [nzLabel]="'顶级菜单'"></nz-option>
               <nz-option [nzValue]="data.id" [nzLabel]="data.name" *ngFor="let data of rootMenuList"></nz-option>
             </nz-select>
           </div>

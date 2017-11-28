@@ -142,6 +142,18 @@ export  class DataTool{
   }
 
   /**
+   * 获取菜单类型
+   * @param val
+   */
+  getMenuType(val){
+    switch (val){
+      case "PARENT_MENU":
+        return"父菜单";
+      case "SUBMENU":
+        return "子菜单";
+    }
+  }
+  /**
    * 字符串转布尔
    * @param val 值
    * @param flag status:状态

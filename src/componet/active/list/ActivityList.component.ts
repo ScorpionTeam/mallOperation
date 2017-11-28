@@ -3,13 +3,13 @@ import {PageService} from "../../../service/page/Page.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
-import {isUndefined} from "util";
-import {isNull} from "util";
 import {DataTool} from "../../../common/data/DataTool";
+import {ActivityService} from "../../../service/active/Activity.service";
 @Component({
   selector:"activity-list",
   templateUrl:"./ActivityList.component.html",
-  styleUrls:["./ActivityList.component.css"]
+  styleUrls:["./ActivityList.component.css"],
+  providers:[ActivityService]
 })
 
 export class ActivityListComponent{
@@ -27,7 +27,7 @@ export class ActivityListComponent{
   idList:any=[];//批量操作id集合
   checkAll:boolean=false;
   constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,private service:ActivityService){}
 
   ngOnInit(){
     this.init();
@@ -38,20 +38,20 @@ export class ActivityListComponent{
    */
   init(){
     this.ngLoad=true;
-    this.pageObj.pageChange("backstage/activity/findByCondition",1,10).subscribe(res=>{
-      console.log(res);
-      this.ngLoad=false;
-      if(res["total"]!=0){
-        this.activityList = res["list"];
-        this.page.total = res["total"];
-      }else {
-        this.activityList = res["list"];
-        this.page.total = res["total"];
-      }
-    },err=>{
-      console.log(err);
-      this.nzMessage.error("系统错误")
-    })
+    this.service.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
+        this.ngLoad=false;
+        if(res["total"]!=0){
+          this.activityList = res["list"];
+          this.page.total = res["total"];
+        }else {
+          this.activityList = res["list"];
+          this.page.total = res["total"];
+        }
+      },
+      err=>{
+        this.ngLoad=false;
+        console.log(err);
+      });
   }
   /**
    * 页面跳转
@@ -67,43 +67,29 @@ export class ActivityListComponent{
   }
 
   /*分页*/
-  pageChangeHandler(val){
-    this.ngLoad=true;
-    this.page.pageNo=val;
-    let url = 'backstage/activity/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
-        this.ngLoad=false;
-        if(res["total"]!=0){
+  pageChangeHandler(val) {
+    this.ngLoad = true;
+    this.page.pageNo = val;
+    this.service.pageList(this.page.pageNo, this.page.pageSize, this.searchKey, this.condition).subscribe(res => {
+        this.ngLoad = false;
+        if (res["total"] != 0) {
           this.activityList = res["list"];
           this.page.total = res["total"];
-        }else {
+        } else {
           this.activityList = res["list"];
           this.page.total = res["total"];
         }
       },
-      err=>{
-        this.ngLoad=false;
+      err => {
+        this.ngLoad = false;
         console.log(err);
       });
-  };
+  }
   /*size改变*/
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/activity/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.service.pageList(this.page.pageNo,this.page.pageSize,this.searchKey,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.activityList = res["list"];
@@ -124,15 +110,7 @@ export class ActivityListComponent{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/activity/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
-        console.log(res);
+    this.service.pageList(this.page.pageNo,this.page.pageSize,this.searchKey,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.activityList = res["list"];
@@ -143,6 +121,7 @@ export class ActivityListComponent{
         }
       },
       err=>{
+        this.ngLoad=false;
         console.log(err);
       });
   }
