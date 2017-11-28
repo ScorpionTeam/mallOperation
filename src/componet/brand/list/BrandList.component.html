@@ -104,7 +104,7 @@
     <td nz-td>{{data.brand_name}}</td>
     <td nz-td>{{data.short_name}}</td>
     <td nz-td>{{data.create_date|date:"yyyy-mm-dd hh:mm:ss"}}</td>
-    <td nz-td  [class]="!dataTool.getStatus(data.status)?'sta_normal':'sta_del'">{{data.status=="0"?"退驻":"入驻"}}</td>
+    <td nz-td  [class]="dataTool.strTransBool(data.status,'quit')?'sta_normal':'sta_del'">{{data.status=="ENTER"?"入驻":"退驻"}}</td>
     <td nz-td class="brand_list_action">
       <span><a (click)="skipToPage('/brand-detail',data.id)">编辑</a></span>
     </td>

@@ -34,7 +34,7 @@ export class PersonalComponent{
       console.log(res);
       this.person=res["data"];
       this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');
-      this.person.bornDate = new Date(res["data"].bornDate);
+      this.person.born_date = new Date(res["data"].born_date);
     });
   }
   /**

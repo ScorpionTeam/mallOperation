@@ -90,6 +90,7 @@ export class BrandListComponent{
           this.brandList = res["list"];
           this.page.total = res["total"];
         }
+        this.checkAll=false;
         this.idList=[];
       },
       err=>{
@@ -117,6 +118,7 @@ export class BrandListComponent{
           this.brandList = res["list"];
           this.page.total = res["total"];
         }
+        this.checkAll=false;
         this.idList=[];
       },
       err=>{
@@ -147,6 +149,7 @@ export class BrandListComponent{
           this.brandList = res["list"];
           this.page.total = res["total"];
         }
+        this.checkAll=false;
         this.idList=[];
       },
       err=>{
@@ -233,7 +236,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要上架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'NORMAL',idList:this.idList}).subscribe(
+    this.http.post("backstage/brand/batchModifyStatus",{status:'ENTER',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("上架成功");
@@ -255,7 +258,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要下架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'UN_NORMAL',idList:this.idList}).subscribe(
+    this.http.post("backstage/brand/batchModifyStatus",{status:'QUITE',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("下架成功");

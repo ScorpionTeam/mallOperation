@@ -40,7 +40,7 @@ export class BrandDetailComponent implements OnInit{
         res=>{
           if(res['result']==1){
             this.brand = res['data'];
-            this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
+            this.brand.status = this.dataTool.strTransBool(this.brand.status,'quit');
             if(!isNull(this.brand.brand_image)){
               this.initUrl = this.brand.brand_image;
             }
@@ -71,7 +71,6 @@ export class BrandDetailComponent implements OnInit{
    * 保存
    */
   save(){
-    console.log(this.validateForm.valid);
     if(!this.validateForm.valid||this.brand.brand_image==''||isUndefined(this.brand.brand_image)){
       this.nzMessage.warning("请将表单填写完整");
       return;
@@ -87,7 +86,7 @@ export class BrandDetailComponent implements OnInit{
    * 新增
    */
   add(){
-    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'status');
+    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'quit');
     this.http.post("backstage/brand/add",this.brand).subscribe(
       res=>{
         if(res["result"]==1){
@@ -95,11 +94,11 @@ export class BrandDetailComponent implements OnInit{
           this.validateForm.reset();
           this.initUrl='';
         }
-        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'quit');
       },
       err=>{
         console.log(err);
-        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'quit');
         this.nzMessage.error("系统错误");
       }
     )
@@ -109,17 +108,17 @@ export class BrandDetailComponent implements OnInit{
    * 更新
    */
   update(){
-    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'status');
+    this.brand.status = this.dataTool.boolTransStr(this.brand.status,'quit');
     this.http.post("backstage/brand/modify",this.brand).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
         }
-        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'quit');
       },
       err=>{
         console.log(err);
-        this.brand.status = this.dataTool.strTransBool(this.brand.status,'status');
+        this.brand.status = this.dataTool.strTransBool(this.brand.status,'quit');
       }
     )
   }
