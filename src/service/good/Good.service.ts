@@ -4,8 +4,9 @@ import {Http} from "../../common/http/Http";
 export class GoodService{
   constructor(private http:Http){}
 
-  pageList(){
-
+  pageList(condition){
+    let url = 'backstage/good/findByCondition';
+    return this.http.post(url,condition);
   }
 
   /**
@@ -31,5 +32,35 @@ export class GoodService{
       url+='&'+key+'='+condition[key];
     }
     return this.http.get(url);
+  }
+
+  /**
+   * 根据商品id查询商品详情
+   * @param goodId
+   * @returns {Observable<Object>}
+   */
+  detail(goodId){
+    let url = "backstage/good/findById?id="+goodId;
+    return this.http.get(url);
+  }
+
+  /**
+   * 新增商品
+   * @param goodObj
+   * @param imgList
+   * @returns {Observable<Object>}
+   */
+  add(goodObj,imgList){
+    return this.http.post('backstage/good/add',{good:goodObj,imageList:imgList});
+  }
+
+  /**
+   * 修改商品
+   * @param goodObj
+   * @param imgList
+   * @returns {Observable<Object>}
+   */
+  update(goodObj,imgList){
+    return this.http.post('backstage/good/update',{good:goodObj,imageList:imgList});
   }
 }

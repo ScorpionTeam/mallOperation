@@ -5,11 +5,13 @@ import {Http} from "../../../common/http/Http";
 import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 import {isUndefined} from "util";
+import {GoodService} from "../../../service/good/Good.service";
 
 @Component({
   selector:'good',
   templateUrl:"Good.component.html",
-  styleUrls:["Good.component.css"]
+  styleUrls:["Good.component.css"],
+  providers:[GoodService]
 })
 
 export class GoodComponent implements OnInit{
@@ -52,7 +54,7 @@ export class GoodComponent implements OnInit{
   initUrl:any;
   initLittleUrl:any=[];
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
-              private fb :FormBuilder,private https:Http,private dataTool:DataTool){}
+              private fb :FormBuilder,private https:Http,private dataTool:DataTool,private goodService:GoodService){}
   ngOnInit(){
     this.init();
     this.createValidatorGroup();
@@ -64,8 +66,7 @@ export class GoodComponent implements OnInit{
   init(){
     this.isDetail = this.route.params['value'].id?true:false;
     if(this.isDetail){
-      let url = "backstage/good/findById?id="+this.route.params['value'].id;
-      this.https.get(url).subscribe(res=>{
+      this.goodService.detail(this.route.params['value'].id).subscribe(res=>{
         console.log(res);
         this.good=res["data"];
         /*this.good.goodAttrExts=[];*/
@@ -114,7 +115,7 @@ export class GoodComponent implements OnInit{
     this.transStr();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
-    this.https.post('backstage/good/add',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
+    this.goodService.add(this.good,this.imgUrlList).subscribe(res=>{
       console.log(res)
       if(res["result"]==1){
         this.nzMessage.success("添加成功");
@@ -149,8 +150,8 @@ export class GoodComponent implements OnInit{
     this.transStr();
     this.good.price = this.dataTool.yTransFen(this.good.price);//元转分传
     this.good.promotion = this.dataTool.yTransFen(this.good.promotion);//元转分传
-    this.https.post('backstage/good/update',{good:this.good,imageList:this.imgUrlList}).subscribe(res=>{
-      console.log(res)
+    this.goodService.update(this.good,this.imgUrlList).subscribe(res=>{
+      console.log(res);
       if(res["result"]==1){
         this.transBool();
         this.nzMessage.success(res["data"]);
@@ -179,12 +180,6 @@ export class GoodComponent implements OnInit{
    * 返回列表
    */
   back(){
-/*    let editor;
-    setTimeout(()=>{
-      editor = this.element.nativeElement.querySelector(".editor");
-      console.log(editor);
-      this.render.destroyNode(editor);
-    },0);*/
     if(this.isDetail){
       this.router.navigate(['../../good-list'],{relativeTo:this.route})
     }else {

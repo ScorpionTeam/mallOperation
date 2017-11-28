@@ -6,10 +6,12 @@ import {Http} from "../../../common/http/Http";
 import {isNull} from "util";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
+import {GoodService} from "../../../service/good/Good.service";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
-  styleUrls:["GoodList.component.css"]
+  styleUrls:["GoodList.component.css"],
+  providers:[GoodService]
 })
 
 export class GoodListComponent implements OnInit{
@@ -30,7 +32,7 @@ export class GoodListComponent implements OnInit{
   //是否展开
   isCollapse:boolean = false;
   idList:any=[];//id集合
-  constructor(private pageObj : PageService,private http:Http,private dataTool:DataTool,
+  constructor(private http:Http,private dataTool:DataTool,private goodService:GoodService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzService :NzModalService ,private nzMessage:NzMessageService){}
 
@@ -43,13 +45,12 @@ export class GoodListComponent implements OnInit{
    * 初始化
    */
   init(){
-    let url = 'backstage/good/findByCondition';
     let conditionObj:any={};
     conditionObj.pageNo = this.page.pageNo;
     conditionObj.pageSize = this.page.pageSize;
     /*数据初始化*/
     this.ngLoad=true;
-    this.http.post(url,conditionObj).subscribe(res=>{
+    this.goodService.pageList(conditionObj).subscribe(res=>{
         this.ngLoad=false;
         console.log(res)
         if(res["total"]!=0){
@@ -81,7 +82,8 @@ export class GoodListComponent implements OnInit{
     this.page.pageNo=val;
     this.condition.pageNo=this.page.pageNo;
     this.condition.pageSize=this.page.pageSize;
-    this.http.post('backstage/good/findByCondition',this.condition).subscribe(res=>{
+    this.condition.searchKey = this.searchKey;
+    this.goodService.pageList(this.condition).subscribe(res=>{
         this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
@@ -103,7 +105,8 @@ export class GoodListComponent implements OnInit{
     this.page.pageSize=val;
     this.condition.pageNo=this.page.pageNo;
     this.condition.pageSize=this.page.pageSize;
-    this.http.post('backstage/good/findByCondition',this.condition).subscribe(res=>{
+    this.condition.searchKey = this.searchKey;
+    this.goodService.pageList(this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -129,7 +132,7 @@ export class GoodListComponent implements OnInit{
     this.condition.pageNo=1;
     this.condition.searchKey=this.searchKey;
     this.condition.pageSize=this.page.pageSize;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.goodService.pageList(this.condition).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
