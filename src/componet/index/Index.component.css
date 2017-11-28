@@ -40,3 +40,19 @@
   overflow-y: scroll;
   width: calc(100% + 17px);
 }
+
+/*加载中*/
+.spin_warp{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top:0;
+  background: #fff;
+  opacity: 0.6;
+}
+.spin{
+  position: absolute;
+  top:50%;
+  width: 100%;
+  text-align: center;
+}
