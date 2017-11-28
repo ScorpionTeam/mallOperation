@@ -91,7 +91,6 @@ export class TicketComponent implements OnInit{
    */
   disabledEndDate=(endValue)=>{
     if(!this.ticket.start_date||!endValue){
-      console.log(1);
       return false
     }
     return endValue.getTime() <= this.ticket.start_date.getTime();
@@ -200,7 +199,7 @@ export class TicketComponent implements OnInit{
           this.nzMessage.warning(res['error'].message);
         }
         this.ticket.money = this.dataTool.fTransYuan(this.ticket.money);
-        this.ticket.reduceMoney = this.dataTool.fTransYuan(this.ticket.reduceMoney);
+        this.ticket.reduce_money = this.dataTool.fTransYuan(this.ticket.reduce_money);
         this.ticket.status = this.dataTool.strTransBool(this.ticket.status,'status');
         this.ticket.num_limit = this.dataTool.strTransBool(this.ticket.num_limit,'limit');
       },

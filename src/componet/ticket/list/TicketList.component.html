@@ -161,7 +161,7 @@
     <td nz-td>{{dataTool.fTransYuan(data.reduce_money)}}</td>
     <td nz-td>{{dataTool.fTransYuan(data.money)}}</td>
     <td nz-td>{{data.num}}</td>
-    <td nz-td [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="UN_NORMAL"?"删除":"正常"}}</td>
+    <td nz-td [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="NORMAL"?"正常":"删除"}}</td>
     <td nz-td class="ticket_list_action">
       <span><a (click)="skipToPage('/ticket-detail',data.id)">编辑</a></span>
     </td>

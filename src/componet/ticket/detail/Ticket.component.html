@@ -58,7 +58,7 @@
       <label nz-form-label nz-form-item-required >优惠金额</label>
     </div>
     <div nz-col [nzSpan]="13" [nzOffset]="1" nz-form-item>
-      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.reduce_money" [nzMin]="0" formControlName="reduce" (nzBlur)="justifyMoney(0,ticket.reduceMoney)">></nz-input-number>
+      <nz-input-number [nzSize]="'large'" [(ngModel)]="ticket.reduce_money" [nzMin]="0" formControlName="reduce" (nzBlur)="justifyMoney(0,ticket.reduce_money)">></nz-input-number>
     </div>
   </div>
   <div nz-row>

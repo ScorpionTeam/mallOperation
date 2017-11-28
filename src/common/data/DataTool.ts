@@ -136,6 +136,8 @@ export  class DataTool{
         return val?"WATER_REMARK":"NOT_WATER_REMARK";
       case "cut":
         return val?"CUT":"NOT_CUT";
+      case "limit":
+        return val?"LIMITED":"UN_LIMITED";
     }
   }
 
@@ -176,6 +178,8 @@ export  class DataTool{
         return val=="WATER_REMARK"?true:false;
       case "cut":
         return val=="CUT"?true:false;
+      case "limit":
+        return val=="LIMITED"?true:false;
     }
   }
 }

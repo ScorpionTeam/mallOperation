@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {Interceptor} from "../interceptor/interceptor";
 import {HttpHandler} from "@angular/common/http";
 import {HttpRequest} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class Http{
@@ -32,13 +33,15 @@ export class Http{
     let urls = this.httpData.Host+url;
     let request = new HttpRequest("GET",urls);
     let i = 1;
- /*   this.interceptor.intercept(request,this.next).subscribe(
+/*    this.interceptor.intercept(request,this.next).subscribe(
       res=>{
-        console.log(i++);
-        console.log(res);
+        if(res.type==0){
+          console.log("请求刚发出");
+        }else {
+          console.log(res);
+        }
       }
     );*/
-
     return this.http.get(urls);
   }
 
