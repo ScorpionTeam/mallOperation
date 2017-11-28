@@ -63,4 +63,14 @@ export class GoodService{
   update(goodObj,imgList){
     return this.http.post('backstage/good/update',{good:goodObj,imageList:imgList});
   }
+
+  /**
+   * 上、下架商品
+   * @param status
+   * @param idList
+   * @returns {Observable<Object>}
+   */
+  batchGoodDown(status,idList){
+    return this.http.post('backstage/good/batchModifySaleStatus',{saleStatus:status,goodsIdList:idList});
+  }
 }

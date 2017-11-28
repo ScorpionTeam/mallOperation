@@ -1,9 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NzModalService, NzMessageService} from "ng-zorro-antd";
-import {Http} from "../../../common/http/Http";
-import {isNull} from "util";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
 import {GoodService} from "../../../service/good/Good.service";
@@ -32,7 +29,7 @@ export class GoodListComponent implements OnInit{
   //是否展开
   isCollapse:boolean = false;
   idList:any=[];//id集合
-  constructor(private http:Http,private dataTool:DataTool,private goodService:GoodService,
+  constructor(private dataTool:DataTool,private goodService:GoodService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzService :NzModalService ,private nzMessage:NzMessageService){}
 
@@ -238,7 +235,7 @@ export class GoodListComponent implements OnInit{
       this.nzMessage.warning("请先选择商品");
       return;
     }
-    this.http.post('backstage/good/batchModifySaleStatus',{saleStatus:status,goodsIdList:this.idList}).subscribe(res=>{
+    this.goodService.batchGoodDown(status,this.idList).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.nzMessage.success(res["data"])
