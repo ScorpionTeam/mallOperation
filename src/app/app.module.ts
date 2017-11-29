@@ -40,6 +40,8 @@ import {RouterTool} from "../common/routertool/RouterTool";
 import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
 import {StoreModule} from "@ngrx/store";
 import {reducer}from"../state/reducer/index/StateApplaction"
+import {CategoryListComponent} from "../componet/category/list/CategoryList.component";
+import {CategoryComponent} from "../componet/category/detail/Category.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -65,7 +67,9 @@ import {reducer}from"../state/reducer/index/StateApplaction"
     MenuComponent,
     AdvertisementListComonent,
     AdvertisementComponent,
-    PersonalComponent
+    PersonalComponent,
+    CategoryListComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

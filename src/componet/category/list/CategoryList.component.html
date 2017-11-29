@@ -1,0 +1,53 @@
+<div class="search_tool">
+  <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"
+            [(ngModel)]="searchKey" [class]="'search_input'">
+    <ng-template #addOnAfter>
+      <i class="anticon anticon-search search" (click)="search()"></i>
+    </ng-template>
+  </nz-input>
+  <button nz-button [nzType]="'danger'" class="btn_search_tool  btn-danger" (click)="outStore()">
+    <span>停用</span>
+  </button>
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="inStore()">
+    <span>启用</span>
+  </button>
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="skipToPage('/category-add',route)">
+    <span>新增</span>
+  </button>
+</div>
+<nz-table #categoryTable [nzAjaxData]="categoryList" [nzPageSize]="page.pageSize"
+          [nzPageIndex]="page.pageNo" [nzLoading]="ngLoad"
+          [nzShowSizeChanger]="true" [nzShowTotal]="true" (nzPageIndexChange)="pageChangeHandler($event)"
+          [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
+  <thead nz-thead>
+  <tr>
+    <th nz-th [nzCheckbox]="true">
+      <label #checkboxAll nz-checkbox  [(ngModel)]="checkAll"  (ngModelChange)="selectItem(checkAll,categoryList,0)">
+      </label>
+    </th>
+    <th nz-th><span>类目名</span></th>
+    <th nz-th><span>排序</span></th>
+    <th nz-th><span>状态</span></th>
+    <th nz-th><span>创建时间</span></th>
+    <th nz-th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of categoryTable.data;let index = index;">
+    <td nz-td [nzCheckbox]="true">
+      <label #checkbox  nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="selectItem(data.checked,data.id,1,index)">
+      </label>
+    </td>
+    <td nz-td>{{data.category_name}}</td>
+    <td nz-td>{{data.sort}}</td>
+    <td nz-td  [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="NORMAL"?"正常":"删除"}}</td>
+    <td nz-td>{{data.create_date}}</td>
+    <td nz-td class="category_list_action">
+      <span><a (click)="skipToPage('/category-detail',route,data.id)">编辑</a></span>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+

@@ -22,6 +22,8 @@ import {AdvertisementListComonent} from "../componet/advertisement/list/Advertis
 import {AdvertisementComponent} from "../componet/advertisement/detail/Advertisement.component";
 import { PersonalComponent} from "../componet/user/person/PersonDetail.component";
 import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
+import {CategoryListComponent} from "../componet/category/list/CategoryList.component";
+import {CategoryComponent} from "../componet/category/detail/Category.component";
 
 const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full',},
@@ -52,7 +54,10 @@ const appRoute :Routes = [
       {path:'menu-list',component:MenuListComponent},
       {path:'menu-add',component:MenuComponent},
       {path:'menu-detail/:id',component:MenuComponent},
-      {path:'personal',component:PersonalComponent}
+      {path:'personal',component:PersonalComponent},
+      {path:'category-list',component:CategoryListComponent},
+      {path:'category-add',component:CategoryComponent},
+      {path:'category-detail/:id',component:CategoryComponent}
     ]},
   {path:'login',component:LoginComponent}
 ]
