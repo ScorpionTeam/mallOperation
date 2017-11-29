@@ -4,11 +4,12 @@ import {NzModalService, NzMessageService} from "ng-zorro-antd";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
 import {GoodService} from "../../../service/good/Good.service";
+import {CategoryService} from "../../../service/category/Category.service";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
   styleUrls:["GoodList.component.css"],
-  providers:[GoodService]
+  providers:[GoodService,CategoryService]
 })
 
 export class GoodListComponent implements OnInit{
@@ -23,19 +24,30 @@ export class GoodListComponent implements OnInit{
     pageSize:10,
     total:0
   };
-  //条件
-  condition:any={}
+  condition:any={};//条件
+  categoryList:any = [];
 
   //是否展开
   isCollapse:boolean = false;
   idList:any=[];//id集合
-  constructor(private dataTool:DataTool,private goodService:GoodService,
+  constructor(private dataTool:DataTool,private goodService:GoodService,private categoryService:CategoryService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzService :NzModalService ,private nzMessage:NzMessageService){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
     this.init();
+    this.getCategoryList();
+  }
+  /**
+   * 获取商品类目列表
+   */
+  getCategoryList(){
+    this.categoryService.findRootOrChildCategory("CHILD").subscribe(
+      res=>{
+        this.categoryList = res["list"];
+      }
+    )
   }
 
   /**

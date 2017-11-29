@@ -102,8 +102,7 @@
             </div>
             <div nz-form-control nz-col [nzSpan]="19">
               <nz-select [nzSize]="'large'" nzAllowClear [(ngModel)]="condition.categoryId"  [nzPlaceHolder]="'商品类目'"  [style.height]="'29px'" name="categoryId">
-                <nz-option [nzLabel]="'类目1'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'类目2'" [nzValue]="0"></nz-option>
+                <nz-option [nzLabel]="data.category_name" [nzValue]="data.id" *ngFor="let data of categoryList"></nz-option>
               </nz-select>
             </div>
           </div>

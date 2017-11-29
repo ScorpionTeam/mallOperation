@@ -6,12 +6,13 @@ import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 import {isUndefined} from "util";
 import {GoodService} from "../../../service/good/Good.service";
+import {CategoryService} from "../../../service/category/Category.service";
 
 @Component({
   selector:'good',
   templateUrl:"Good.component.html",
   styleUrls:["Good.component.css"],
-  providers:[GoodService]
+  providers:[GoodService,CategoryService]
 })
 
 export class GoodComponent implements OnInit{
@@ -55,10 +56,12 @@ export class GoodComponent implements OnInit{
   categoryList:any=[];//类目列表
   brandList:any=[];//品牌列表
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
-              private fb :FormBuilder,private https:Http,private dataTool:DataTool,private goodService:GoodService){}
+              private fb :FormBuilder,private https:Http,private dataTool:DataTool,
+              private categoryService:CategoryService,private goodService:GoodService){}
   ngOnInit(){
     this.init();
     this.createValidatorGroup();
+    this.getCategoryList();
   }
 
   /**
@@ -88,7 +91,11 @@ export class GoodComponent implements OnInit{
    * 获取商品类目列表
    */
   getCategoryList(){
-
+    this.categoryService.findRootOrChildCategory("CHILD").subscribe(
+      res=>{
+        this.categoryList = res["list"];
+      }
+    )
   }
 
   /**

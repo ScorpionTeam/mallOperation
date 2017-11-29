@@ -222,7 +222,7 @@
         <div nz-col [nzSpan]="8"  [nzOffset]="1" nz-form-control>
           <nz-select  [nzPlaceHolder]="'请选择'" [(ngModel)]="good.category_id" name="categoryId" formControlName="categoryId">
             <nz-option [nzLabel]="'请选择'" [nzValue]="0"></nz-option>
-            <nz-option [nzLabel]="'饮料'" [nzValue]="1"></nz-option>
+            <nz-option [nzLabel]="data.category_name" [nzValue]="data.id" *ngFor="let data of categoryList"></nz-option>
           </nz-select>
         </div>
       </div>
