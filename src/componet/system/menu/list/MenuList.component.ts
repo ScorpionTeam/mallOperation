@@ -3,9 +3,12 @@ import {Http} from "../../../../common/http/Http";
 import {Router, ActivatedRoute} from "@angular/router";
 import {RouterTool} from "../../../../common/routertool/RouterTool";
 import {DataTool} from "../../../../common/data/DataTool";
+import {MenuService} from "../../../../service/menu/Menu.service";
+import {NzMessageService} from "ng-zorro-antd";
 @Component({
   selector:"menu-list",
-  templateUrl:"MenuList.component.html"
+  templateUrl:"MenuList.component.html",
+  providers:[MenuService]
 })
 
 export class MenuListComponent implements OnInit{
@@ -20,7 +23,7 @@ export class MenuListComponent implements OnInit{
   checkAll:boolean=false;
   searchKey:string='';
   constructor(private http:Http,private routerTool:RouterTool,private route:ActivatedRoute,
-                private dataTool:DataTool){}
+                private dataTool:DataTool,private menuService:MenuService,private nzMessage:NzMessageService){}
   ngOnInit(){
     this.pageChangeHandler(1);
   }
@@ -29,9 +32,7 @@ export class MenuListComponent implements OnInit{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    this.http.get(url).subscribe(res=>{
+    this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
@@ -51,9 +52,7 @@ export class MenuListComponent implements OnInit{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    this.http.get(url).subscribe(res=>{
+    this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
@@ -75,9 +74,8 @@ export class MenuListComponent implements OnInit{
    */
   search(){
     this.ngLoad=true;
-    let url = 'backstage/menu/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    this.http.get(url).subscribe(res=>{
+    this.page.pageNo=1;
+    this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
@@ -140,5 +138,24 @@ export class MenuListComponent implements OnInit{
     console.log(this.idList);
   };
 
-
+  /**
+   * 删除菜单
+   * @param id
+   */
+  delMenu(id){
+    this.menuService.delMenu(id).subscribe(
+      res=>{
+        this.pageChangeHandler(1);
+        if(res["result"]==1){
+          this.nzMessage.success("删除成功");
+          this.pageChangeHandler(1);
+        }else {
+          this.nzMessage.warning(res["error"].message);
+        }
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
 }

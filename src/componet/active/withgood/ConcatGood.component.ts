@@ -339,7 +339,7 @@ export class  ConcatGoodComponent implements OnInit{
           this.pageChangeHandler(1);
           this.idList=[];//清空选中的id
         }else{
-          this.nzMessage.success("关联失败");
+          this.nzMessage.success(res["error"].message);
         }
       },
       err=>{

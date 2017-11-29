@@ -44,6 +44,9 @@
 .sta_del{
   color:red;
 }
+.sta_del:hover{
+   color: #ff0000;
+ }
 .sta_normal{
   color:#108ee9;
 }

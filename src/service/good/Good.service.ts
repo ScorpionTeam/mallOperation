@@ -1,5 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http} from "../../common/http/Http";
+import {isNull} from "util";
+import {isUndefined} from "util";
 @Injectable()
 export class GoodService{
   constructor(private http:Http){}
@@ -29,6 +31,9 @@ export class GoodService{
   pageConcatWithActivity(pageNo,pageSize,searchKey,condition?){
     let url = 'backstage/good/findForActivity?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+searchKey;
     for(let key in condition){
+      if(isNull(condition[key])||isUndefined(condition[key])){
+        continue;
+      }
       url+='&'+key+'='+condition[key];
     }
     return this.http.get(url);

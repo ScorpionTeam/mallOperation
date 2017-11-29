@@ -4,10 +4,12 @@ import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../../common/http/Http";
 import {DataTool} from "../../../../common/data/DataTool";
+import {MenuService} from "../../../../service/menu/Menu.service";
 
 @Component({
   selector:'menu-detail',
-  templateUrl:'Menu.component.html'
+  templateUrl:'Menu.component.html',
+  providers:[MenuService]
 })
 
 export class MenuComponent{
@@ -20,7 +22,7 @@ export class MenuComponent{
     pid:0
   };
   rootMenuList:any=[];
-  constructor(private route:ActivatedRoute,private router :Router,
+  constructor(private route:ActivatedRoute,private router :Router,private menuService:MenuService,
               private fb :FormBuilder, private nzMessage:NzMessageService,
               private http:Http,private dataTool:DataTool){}
   ngOnInit(){
@@ -35,8 +37,7 @@ export class MenuComponent{
   init(){
     this.isDetail = this.route.params['value'].id?true:false;
     if(this.isDetail){
-      let url = "backstage/menu/findById?id="+this.route.params['value'].id;
-      this.http.get(url).subscribe(res=>{
+      this.menuService.findMenuById(this.route.params["value"].id).subscribe(res=>{
         console.log(res);
         this.menu=res["data"];
         this.menu.bornDate = new Date(res["data"].bornDate);
@@ -67,10 +68,9 @@ export class MenuComponent{
    * 新增
    */
   add(){
-    let url = 'backstage/menu/add';
     //转换数据
     this.menu.status=this.dataTool.boolTransStr(this.menu.status,'status');
-    this.http.post(url,this.menu).subscribe(res=>{
+    this.menuService.add(this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.nzMessage.success("新建成功");
@@ -91,10 +91,9 @@ export class MenuComponent{
    * 修改
    */
   update(){
-    let url = 'backstage/menu/modify';
     //转换数据
     this.menu.status=this.dataTool.boolTransStr(this.menu.status,'status');
-    this.http.post(url,this.menu).subscribe(res=>{
+    this.menuService.update(this.menu).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.nzMessage.success("修改成功");
@@ -136,7 +135,7 @@ export class MenuComponent{
    * 寻找根节点菜单
    */
   findRootMenu(){
-    this.http.get("backstage/menu/findRootMenu").subscribe(
+    this.menuService.findRootMenu().subscribe(
       res=>{
         console.log(res);
         this.rootMenuList = res["data"];
