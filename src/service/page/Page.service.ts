@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {isUndefined} from "util";
 import {Http} from "../../common/http/Http";
+import {isNull} from "util";
 @Injectable()
 export class PageService{
   constructor(private http:Http){}
@@ -19,6 +20,23 @@ export class PageService{
        urls = url+'?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+key;
     }else {
       urls = url+'?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey=';
+    }
+    return this.http.get(urls);
+  }
+
+  /**
+   * 分页加载
+   * @param url
+   * @param condition
+   * @returns {Observable<Object>}
+   */
+  pageList(url,condition){
+    let urls = url;
+    for(let key in condition){
+      if(isNull(condition[key])||isUndefined(condition[key])){
+        continue;
+      }
+      urls = urls+"&"+key+"="+condition[key];
     }
     return this.http.get(urls);
   }

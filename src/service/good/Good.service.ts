@@ -2,10 +2,16 @@ import {Injectable} from "@angular/core";
 import {Http} from "../../common/http/Http";
 import {isNull} from "util";
 import {isUndefined} from "util";
+import {PageService} from "../page/Page.service";
 @Injectable()
 export class GoodService{
   constructor(private http:Http){}
 
+  /**
+   * 条件查询商品列表
+   * @param condition
+   * @returns {Observable<Object>}
+   */
   pageList(condition){
     let url = 'backstage/good/findByCondition';
     return this.http.post(url,condition);

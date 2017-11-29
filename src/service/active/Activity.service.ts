@@ -2,10 +2,11 @@ import {Injectable} from "@angular/core";
 import {Http} from "../../common/http/Http";
 import {isNull} from "util";
 import {isUndefined} from "util";
+import {PageService} from "../page/Page.service";
 @Injectable()
 export class  ActivityService{
 
-  constructor(private http:Http){}
+  constructor(private http:Http,private pageService:PageService){}
 
   /**
    * 分页查询
@@ -18,12 +19,13 @@ export class  ActivityService{
   pageList(pageNo,pageSize,searchKey,condition?){
     let url = 'backstage/activity/findByCondition?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+
       searchKey;
-    for(let key in condition){
+    return this.pageService.pageList(url,condition);
+/*    for(let key in condition){
       if(!isNull(condition[key]&&!isUndefined(condition[key]))){
         url+='&'+key+'='+condition[key];
       }
     }
-    return this.http.get(url);
+    return this.http.get(url);*/
   }
 
   /**
