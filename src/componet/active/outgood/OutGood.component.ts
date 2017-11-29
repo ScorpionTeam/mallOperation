@@ -6,17 +6,19 @@ import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {isUndefined} from "util";
 import {ActivityService} from "../../../service/active/Activity.service";
 import {GoodService} from "../../../service/good/Good.service";
+import {CategoryService} from "../../../service/category/Category.service";
 @Component({
   selector:'out-good-activity',
   templateUrl:'OutGood.component.html',
   styleUrls:['OutGood.component.css'],
-  providers:[ActivityService,GoodService]
+  providers:[ActivityService,GoodService,CategoryService]
 })
 
 export class OutGoodComponent implements OnInit{
   curActivity:any;//当前活动
   goodList:any=[];//商品列表
   activityList:any=[];//活动列表
+  categoryList:any=[];//类目列表
   isCollapse:boolean=false;
   ngLoad:boolean=false;
   checkAll:boolean = false;//全选
@@ -31,13 +33,15 @@ export class OutGoodComponent implements OnInit{
   picUrl:string = '';//图片公共地址
   condition:any={};//条件
   idList:any=[];//选中商品ID集合
-  constructor(private http:Http,private actService:ActivityService,private goodService:GoodService,
-              private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
+  constructor(private actService:ActivityService,private goodService:GoodService,
+              private categoryService:CategoryService, private router:Router,
+              private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzModal :NzModalService ,private nzMessage:NzMessageService){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
     this.getActivityList();
+    this.getCategoryList();
   }
   /**
    * 改变活动
@@ -314,6 +318,17 @@ export class OutGoodComponent implements OnInit{
       },
       err=>{
         console.log(err);
+      }
+    )
+  }
+
+  /**
+   * 获取类目列表
+   */
+  getCategoryList(){
+    this.categoryService.findRootOrChildCategory("CHILD").subscribe(
+      res=>{
+        this.categoryList = res["list"];
       }
     )
   }
