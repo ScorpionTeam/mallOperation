@@ -27,8 +27,8 @@ import {Router, ActivatedRoute} from "@angular/router";
 })
 
 export class LoginComponent implements  OnInit{
-  userName:any='15757135983';
-  password:any='123456';
+  userName:any;
+  password:any;
   validateForm :FormGroup;
 
   constructor(private fb:FormBuilder,private http:HttpClient,

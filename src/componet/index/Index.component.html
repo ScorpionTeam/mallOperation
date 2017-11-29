@@ -71,13 +71,14 @@
       <div class="sub_out">
         <nz-content class="sub_container">
           <router-outlet></router-outlet>
-<!--          <div class="spin_warp"></div>
-          <div class="spin">
-            <nz-spin [nzSize]="'large'"></nz-spin>
-          </div>-->
+
         </nz-content>
       </div>
     </nz-layout>
+    <div class="spin_warp" *ngIf="spinFlag|async"></div>
+    <div class="spin" *ngIf="spinFlag|async">
+      <nz-spin [nzSize]="'large'" [nzTip]="'加载中...'"></nz-spin>
+    </div>
   </nz-layout>
   <nz-footer style="text-align: center;">Ant Design ©2017 妆口袋</nz-footer>
 </nz-layout>

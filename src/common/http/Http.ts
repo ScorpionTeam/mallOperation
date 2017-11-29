@@ -10,20 +10,27 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map'
 import {NzMessageService} from "ng-zorro-antd";
 import {Router, ActivatedRoute} from "@angular/router";
+import {Store} from "@ngrx/store";
 
 @Injectable()
 export class Http{
   constructor(private http:HttpClient,private httpData:HttpData,private nzMessage:NzMessageService,
               private interceptor:Interceptor,private next :HttpHandler,private router:Router,
-              private route:ActivatedRoute){}
+              private route:ActivatedRoute,private store:Store<boolean>){}
 
   /**
    * Post请求
    */
   post(url,body?){
+    this.store.dispatch({type:"show"});
      let urls = this.httpData.Host+url;
      let headers = this.httpData.Header;
-      return this.http.post(urls,JSON.stringify(body),{headers:headers}).catch(
+      return this.http.post(urls,JSON.stringify(body),{headers:headers}).map(
+        res=>{
+          this.store.dispatch({type:"hide"});
+          return res;
+        }
+      ).catch(
         error=>{
           this.nzMessage.error("系统错误");
           return Observable.throw(error);
@@ -45,6 +52,7 @@ export class Http{
    * Get请求
    */
   get(url){
+    this.store.dispatch({type:"show"});
     let urls = this.httpData.Host+url;
     let request = new HttpRequest("GET",urls);
     let i = 1;
@@ -59,6 +67,7 @@ export class Http{
     );*/
     return this.http.get(urls).map(
       res=>{
+        this.store.dispatch({type:"hide"});
         return res;
       }
     ).catch(

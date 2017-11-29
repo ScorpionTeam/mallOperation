@@ -1,15 +1,24 @@
-import {Component} from "@angular/core";
+import {Component, OnInit,enableProdMode} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../common/http/Http";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+enableProdMode();
 @Component({
   selector:'index',
   templateUrl:'./Index.component.html',
   styleUrls:['./Index.component.css']
 })
-export class IndexComponent{
-  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,private http:Http){}
+export class IndexComponent implements OnInit{
+  constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,
+              private http:Http,private store:Store<boolean>){
+    this.spinFlag = this.store.select('loadFlag');
+  }
 
+  spinFlag:Observable<boolean>;
+  ngOnInit(){
+  }
   skipToPage(url){
     this.router.navigate([url],{relativeTo:this.route});
   }

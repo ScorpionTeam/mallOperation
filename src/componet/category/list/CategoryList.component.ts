@@ -3,6 +3,7 @@ import {RouterTool} from "../../../common/routertool/RouterTool";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../../service/category/Category.service";
 import {DataTool} from "../../../common/data/DataTool";
+import {Store} from "@ngrx/store";
 @Component({
   selector:'category-list',
   templateUrl:'CategoryList.component.html',
@@ -11,7 +12,7 @@ import {DataTool} from "../../../common/data/DataTool";
 
 export class CategoryListComponent implements OnInit{
   constructor( private routeTool:RouterTool,private route:ActivatedRoute,private categoryService:CategoryService,
-               private dataTool:DataTool ){}
+               private dataTool:DataTool){}
   ngOnInit(){
     this.pageChangeHandler(1);
   }
@@ -44,12 +45,7 @@ export class CategoryListComponent implements OnInit{
         this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
-      }
-    );
+      });
   }
 
   /**
@@ -64,12 +60,7 @@ export class CategoryListComponent implements OnInit{
         this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
-      }
-    );
+      });
   }
 
   /**
@@ -83,12 +74,7 @@ export class CategoryListComponent implements OnInit{
         this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
-      }
-    );
+      });
   }
   selectItem(flag,val,type,index?){
     if(type==1){
@@ -130,5 +116,6 @@ export class CategoryListComponent implements OnInit{
     }
     console.log(this.idList);
   };
+
 
 }
