@@ -19,7 +19,6 @@ export class ActivityComponent implements OnInit{
   validateForm:FormGroup;
   activity:any={
     status:true,
-    activity_type:'0',
     target:'3'
   };
   constructor(private fb:FormBuilder,private router:Router,private nzMessage:NzMessageService,
@@ -90,7 +89,7 @@ export class ActivityComponent implements OnInit{
     if(!this.validateForm.valid){
       this.nzMessage.warning("请将表单填写完整!");
       return;
-    }else  if(this.activity.activity_type=='1'&&(this.activity.number==0||isUndefined(this.activity.number))){
+    }else  if(this.activity.activity_type=='SPELL_GROUP'&&(this.activity.number==0||isUndefined(this.activity.number))){
       this.nzMessage.warning("请将表单填写完整!");
       return;
     }

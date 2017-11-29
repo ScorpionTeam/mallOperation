@@ -33,7 +33,7 @@ export class  ConcatGoodComponent implements OnInit{
   condition:any={};//条件
   idList:any=[];//选中商品ID集合
   nowDate:any;//当前时间
-  constructor(private http:Http,private actService:ActivityService,private goodService:GoodService,
+  constructor(private actService:ActivityService,private goodService:GoodService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzModal :NzModalService ,private nzMessage:NzMessageService){}
 
@@ -57,11 +57,7 @@ export class  ConcatGoodComponent implements OnInit{
           this.goodList = res["list"];
           this.page.total=res["total"];
         }
-      },
-      err=>{
-        console.log(err);
       });
-
   }
 
   /**
