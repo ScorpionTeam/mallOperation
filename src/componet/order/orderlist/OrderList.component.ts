@@ -1,17 +1,17 @@
 import {Component, OnInit} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
-import {isNull} from "util";
 import {isUndefined} from "util";
 import {Http} from "../../../common/http/Http";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
+import {OrderService} from "../../../service/order/Order.service";
 
 @Component({
   selector:"order-list",
   templateUrl:"./OrderList.component.html",
-  styleUrls:["./OrderList.component.css"]
+  styleUrls:["./OrderList.component.css"],
+  providers:[OrderService]
 })
 
 export class OrderListComponent implements OnInit{
@@ -31,7 +31,7 @@ export class OrderListComponent implements OnInit{
   failRemark:string;
   condition:any={};
   deliveryObj:any={};
-  constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
+  constructor(private orderService:OrderService,private router:Router,private http:Http,private PicUrl:HttpData,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,
               private  dataTool:DataTool){}
 
@@ -45,7 +45,7 @@ export class OrderListComponent implements OnInit{
    */
   init(){
     this.ngLoad=true;
-    this.http.post("backstage/order/findByCondition",{pageNo:1,pageSize:10}).subscribe(res=>{
+    this.orderService.pageList({pageNo:this.page.pageNo,pageSize:this.page.pageSize}).subscribe(res=>{
       console.log(res);
       this.ngLoad=false;
       if(res["total"]!=0){
@@ -55,9 +55,6 @@ export class OrderListComponent implements OnInit{
         this.orderList = res["list"];
         this.page.total = res["total"];
       }
-    },err=>{
-      console.log(err);
-      this.nzMessage.error("系统错误")
     })
   }
   /**
@@ -77,11 +74,10 @@ export class OrderListComponent implements OnInit{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/order/findByCondition';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.orderService.pageList(this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
@@ -90,21 +86,16 @@ export class OrderListComponent implements OnInit{
           this.orderList = res["list"];
           this.page.total = res["total"];
         }
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/order/findByCondition';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.orderService.pageList(this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
@@ -113,10 +104,6 @@ export class OrderListComponent implements OnInit{
           this.orderList = res["list"];
           this.page.total = res["total"];
         }
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
       });
   };
 
@@ -125,11 +112,10 @@ export class OrderListComponent implements OnInit{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/order/findByCondition';
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
     this.condition.searchKey = this.searchKey;
-    this.http.post(url,this.condition).subscribe(res=>{
+    this.orderService.pageList(this.condition).subscribe(res=>{
       console.log(res);
         this.ngLoad=false;
         if(res["total"]!=0){
@@ -139,10 +125,7 @@ export class OrderListComponent implements OnInit{
           this.orderList = res["list"];
           this.page.total = res["total"];
         }
-      },
-      err=>{
-        console.log(err);
-      });
+      })
   }
 
   /**
@@ -191,18 +174,17 @@ export class OrderListComponent implements OnInit{
       this.nzMessage.error("退款金额无法大于订单总额");
       return;
     }
-    this.http.post("backstage/order/audit/refund?orderId="+id+'&flag=1&remark=&refundFee='+this.returnMoney,null).subscribe(
+    this.orderService.areggReturnMoney(id,this.returnMoney).subscribe(
       res=>{
         console.log(res)
         if(res["result"]==1){
           this.returnMoney=0;
           this.pageChangeHandler(1);
         }
-      },
-      err=>{console.log(err)}
+      }
     )
   }
-  returnMoneyFailConfirm(id,content,title){
+  returnMoneyFailConfirm(id,content){
    let fail =  this.nzModal.confirm({
       title:"操作提示",
       content:content,
@@ -215,14 +197,13 @@ export class OrderListComponent implements OnInit{
   }
   returnMoneyFail(id){
     console.log(this.failRemark);
-    this.http.post("backstage/order/audit/refund?orderId="+id+'&flag=0&refundFee=0&remark='+this.failRemark,null).subscribe(
+    this.orderService.aginstReturnMoney(id,this.failRemark).subscribe(
       res=>{
-        console.log(res)
+        console.log(res);
         if(res["result"]==1){
           this.failRemark='';
         }
-      },
-      err=>{console.log(err)}
+      }
     )
   }
 
@@ -243,8 +224,7 @@ export class OrderListComponent implements OnInit{
       this.nzMessage.warning("请将表单填写完整");
       return;
     }
-    let url = "backstage/order/sendGood?orderId="+this.deliveryObj.orderId+"&deliveryNo="+this.deliveryObj.deliveryNo+"&expressName="+this.deliveryObj.expressName;
-    this.http.post(url).subscribe(
+    this.orderService.sendGood(this.deliveryObj.orderId,this.deliveryObj.deliveryNo,this.deliveryObj.expressName).subscribe(
       res=>{
         if(res["result"]==1){
           this.pageChangeHandler(1);
@@ -253,9 +233,6 @@ export class OrderListComponent implements OnInit{
         }else {
           this.nzMessage.warning(res["error"].message);
         }
-      },
-      err=>{
-        console.log(err);
       }
     )
   }
