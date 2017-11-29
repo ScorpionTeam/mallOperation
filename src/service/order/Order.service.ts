@@ -4,8 +4,20 @@ import {Http} from "../../common/http/Http";
 export class OrderService{
   constructor(private http:Http){}
 
-  findById(id){}
+  /**
+   * 根据ID查询订单详情
+   * @param id
+   */
+  findById(id){
+    let url ="backstage/order/findById?id="+id;
+    return this.http.get(url);
+  }
 
+  /**
+   * 分页查询
+   * @param condition
+   * @returns {Observable<R|T>}
+   */
   pageList(condition?){
     let url ="backstage/order/findByCondition";
     return this.http.post(url,condition);
@@ -42,5 +54,21 @@ export class OrderService{
   aginstReturnMoney(id,failRemark){
     let url = 'backstage/order/audit/refund?orderId='+id+'&flag=REFUSE&refundFee=0&remark='+failRemark;
     return this.http.post(url,null);
+  }
+
+  /**
+   * 修改订单
+   * @param orderObj
+   * @returns {Observable<R|T>}
+   */
+  update(orderObj){
+    let url = "backstage/order/modify";
+    return this.http.post(url,orderObj);
+  }
+
+  pageListOrderLog(pageNo,pageSize,id){
+    let url = 'backstage/order/findOrderLogByOrderId?orderId='+id+'&pageNo='
+      +pageNo+'&pageSize='+pageSize;
+    return this.http.get(url);
   }
 }
