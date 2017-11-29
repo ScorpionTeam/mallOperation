@@ -111,10 +111,6 @@ export class CategoryComponent implements OnInit{
           this.nzMessage.error(res["error"].message);
         }
         this.category.status = this.dataTool.strTransBool(this.category.status,'status');
-      },
-      err=>{
-        this.category.status = this.dataTool.strTransBool(this.category.status,'status');
-        console.log(err);
       }
     )
   }
@@ -137,9 +133,7 @@ export class CategoryComponent implements OnInit{
     this.categoryService.findRootCategory().subscribe(
       res=>{
         this.rootcategoryList = res["list"];
-
-      },
-      err=>{}
+      }
     );
   }
 }

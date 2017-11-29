@@ -5,12 +5,17 @@ import {Interceptor} from "../interceptor/interceptor";
 import {HttpHandler} from "@angular/common/http";
 import {HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map'
+import {NzMessageService} from "ng-zorro-antd";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Injectable()
 export class Http{
-  constructor(private http:HttpClient,private httpData:HttpData,
-              private interceptor:Interceptor,private next :HttpHandler){}
-
+  constructor(private http:HttpClient,private httpData:HttpData,private nzMessage:NzMessageService,
+              private interceptor:Interceptor,private next :HttpHandler,private router:Router,
+              private route:ActivatedRoute){}
 
   /**
    * Post请求
@@ -18,13 +23,23 @@ export class Http{
   post(url,body?){
      let urls = this.httpData.Host+url;
      let headers = this.httpData.Header;
-      return this.http.post(urls,JSON.stringify(body),{headers:headers});
+      return this.http.post(urls,JSON.stringify(body),{headers:headers}).catch(
+        error=>{
+          this.nzMessage.error("系统错误");
+          return Observable.throw(error);
+        }
+      );
   }
 
   /*上传图片*/
   postImg(url,body){
     let urls= this.httpData.Host+url;
-    return this.http.post(urls,body);
+    return this.http.post(urls,body).catch(
+      error=>{
+        this.nzMessage.error("系统错误");
+        return Observable.throw(error);
+      }
+    );
   }
   /**
    * Get请求
@@ -42,7 +57,19 @@ export class Http{
         }
       }
     );*/
-    return this.http.get(urls);
+    return this.http.get(urls).map(
+      res=>{
+        return res;
+      }
+    ).catch(
+      error=>{
+        //退出系统
+        /*this.router.navigateByUrl("login");
+        localStorage.removeItem("token");*/
+        this.nzMessage.error("系统错误");
+        return Observable.throw(error);
+      }
+    );
   }
 
 }

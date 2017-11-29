@@ -54,7 +54,7 @@ export class CategoryService{
    *查询根类目
    */
   findRootCategory(){
-    let url ='backstage/category/findByCondition?pageNo=1&pageSize=1000&type=0';
+    let url ='backstage/category1/findByCondition?pageNo=1&pageSize=1000&type=0';
     return this.http.get(url);
   }
 }
