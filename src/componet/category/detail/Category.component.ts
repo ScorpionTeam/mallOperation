@@ -130,7 +130,7 @@ export class CategoryComponent implements OnInit{
    * 查找根类目
    */
   findRootCategory(){
-    this.categoryService.findRootCategory().subscribe(
+    this.categoryService.findRootOrChildCategory("PARENT").subscribe(
       res=>{
         this.rootcategoryList = res["list"];
       }

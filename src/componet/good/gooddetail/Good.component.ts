@@ -45,14 +45,15 @@ export class GoodComponent implements OnInit{
   editObj:any={};//编辑行的对象
   isAddAttr:boolean=false;//是否新增
   isAddAttrValue:boolean=false;//是否新增属性值
-  /*规格模态*/
-  isAttrShow:boolean=false;
+  isAttrShow:boolean=false;//规格模态
   AttrModalTit:string;//模态标题
   modalObj:any={};//模态中的对象
   modalArray:any= [];//模态中的数组
   imgUrlList:any=[];
   initUrl:any;
   initLittleUrl:any=[];
+  categoryList:any=[];//类目列表
+  brandList:any=[];//品牌列表
   constructor(private route:ActivatedRoute,private router :Router,private nzMessage:NzMessageService,
               private fb :FormBuilder,private https:Http,private dataTool:DataTool,private goodService:GoodService){}
   ngOnInit(){
@@ -82,6 +83,14 @@ export class GoodComponent implements OnInit{
       });
     }
   }
+
+  /**
+   * 获取商品类目列表
+   */
+  getCategoryList(){
+
+  }
+
   /**
    * 保存
    */

@@ -51,10 +51,12 @@ export class CategoryService{
   /*修改类目状态*/
 
   /**
-   *查询根类目
+   * 查询根类目
+   * @param type :PARENT:父类目  CHILD:子类目
+   * @returns {Observable<R|T>}
    */
-  findRootCategory(){
-    let url ='backstage/category1/findByCondition?pageNo=1&pageSize=1000&type=0';
+  findRootOrChildCategory(type){
+    let url ='backstage/category/findByCondition?pageNo=1&pageSize=1000&type='+type;
     return this.http.get(url);
   }
 }
