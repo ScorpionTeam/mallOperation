@@ -5,17 +5,19 @@ import {HttpData} from "../../../http/HttpData";
 import {isUndefined} from "util";
 import {ActivityService} from "../../../service/active/Activity.service";
 import {GoodService} from "../../../service/good/Good.service";
+import {CategoryService} from "../../../service/category/Category.service";
 @Component({
   selector:"act-concat-good",
   templateUrl:"ConcatGood.component.html",
   styleUrls:["ConcatGood.component.css"],
-  providers:[ActivityService,GoodService]
+  providers:[ActivityService,GoodService,CategoryService]
 })
 
 export class  ConcatGoodComponent implements OnInit{
   curActivity:any;//当前活动
   goodList:any=[];//商品列表
   activityList:any=[];//活动列表
+  categoryList:any=[];//类目列表
   isCollapse:boolean=false;
   checkAll:boolean = false;//全选
   doCheckAll:boolean=false;//是否可以全选
@@ -29,7 +31,7 @@ export class  ConcatGoodComponent implements OnInit{
   condition:any={};//条件
   idList:any=[];//选中商品ID集合
   nowDate:any;//当前时间
-  constructor(private actService:ActivityService,private goodService:GoodService,
+  constructor(private actService:ActivityService,private goodService:GoodService,private categoryService:CategoryService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
               private nzModal :NzModalService ,private nzMessage:NzMessageService){}
 
@@ -39,6 +41,7 @@ export class  ConcatGoodComponent implements OnInit{
     this.nowDate = date.getTime();
     this.init();
     this.getActivityList();
+    this.getCategoryList();
   }
   /**
    * 初始化
@@ -66,6 +69,17 @@ export class  ConcatGoodComponent implements OnInit{
     }else{
       this.router.navigate([".."+name],{relativeTo:this.route});
     }
+  }
+
+  /**
+   * 获取类目列表
+   */
+  getCategoryList(){
+    this.categoryService.findRootOrChildCategory("CHILD").subscribe(
+      res=>{
+        this.categoryList = res["list"];
+      }
+    )
   }
 
   /**
