@@ -4,10 +4,12 @@ import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {DataTool} from "../../../common/data/DataTool";
+import {UserService} from "../../../service/user/User.service";
 
 @Component({
   selector:'personal',
-  templateUrl:'PersonDetail.component.html'
+  templateUrl:'PersonDetail.component.html',
+  providers:[UserService]
 })
 
 export class PersonalComponent{
@@ -17,7 +19,7 @@ export class PersonalComponent{
     sex:false
   };
 
-  constructor(private route:ActivatedRoute,private router :Router,
+  constructor(private route:ActivatedRoute,private router :Router,private userService:UserService,
               private fb :FormBuilder, private nzMessage:NzMessageService,
               private http:Http,private dataTool:DataTool){}
   ngOnInit(){
@@ -29,8 +31,7 @@ export class PersonalComponent{
    * 初始化
    */
   init(){
-    let url = "backstage/user/findById?id="+localStorage.getItem('id');
-    this.http.get(url).subscribe(res=>{
+    this.userService.findById(localStorage.getItem('id')).subscribe(res=>{
       console.log(res);
       this.person=res["data"];
       this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');
@@ -59,7 +60,7 @@ export class PersonalComponent{
     let url = 'backstage/user/modify';
     //转换数据
     this.person.sex=this.dataTool.boolTransStr(this.person.sex,'sex');
-    this.http.post(url,this.person).subscribe(res=>{
+    this.userService.update(this.person).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.person.sex=this.dataTool.strTransBool(this.person.sex,'sex');

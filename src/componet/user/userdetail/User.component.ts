@@ -4,11 +4,13 @@ import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {DataTool} from "../../../common/data/DataTool";
+import {UserService} from "../../../service/user/User.service";
 
 @Component({
   selector:'user-detail',
   templateUrl:'User.component.html',
   styleUrls:['User.component.css'],
+  providers:[UserService]
 })
 
 export class UserComponent{
@@ -22,7 +24,7 @@ export class UserComponent{
   };
 
   constructor(private route:ActivatedRoute,private router :Router,private dataTool:DataTool,
-              private fb :FormBuilder, private nzMessage:NzMessageService,
+              private fb :FormBuilder, private nzMessage:NzMessageService,private userService:UserService,
               private http:Http){}
   ngOnInit(){
     console.log(this.route.params['value'].id);
@@ -36,8 +38,7 @@ export class UserComponent{
   init(){
     this.isDetail = this.route.params['value'].id?true:false;
     if(this.isDetail){
-      let url = "backstage/user/findById?id="+this.route.params['value'].id;
-      this.http.get(url).subscribe(res=>{
+      this.userService.findById(this.route.params['value'].id).subscribe(res=>{
         console.log(res);
         this.user=res["data"];
         this.user.born_date = new Date(res["data"].born_date);
@@ -69,11 +70,10 @@ export class UserComponent{
    * 新增
    */
   add(){
-    let url = 'backstage/user/register';
     //转换数据
     this.user.status=this.dataTool.boolTransStr(this.user.status,'status');
     this.user.sex=this.dataTool.boolTransStr(this.user.sex,'sex');
-    this.http.post(url,this.user).subscribe(res=>{
+    this.userService.add(this.user).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.nzMessage.success("注册成功");
@@ -94,11 +94,10 @@ export class UserComponent{
    * 修改
    */
   update(){
-    let url = 'backstage/user/modify';
     //转换数据
     this.user.status=this.dataTool.boolTransStr(this.user.status,'status');
     this.user.sex=this.dataTool.boolTransStr(this.user.sex,'sex');
-    this.http.post(url,this.user).subscribe(res=>{
+    this.userService.update(this.user).subscribe(res=>{
       console.log(res);
       if(res["result"]==1){
         this.user.status = this.dataTool.strTransBool(this.user.status,'status');

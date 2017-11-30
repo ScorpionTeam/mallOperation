@@ -4,11 +4,13 @@ import {PageService} from "../../../service/page/Page.service";
 import {NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {DataTool} from "../../../common/data/DataTool";
+import {UserService} from "../../../service/user/User.service";
 
 @Component({
   selector:'user-list',
   templateUrl:'UserList.component.html',
-  styleUrls:['UserList.component.css']
+  styleUrls:['UserList.component.css'],
+  providers:[UserService]
 })
 
 export class UserListComponent{
@@ -22,7 +24,7 @@ export class UserListComponent{
   };
   idList:any=[];//id集合
   constructor(private pageObj : PageService,private http:Http,private dataTool:DataTool,
-              private router:Router,private route :ActivatedRoute,
+              private router:Router,private route :ActivatedRoute,private userService:UserService,
               private nzService :NzModalService ){
   }
 
@@ -35,9 +37,8 @@ export class UserListComponent{
    */
   init(){
     this.ngLoad=true;
-    let url = 'backstage/user/userList?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+this.searchKey;
     /*数据初始化*/
-    this.http.get(url).subscribe(res=>{
+    this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         console.log(res)
         this.ngLoad=false;
         this.userList = res["list"];
@@ -62,10 +63,9 @@ export class UserListComponent{
   }
   /*分页*/
   pageChangeHandler(val){
-    let url = 'backstage/user/userList';
     this.ngLoad=true;
     this.page.pageNo=val;
-    this.pageObj.pageChange(url,val,this.page.pageNo).subscribe(res=>{
+    this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -83,7 +83,7 @@ export class UserListComponent{
     let url = 'backstage/user/userList';
     this.ngLoad=true;
     this.page.pageSize=val;
-    this.pageObj.pageChange(url,this.page.pageSize,val).subscribe(res=>{
+    this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -104,7 +104,7 @@ export class UserListComponent{
     let url = 'backstage/user/userList';
     this.page.pageNo=1;
     this.ngLoad = true;
-    this.pageObj.pageChange(url,this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
+    this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -165,9 +165,16 @@ export class UserListComponent{
       title:"删除提醒",
       content:"确认进行删除吗?",
       maskClosable:false,
-      onOk:function(){
-        console.log("success");
+      onOk:()=>{
+        this.deleteHandler();
       }
     });
+  }
+
+  /**
+   * 删除执行函数
+   */
+  deleteHandler(){
+
   }
 }
