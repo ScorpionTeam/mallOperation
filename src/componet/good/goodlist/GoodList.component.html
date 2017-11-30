@@ -10,15 +10,12 @@
     <span>删除</span>
   </button>-->
   <button nz-button [nzType]="'danger'"  class="btn" (click)="batchGoodDown('OFF_SALE')">
-    <!--<i class="anticon anticon-close"></i>-->
     <span>下架</span>
   </button>
   <button nz-button [nzType]="'primary'" class="btn" (click)="batchGoodDown('ON_SALE')">
-    <!--<i class="anticon anticon-close"></i>-->
     <span>上架</span>
   </button>
   <button nz-button [nzType]="'primary'" class="btn" (click)="skipToPage('/good-add')">
-    <!--<i class="anticon anticon-plus"></i>-->
     <span>新增</span>
   </button>
   <a style="margin-left:8px;font-size:12px;" (click)="isCollapse =!isCollapse">

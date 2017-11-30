@@ -5,10 +5,12 @@ import {NzMessageService} from "ng-zorro-antd";
 import {Router, ActivatedRoute} from "@angular/router";
 import {DataTool} from "../../../common/data/DataTool";
 import {isUndefined} from "util";
+import {AdvertisementService} from "../../../service/advertisement/Advertisement.service";
 
 @Component({
  selector:'advertisement-detail',
-  templateUrl:'Advertisement.component.html'
+  templateUrl:'Advertisement.component.html',
+  providers:[AdvertisementService]
 })
 
 export class AdvertisementComponent implements OnInit{
@@ -19,7 +21,8 @@ export class AdvertisementComponent implements OnInit{
   initPicUrl:any;
   validateForm:FormGroup;
   constructor(private fb:FormBuilder,private http:Http,private nzMessage:NzMessageService,
-                private router:Router,private route:ActivatedRoute,private dataTool:DataTool){}
+              private advertisementService:AdvertisementService,private router:Router,
+              private route:ActivatedRoute,private dataTool:DataTool){}
   ngOnInit(){
     this.crateValidate();
     this.init();
@@ -27,7 +30,7 @@ export class AdvertisementComponent implements OnInit{
 
   init(){
     if(this.route.params["value"].id){
-      this.http.get("backstage/banner/findById?id="+this.route.params["value"].id).subscribe(
+      this.advertisementService.findById(this.route.params["value"].id).subscribe(
         res=>{
           if(res["result"]==1){
             this.banner = res["data"];
@@ -60,7 +63,7 @@ export class AdvertisementComponent implements OnInit{
    * 图片上传成功
    * @param val
    */
-  uploadSuccess(val){
+  uploadPic(val){
     this.banner.image_url = val[0].url;
     console.log(this.banner.image_url);
   }
@@ -68,7 +71,8 @@ export class AdvertisementComponent implements OnInit{
   /**
    * 图片删除成功
    */
-  delSuccess(){
+  delPic(val){
+    console.log("删除图片");
     this.banner.image_url = '';
   }
 
@@ -76,7 +80,7 @@ export class AdvertisementComponent implements OnInit{
    * 保存
    */
   save(){
-    if(isUndefined(this.banner.image_url)){
+    if(isUndefined(this.banner.image_url)||this.banner.image_url==''){
       this.nzMessage.warning("请上传图片");
       return;
     }else if(!this.validateForm.valid){
@@ -93,7 +97,7 @@ export class AdvertisementComponent implements OnInit{
 
   add(){
     this.banner.status = this.dataTool.boolTransStr(this.banner.status,'status');
-    this.http.post("backstage/banner/add",this.banner).subscribe(
+    this.advertisementService.add(this.banner).subscribe(
       res=>{
         console.log(res);
         this.banner.status = !this.dataTool.strTransBool(this.banner.status,'status');
@@ -111,7 +115,7 @@ export class AdvertisementComponent implements OnInit{
   }
   update(){
     this.banner.status = this.dataTool.boolTransStr(this.banner.status,'status');
-    this.http.post("backstage/banner/modify",this.banner).subscribe(
+    this.advertisementService.update(this.banner).subscribe(
       res=>{
         console.log(res);
         this.banner.status = this.dataTool.strTransBool(this.banner.status,'status');

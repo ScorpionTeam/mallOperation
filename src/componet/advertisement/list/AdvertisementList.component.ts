@@ -1,14 +1,12 @@
 import {Component} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
-import {Http} from "../../../common/http/Http";
-import {isUndefined} from "util";
-import {isNull} from "util";
 import {DataTool} from "../../../common/data/DataTool";
+import {AdvertisementService} from "../../../service/advertisement/Advertisement.service";
 @Component({
   selector:"banner-list",
-  templateUrl:"./AdvertisementList.component.html"
+  templateUrl:"./AdvertisementList.component.html",
+  providers:[AdvertisementService]
 })
 
 export class AdvertisementListComonent{
@@ -24,8 +22,9 @@ export class AdvertisementListComonent{
   condition:any={};
   idList:any=[];//批量操作id集合
   checkAll:boolean=false;
-  constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService){}
+  constructor(private router:Router,private dataTool:DataTool,
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,
+              private advertisementService:AdvertisementService){}
 
   ngOnInit(){
     this.init();
@@ -36,7 +35,7 @@ export class AdvertisementListComonent{
    */
   init(){
     this.ngLoad=true;
-    this.pageObj.pageChange("backstage/banner/list",1,10).subscribe(res=>{
+    this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
       this.ngLoad=false;
       if(res["total"]!=0){
@@ -68,14 +67,8 @@ export class AdvertisementListComonent{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/banner/list?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey= this.searchKey;
+    this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.bannerList = res["list"];
@@ -94,14 +87,8 @@ export class AdvertisementListComonent{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/banner/list?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey= this.searchKey;
+    this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.bannerList = res["list"];
@@ -122,14 +109,8 @@ export class AdvertisementListComonent{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/banner/list?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey= this.searchKey;
+    this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
         this.ngLoad=false;
         if(res["total"]!=0){
@@ -220,7 +201,7 @@ export class AdvertisementListComonent{
       this.nzMessage.warning("请勾选要开启/结束的活动");
       return
     }
-    this.http.post("backstage/banner/batchModifyStatus",{status:status,idList:this.idList}).subscribe(
+    this.advertisementService.changeBrandStatus({status:status,idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("操作成功");
