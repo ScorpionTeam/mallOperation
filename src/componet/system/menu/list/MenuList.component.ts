@@ -21,7 +21,7 @@ export class MenuListComponent implements OnInit{
   idList:any=[];
   checkAll:boolean=false;
   searchKey:string='';
-  constructor(private http:Http,private routerTool:RouterTool,private route:ActivatedRoute,
+  constructor(private http:Http,public routerTool:RouterTool,public route:ActivatedRoute,
                 private dataTool:DataTool,private menuService:MenuService,private nzMessage:NzMessageService){}
   ngOnInit(){
     this.pageChangeHandler(1);

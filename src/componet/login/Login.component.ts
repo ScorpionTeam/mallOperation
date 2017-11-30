@@ -3,9 +3,7 @@ import {FormBuilder, FormGroup,FormControl,Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {HttpData} from "../../http/HttpData";
 import {NzMessageService} from "ng-zorro-antd";
-import {HttpParams} from "@angular/common/http";
 import {Router, ActivatedRoute} from "@angular/router";
-import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector:"login",

@@ -2,20 +2,12 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export  class DataTool{
   constructor(){}
-/*
-  boolTransStr(val){
-    return val?'1':'0';
-  }
-  strTransBool(val){
-    return val=='1'?true:false;
-  }
-*/
 
   /**
    * 分转元
    * @param val
    */
-  fTransYuan(val){
+  fTransYuan(val:any){
     return (val/100);
   }
 
@@ -23,7 +15,7 @@ export  class DataTool{
    * 元转分
    * @param val
    */
-  yTransFen(val){
+  yTransFen(val:any){
     return (val*100);
   }
 
@@ -31,7 +23,7 @@ export  class DataTool{
    * 获取订单状态字符串
    * @param val
    */
-  getOrderStatusStr(val){
+  getOrderStatusStr(val:any){
     switch (val){
       case "UN_PAY":
         return "待付款";
@@ -56,7 +48,7 @@ export  class DataTool{
    * 获取订单类型字符串
    * @param val
    */
-  getOrderTypeStr(val){
+  getOrderTypeStr(val:any){
     switch (val){
       case "PC_ORDER":
         return "PC订单";
@@ -70,7 +62,7 @@ export  class DataTool{
    * @param val
    * @returns {any}
    */
-  getPayTypeStr(val){
+  getPayTypeStr(val:any){
     switch (val){
       case "ALI_PAY":
         return "支付宝";
@@ -87,7 +79,7 @@ export  class DataTool{
    * 获取活动类型
    * @param val
    */
-  getActivityType(val){
+  getActivityType(val:any){
     switch (val){
       case "SECONDS_KILL":
         return "秒杀";
@@ -114,7 +106,7 @@ export  class DataTool{
    *              water:水印
    *              cut:裁剪
    */
-  boolTransStr(val,flag){
+  boolTransStr(val:any,flag:any){
     switch (flag){
       case "status":
         return val?"NORMAL":"UN_NORMAL";
@@ -145,7 +137,7 @@ export  class DataTool{
    * 获取菜单类型
    * @param val
    */
-  getMenuType(val){
+  getMenuType(val:any){
     switch (val){
       case "PARENT_MENU":
         return"父菜单";
@@ -168,7 +160,7 @@ export  class DataTool{
    *              water:水印
    *              cut:裁剪
    */
-  strTransBool(val,flag){
+  strTransBool(val:string,flag:string){
     switch (flag){
       case "status":
         return val=="NORMAL"?true:false;

@@ -3,5 +3,5 @@ export interface Actions{
   playload?:any;
 }
 
-export const SHOW_LOADING = "show";
-export const HIDE_LOADING="hide";
+export const SHOW_LOADING:string = "show";
+export const HIDE_LOADING:string="hide";

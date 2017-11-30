@@ -10,7 +10,7 @@ import {DataTool} from "../../../common/data/DataTool";
 })
 
 export class CategoryListComponent implements OnInit{
-  constructor( private routeTool:RouterTool,private route:ActivatedRoute,private categoryService:CategoryService,
+  constructor( private routeTool:RouterTool,public route:ActivatedRoute,private categoryService:CategoryService,
                private dataTool:DataTool){}
   ngOnInit(){
     this.pageChangeHandler(1);

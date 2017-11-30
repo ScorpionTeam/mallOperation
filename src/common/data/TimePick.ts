@@ -9,7 +9,7 @@ export class TimePick{
    * @param endTime 结束时间
    * @returns {boolean}
    */
-  disableStartTime=(baseTime,endTime)=>{
+  disableStartTime=(baseTime:any,endTime:any)=>{
     if(!baseTime||!endTime){
       return false;
     }
@@ -21,7 +21,7 @@ export class TimePick{
    * @param baseTime  基准时间
    * @param startTime 开始时间
    */
-  disableEndTime=(baseTime,startTime)=>{
+  disableEndTime=(baseTime:any,startTime:any)=>{
     if(!startTime||!baseTime){
       return false
     }

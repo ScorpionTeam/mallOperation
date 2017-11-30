@@ -15,11 +15,13 @@ interface FlagState{
 })
 export class IndexComponent implements OnInit{
   spinFlag:Observable<boolean>;
+  name:string;
   constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,
               private http:Http,private store:Store<FlagState>){
     this.spinFlag = this.store.select('loadFlag');
   }
   ngOnInit(){
+    this.name = localStorage.getItem("name");
   }
   skipToPage(url){
     this.router.navigate([url],{relativeTo:this.route});

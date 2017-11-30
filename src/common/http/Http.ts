@@ -40,7 +40,7 @@ export class Http{
   }
 
   /*上传图片*/
-  postImg(url,body){
+  postImg(url:any,body:any){
     let urls= this.httpData.Host+url;
     //Todo:判断是否有token
     let headers = new HttpHeaders().append("auth","JSONID:94268");
@@ -51,7 +51,7 @@ export class Http{
       }
     );
   }
-  
+
   /**
    * Get请求
    */
