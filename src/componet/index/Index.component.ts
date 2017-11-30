@@ -39,9 +39,6 @@ export class IndexComponent implements OnInit{
       }else {
         this.nzMessage.error(res["error"].message);
       }
-    }),
-      err=>{
-       console.log("error="+err)
-      }
+    })
   }
 }

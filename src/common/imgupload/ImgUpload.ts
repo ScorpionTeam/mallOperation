@@ -10,8 +10,8 @@ import {HttpData} from "../../http/HttpData";
   styleUrls:["ImgUpload.css"]
 })
 export class ImgUpload implements OnInit,OnChanges{
-  @Input() type;//图片类型
-  @Input() alt;//图片alt
+  @Input() type:string;//图片类型
+  @Input() alt:string;//图片alt
   @Input() initUrl:any;//初始化地址
   @Output() uploadSuccess = new EventEmitter();//上传成功回调
   @Output() delSuccess = new EventEmitter();//删除图片成功回调

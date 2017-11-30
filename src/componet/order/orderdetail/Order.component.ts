@@ -62,7 +62,7 @@ export class OrderComponent implements OnInit{
    * 查看商品详情
    * @param id 商品id
    */
-  checkGoodDetail(id){
+  checkGoodDetail(id:any){
     this.router.navigate(["../../good-detail",id],{relativeTo:this.route});
   }
 
