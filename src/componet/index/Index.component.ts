@@ -5,18 +5,20 @@ import {Http} from "../../common/http/Http";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 enableProdMode();
+interface FlagState{
+  loadFlag:boolean;
+}
 @Component({
   selector:'index',
   templateUrl:'./Index.component.html',
   styleUrls:['./Index.component.css']
 })
 export class IndexComponent implements OnInit{
+  spinFlag:Observable<boolean>;
   constructor(private router :Router ,private route :ActivatedRoute,private nzMessage:NzMessageService,
-              private http:Http,private store:Store<boolean>){
+              private http:Http,private store:Store<FlagState>){
     this.spinFlag = this.store.select('loadFlag');
   }
-
-  spinFlag:Observable<boolean>;
   ngOnInit(){
   }
   skipToPage(url){

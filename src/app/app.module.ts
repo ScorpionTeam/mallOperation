@@ -79,7 +79,9 @@ import {CategoryComponent} from "../componet/category/detail/Category.component"
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    StoreModule.forRoot({loadFlag:reducer}),
+    StoreModule.forRoot({
+      loadFlag:reducer
+    }),
     CKEditorModule
   ],
   providers: [PageService,

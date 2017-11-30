@@ -2,10 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpHeaders} from "@angular/common/http";
 @Injectable()
 export class HttpData{
-  /*Host:string="http://192.168.0.123:8088/mall/";*/
+  Host:string="http://192.168.0.123:8088/mall/";
   /*Host:string="http://gjt2kt.natappfree.cc/mall/";*/
   /*Host:string="http://localhost:8088/mall/";*/
-  Host:string = "https://zjhkhl.com/mall/";
+  /*Host:string = "https://zjhkhl.com/mall/";*/
   Header:HttpHeaders;
   /*PicUrl:string = "http://ajijkh.natappfree.cc";*/
   PicUrl:string="https://zjhkhl.com";

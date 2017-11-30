@@ -1,16 +1,15 @@
 import {Component} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
-import {isUndefined} from "util";
-import {isNull} from "util";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
+import {BrandService} from "../../../service/brand/Brand.service";
 @Component({
   selector:"brand-list",
   templateUrl:"./BrandList.component.html",
-  styleUrls:["./BrandList.component.css"]
+  styleUrls:["./BrandList.component.css"],
+  providers:[BrandService]
 })
 
 export class BrandListComponent{
@@ -28,8 +27,8 @@ export class BrandListComponent{
     total:0
   };
   condition:any={};
-  constructor(private pageObj:PageService,private router:Router,private http:Http,private PicUrl:HttpData,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,
+  constructor(private router:Router,private PicUrl:HttpData,
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private brandService:BrandService,
               private dataTool:DataTool,private nzModal:NzModalService){}
 
   ngOnInit(){
@@ -42,7 +41,7 @@ export class BrandListComponent{
    */
   init(){
     this.ngLoad=true;
-    this.pageObj.pageChange("backstage/brand/findByCondition",1,10).subscribe(res=>{
+    this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
       this.ngLoad=false;
       if(res["total"]!=0){
@@ -52,9 +51,6 @@ export class BrandListComponent{
         this.brandList = res["list"];
         this.page.total = res["total"];
       }
-    },err=>{
-      console.log(err);
-      this.nzMessage.error("系统错误")
     })
   }
   /**
@@ -74,14 +70,8 @@ export class BrandListComponent{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/brand/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey=this.searchKey;
+    this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.brandList = res["list"];
@@ -92,24 +82,14 @@ export class BrandListComponent{
         }
         this.checkAll=false;
         this.idList=[];
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/brand/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey=this.searchKey;
+    this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.brandList = res["list"];
@@ -120,10 +100,6 @@ export class BrandListComponent{
         }
         this.checkAll=false;
         this.idList=[];
-      },
-      err=>{
-        this.ngLoad=false;
-        console.log(err);
       });
   };
 
@@ -132,14 +108,8 @@ export class BrandListComponent{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/brand/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey=this.searchKey;
+    this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
         this.ngLoad=false;
         if(res["total"]!=0){
@@ -151,9 +121,6 @@ export class BrandListComponent{
         }
         this.checkAll=false;
         this.idList=[];
-      },
-      err=>{
-        console.log(err);
       });
   }
 
@@ -236,7 +203,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要上架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'ENTER',idList:this.idList}).subscribe(
+    this.brandService.changeBrandStatus({status:'ENTER',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("上架成功");
@@ -258,7 +225,7 @@ export class BrandListComponent{
       this.nzMessage.warning("请先勾选要下架的品牌");
       return
     }
-    this.http.post("backstage/brand/batchModifyStatus",{status:'QUITE',idList:this.idList}).subscribe(
+    this.brandService.changeBrandStatus({status:'QUIT',idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("下架成功");

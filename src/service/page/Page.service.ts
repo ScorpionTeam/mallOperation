@@ -7,19 +7,20 @@ export class PageService{
   constructor(private http:Http){}
 
   /**
-   * 分页
+   * 分页(get请求)
    * @param url
    * @param pageNo
    * @param pageSize
    * @param key关键字
    * @returns {Observable<Object>}
    */
-  pageChange(url,pageNo,pageSize,key?){
-    let urls:any;
-    if(!isUndefined(key)){
-       urls = url+'?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+key;
-    }else {
-      urls = url+'?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey=';
+  pageChange(url,pageNo,pageSize,condition?){
+    let urls:any=url+'&pageNo='+pageNo+'&pageSize='+pageSize;
+    for(let key in condition){
+      if(isNull(condition[key])||isUndefined(condition[key])){
+        continue;
+      }
+      urls = urls+"&"+key+"="+condition[key];
     }
     return this.http.get(urls);
   }

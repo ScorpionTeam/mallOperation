@@ -3,7 +3,6 @@ import {RouterTool} from "../../../common/routertool/RouterTool";
 import {ActivatedRoute} from "@angular/router";
 import {CategoryService} from "../../../service/category/Category.service";
 import {DataTool} from "../../../common/data/DataTool";
-import {Store} from "@ngrx/store";
 @Component({
   selector:'category-list',
   templateUrl:'CategoryList.component.html',

@@ -6,13 +6,13 @@ import {NzMessageService} from "ng-zorro-antd";
 import {isUndefined} from "util";
 import {DataTool} from "../../../common/data/DataTool";
 import {isNull} from "util";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import {BrandService} from "../../../service/brand/Brand.service";
 
 @Component({
   selector:"brand-detail",
   templateUrl:"Brand.component.html",
-  styleUrls:["Brand.component.css"]
+  styleUrls:["Brand.component.css"],
+  providers:[BrandService]
 })
 
 export class BrandDetailComponent implements OnInit{
@@ -21,9 +21,9 @@ export class BrandDetailComponent implements OnInit{
   };
   initUrl:any;
   validateForm:FormGroup;
-  loadingFlag:Observable<boolean>;
   constructor(private fb:FormBuilder,private router:Router,private route:ActivatedRoute,
-              private http:Http,private  nzMessage :NzMessageService,private dataTool:DataTool){
+              private brandService:BrandService, private http:Http,
+              private  nzMessage :NzMessageService,private dataTool:DataTool){
     this.initFormValidate();
   }
 
@@ -36,7 +36,7 @@ export class BrandDetailComponent implements OnInit{
    */
   init(){
     if(this.route.params['value'].id){
-      this.http.get("backstage/brand/findById?id="+this.route.params['value'].id).subscribe(
+      this.brandService.findById(this.route.params['value'].id).subscribe(
         res=>{
           if(res['result']==1){
             this.brand = res['data'];
@@ -87,7 +87,7 @@ export class BrandDetailComponent implements OnInit{
    */
   add(){
     this.brand.status = this.dataTool.boolTransStr(this.brand.status,'quit');
-    this.http.post("backstage/brand/add",this.brand).subscribe(
+    this.brandService.add(this.brand).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("新增成功");
@@ -109,7 +109,7 @@ export class BrandDetailComponent implements OnInit{
    */
   update(){
     this.brand.status = this.dataTool.boolTransStr(this.brand.status,'quit');
-    this.http.post("backstage/brand/modify",this.brand).subscribe(
+    this.brandService.update(this.brand).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("修改成功");
