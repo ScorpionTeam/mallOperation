@@ -42,6 +42,7 @@ import {StoreModule} from "@ngrx/store";
 import {reducer}from"../state/reducer/index/StateApplaction"
 import {CategoryListComponent} from "../componet/category/list/CategoryList.component";
 import {CategoryComponent} from "../componet/category/detail/Category.component";
+import {TimePick} from "../common/data/TimePick";
 @NgModule({
   declarations: [
     HKeditor,
@@ -91,6 +92,7 @@ import {CategoryComponent} from "../componet/category/detail/Category.component"
                RouterTool,
               Interceptor,
                DataTool,
+              TimePick,
               { provide: NZ_MESSAGE_CONFIG, useValue: { nzMaxStack:1 }} ],
   bootstrap: [AppComponent]
 })

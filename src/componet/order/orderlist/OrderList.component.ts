@@ -6,6 +6,7 @@ import {Http} from "../../../common/http/Http";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
 import {OrderService} from "../../../service/order/Order.service";
+import {TimePick} from "../../../common/data/TimePick";
 
 @Component({
   selector:"order-list",
@@ -32,7 +33,7 @@ export class OrderListComponent implements OnInit{
   deliveryObj:any={};
   constructor(private orderService:OrderService,private router:Router,private http:Http,private PicUrl:HttpData,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,
-              private  dataTool:DataTool){}
+              private  dataTool:DataTool,private timePickTool:TimePick){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
@@ -126,22 +127,16 @@ export class OrderListComponent implements OnInit{
    * @returns {boolean}
    */
   disabledStartDate=(startValue)=>{
-    if(!startValue||!this.condition.endDate){
-      return false;
-    }
-    return startValue.getTime()>=this.condition.endDate.getTime();
-  }
+    return this.timePickTool.disableStartTime(startValue,this.condition.endDate);
+  };
   /**
    * 禁止结束时间
    * @param endValue
    * @returns {boolean}
    */
   disabledEndDate=(endValue)=>{
-    if(!this.condition.startDate||!endValue){
-      return false
-    }
-    return endValue.getTime() <= this.condition.startDate.getTime();
-  }
+    return this.timePickTool.disableEndTime(endValue,this.condition.startDate);
+  };
 
   /**
    *

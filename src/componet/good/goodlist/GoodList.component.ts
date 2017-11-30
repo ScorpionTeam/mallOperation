@@ -5,6 +5,7 @@ import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
 import {GoodService} from "../../../service/good/Good.service";
 import {CategoryService} from "../../../service/category/Category.service";
+import {TimePick} from "../../../common/data/TimePick";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
@@ -31,7 +32,7 @@ export class GoodListComponent implements OnInit{
   idList:any=[];//id集合
   constructor(private dataTool:DataTool,private goodService:GoodService,private categoryService:CategoryService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
-              private nzService :NzModalService ,private nzMessage:NzMessageService){}
+              private nzService :NzModalService ,private nzMessage:NzMessageService,private timePickTool:TimePick){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
@@ -211,10 +212,7 @@ export class GoodListComponent implements OnInit{
    * @returns {boolean}
    */
   disabledStartDate=(startValue)=>{
-    if(!startValue||!this.condition.endDate){
-      return false;
-    }
-    return startValue.getTime()>=this.condition.endDate.getTime();
+    return this.timePickTool.disableStartTime(startValue,this.condition.endDate);
   };
   /**
    * 禁止结束时间
@@ -222,10 +220,7 @@ export class GoodListComponent implements OnInit{
    * @returns {boolean}
    */
   disabledEndDate=(endValue)=>{
-    if(!this.condition.startDate||!endValue){
-      return false
-    }
-    return endValue.getTime() <= this.condition.startDate.getTime();
+    return this.timePickTool.disableEndTime(endValue,this.condition.startDate)
   };
 
   /**
