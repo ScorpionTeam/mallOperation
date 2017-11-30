@@ -5,10 +5,12 @@ import {Http} from "../../../common/http/Http";
 import {NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 import {isUndefined} from "util";
+import {TicketService} from "../../../service/ticket/Ticket.service";
 @Component({
   selector:"ticket-detail",
   templateUrl:"Ticket.component.html",
-  styleUrls:["Ticket.component.css"]
+  styleUrls:["Ticket.component.css"],
+  providers:[TicketService]
 })
 
 export class TicketComponent implements OnInit{
@@ -16,7 +18,8 @@ export class TicketComponent implements OnInit{
   validateForm:FormGroup;
   isDetail:boolean=false;
   constructor(private fb:FormBuilder,private router:Router,private dataTool:DataTool,
-              private route:ActivatedRoute,private http:Http,private nzMessage:NzMessageService){
+              private ticketService:TicketService, private route:ActivatedRoute,
+              private http:Http,private nzMessage:NzMessageService){
 
   }
 
@@ -100,7 +103,7 @@ export class TicketComponent implements OnInit{
    * 查找详情
    */
   detail(){
-    this.http.get("backstage/ticket/findById?id="+this.route.params['value'].id).subscribe(
+    this.ticketService.findById(this.route.params['value'].id).subscribe(
       res=>{
         console.log(res);
         if(res["result"]){
@@ -159,7 +162,7 @@ export class TicketComponent implements OnInit{
     this.ticket.num_limit = this.dataTool.boolTransStr(this.ticket.num_limit,'limit');
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduce_money = this.dataTool.yTransFen(this.ticket.reduce_money);
-    this.http.post('backstage/ticket/add',this.ticket).subscribe(
+    this.ticketService.add(this.ticket).subscribe(
       res=>{
         if(res["result"]==1){
           this.validateForm.reset();
@@ -191,7 +194,7 @@ export class TicketComponent implements OnInit{
     this.ticket.status = this.dataTool.boolTransStr(this.ticket.status,'status');
     this.ticket.money = this.dataTool.yTransFen(this.ticket.money);
     this.ticket.reduce_money = this.dataTool.yTransFen(this.ticket.reduce_money);
-    this.http.post('backstage/ticket/modify',this.ticket).subscribe(
+    this.ticketService.update(this.ticket).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("修改成功");

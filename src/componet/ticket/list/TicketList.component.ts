@@ -6,10 +6,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../../common/http/Http";
 import {DataTool} from "../../../common/data/DataTool";
+import {TicketService} from "../../../service/ticket/Ticket.service";
 @Component({
   selector:"ticket-list",
   templateUrl:"TicketList.component.html",
-  styleUrls:["TicketList.component.css"]
+  styleUrls:["TicketList.component.css"],
+  providers:[TicketService]
 })
 export class  TicketListComponent{
   ngLoad:boolean=false;//加载中标志
@@ -26,7 +28,7 @@ export class  TicketListComponent{
   };
   condition:any={};
   constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
-              private route:ActivatedRoute,private nzMessage:NzMessageService){}
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private ticketService:TicketService){}
 
   ngOnInit(){
     this.init();
@@ -37,7 +39,7 @@ export class  TicketListComponent{
    */
   init(){
     this.ngLoad=true;
-    this.pageObj.pageChange("backstage/ticket/findByCondition",1,10).subscribe(res=>{
+    this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
       this.ngLoad=false;
       if(res["total"]!=0){
@@ -69,14 +71,8 @@ export class  TicketListComponent{
   pageChangeHandler(val){
     this.ngLoad=true;
     this.page.pageNo=val;
-    let url = 'backstage/ticket/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey = this.searchKey;
+    this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.ticketList = res["list"];
@@ -95,14 +91,8 @@ export class  TicketListComponent{
   pageSizeChangeHandler(val){
     this.ngLoad=true;
     this.page.pageSize=val;
-    let url = 'backstage/ticket/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey = this.searchKey;
+    this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         this.ngLoad=false;
         if(res["total"]!=0){
           this.ticketList = res["list"];
@@ -123,14 +113,8 @@ export class  TicketListComponent{
    */
   search(){
     this.page.pageNo=1;
-    let url = 'backstage/ticket/findByCondition?pageNo='+this.page.pageNo+'&pageSize='+this.page.pageSize+'&searchKey='+
-      this.searchKey;
-    for(let key in this.condition){
-      if(!isNull(this.condition[key]&&!isUndefined(this.condition[key]))){
-        url+='&'+key+'='+this.condition[key];
-      }
-    }
-    this.http.get(url).subscribe(res=>{
+    this.condition.searchKey = this.searchKey;
+    this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
         this.ngLoad=false;
         if(res["total"]!=0){
@@ -217,27 +201,6 @@ export class  TicketListComponent{
     console.log(this.idList);
   };
 
-  /**
-   * 批量上架
-   */
-  inStore(){
-    if(this.idList.length==0){
-      this.nzMessage.warning("请先勾选要上架的品牌");
-      return
-    }
-    this.http.post("backstage/ticket/batchModifyStatus",{status:'1',idList:this.idList}).subscribe(
-      res=>{
-        if(res["result"]==1){
-          this.nzMessage.success("上架成功");
-          this.pageChangeHandler(1);
-          this.idList = [];
-        }
-      },
-      err=>{
-        console.log(err);
-      }
-    )
-  }
 
   /**
    * 批量删除
@@ -247,10 +210,11 @@ export class  TicketListComponent{
       this.nzMessage.warning("请先勾选要删除的优惠券");
       return
     }
-    this.http.post("backstage/ticket/batchDelete",{idList:this.idList}).subscribe(
+    this.ticketService.delTickets({idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("删除成功");
+          this.checkAll=false;
           this.pageChangeHandler(1);
           this.idList = [];
         }

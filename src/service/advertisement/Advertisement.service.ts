@@ -51,7 +51,7 @@ export class AdvertisementService{
    * @param inObj { status:"状态",idList:[]}
    * @returns {any}
    */
-  changeBrandStatus(inObj){
+  changeBannerStatus(inObj){
     let url ="backstage/banner/batchModifyStatus";
     return this.http.post(url,inObj);
   }

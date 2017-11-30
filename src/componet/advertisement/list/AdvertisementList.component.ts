@@ -201,7 +201,7 @@ export class AdvertisementListComonent{
       this.nzMessage.warning("请勾选要开启/结束的活动");
       return
     }
-    this.advertisementService.changeBrandStatus({status:status,idList:this.idList}).subscribe(
+    this.advertisementService.changeBannerStatus({status:status,idList:this.idList}).subscribe(
       res=>{
         if(res["result"]==1){
           this.nzMessage.success("操作成功");
