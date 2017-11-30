@@ -81,7 +81,7 @@ export class OrderComponent implements OnInit{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.ngLoad=true;
     this.page.pageNo=val;
     this.orderService.pageListOrderLog(this.page.pageNo,this.page.pageSize,this.route.params["value"].id).subscribe(res=>{
@@ -96,7 +96,7 @@ export class OrderComponent implements OnInit{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.ngLoad=true;
     this.page.pageSize=val;
     this.orderService.pageListOrderLog(this.page.pageNo,this.page.pageSize,this.route.params["value"].id).subscribe(res=>{

@@ -62,7 +62,7 @@ export class  ConcatGoodComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     console.log(name);
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
@@ -102,7 +102,7 @@ export class  ConcatGoodComponent implements OnInit{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     //拼接地址
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
@@ -126,7 +126,7 @@ export class  ConcatGoodComponent implements OnInit{
   };
 
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
@@ -175,7 +175,7 @@ export class  ConcatGoodComponent implements OnInit{
    * 比较时间
    * @param date
    */
-  compareDate(startDate,endDate){
+  compareDate(startDate:any,endDate:any){
     let sDate = new Date(startDate).getTime();
     let eDate = new Date(endDate).getTime();
     let now =new Date().getTime();
@@ -193,7 +193,7 @@ export class  ConcatGoodComponent implements OnInit{
    * @param stock 参加活动库存
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,stock?,index?){
+  selectItem(flag:any,val:any,type:any,stock?:any,index?:any){
     if(type==1){
       if(flag){
         //单选勾选操作
@@ -271,7 +271,7 @@ export class  ConcatGoodComponent implements OnInit{
    * @param allStock 总库存
    * @param index 序列号
    */
-  compareStock(inStock,allStock,index){
+  compareStock(inStock:any,allStock:any,index:any){
     console.log(this.goodList);
     if(Number(inStock)>allStock){
       this.goodList[index].inStock=0;
@@ -284,7 +284,7 @@ export class  ConcatGoodComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -296,7 +296,7 @@ export class  ConcatGoodComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       console.log(1);
       return false

@@ -1,6 +1,5 @@
 import {Router, ActivatedRoute} from "@angular/router";
 import {Injectable} from "@angular/core";
-import {isNull} from "util";
 import {isUndefined} from "util";
 
 @Injectable()
@@ -13,7 +12,7 @@ export class RouterTool{
    * @param route 当前route对象
    * @param val 路由参数
    */
-  skipToPage(url,route,val?){
+  skipToPage(url:string,route:ActivatedRoute,val?:any){
     if(!isUndefined(val)){
       this.router.navigate([".."+url,val],{relativeTo:route});
     }else {

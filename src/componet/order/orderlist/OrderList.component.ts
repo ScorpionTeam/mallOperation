@@ -60,7 +60,7 @@ export class OrderListComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -69,7 +69,7 @@ export class OrderListComponent implements OnInit{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
@@ -85,7 +85,7 @@ export class OrderListComponent implements OnInit{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
@@ -126,7 +126,7 @@ export class OrderListComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     return this.timePickTool.disableStartTime(startValue,this.condition.endDate);
   };
   /**
@@ -134,7 +134,7 @@ export class OrderListComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     return this.timePickTool.disableEndTime(endValue,this.condition.startDate);
   };
 
@@ -145,7 +145,7 @@ export class OrderListComponent implements OnInit{
    * @param totalFee
    * @param title
    */
-  returnMoneySuccessConfirm(id,content,totalFee,title){
+  returnMoneySuccessConfirm(id:any,content:any,totalFee:any,title:any){
     this.nzModal.confirm({
       title:title,
       content:content,
@@ -156,7 +156,7 @@ export class OrderListComponent implements OnInit{
       }
     })
   }
-  returnMoneySuccess(id,totalFee){
+  returnMoneySuccess(id:any,totalFee:any){
     if(this.returnMoney>totalFee){
       this.nzMessage.error("退款金额无法大于订单总额");
       return;
@@ -171,7 +171,7 @@ export class OrderListComponent implements OnInit{
       }
     )
   }
-  returnMoneyFailConfirm(id,content){
+  returnMoneyFailConfirm(id:any,content:any){
    let fail =  this.nzModal.confirm({
       title:"操作提示",
       content:content,
@@ -182,7 +182,7 @@ export class OrderListComponent implements OnInit{
       }
     });
   }
-  returnMoneyFail(id){
+  returnMoneyFail(id:any){
     console.log(this.failRemark);
     this.orderService.aginstReturnMoney(id,this.failRemark).subscribe(
       res=>{
@@ -198,7 +198,7 @@ export class OrderListComponent implements OnInit{
    * 打开模态
    * @param orderId
    */
-  openDeliveyModal(orderId){
+  openDeliveyModal(orderId:any){
     this.deliveryObj.orderId = orderId;
     this.isDeliveryShow=!this.isDeliveryShow;
   }
@@ -206,7 +206,7 @@ export class OrderListComponent implements OnInit{
    * 发货
    * @param orderId
    */
-  sendGoood(orderId){
+  sendGoood(orderId:any){
     if(isUndefined(this.deliveryObj['expressName'])||isUndefined(this.deliveryObj['deliveryNo'])){
       this.nzMessage.warning("请将表单填写完整");
       return;

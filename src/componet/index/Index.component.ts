@@ -23,7 +23,7 @@ export class IndexComponent implements OnInit{
   ngOnInit(){
     this.name = localStorage.getItem("name");
   }
-  skipToPage(url){
+  skipToPage(url:string){
     this.router.navigate([url],{relativeTo:this.route});
   }
   logout(){

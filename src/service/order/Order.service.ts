@@ -8,7 +8,7 @@ export class OrderService{
    * 根据ID查询订单详情
    * @param id
    */
-  findById(id){
+  findById(id:any){
     let url ="backstage/order/findById?id="+id;
     return this.http.get(url);
   }
@@ -18,7 +18,7 @@ export class OrderService{
    * @param condition
    * @returns {Observable<R|T>}
    */
-  pageList(condition?){
+  pageList(condition?:any){
     let url ="backstage/order/findByCondition";
     return this.http.post(url,condition);
   }
@@ -29,7 +29,7 @@ export class OrderService{
    * @param deliveryNo
    * @param expressName
    */
-  sendGood(orderId,deliveryNo,expressName){
+  sendGood(orderId:any,deliveryNo:any,expressName:any){
     let url = "backstage/order/sendGood?orderId="+orderId+"&deliveryNo="+deliveryNo+"&expressName="+expressName;
     return this.http.post(url,null);
   }
@@ -40,7 +40,7 @@ export class OrderService{
    * @param fee
    * @returns {Observable<R|T>}
    */
-  areggReturnMoney(id,fee){
+  areggReturnMoney(id:any,fee:any){
     let url = 'backstage/order/audit/refund?orderId='+id+'&flag=AGREE&remark=&refundFee='+fee;
     return this.http.post(url,null);
   }
@@ -51,7 +51,7 @@ export class OrderService{
    * @param failRemark
    * @returns {Observable<R|T>}
    */
-  aginstReturnMoney(id,failRemark){
+  aginstReturnMoney(id:any,failRemark:any){
     let url = 'backstage/order/audit/refund?orderId='+id+'&flag=REFUSE&refundFee=0&remark='+failRemark;
     return this.http.post(url,null);
   }
@@ -61,12 +61,12 @@ export class OrderService{
    * @param orderObj
    * @returns {Observable<R|T>}
    */
-  update(orderObj){
+  update(orderObj:any){
     let url = "backstage/order/modify";
     return this.http.post(url,orderObj);
   }
 
-  pageListOrderLog(pageNo,pageSize,id){
+  pageListOrderLog(pageNo:any,pageSize:any,id:any){
     let url = 'backstage/order/findOrderLogByOrderId?orderId='+id+'&pageNo='
       +pageNo+'&pageSize='+pageSize;
     return this.http.get(url);

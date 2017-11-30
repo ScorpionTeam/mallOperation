@@ -5,7 +5,7 @@
       <i class="anticon anticon-search search" (click)="search()"></i>
     </ng-template>
   </nz-input>
-  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="skipToPage('/category-add',route)">
+  <button nz-button [nzType]="'primary'" class="btn_search_tool" (click)="skipToPage('/category-add')">
     <span>新增</span>
   </button>
 </div>
@@ -39,7 +39,7 @@
     <td nz-td>{{data.parent_id==0?"父类目":"子类目"}}</td>
     <td nz-td>{{data.create_date}}</td>
     <td nz-td class="category_list_action">
-      <span><a (click)="skipToPage('/category-detail',route,data.id)">编辑</a></span>
+      <span><a (click)="skipToPage('/category-detail',data.id)">编辑</a></span>
     </td>
   </tr>
   </tbody>

@@ -9,7 +9,7 @@ export class TicketService{
    * @param ticketObj
    * @returns {Observable<R|T>}
    */
-  add(ticketObj){
+  add(ticketObj:any){
     let url="backstage/ticket/add";
     return this.http.post(url,ticketObj);
   }
@@ -19,7 +19,7 @@ export class TicketService{
    * @param ticketObj
    * @returns {Observable<R|T>}
    */
-  update(ticketObj){
+  update(ticketObj:any){
     let url="backstage/ticket/modify";
     return this.http.post(url,ticketObj);
   }
@@ -29,7 +29,7 @@ export class TicketService{
    * @param id
    * @returns {Observable<R|T>}
    */
-  findById(id){
+  findById(id:any){
     let url ="backstage/ticket/findById?id="+id;
     return this.http.get(url);
   }
@@ -41,7 +41,7 @@ export class TicketService{
    * @param condition
    * @returns {any}
    */
-  pageList(pageNo,pageSize,condition?){
+  pageList(pageNo:any,pageSize:any,condition?:any){
     let url = "backstage/ticket/findByCondition?pageNo="+pageNo+"&pageSize="+pageSize;
     return this.pageService.pageList(url,condition);
   }
@@ -51,7 +51,7 @@ export class TicketService{
    * @param idList
    * @returns {any}
    */
-  delTickets(idListObj){
+  delTickets(idListObj:any){
     let url = 'backstage/ticket/batchDelete';
     return this.http.post(url,idListObj);
   }

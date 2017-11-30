@@ -12,7 +12,7 @@ export class MenuService{
    * @param searchKey
    * @returns {Observable<Object>}
    */
-  pageList(pageNo,pageSize,searchKey?){
+  pageList(pageNo:any,pageSize:any,searchKey?:any){
     let url = 'backstage/menu/findByCondition?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+ searchKey;
     return this.http.get(url);
   }
@@ -22,7 +22,7 @@ export class MenuService{
    * @param id
    * @returns {Observable<Object>}
    */
-  findMenuById(id){
+  findMenuById(id:any){
     let url = "backstage/menu/findById?id="+id;
     return this.http.get(url);
   }
@@ -31,7 +31,7 @@ export class MenuService{
    * @param menuObj
    * @returns {Observable<Object>}
    */
-  add(menuObj){
+  add(menuObj:any){
     return this.http.post('backstage/menu/add',menuObj);
   }
 
@@ -40,7 +40,7 @@ export class MenuService{
    * @param menuObj
    * @returns {Observable<Object>}
    */
-  update(menuObj){
+  update(menuObj:any){
     return this.http.post('backstage/menu/modify',menuObj);
   }
 
@@ -57,7 +57,7 @@ export class MenuService{
    * @param id
    * @returns {Observable<Object>}
    */
-  delMenu(id){
+  delMenu(id:any){
     return this.http.get("backstage/menu/deleteById?id="+id);
   }
 }

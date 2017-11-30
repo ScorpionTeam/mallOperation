@@ -45,7 +45,7 @@ export class OutGoodComponent implements OnInit{
    * 改变活动
    * @param flag 打开开关
    */
-  changeActType(flag){
+  changeActType(flag:any){
     this.openFlag=!this.openFlag;
     if(flag){
       return;
@@ -76,7 +76,7 @@ export class OutGoodComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     console.log(name);
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
@@ -107,7 +107,7 @@ export class OutGoodComponent implements OnInit{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     //拼接地址
     this.condition.pageNo = this.page.pageNo;
@@ -135,7 +135,7 @@ export class OutGoodComponent implements OnInit{
   };
 
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     //拼接地址
     this.condition.pageNo = this.page.pageNo;
@@ -197,7 +197,7 @@ export class OutGoodComponent implements OnInit{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         //单选勾选操作
@@ -249,7 +249,7 @@ export class OutGoodComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -261,7 +261,7 @@ export class OutGoodComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       console.log(1);
       return false

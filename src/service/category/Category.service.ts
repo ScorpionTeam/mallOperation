@@ -11,7 +11,7 @@ export class CategoryService{
    * @param pageNo
    * @param searchKey
    */
-  pageList(pageNo,pageSize,searchKey?){
+  pageList(pageNo:any,pageSize:any,searchKey?:any){
     let url = 'backstage/category/findByCondition?pageNo='+pageNo+'&pageSize='+pageSize;
     let condition:any={};
     condition.searchKey= searchKey;
@@ -23,7 +23,7 @@ export class CategoryService{
    * @param categoryObj
    * @returns {Observable<Object>}
    */
-  add(categoryObj){
+  add(categoryObj:any){
     let url = 'backstage/category/add';
     return this.http.post(url,categoryObj);
   }
@@ -33,7 +33,7 @@ export class CategoryService{
    * @param categoryObj
    * @returns {Observable<Object>}
    */
-  update(categoryObj){
+  update(categoryObj:any){
     let url = 'backstage/category/modify';
     return this.http.post(url,categoryObj);
   }
@@ -43,7 +43,7 @@ export class CategoryService{
    * @param id
    * @returns {Observable<Object>}
    */
-  findById(id){
+  findById(id:any){
     let url = 'backstage/category/findById?id='+id;
     return this.http.get(url);
   }
@@ -55,7 +55,7 @@ export class CategoryService{
    * @param type :PARENT:父类目  CHILD:子类目
    * @returns {Observable<R|T>}
    */
-  findRootOrChildCategory(type){
+  findRootOrChildCategory(type:any){
     let url ='backstage/category/findByCondition?pageNo=1&pageSize=1000&type='+type;
     return this.http.get(url);
   }

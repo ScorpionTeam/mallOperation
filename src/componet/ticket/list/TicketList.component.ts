@@ -1,6 +1,4 @@
 import {Component} from "@angular/core";
-import {isUndefined} from "util";
-import {isNull} from "util";
 import {PageService} from "../../../service/page/Page.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd";
@@ -56,7 +54,7 @@ export class  TicketListComponent{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:any,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -65,7 +63,7 @@ export class  TicketListComponent{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.condition.searchKey = this.searchKey;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -82,7 +80,7 @@ export class  TicketListComponent{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.condition.searchKey = this.searchKey;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -125,7 +123,7 @@ export class  TicketListComponent{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -136,7 +134,7 @@ export class  TicketListComponent{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       console.log(1);
       return false
@@ -150,7 +148,7 @@ export class  TicketListComponent{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);

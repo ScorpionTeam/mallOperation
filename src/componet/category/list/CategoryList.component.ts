@@ -10,7 +10,7 @@ import {DataTool} from "../../../common/data/DataTool";
 })
 
 export class CategoryListComponent implements OnInit{
-  constructor( private routeTool:RouterTool,public route:ActivatedRoute,private categoryService:CategoryService,
+  constructor( private routeTool:RouterTool,private route:ActivatedRoute,private categoryService:CategoryService,
                private dataTool:DataTool){}
   ngOnInit(){
     this.pageChangeHandler(1);
@@ -27,15 +27,15 @@ export class CategoryListComponent implements OnInit{
   checkAll:boolean=false;
   rootcategoryList:any=[];
 
-  skipToPage(url,route,val?){
-    this.routeTool.skipToPage(url,route,val)
+  skipToPage(url:string,val?:any){
+    this.routeTool.skipToPage(url,this.route,val)
   }
 
   /**
    * 翻页
    * @param val
    */
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo = val;
     this.categoryService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(
       res=>{
@@ -48,7 +48,7 @@ export class CategoryListComponent implements OnInit{
    * 修改pageSize回调
    * @param val
    */
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize = val;
     this.categoryService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(
       res=>{
@@ -68,7 +68,7 @@ export class CategoryListComponent implements OnInit{
         this.page.total = res["total"];
       });
   }
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);

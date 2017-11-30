@@ -21,11 +21,11 @@ export class Http{
   /**
    * Post请求
    */
-  post(url,body?){
+  post(url:string,body?:any){
     this.store.dispatch({type:"show"});
-     let urls = this.httpData.Host+url;
+     let urls:string = this.httpData.Host+url;
     //Todo:判断是否有token
-     let headers = this.httpData.Header.append("auth","JSONID:94268");
+     let headers:HttpHeaders = this.httpData.Header.append("auth","JSONID:94268");
       return this.http.post(urls,JSON.stringify(body),{headers:headers}).map(
         res=>{
           this.store.dispatch({type:"hide"});
@@ -40,10 +40,10 @@ export class Http{
   }
 
   /*上传图片*/
-  postImg(url:any,body:any){
-    let urls= this.httpData.Host+url;
+  postImg(url:string,body:any){
+    let urls:string= this.httpData.Host+url;
     //Todo:判断是否有token
-    let headers = new HttpHeaders().append("auth","JSONID:94268");
+    let headers:HttpHeaders = new HttpHeaders().append("auth","JSONID:94268");
     return this.http.post(urls,body,{headers:headers}).catch(
       error=>{
         this.nzMessage.error("系统错误");
@@ -55,11 +55,11 @@ export class Http{
   /**
    * Get请求
    */
-  get(url){
+  get(url:string){
     this.store.dispatch({type:"show"});
-    let urls = this.httpData.Host+url;
+    let urls:string = this.httpData.Host+url;
     //Todo:判断是否有token
-    let headers = new HttpHeaders().append("auth","JSONID:94268");
+    let headers:HttpHeaders = new HttpHeaders().append("auth","JSONID:94268");
     return this.http.get(urls,{headers:headers}).map(
       res=>{
         this.store.dispatch({type:"hide"});

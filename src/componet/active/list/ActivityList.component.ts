@@ -51,7 +51,7 @@ export class ActivityListComponent{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -60,7 +60,7 @@ export class ActivityListComponent{
   }
 
   /*分页*/
-  pageChangeHandler(val) {
+  pageChangeHandler(val:any) {
     this.page.pageNo = val;
     this.service.pageList(this.page.pageNo, this.page.pageSize, this.searchKey, this.condition).subscribe(res => {
         if (res["total"] != 0) {
@@ -76,7 +76,7 @@ export class ActivityListComponent{
       });
   }
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.service.pageList(this.page.pageNo,this.page.pageSize,this.searchKey,this.condition).subscribe(res=>{
         if(res["total"]!=0){
@@ -116,7 +116,7 @@ export class ActivityListComponent{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -127,7 +127,7 @@ export class ActivityListComponent{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       console.log(1);
       return false
@@ -141,7 +141,7 @@ export class ActivityListComponent{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);
@@ -186,7 +186,7 @@ export class ActivityListComponent{
    * 改变活动状态
    * @param status
    */
-  changeActivityStatus(status){
+  changeActivityStatus(status:string){
     if(this.idList.length==0){
       this.nzMessage.warning("请勾选要开启/结束的活动");
       return

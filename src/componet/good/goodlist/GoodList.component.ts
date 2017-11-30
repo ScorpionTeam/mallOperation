@@ -75,7 +75,7 @@ export class GoodListComponent implements OnInit{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -83,7 +83,7 @@ export class GoodListComponent implements OnInit{
     }
   }
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     console.log(val);
     this.page.pageNo=val;
     this.condition.pageNo=this.page.pageNo;
@@ -104,7 +104,7 @@ export class GoodListComponent implements OnInit{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.condition.pageNo=this.page.pageNo;
     this.condition.pageSize=this.page.pageSize;
@@ -152,7 +152,7 @@ export class GoodListComponent implements OnInit{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);
@@ -211,7 +211,7 @@ export class GoodListComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     return this.timePickTool.disableStartTime(startValue,this.condition.endDate);
   };
   /**
@@ -219,14 +219,14 @@ export class GoodListComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     return this.timePickTool.disableEndTime(endValue,this.condition.startDate)
   };
 
   /**
    * 上、下架商品
    */
-  batchGoodDown(status){
+  batchGoodDown(status:any){
     if(this.idList.length==0){
       this.nzMessage.warning("请先选择商品");
       return;

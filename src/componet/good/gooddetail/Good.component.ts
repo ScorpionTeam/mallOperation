@@ -189,7 +189,7 @@ export class GoodComponent implements OnInit{
    * 获取富文本内容
    * @param richContent
    */
-  getRitchContent(richContent){
+  getRitchContent(richContent:any){
     this.good.rich_content = richContent;
   }
   /**
@@ -265,7 +265,7 @@ export class GoodComponent implements OnInit{
    * 新增规格
    * @param flag 0:新增规格，1:新增属性
    */
-  addAttr(flag){
+  addAttr(flag:any){
     if(flag==0){
       this.AttrModalTit = '规格新增';
       this.isAttrShow=true;
@@ -280,7 +280,7 @@ export class GoodComponent implements OnInit{
    * @param index
    * @param data
    */
-  editAttr(index,data){
+  editAttr(index:any,data:any){
     console.log(data);
       this.isAttrShow = !this.isAttrShow;
       this.AttrModalTit = '规格详情';
@@ -329,7 +329,7 @@ export class GoodComponent implements OnInit{
    * @param flag 0:规格 1:规格值
    * @param id
    */
-  delAttr(flag,index,id?){
+  delAttr(flag:any,index:any,id?:any){
       if(flag==0){
 
       }else {
@@ -473,7 +473,7 @@ export class GoodComponent implements OnInit{
    * 图片
    * @param flag 0:主图  1:小图
    */
-  imgUpload = (val,flag)=>{
+  imgUpload = (val:any,flag:any)=>{
     if(flag==0){
       this.good.main_image_url = val[0].url;
       this.imgUrlList.unshift(val[0]);
@@ -487,7 +487,7 @@ export class GoodComponent implements OnInit{
    * 删除图片
    * @param flag 0:主图  1:小图
    */
-  delPic(val,flag?){
+  delPic(val:any,flag?:any){
     console.log(val);
     let index ;
     for(let i in this.imgUrlList){

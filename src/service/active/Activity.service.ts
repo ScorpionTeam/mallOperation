@@ -16,7 +16,7 @@ export class  ActivityService{
    * @param condition
    * @returns {Observable<Object>}
    */
-  pageList(pageNo,pageSize,searchKey,condition?){
+  pageList(pageNo:any,pageSize:any,searchKey:any,condition?:any){
     let url = 'backstage/activity/findByCondition?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+
       searchKey;
     return this.pageService.pageList(url,condition);
@@ -33,7 +33,7 @@ export class  ActivityService{
    * @param id
    * @returns {Observable<Object>}
    */
-  detail(id){
+  detail(id:any){
     return this.http.get("backstage/activity/findById?id="+id);
   }
   /**
@@ -41,7 +41,7 @@ export class  ActivityService{
    * @param activityObj
    * @returns {Observable<Object>}
    */
-  add(activityObj){
+  add(activityObj:any){
     return this.http.post("backstage/activity/add",activityObj);
   }
 
@@ -50,7 +50,7 @@ export class  ActivityService{
    * @param activityObj
    * @returns {Observable<Object>}
    */
-  update(activityObj){
+  update(activityObj:any){
     return this.http.post("backstage/activity/modify",activityObj);
   }
 
@@ -60,7 +60,7 @@ export class  ActivityService{
    * @param goodIdList
    * @returns {Observable<Object>}
    */
-  concatGood(activityId,goodIdList){
+  concatGood(activityId:any,goodIdList:any){
     return this.http.post("backstage/activity/bindActivityWithGood",{activityId:activityId,goodList:goodIdList});
   }
 
@@ -70,7 +70,7 @@ export class  ActivityService{
    * @param goodIdList
    * @returns {Observable<Object>}
    */
-  unconcatGood(activiId,goodIdList){
+  unconcatGood(activiId:any,goodIdList:any){
     return this.http.post("backstage/activity/unbindActivityWithGood",{activityId:activiId,goodIdList:goodIdList});
   }
 }

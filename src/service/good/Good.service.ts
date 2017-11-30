@@ -12,7 +12,7 @@ export class GoodService{
    * @param condition
    * @returns {Observable<Object>}
    */
-  pageList(condition){
+  pageList(condition:any){
     let url = 'backstage/good/findByCondition';
     return this.http.post(url,condition);
   }
@@ -22,7 +22,7 @@ export class GoodService{
    * @param condition
    * @returns {Observable<Object>}
    */
-  pageByActivityId(condition){
+  pageByActivityId(condition:any){
     let url ='backstage/good/findByCondition';
     let conditionObj= condition||{};
     conditionObj.type='BIND_ACTIVITY';
@@ -37,7 +37,7 @@ export class GoodService{
    * @param condition
    * @returns {Observable<Object>}
    */
-  pageConcatWithActivity(pageNo,pageSize,searchKey,condition?){
+  pageConcatWithActivity(pageNo:any,pageSize:any,searchKey:any,condition?:any){
     let url = 'backstage/good/findByCondition';
     let conditionObj= condition||{};
     conditionObj.pageNo = pageNo;
@@ -52,7 +52,7 @@ export class GoodService{
    * @param goodId
    * @returns {Observable<Object>}
    */
-  detail(goodId){
+  detail(goodId:any){
     let url = "backstage/good/findById?id="+goodId;
     return this.http.get(url);
   }
@@ -63,7 +63,7 @@ export class GoodService{
    * @param imgList
    * @returns {Observable<Object>}
    */
-  add(goodObj,imgList){
+  add(goodObj:any,imgList:any){
     return this.http.post('backstage/good/add',{good:goodObj,imageList:imgList});
   }
 
@@ -73,7 +73,7 @@ export class GoodService{
    * @param imgList
    * @returns {Observable<Object>}
    */
-  update(goodObj,imgList){
+  update(goodObj:any,imgList:any){
     return this.http.post('backstage/good/update',{good:goodObj,imageList:imgList});
   }
 
@@ -83,7 +83,7 @@ export class GoodService{
    * @param idList
    * @returns {Observable<Object>}
    */
-  batchGoodDown(status,idList){
+  batchGoodDown(status:any,idList:any){
     return this.http.post('backstage/good/batchModifySaleStatus',{saleStatus:status,goodsIdList:idList});
   }
 }

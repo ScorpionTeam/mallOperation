@@ -52,7 +52,7 @@ export class AdvertisementListComonent{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -61,7 +61,7 @@ export class AdvertisementListComonent{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.condition.searchKey= this.searchKey;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -78,7 +78,7 @@ export class AdvertisementListComonent{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.condition.searchKey= this.searchKey;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -121,7 +121,7 @@ export class AdvertisementListComonent{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -132,7 +132,7 @@ export class AdvertisementListComonent{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       return false
     }
@@ -145,7 +145,7 @@ export class AdvertisementListComonent{
    * @param val 广告id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);
@@ -186,7 +186,7 @@ export class AdvertisementListComonent{
    * 改变广告状态
    * @param status
    */
-  changeBannerStatus(status){
+  changeBannerStatus(status:any){
     if(this.idList.length==0){
       this.nzMessage.warning("请勾选要开启/结束的活动");
       return

@@ -9,7 +9,7 @@ export class UserService{
    * @param userObj
    * @returns {Observable<R|T>}
    */
-  add(userObj){
+  add(userObj:any){
     let url="backstage/user/register";
     return this.http.post(url,userObj);
   }
@@ -19,7 +19,7 @@ export class UserService{
    * @param userObj
    * @returns {Observable<R|T>}
    */
-  update(userObj){
+  update(userObj:any){
     let url="backstage/user/modify";
     return this.http.post(url,userObj);
   }
@@ -29,7 +29,7 @@ export class UserService{
    * @param id
    * @returns {Observable<R|T>}
    */
-  findById(id){
+  findById(id:any){
     let url ="backstage/user/findById?id="+id;
     return this.http.get(url);
   }
@@ -41,7 +41,7 @@ export class UserService{
    * @param condition
    * @returns {any}
    */
-  pageList(pageNo,pageSize,condition?){
+  pageList(pageNo:any,pageSize:any,condition?:any){
     let url = "backstage/user/userList?pageNo="+pageNo+"&pageSize="+pageSize;
     return this.pageService.pageList(url,condition);
   }

@@ -51,7 +51,7 @@ export class UserListComponent{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -59,7 +59,7 @@ export class UserListComponent{
     }
   }
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
@@ -73,7 +73,7 @@ export class UserListComponent{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     let url = 'backstage/user/userList';
     this.page.pageSize=val;
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
@@ -113,7 +113,7 @@ export class UserListComponent{
    * @param val 用户id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(!flag._checked){
         this.idList.push(val);

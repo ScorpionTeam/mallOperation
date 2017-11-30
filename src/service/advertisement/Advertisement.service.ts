@@ -9,7 +9,7 @@ export class AdvertisementService{
    * @param bannerObj
    * @returns {Observable<R|T>}
    */
-  add(bannerObj){
+  add(bannerObj:any){
     let url="backstage/banner/add";
     return this.http.post(url,bannerObj);
   }
@@ -19,7 +19,7 @@ export class AdvertisementService{
    * @param bannerObj
    * @returns {Observable<R|T>}
    */
-  update(bannerObj){
+  update(bannerObj:any){
     let url="backstage/banner/modify";
     return this.http.post(url,bannerObj);
   }
@@ -29,7 +29,7 @@ export class AdvertisementService{
    * @param id
    * @returns {Observable<R|T>}
    */
-  findById(id){
+  findById(id:any){
     let url ="backstage/banner/findById?id="+id;
     return this.http.get(url);
   }
@@ -41,7 +41,7 @@ export class AdvertisementService{
    * @param condition
    * @returns {any}
    */
-  pageList(pageNo,pageSize,condition?){
+  pageList(pageNo:any,pageSize:any,condition?:any){
     let url = "backstage/banner/list?pageNo="+pageNo+"&pageSize="+pageSize;
     return this.pageService.pageList(url,condition);
   }
@@ -51,7 +51,7 @@ export class AdvertisementService{
    * @param inObj { status:"状态",idList:[]}
    * @returns {any}
    */
-  changeBannerStatus(inObj){
+  changeBannerStatus(inObj:any){
     let url ="backstage/banner/batchModifyStatus";
     return this.http.post(url,inObj);
   }

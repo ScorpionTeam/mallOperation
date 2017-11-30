@@ -55,7 +55,7 @@ export class BrandListComponent{
    * @param name
    * @param val
    */
-  skipToPage(name,val?){
+  skipToPage(name:string,val?:any){
     if(val){
       this.router.navigate([".."+name,val],{relativeTo:this.route});
     }else{
@@ -64,7 +64,7 @@ export class BrandListComponent{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.condition.searchKey=this.searchKey;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -80,7 +80,7 @@ export class BrandListComponent{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.condition.searchKey=this.searchKey;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
@@ -121,7 +121,7 @@ export class BrandListComponent{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.condition.endDate){
       return false;
     }
@@ -132,7 +132,7 @@ export class BrandListComponent{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.condition.startDate||!endValue){
       console.log(1);
       return false
@@ -146,7 +146,7 @@ export class BrandListComponent{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);

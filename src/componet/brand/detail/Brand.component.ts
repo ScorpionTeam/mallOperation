@@ -138,7 +138,7 @@ export class BrandDetailComponent implements OnInit{
    * 上传图片成功
    * @param val
    */
-  uploadPicSuccess(val){
+  uploadPicSuccess(val:any){
     console.log(val);
     this.brand.brand_image = val[0].url;
   }
@@ -147,7 +147,7 @@ export class BrandDetailComponent implements OnInit{
    * 删除图片成功
    * @param val
    */
-  delPicSuccess(val){
+  delPicSuccess(val:any){
     console.log(val);
     this.brand.brand_image="";
   }

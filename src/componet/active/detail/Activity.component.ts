@@ -135,7 +135,7 @@ export class ActivityComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.activity.end_date){
       return false;
     }
@@ -147,7 +147,7 @@ export class ActivityComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.activity.start_date||!endValue){
       return false
     }

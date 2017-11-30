@@ -52,7 +52,7 @@ export class ImgUpload implements OnInit,OnChanges{
    * 选取图片尺寸
    * @param val
    */
-  selectImgSize(val){
+  selectImgSize(val:any){
     for(let index in val){
       let i = this.imgObj.cutSizeList.indexOf(val[index]["value"]);
       if(val[index]["checked"]){
@@ -73,7 +73,7 @@ export class ImgUpload implements OnInit,OnChanges{
   /**
    * 图片
    */
-  imgUpload = (val)=>{
+  imgUpload = (val:any)=>{
     if(this.imgObj.watermark&&this.imgObj.cut&&this.imgObj.cutSizeList.length==0){
       this.nzMessage.warning("添加水印必须选择裁剪尺寸!");
       return;
@@ -106,7 +106,7 @@ export class ImgUpload implements OnInit,OnChanges{
    * 图片预览函数
    * @param url
    */
-  previewPic(url){
+  previewPic(url:string){
     this.isUpload = !this.isUpload;
     this.imgPreview =this.httpData.PicUrl+ url;
   }

@@ -10,7 +10,7 @@ export class BrandService{
    * @param brandObj
    * @returns {Observable<R|T>}
    */
-  add(brandObj){
+  add(brandObj:any){
     let url="backstage/brand/add";
     return this.http.post(url,brandObj);
   }
@@ -20,7 +20,7 @@ export class BrandService{
    * @param brandObj
    * @returns {Observable<R|T>}
    */
-  update(brandObj){
+  update(brandObj:any){
     let url="backstage/brand/modify";
     return this.http.post(url,brandObj);
   }
@@ -30,7 +30,7 @@ export class BrandService{
    * @param id
    * @returns {Observable<R|T>}
    */
-  findById(id){
+  findById(id:any){
     let url ="backstage/brand/findById?id="+id;
     return this.http.get(url);
   }
@@ -42,7 +42,7 @@ export class BrandService{
    * @param condition
    * @returns {any}
    */
-  pageList(pageNo,pageSize,condition){
+  pageList(pageNo:any,pageSize:any,condition:any){
     let url = "backstage/brand/findByCondition?pageNo="+pageNo+"&pageSize="+pageSize;
     return this.pageService.pageList(url,condition);
   }
@@ -52,7 +52,7 @@ export class BrandService{
    * @param inObj { status:"状态",idList:[]}
    * @returns {any}
    */
-  changeBrandStatus(inObj){
+  changeBrandStatus(inObj:any){
     let url ="backstage/brand/batchModifyStatus";
     return this.http.post(url,inObj);
   }

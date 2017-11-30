@@ -14,7 +14,7 @@ export class PageService{
    * @param key关键字
    * @returns {Observable<Object>}
    */
-  pageChange(url,pageNo,pageSize,condition?){
+  pageChange(url:any,pageNo:any,pageSize:any,condition?:any){
     let urls:any=url+'&pageNo='+pageNo+'&pageSize='+pageSize;
     for(let key in condition){
       if(isNull(condition[key])||isUndefined(condition[key])){
@@ -31,7 +31,7 @@ export class PageService{
    * @param condition
    * @returns {Observable<Object>}
    */
-  pageList(url,condition){
+  pageList(url:any,condition:any){
     let urls = url;
     for(let key in condition){
       if(isNull(condition[key])||isUndefined(condition[key])){

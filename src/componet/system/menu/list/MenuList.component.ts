@@ -28,7 +28,7 @@ export class MenuListComponent implements OnInit{
   }
 
   /*分页*/
-  pageChangeHandler(val){
+  pageChangeHandler(val:any){
     this.page.pageNo=val;
     this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         if(res["total"]!=0){
@@ -45,7 +45,7 @@ export class MenuListComponent implements OnInit{
       });
   };
   /*size改变*/
-  pageSizeChangeHandler(val){
+  pageSizeChangeHandler(val:any){
     this.page.pageSize=val;
     this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         if(res["total"]!=0){
@@ -87,7 +87,7 @@ export class MenuListComponent implements OnInit{
    * @param val 商品id
    * @param type 类型 0:全选，1:单选
    */
-  selectItem(flag,val,type,index?){
+  selectItem(flag:any,val:any,type:any,index?:any){
     if(type==1){
       if(flag){
         this.idList.push(val);
@@ -132,7 +132,7 @@ export class MenuListComponent implements OnInit{
    * 删除菜单
    * @param id
    */
-  delMenu(id){
+  delMenu(id:any){
     this.menuService.delMenu(id).subscribe(
       res=>{
         this.pageChangeHandler(1);

@@ -36,7 +36,7 @@ export class TicketComponent implements OnInit{
    * @param flag 类型 0:优惠金额 1:总金额
    * @param val
    */
-  justifyMoney(flag,val){
+  justifyMoney(flag:any,val:any){
     console.log(val);
     if(flag==0){
       if(val<0||isUndefined(val)){
@@ -81,7 +81,7 @@ export class TicketComponent implements OnInit{
    * @param startValue
    * @returns {boolean}
    */
-  disabledStartDate=(startValue)=>{
+  disabledStartDate=(startValue:any)=>{
     if(!startValue||!this.ticket.end_date){
       return false;
     }
@@ -92,7 +92,7 @@ export class TicketComponent implements OnInit{
    * @param endValue
    * @returns {boolean}
    */
-  disabledEndDate=(endValue)=>{
+  disabledEndDate=(endValue:any)=>{
     if(!this.ticket.start_date||!endValue){
       return false
     }

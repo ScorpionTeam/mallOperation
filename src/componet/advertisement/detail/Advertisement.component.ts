@@ -63,7 +63,7 @@ export class AdvertisementComponent implements OnInit{
    * 图片上传成功
    * @param val
    */
-  uploadPic(val){
+  uploadPic(val:any){
     this.banner.image_url = val[0].url;
     console.log(this.banner.image_url);
   }
@@ -71,8 +71,7 @@ export class AdvertisementComponent implements OnInit{
   /**
    * 图片删除成功
    */
-  delPic(val){
-    console.log("删除图片");
+  delPic(){
     this.banner.image_url = '';
   }
 
