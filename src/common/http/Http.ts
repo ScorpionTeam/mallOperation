@@ -51,6 +51,7 @@ export class Http{
       }
     );
   }
+  
   /**
    * Get请求
    */

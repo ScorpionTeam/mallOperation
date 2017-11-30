@@ -28,6 +28,7 @@
     <th nz-th><span>类目名</span></th>
     <th nz-th><span>排序</span></th>
     <th nz-th><span>状态</span></th>
+    <th nz-th><span>类型</span></th>
     <th nz-th><span>创建时间</span></th>
     <th nz-th><span>操作</span></th>
   </tr>
@@ -41,6 +42,7 @@
     <td nz-td>{{data.category_name}}</td>
     <td nz-td>{{data.sort}}</td>
     <td nz-td  [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="NORMAL"?"正常":"删除"}}</td>
+    <td nz-td>{{data.parent_id==0?"父类目":"子类目"}}</td>
     <td nz-td>{{data.create_date}}</td>
     <td nz-td class="category_list_action">
       <span><a (click)="skipToPage('/category-detail',route,data.id)">编辑</a></span>

@@ -5,6 +5,7 @@ import {HttpData} from "../../http/HttpData";
 import {NzMessageService} from "ng-zorro-antd";
 import {HttpParams} from "@angular/common/http";
 import {Router, ActivatedRoute} from "@angular/router";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector:"login",
@@ -56,12 +57,12 @@ export class LoginComponent implements  OnInit{
    */
   login(){
     if(this.validateForm.valid){
-      let url = this.httpData.Host+'backstage/user/login';
-      let params = new HttpParams().set("mobile",this.userName).set("password",this.password);
-      this.http.post(url,null,{params:params}).subscribe(res=>{
+      let url = this.httpData.Host+'backstage/user/login?mobile='+this.userName+'&password='+this.password;
+      this.http.post(url,null).subscribe(res=>{
         if(res["result"]==1){
           this.router.navigate(['./index'])
           localStorage.setItem("token",res["data"].token);
+          localStorage.setItem("name",res["data"].name);
           localStorage.setItem("mobile",this.userName);
           localStorage.setItem("id",res["data"].id);
           localStorage.setItem("city",res["data"].city);
