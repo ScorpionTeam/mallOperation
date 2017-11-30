@@ -24,6 +24,8 @@ import { PersonalComponent} from "../componet/user/person/PersonDetail.component
 import {MenuComponent} from "../componet/system/menu/detail/Menu.component";
 import {CategoryListComponent} from "../componet/category/list/CategoryList.component";
 import {CategoryComponent} from "../componet/category/detail/Category.component";
+import {RoleListComponent} from "../componet/system/role/list/RoleList.component";
+import {RoleComponent} from "../componet/system/role/detail/Role.component";
 
 const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full',},
@@ -57,7 +59,10 @@ const appRoute :Routes = [
       {path:'personal',component:PersonalComponent},
       {path:'category-list',component:CategoryListComponent},
       {path:'category-add',component:CategoryComponent},
-      {path:'category-detail/:id',component:CategoryComponent}
+      {path:'category-detail/:id',component:CategoryComponent},
+      {path:'role-list',component:RoleListComponent},
+      {path:'role-add',component:RoleComponent},
+      {path:'role-detail/:id',component:RoleComponent}
     ]},
   {path:'login',component:LoginComponent}
 ]

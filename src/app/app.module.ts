@@ -43,6 +43,8 @@ import {reducer}from"../state/reducer/index/StateApplaction"
 import {CategoryListComponent} from "../componet/category/list/CategoryList.component";
 import {CategoryComponent} from "../componet/category/detail/Category.component";
 import {TimePick} from "../common/data/TimePick";
+import {RoleListComponent} from "../componet/system/role/list/RoleList.component";
+import {RoleComponent} from "../componet/system/role/detail/Role.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -70,7 +72,9 @@ import {TimePick} from "../common/data/TimePick";
     AdvertisementComponent,
     PersonalComponent,
     CategoryListComponent,
-    CategoryComponent
+    CategoryComponent,
+    RoleListComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,
