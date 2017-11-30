@@ -3,7 +3,6 @@ import {HttpData} from "../../http/HttpData";
 import {Injectable} from "@angular/core";
 import {Interceptor} from "../interceptor/interceptor";
 import {HttpHandler} from "@angular/common/http";
-import {HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
@@ -11,6 +10,7 @@ import 'rxjs/add/operator/map'
 import {NzMessageService} from "ng-zorro-antd";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class Http{
@@ -24,7 +24,8 @@ export class Http{
   post(url,body?){
     this.store.dispatch({type:"show"});
      let urls = this.httpData.Host+url;
-     let headers = this.httpData.Header;
+    //Todo:判断是否有token
+     let headers = this.httpData.Header.append("auth","JSONID:94268");
       return this.http.post(urls,JSON.stringify(body),{headers:headers}).map(
         res=>{
           this.store.dispatch({type:"hide"});
@@ -41,7 +42,9 @@ export class Http{
   /*上传图片*/
   postImg(url,body){
     let urls= this.httpData.Host+url;
-    return this.http.post(urls,body).catch(
+    //Todo:判断是否有token
+    let headers = new HttpHeaders().append("auth","JSONID:94268");
+    return this.http.post(urls,body,{headers:headers}).catch(
       error=>{
         this.nzMessage.error("系统错误");
         return Observable.throw(error);
@@ -54,18 +57,9 @@ export class Http{
   get(url){
     this.store.dispatch({type:"show"});
     let urls = this.httpData.Host+url;
-    let request = new HttpRequest("GET",urls);
-    let i = 1;
-/*    this.interceptor.intercept(request,this.next).subscribe(
-      res=>{
-        if(res.type==0){
-          console.log("请求刚发出");
-        }else {
-          console.log(res);
-        }
-      }
-    );*/
-    return this.http.get(urls).map(
+    //Todo:判断是否有token
+    let headers = new HttpHeaders().append("auth","JSONID:94268");
+    return this.http.get(urls,{headers:headers}).map(
       res=>{
         this.store.dispatch({type:"hide"});
         return res;
@@ -81,4 +75,16 @@ export class Http{
     );
   }
 
+  /**
+   * 判断是否有token
+   */
+  hasToken(){
+    if(localStorage.getItem('token')){
+      return true;
+    }else{
+      this.router.navigateByUrl("login");
+      this.nzMessage.warning("请重新登录");
+      return false;
+    }
+  }
 }

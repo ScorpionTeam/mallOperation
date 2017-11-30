@@ -14,7 +14,6 @@ import {BrandService} from "../../../service/brand/Brand.service";
 
 export class BrandListComponent{
   picUrl:string;
-  ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   brandList:any[]=[];//订单列表
   isCollapse:boolean=false;
@@ -40,10 +39,8 @@ export class BrandListComponent{
    * 初始化
    */
   init(){
-    this.ngLoad=true;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
-      this.ngLoad=false;
       if(res["total"]!=0){
         this.brandList = res["list"];
         this.page.total = res["total"];
@@ -68,11 +65,9 @@ export class BrandListComponent{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.condition.searchKey=this.searchKey;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.brandList = res["list"];
           this.page.total = res["total"];
@@ -86,11 +81,9 @@ export class BrandListComponent{
   };
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.condition.searchKey=this.searchKey;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.brandList = res["list"];
           this.page.total = res["total"];
@@ -111,7 +104,6 @@ export class BrandListComponent{
     this.condition.searchKey=this.searchKey;
     this.brandService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.brandList = res["list"];
           this.page.total = res["total"];

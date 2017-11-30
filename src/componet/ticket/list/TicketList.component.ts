@@ -14,7 +14,6 @@ import {TicketService} from "../../../service/ticket/Ticket.service";
   providers:[TicketService]
 })
 export class  TicketListComponent{
-  ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   ticketList:any[]=[];//订单列表
   isCollapse:boolean=false;
@@ -38,10 +37,8 @@ export class  TicketListComponent{
    * 初始化
    */
   init(){
-    this.ngLoad=true;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
-      this.ngLoad=false;
       if(res["total"]!=0){
         this.ticketList = res["list"];
         this.page.total = res["total"];
@@ -69,11 +66,9 @@ export class  TicketListComponent{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.condition.searchKey = this.searchKey;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.ticketList = res["list"];
           this.page.total = res["total"];
@@ -83,17 +78,14 @@ export class  TicketListComponent{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.condition.searchKey = this.searchKey;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.ticketList = res["list"];
           this.page.total = res["total"];
@@ -103,7 +95,6 @@ export class  TicketListComponent{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -116,7 +107,6 @@ export class  TicketListComponent{
     this.condition.searchKey = this.searchKey;
     this.ticketService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.ticketList = res["list"];
           this.page.total = res["total"];

@@ -15,7 +15,6 @@ import {UserService} from "../../../service/user/User.service";
 
 export class UserListComponent{
   userList:Array<any> = [];
-  ngLoad:Boolean = false;
   searchKey:any= '';
   page:any = {
     pageNo:1,
@@ -36,11 +35,9 @@ export class UserListComponent{
    * 初始化
    */
   init(){
-    this.ngLoad=true;
     /*数据初始化*/
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         console.log(res)
-        this.ngLoad=false;
         this.userList = res["list"];
         this.page.total =res["total"];
       },
@@ -63,10 +60,8 @@ export class UserListComponent{
   }
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
-        this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -74,17 +69,14 @@ export class UserListComponent{
         this.page.total=res["total"];
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
     let url = 'backstage/user/userList';
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
-        this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
@@ -92,7 +84,6 @@ export class UserListComponent{
         this.page.total=res["total"];
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -103,17 +94,14 @@ export class UserListComponent{
   search(){
     let url = 'backstage/user/userList';
     this.page.pageNo=1;
-    this.ngLoad = true;
     this.userService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
         this.userList = res["list"];
         this.page.total=res["total"];
-        this.ngLoad = false;
       },
       err=>{
-        this.ngLoad = false;
         console.log(err);
       });
     console.log(this.searchKey);

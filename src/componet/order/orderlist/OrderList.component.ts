@@ -16,7 +16,6 @@ import {OrderService} from "../../../service/order/Order.service";
 
 export class OrderListComponent implements OnInit{
   picUrl:string;
-  ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   orderList:any[]=[];//订单列表
   isCollapse:boolean=false;
@@ -44,10 +43,8 @@ export class OrderListComponent implements OnInit{
    * 初始化
    */
   init(){
-    this.ngLoad=true;
     this.orderService.pageList({pageNo:this.page.pageNo,pageSize:this.page.pageSize}).subscribe(res=>{
       console.log(res);
-      this.ngLoad=false;
       if(res["total"]!=0){
         this.orderList = res["list"];
         this.page.total = res["total"];
@@ -72,13 +69,11 @@ export class OrderListComponent implements OnInit{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
     this.condition.searchKey = this.searchKey;
     this.orderService.pageList(this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
           this.page.total = res["total"];
@@ -90,13 +85,11 @@ export class OrderListComponent implements OnInit{
   };
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.condition.pageNo = this.page.pageNo;
     this.condition.pageSize = this.page.pageSize;
     this.condition.searchKey = this.searchKey;
     this.orderService.pageList(this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
           this.page.total = res["total"];
@@ -117,7 +110,6 @@ export class OrderListComponent implements OnInit{
     this.condition.searchKey = this.searchKey;
     this.orderService.pageList(this.condition).subscribe(res=>{
       console.log(res);
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.orderList = res["list"];
           this.page.total = res["total"];

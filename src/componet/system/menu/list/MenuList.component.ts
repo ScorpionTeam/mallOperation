@@ -13,7 +13,6 @@ import {NzMessageService} from "ng-zorro-antd";
 
 export class MenuListComponent implements OnInit{
   menuList:any=[];
-  ngLoad:boolean=false;
   page:any={
     pageNo:1,
     pageSize:10,
@@ -30,10 +29,8 @@ export class MenuListComponent implements OnInit{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
           this.page.total = res["total"];
@@ -44,16 +41,13 @@ export class MenuListComponent implements OnInit{
         this.idList=[];
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
           this.page.total = res["total"];
@@ -64,7 +58,6 @@ export class MenuListComponent implements OnInit{
         this.idList=[];
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -73,10 +66,8 @@ export class MenuListComponent implements OnInit{
    * 查询
    */
   search(){
-    this.ngLoad=true;
     this.page.pageNo=1;
     this.menuService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.menuList = res["list"];
           this.page.total = res["total"];
@@ -87,7 +78,6 @@ export class MenuListComponent implements OnInit{
         this.idList=[];
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   }

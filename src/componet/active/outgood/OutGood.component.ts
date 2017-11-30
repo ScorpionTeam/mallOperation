@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {Http} from "../../../common/http/Http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpData} from "../../../http/HttpData";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
@@ -20,7 +19,6 @@ export class OutGoodComponent implements OnInit{
   activityList:any=[];//活动列表
   categoryList:any=[];//类目列表
   isCollapse:boolean=false;
-  ngLoad:boolean=false;
   checkAll:boolean = false;//全选
   doCheckAll:boolean=false;//是否可以全选
   openFlag:boolean=false;
@@ -57,9 +55,7 @@ export class OutGoodComponent implements OnInit{
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
     /*数据初始化*/
-    this.ngLoad=true;
     this.goodService.pageByActivityId(this.condition).subscribe(res=>{
-        this.ngLoad=false;
         console.log(res);
         if(res["total"]!=0){
           this.goodList = res["list"];
@@ -112,7 +108,6 @@ export class OutGoodComponent implements OnInit{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
     this.condition.pageNo = this.page.pageNo;
@@ -120,7 +115,6 @@ export class OutGoodComponent implements OnInit{
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
     this.goodService.pageByActivityId(this.condition).subscribe(res=>{
-        this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -136,14 +130,12 @@ export class OutGoodComponent implements OnInit{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
 
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     //拼接地址
     this.condition.pageNo = this.page.pageNo;
@@ -155,7 +147,6 @@ export class OutGoodComponent implements OnInit{
           res["list"].checked=false
         }
         this.idList=[];
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.checkAll=false;
           this.goodList = res["list"];
@@ -166,7 +157,6 @@ export class OutGoodComponent implements OnInit{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -175,7 +165,6 @@ export class OutGoodComponent implements OnInit{
    * 关键字查询
    */
   search(){
-    this.ngLoad=true;
     this.page.pageNo=1;
     //拼接地址
     this.condition.pageNo = this.page.pageNo;
@@ -183,7 +172,6 @@ export class OutGoodComponent implements OnInit{
     this.condition.activityId = this.curActivity;
     this.condition.searchKey = this.searchKey;
     this.goodService.pageByActivityId(this.condition).subscribe(res=>{
-        this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }

@@ -22,7 +22,6 @@ export class CategoryListComponent implements OnInit{
     total:0
   };
   categoryList:any=[];//类目数组
-  ngLoad:boolean=false;
   searchKey:string='';
   idList:any =[];
   checkAll:boolean=false;
@@ -37,11 +36,9 @@ export class CategoryListComponent implements OnInit{
    * @param val
    */
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo = val;
     this.categoryService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(
       res=>{
-        this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
       });
@@ -52,11 +49,9 @@ export class CategoryListComponent implements OnInit{
    * @param val
    */
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize = val;
     this.categoryService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(
       res=>{
-        this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
       });
@@ -66,11 +61,9 @@ export class CategoryListComponent implements OnInit{
    * 查询
    */
   search(){
-    this.ngLoad=true;
     this.page.pageNo = 1;
     this.categoryService.pageList(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(
       res=>{
-        this.ngLoad=false;
         this.categoryList = res["list"];
         this.page.total = res["total"];
       });

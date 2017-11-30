@@ -10,7 +10,6 @@ import {AdvertisementService} from "../../../service/advertisement/Advertisement
 })
 
 export class AdvertisementListComonent{
-  ngLoad:boolean=false;//加载中标志
   searchKey:string='';//关键字
   bannerList:any[]=[];//广告列表
   //分页对象
@@ -34,10 +33,8 @@ export class AdvertisementListComonent{
    * 初始化
    */
   init(){
-    this.ngLoad=true;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
       console.log(res);
-      this.ngLoad=false;
       if(res["total"]!=0){
         this.bannerList = res["list"];
         this.page.total = res["total"];
@@ -65,11 +62,9 @@ export class AdvertisementListComonent{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     this.condition.searchKey= this.searchKey;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.bannerList = res["list"];
           this.page.total = res["total"];
@@ -79,17 +74,14 @@ export class AdvertisementListComonent{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.condition.searchKey= this.searchKey;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.bannerList = res["list"];
           this.page.total = res["total"];
@@ -99,7 +91,6 @@ export class AdvertisementListComonent{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -112,7 +103,6 @@ export class AdvertisementListComonent{
     this.condition.searchKey= this.searchKey;
     this.advertisementService.pageList(this.page.pageNo,this.page.pageSize,this.condition).subscribe(res=>{
         console.log(res);
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.bannerList = res["list"];
           this.page.total = res["total"];

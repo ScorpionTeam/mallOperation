@@ -1,10 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {PageService} from "../../../service/page/Page.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NzModalService, NzMessageService} from "ng-zorro-antd";
 import {HttpData} from "../../../http/HttpData";
-import {Http} from "../../../common/http/Http";
-import {isNull} from "util";
 import {isUndefined} from "util";
 import {ActivityService} from "../../../service/active/Activity.service";
 import {GoodService} from "../../../service/good/Good.service";
@@ -20,7 +17,6 @@ export class  ConcatGoodComponent implements OnInit{
   goodList:any=[];//商品列表
   activityList:any=[];//活动列表
   isCollapse:boolean=false;
-  ngLoad:boolean=false;
   checkAll:boolean = false;//全选
   doCheckAll:boolean=false;//是否可以全选
   searchKey:any= '';
@@ -49,9 +45,7 @@ export class  ConcatGoodComponent implements OnInit{
    */
   init(){
     /*数据初始化*/
-    this.ngLoad=true;
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        this.ngLoad=false;
         console.log(res);
         if(res["total"]!=0){
           this.goodList = res["list"];
@@ -95,11 +89,9 @@ export class  ConcatGoodComponent implements OnInit{
 
   /*分页*/
   pageChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageNo=val;
     //拼接地址
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
-        this.ngLoad=false;
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -115,21 +107,18 @@ export class  ConcatGoodComponent implements OnInit{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
 
   /*size改变*/
   pageSizeChangeHandler(val){
-    this.ngLoad=true;
     this.page.pageSize=val;
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
         this.idList=[];
-        this.ngLoad=false;
         if(res["total"]!=0){
           this.checkAll=false;
           this.goodList = res["list"];
@@ -140,7 +129,6 @@ export class  ConcatGoodComponent implements OnInit{
         }
       },
       err=>{
-        this.ngLoad=false;
         console.log(err);
       });
   };
@@ -149,10 +137,8 @@ export class  ConcatGoodComponent implements OnInit{
    * 关键字查询
    */
   search(){
-    this.ngLoad=true;
     this.page.pageNo=1;
     this.goodService.pageConcatWithActivity(this.page.pageNo,this.page.pageSize,this.searchKey,this.condition).subscribe(res=>{
-        this.ngLoad=false;
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
         }
