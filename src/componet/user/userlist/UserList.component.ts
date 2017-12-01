@@ -1,16 +1,16 @@
 import {Component} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {PageService} from "../../../service/page/Page.service";
-import {NzModalService} from "ng-zorro-antd";
-import {Http} from "../../../common/http/Http";
+import {NzModalService, NzMessageService} from "ng-zorro-antd";
 import {DataTool} from "../../../common/data/DataTool";
 import {UserService} from "../../../service/user/User.service";
+import {RoleService} from "../../../service/role/Role.service";
+import {isUndefined} from "util";
 
 @Component({
   selector:'user-list',
   templateUrl:'UserList.component.html',
   styleUrls:['UserList.component.css'],
-  providers:[UserService]
+  providers:[UserService,RoleService]
 })
 
 export class UserListComponent{
@@ -22,13 +22,16 @@ export class UserListComponent{
     total:0
   };
   idList:any=[];//id集合
-  constructor(private pageObj : PageService,private http:Http,private dataTool:DataTool,
+  curRoleId:number;//当前选择的角色ID
+  roleList:any=[];
+  constructor(private roleService:RoleService,private dataTool:DataTool,private nzMessage:NzMessageService,
               private router:Router,private route :ActivatedRoute,private userService:UserService,
-              private nzService :NzModalService ){
+              private nzService :NzModalService,private nzModal:NzModalService){
   }
 
   ngOnInit(){
     this.init();
+    this.getRoleList();
   }
 
   /**
@@ -165,4 +168,46 @@ export class UserListComponent{
   deleteHandler(){
 
   }
+
+  /**
+   * 打开角色分配模态
+   * @param id
+   * @param bodyTemplate
+   */
+  openRoleModal(userId:number,bodyTemplate:any,roleId:number){
+    this.curRoleId = roleId;//初始化用户角色Id
+    this.nzModal.confirm({
+      title:"分配角色",
+      content:bodyTemplate,
+      onOk:()=>{
+        if(isUndefined(this.curRoleId)){
+          this.nzMessage.warning("请先选择角色");
+          return ;
+        }
+        this.roleService.assignRoleToUser(userId,this.curRoleId).subscribe(
+          res=>{
+            if(res["result"]==1){
+              this.nzMessage.success("绑定成功");
+              this.pageChangeHandler(this.page.pageNo);
+            }else {
+              this.nzMessage.error(res["error"].message);
+            }
+          }
+        );
+      },
+      closable:false
+    });
+  }
+
+  /**
+   *获取角色列表
+   */
+  getRoleList(){
+    this.roleService.pageList(1,1000).subscribe(
+      res=>{
+        this.roleList= res.list;
+      }
+    )
+  }
+
 }

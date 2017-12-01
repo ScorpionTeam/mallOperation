@@ -46,8 +46,17 @@
     <td nz-td>{{data.city}}</td>
     <td nz-td>{{data.certification=="0"?"未认证":data.certification=="1"?"认证不通过":"已认证"}}</td>
     <td nz-td [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="NORMAL"?"正常":"注销"}}</td>
-    <td nz-td><span><a (click)="skipToPage('/user-detail',data.id)">编辑</a></span></td>
+    <td nz-td>
+      <span><a (click)="skipToPage('/user-detail',data.id)">编辑</a></span>
+      <span nz-table-divider></span>
+      <span><a (click)="openRoleModal(data.id,roleSelect,data.roleId)">分配角色</a></span>
+    </td>
   </tr>
   </tbody>
 </nz-table>
 
+<ng-template #roleSelect>
+  <nz-select [(ngModel)]="curRoleId" style="width: 100%">
+    <nz-option [nzLabel]="data.name" [nzValue]="data.id" *ngFor="let data of roleList"></nz-option>
+  </nz-select>
+</ng-template>

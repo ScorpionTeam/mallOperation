@@ -22,7 +22,7 @@ export class RoleService{
       }
       url=url+'&'+key+'='+condition[key];
     }
-    return this.http.get(url);
+    return this.http.get(url).map(res=>{return res;});
   }
 
   /**
@@ -52,7 +52,7 @@ export class RoleService{
    */
   delRoleById(id:number){
     let url ="backstage/role/deleteById?id="+id;
-    return this.http.post(url,null).map(res=>{return res;});
+    return this.http.post(url,null);
   }
 
   /**
@@ -63,5 +63,16 @@ export class RoleService{
   findRoleById(id:number){
     let url= "backstage/role/findById?id="+id;
     return this.http.get(url);
+  }
+
+  /**
+   * 向用户分配角色
+   * @param userId
+   * @param roleId
+   * @returns {any}
+   */
+  assignRoleToUser(userId:number,roleId:number){
+    let url ="backstage/role/bindUser?userId="+userId+'&roleId='+roleId;
+    return this.http.post(url,null);
   }
 }

@@ -28,7 +28,7 @@ export class RoleComponent implements OnInit{
   init(){
     this.isDetail = this.route.params['value'].id?true:false;
     if(this.isDetail){
-      this.roleService.findRoleById(this.route.params["value"].id).subscribe(res=>{
+      this.roleService.findRoleById(this.route.params['value'].id).subscribe(res=>{
         console.log(res);
         this.role=res["data"];
         this.role.status=this.dataTool.strTransBool(this.role.status,'status');
