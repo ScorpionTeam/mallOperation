@@ -1,4 +1,5 @@
-.ant-confirm-content{
-  margin-top:20px!important;
-  margin-left:0!important;
+/*消除模态内容层的边距*/
+.modal-body{
+  margin-left: -42px;
+  margin-top: 20px;
 }

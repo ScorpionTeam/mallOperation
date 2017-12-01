@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges} from "@angular/core";
 @Component({
   selector:'checkbox-group',
   template:`
@@ -15,14 +15,16 @@ import {Component, Input, Output, EventEmitter} from "@angular/core";
   `
 })
 
-export class CheckBoxGroup{
+export class CheckBoxGroup implements OnChanges{
   @Input() groupList:any=[];
   @Output() checkAllHanler =  new EventEmitter();
   @Output() singleCheck = new EventEmitter();
   indeterminate:boolean = false;
   allChecked:boolean=false;//全选标志
   constructor(){}
-
+  ngOnChanges(changes: SimpleChanges):void{
+    this.updateSingleChecked();
+  }
   /**
    *
    * 全选

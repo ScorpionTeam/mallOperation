@@ -9,6 +9,7 @@ import {it} from "selenium-webdriver/testing";
 @Component({
   selector:'role-list',
   templateUrl:'RoleList.component.html',
+  styleUrls:['RoleList.component.css'],
   providers:[RoleService,MenuService]
 })
 
@@ -119,7 +120,7 @@ export class RoleListComponent implements OnInit{
    * @param body
    */
   openModal(id:number,body:any){
-    this.initRoleMenu([8]);
+    this.initRoleMenu(id);
     this.nzModal.confirm({
       title:"分配权限",
       content:body,
@@ -175,21 +176,46 @@ export class RoleListComponent implements OnInit{
 
   /**
    * 初始化角色权限
-   * @param curIdList:当前角色权限id列表
+   * @param id:角色id
    */
-  initRoleMenu(curIdList:any){
+  initRoleMenu(id:number){
+    /*this.roleService.findMenuListByRoleId(id).subscribe(
+      res=>{
+        let curIdList=[];
+        res["data"].forEach(
+          item=>{
+            item.leaf.forEach(
+              subItem=>{
+                curIdList.push(subItem.id);
+              }
+            )
+          });
+        console.log(curIdList);
+        this.menuList.forEach(
+          item=>{
+            item.leaf.forEach(
+              subItem=>{
+                if(curIdList.includes(subItem.id)){
+                  subItem.checked=true;
+                }else {
+                  subItem.checked=false;
+                }
+              }
+            )
+          });
+      }
+    );*/
     this.menuList.forEach(
       item=>{
         item.leaf.forEach(
           subItem=>{
-            if(curIdList.includes(subItem.id)){
+            if([9,10,11].includes(subItem.id)){
               subItem.checked=true;
             }else {
               subItem.checked=false;
             }
           }
         )
-      }
-    )
+      });
   }
 }

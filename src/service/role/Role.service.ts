@@ -66,6 +66,16 @@ export class RoleService{
   }
 
   /**
+   * 根据角色ID寻找菜单列表
+   * @param roleId
+   * @returns {any}
+   */
+  findMenuListByRoleId(roleId){
+    let url = "backstage/menu/findByRoleId?roleId="+roleId;
+    return this.http.get(url);
+  }
+
+  /**
    * 向用户分配角色
    * @param userId
    * @param roleId

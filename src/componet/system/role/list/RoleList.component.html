@@ -37,11 +37,13 @@
   </tbody>
 </nz-table>
 <ng-template #checkbox>
-  <nz-collapseset  [nzAccordion]="true">
-    <nz-collapse  [nzTitle]="menu.name" *ngFor="let menu of menuList">
-      <checkbox-group [groupList]="menu.leaf" (checkAllHanler)="getMenuIdList($event)" (singleCheck)="getMenuIdList($event)"></checkbox-group>
-    </nz-collapse>
-  </nz-collapseset>
+  <div class="modal-body">
+    <nz-collapseset  [nzAccordion]="true">
+      <nz-collapse  [nzTitle]="menu.name" *ngFor="let menu of menuList">
+        <checkbox-group [groupList]="menu.leaf" (checkAllHanler)="getMenuIdList($event)" (singleCheck)="getMenuIdList($event)"></checkbox-group>
+      </nz-collapse>
+    </nz-collapseset>
+  </div>
 </ng-template>
 
 
