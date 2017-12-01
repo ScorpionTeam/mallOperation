@@ -15,7 +15,7 @@ export class RoleService{
    * @returns {Observable<R|T>}
    */
   pageList(pageNo:any,pageSize:any,condition?:any){
-    let url:string  ="backstage/role/list?pageNo="+pageNo+"&pageSize="+pageSize;
+    let url:string  ="backstage/role/findByCondition?pageNo="+pageNo+"&pageSize="+pageSize;
     for(let key in condition){
       if(isUndefined(condition[key])||isNull(condition[key])){
         continue;
@@ -74,5 +74,16 @@ export class RoleService{
   assignRoleToUser(userId:number,roleId:number){
     let url ="backstage/role/bindUser?userId="+userId+'&roleId='+roleId;
     return this.http.post(url,null);
+  }
+
+  /**
+   * 向角色分配菜单
+   * @param roleId
+   * @param menuIdList
+   * @returns {any}
+   */
+  assignMenuToRole(roleId:number,menuIdList:any){
+    let url ="backstage/role/bindMenu";
+    return this.http.post(url,{roleId:roleId,menusId:menuIdList})
   }
 }

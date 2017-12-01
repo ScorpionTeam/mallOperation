@@ -45,10 +45,12 @@ import {CategoryComponent} from "../componet/category/detail/Category.component"
 import {TimePick} from "../common/data/TimePick";
 import {RoleListComponent} from "../componet/system/role/list/RoleList.component";
 import {RoleComponent} from "../componet/system/role/detail/Role.component";
+import {CheckBoxGroup} from "../common/checkbox/CheckBoxGroup";
 @NgModule({
   declarations: [
     HKeditor,
     ImgUpload,
+    CheckBoxGroup,
     AppComponent,
     LoginComponent,
     IndexComponent,

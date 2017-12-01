@@ -58,6 +58,15 @@ export class MenuService{
    * @returns {Observable<Object>}
    */
   delMenu(id:any){
-    return this.http.get("backstage/menu/deleteById?id="+id);
+    let url ="backstage/menu/deleteById?id="+id
+    return this.http.get(url);
+  }
+
+  /**
+   * 获取所有菜单列表
+   */
+  getAllMenuList(){
+    let url ="backstage/menu/findAllMenu";
+    return this.http.get(url);
   }
 }
