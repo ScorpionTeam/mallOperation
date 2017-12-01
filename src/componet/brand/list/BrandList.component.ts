@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService, NzModalService} from "ng-zorro-antd";
-import {Http} from "../../../common/http/Http";
 import {HttpData} from "../../../http/HttpData";
 import {DataTool} from "../../../common/data/DataTool";
 import {BrandService} from "../../../service/brand/Brand.service";
+import {TimePick} from "../../../common/data/TimePick";
 @Component({
   selector:"brand-list",
   templateUrl:"./BrandList.component.html",
@@ -26,7 +26,7 @@ export class BrandListComponent{
     total:0
   };
   condition:any={};
-  constructor(private router:Router,private PicUrl:HttpData,
+  constructor(private router:Router,private PicUrl:HttpData,private timePickerTool:TimePick,
               private route:ActivatedRoute,private nzMessage:NzMessageService,private brandService:BrandService,
               private dataTool:DataTool,private nzModal:NzModalService){}
 
@@ -122,10 +122,8 @@ export class BrandListComponent{
    * @returns {boolean}
    */
   disabledStartDate=(startValue:any)=>{
-    if(!startValue||!this.condition.endDate){
-      return false;
-    }
-    return startValue.getTime()>=this.condition.endDate.getTime();
+   return this.timePickerTool.disableStartTime(startValue,this.condition.endDate);
+
   }
   /**
    * 禁止结束时间
@@ -133,11 +131,7 @@ export class BrandListComponent{
    * @returns {boolean}
    */
   disabledEndDate=(endValue:any)=>{
-    if(!this.condition.startDate||!endValue){
-      console.log(1);
-      return false
-    }
-    return endValue.getTime() <= this.condition.startDate.getTime();
+    return this.timePickerTool.disableStartTime(endValue,this.condition.endDate);
   };
 
   /**

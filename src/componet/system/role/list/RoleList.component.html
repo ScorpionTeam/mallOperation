@@ -27,7 +27,7 @@
     <td nz-td>{{data.remark}}</td>
     <td nz-td  [class]="dataTool.strTransBool(data.status,'status')?'sta_normal':'sta_del'">{{data.status=="NORMAL"?"正常":"删除"}}</td>
     <td nz-td class="role_list_action">
-      <span><a (click)="openModal(data.id,checkbox)">分配权限</a></span>
+      <span><a (click)="initRoleMenu(data.id,checkbox)">分配权限</a></span>
       <span nz-table-divider></span>
       <span><a (click)="skipToPage('/role-detail',data.id)">编辑</a></span>
       <span nz-table-divider></span>

@@ -30,11 +30,6 @@ export class RoleListComponent implements OnInit{
   searchKey:string;//关键字
   menuList:any=[];//菜单列表
   menuIdList:any=[];菜单Id列表
-  checkOptionsOne = [
-    { label: 'Apple', value: 'Apple', checked: true },
-    { label: 'Pear', value: 'Pear', checked: false },
-    { label: 'Orange', value: 'Orange', checked: false },
-  ]
 
   /**
    * 跳转
@@ -120,7 +115,6 @@ export class RoleListComponent implements OnInit{
    * @param body
    */
   openModal(id:number,body:any){
-    this.initRoleMenu(id);
     this.nzModal.confirm({
       title:"分配权限",
       content:body,
@@ -134,7 +128,7 @@ export class RoleListComponent implements OnInit{
           }
         );
       }
-    })
+    });
   }
 
   /**
@@ -171,15 +165,14 @@ export class RoleListComponent implements OnInit{
       }
     );
     this.menuIdList = arry;
-    console.log(this.menuIdList);
   }
 
   /**
    * 初始化角色权限
    * @param id:角色id
    */
-  initRoleMenu(id:number){
-    /*this.roleService.findMenuListByRoleId(id).subscribe(
+  initRoleMenu(id:number,body:any){
+    this.roleService.findMenuListByRoleId(id).subscribe(
       res=>{
         let curIdList=[];
         res["data"].forEach(
@@ -190,7 +183,6 @@ export class RoleListComponent implements OnInit{
               }
             )
           });
-        console.log(curIdList);
         this.menuList.forEach(
           item=>{
             item.leaf.forEach(
@@ -203,19 +195,8 @@ export class RoleListComponent implements OnInit{
               }
             )
           });
+        this.openModal(id,body);
       }
-    );*/
-    this.menuList.forEach(
-      item=>{
-        item.leaf.forEach(
-          subItem=>{
-            if([9,10,11].includes(subItem.id)){
-              subItem.checked=true;
-            }else {
-              subItem.checked=false;
-            }
-          }
-        )
-      });
+    );
   }
 }
