@@ -69,4 +69,13 @@ export class MenuService{
     let url ="backstage/menu/findAllMenu";
     return this.http.get(url);
   }
+
+  /**
+   * 根据用户id查询菜单
+   * @param id
+   */
+  findMenuByUserid(id){
+    let url = "backstage/menu/findByUserId?userId="+id;
+    return this.http.get(url);
+  }
 }

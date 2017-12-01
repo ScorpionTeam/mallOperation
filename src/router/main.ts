@@ -53,7 +53,7 @@ const appRoute :Routes = [
       {path:'banner-list',component:AdvertisementListComonent},
       {path:'banner-add',component:AdvertisementComponent},
       {path:'banner-detail/:id',component:AdvertisementComponent},
-      {path:'menu-list',component:MenuListComponent},
+        {path:'menu-list',component:MenuListComponent},
       {path:'menu-add',component:MenuComponent},
       {path:'menu-detail/:id',component:MenuComponent},
       {path:'personal',component:PersonalComponent},
