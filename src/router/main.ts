@@ -26,6 +26,7 @@ import {CategoryListComponent} from "../componet/category/list/CategoryList.comp
 import {CategoryComponent} from "../componet/category/detail/Category.component";
 import {RoleListComponent} from "../componet/system/role/list/RoleList.component";
 import {RoleComponent} from "../componet/system/role/detail/Role.component";
+import {PictureListComponent} from "../componet/picture/list/PictureList.component";
 
 const appRoute :Routes = [
   {path:'',redirectTo:'/index',pathMatch: 'full',},
@@ -62,7 +63,8 @@ const appRoute :Routes = [
       {path:'category-detail/:id',component:CategoryComponent},
       {path:'role-list',component:RoleListComponent},
       {path:'role-add',component:RoleComponent},
-      {path:'role-detail/:id',component:RoleComponent}
+      {path:'role-detail/:id',component:RoleComponent},
+      {path:'pic-list',component:PictureListComponent}
     ]},
   {path:'login',component:LoginComponent}
 ]

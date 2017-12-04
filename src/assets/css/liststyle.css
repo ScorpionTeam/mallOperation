@@ -50,3 +50,17 @@
 .sta_normal{
   color:#108ee9;
 }
+
+/*模态的body*/
+.modal-body{
+  margin-left: -42px;
+  margin-top: 20px;
+}
+
+
+/*列表中的图片*/
+.list_pic{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}

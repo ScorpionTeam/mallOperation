@@ -46,6 +46,7 @@ import {TimePick} from "../common/data/TimePick";
 import {RoleListComponent} from "../componet/system/role/list/RoleList.component";
 import {RoleComponent} from "../componet/system/role/detail/Role.component";
 import {CheckBoxGroup} from "../common/checkbox/CheckBoxGroup";
+import {PictureListComponent} from "../componet/picture/list/PictureList.component";
 @NgModule({
   declarations: [
     HKeditor,
@@ -76,7 +77,8 @@ import {CheckBoxGroup} from "../common/checkbox/CheckBoxGroup";
     CategoryListComponent,
     CategoryComponent,
     RoleListComponent,
-    RoleComponent
+    RoleComponent,
+    PictureListComponent
   ],
   imports: [
     BrowserModule,
