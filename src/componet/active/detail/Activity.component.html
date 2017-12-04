@@ -52,7 +52,7 @@
           <nz-datepicker style="width: 47%;"  [(ngModel)]="activity.end_date" [nzDisabledDate]="disabledEndDate" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'结束时间'" formControlName="end"></nz-datepicker>`
         </div>
       </div>
-      <div nz-col [nzSpan]="12" nz-row [nzOffset]="6" *ngIf="activity.activity_Type=='SPELL_GROUP'?true:false">
+      <div nz-col [nzSpan]="12" nz-row [nzOffset]="6" *ngIf="activity.activity_type=='SPELL_GROUP'?true:false">
         <div nz-col nz-form-label [nzSpan]="5">
           <label nz-form-item-required>人数</label>
         </div>

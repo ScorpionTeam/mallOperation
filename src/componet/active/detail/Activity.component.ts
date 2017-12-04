@@ -75,7 +75,7 @@ export class ActivityComponent implements OnInit{
     if(!this.validateForm.valid){
       this.nzMessage.warning("请将表单填写完整!");
       return;
-    }else  if(this.activity.activity_type=='SPELL_GROUP'&&(this.activity.number==0||isUndefined(this.activity.number))){
+    }else  if(this.activity.activity_type=='SPELL_GROUP'&&(this.activity.num==0||isUndefined(this.activity.num))){
       this.nzMessage.warning("请将表单填写完整!");
       return;
     }

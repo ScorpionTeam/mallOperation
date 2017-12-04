@@ -177,11 +177,11 @@ export class RoleListComponent implements OnInit{
         let curIdList=[];
         res["data"].forEach(
           item=>{
-            item.leaf.forEach(
+          curIdList=  curIdList.concat(item.leaf.map(
               subItem=>{
-                curIdList.push(subItem.id);
+                return subItem.id;
               }
-            )
+            ));
           });
         this.menuList.forEach(
           item=>{

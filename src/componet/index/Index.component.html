@@ -20,7 +20,7 @@
     <nz-sider [nzWidth]="180" class="index_sider">
       <ul nz-menu [nzMode]="'inline'" class="menu">
         <li nz-submenu *ngFor="let menu of menuList">
-          <span title><i class="anticon anticon-user"></i>{{menu.name}}</span>
+          <span title><i [class]="menu.icon"></i>{{menu.name}}</span>
           <ul>
             <li nz-menu-item (click)="skipToPage(subMenu.url)" *ngFor="let subMenu of menu.leaf">{{subMenu.name}}</li>
           </ul>
