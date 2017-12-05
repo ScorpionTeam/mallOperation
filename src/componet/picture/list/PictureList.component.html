@@ -9,9 +9,9 @@
           [nzTotal]="page.total" [nzShowQuickJumper]="true" (nzPageSizeChange)="pageSizeChangeHandler($event)">
   <thead nz-thead>
   <tr>
-    <th nz-th><span>图片</span></th>
-    <th nz-th><span>地址</span></th>
-    <th nz-th><span>操作</span></th>
+    <th nz-th [nzWidth]="'100px'"><span>图片</span></th>
+    <th nz-th [nzWidth]="'100px'"><span>地址</span></th>
+    <th nz-th [nzWidth]="'100px'"><span>操作</span></th>
   </tr>
   </thead>
   <tbody nz-tbody>
