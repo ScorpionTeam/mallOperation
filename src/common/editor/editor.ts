@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
 @Component({
   selector:'hk-editor',
   template:`<ckeditor
@@ -10,7 +10,7 @@ import {Component, Input, Output, EventEmitter} from "@angular/core";
   </ckeditor>`
 })
 
-export class HKeditor{
+export class HKeditor implements OnInit{
   @Input() ckeditorContent:any;
   @Output() change = new EventEmitter();
   toobarConfig:any=[
@@ -34,10 +34,13 @@ export class HKeditor{
     uiColor:"#f1f1f1",
     toobar:'full',
     toobar_full:this.toobarConfig,
-    toolbarCanCollapse:true
+    toolbarCanCollapse:true,
+    extraPlugins: 'divarea'
   };
   constructor(){
   }
+
+  ngOnInit(){}
 
   changeHandler(){
     this.change.emit(this.ckeditorContent);

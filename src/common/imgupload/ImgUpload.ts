@@ -16,7 +16,6 @@ export class ImgUpload implements OnInit,OnChanges{
   @Output() uploadSuccess = new EventEmitter();//上传成功回调
   @Output() delSuccess = new EventEmitter();//删除图片成功回调
 
-  publicUrl:string='';//图片公共地址
   imgPreview:any;
   isUpload:boolean=false;//是否上传标志
   imgObj:any={
@@ -79,9 +78,8 @@ export class ImgUpload implements OnInit,OnChanges{
       return;
     }
     let formData= new FormData();
-    console.log(this.imgObj)
     //图片上传部分代码
-    this.imgObj.watermark=this.dataTool.boolTransStr(this.imgObj.watermark,'water')
+    this.imgObj.watermark=this.dataTool.boolTransStr(this.imgObj.watermark,'water');
     this.imgObj.cut=this.dataTool.boolTransStr(this.imgObj.cut,'cut');
     formData.append("jsonContent",JSON.stringify(this.imgObj));
     formData.append("file",val.target.files[0]);
