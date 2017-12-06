@@ -20,12 +20,6 @@ export class  ActivityService{
     let url = 'backstage/activity/findByCondition?pageNo='+pageNo+'&pageSize='+pageSize+'&searchKey='+
       searchKey;
     return this.pageService.pageList(url,condition);
-/*    for(let key in condition){
-      if(!isNull(condition[key]&&!isUndefined(condition[key]))){
-        url+='&'+key+'='+condition[key];
-      }
-    }
-    return this.http.get(url);*/
   }
 
   /**

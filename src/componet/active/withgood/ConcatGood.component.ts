@@ -93,6 +93,7 @@ export class  ConcatGoodComponent implements OnInit{
       res=>{
         if(res["total"]!=0){
           this.activityList = res["list"];
+          console.log(this.activityList);
         }
       },
       err=>{

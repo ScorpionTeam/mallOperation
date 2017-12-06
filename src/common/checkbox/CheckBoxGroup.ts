@@ -56,7 +56,11 @@ export class CheckBoxGroup implements OnInit, OnChanges{
     this.singleCheck.emit(this.groupList);
   }
 
-  initChang(groupList){
+  /**
+   * 初始化
+   * @param groupList
+   */
+  initChang(groupList:any){
     if (groupList.every(item => item.checked === false)) {
       this.allChecked = false;
       this.indeterminate = false;
