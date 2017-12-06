@@ -18,7 +18,6 @@ export class GoodListComponent implements OnInit{
   goodList:Array<any> = [];
   checkAll:boolean = false;//全选
   doCheckAll:boolean=false;//是否可以全选
-  searchKey:any= '';
   page:any = {
     pageNo:1,
     pageSize:10,
@@ -88,7 +87,6 @@ export class GoodListComponent implements OnInit{
     this.page.pageNo=val;
     this.condition.pageNo=this.page.pageNo;
     this.condition.pageSize=this.page.pageSize;
-    this.condition.searchKey = this.searchKey;
     this.goodService.pageList(this.condition).subscribe(res=>{
         /*给checkbox赋值*/
         for(let i =0;i<res["list"].length;i++){
@@ -108,7 +106,6 @@ export class GoodListComponent implements OnInit{
     this.page.pageSize=val;
     this.condition.pageNo=this.page.pageNo;
     this.condition.pageSize=this.page.pageSize;
-    this.condition.searchKey = this.searchKey;
     this.goodService.pageList(this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
           res["list"].checked=false
@@ -130,7 +127,6 @@ export class GoodListComponent implements OnInit{
     let url = 'backstage/good/findByCondition';
     this.page.pageNo=1;
     this.condition.pageNo=1;
-    this.condition.searchKey=this.searchKey;
     this.condition.pageSize=this.page.pageSize;
     this.goodService.pageList(this.condition).subscribe(res=>{
         for(let i =0;i<res["list"].length;i++){
@@ -174,19 +170,17 @@ export class GoodListComponent implements OnInit{
             continue;
           }
           //检测是否在idList中已存在
-          for(let index in this.idList){
-            if(val[i].id==this.idList[index]){
-              break;
-            }else if((Number(index)+1)==this.idList.length){
-              this.goodList[i]['checked']=true;
-              this.idList.push(val[i].id);
-            }
+          if(this.idList.indexOf(val[i].id)!=-1){
+            continue;
+          }else {
+            this.goodList[i]['checked']=true;
+            this.idList.push(val[i].id);
           }
         }
       }else {
-        for(let i =0;i<val.length;i++){
-          this.goodList[i]['checked']=false;
-        }
+        this.goodList.forEach(
+          item=>{item.checked=false}
+        );
         this.idList=[]
       }
     }

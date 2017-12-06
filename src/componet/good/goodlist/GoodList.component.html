@@ -1,14 +1,10 @@
 <div class="goodList_tool">
   <nz-input [nzType]="'text'" [nzPlaceHolder]="'输入关键字'" [nzSize]="'large'"
-            [(ngModel)]="searchKey" [class]="'search_input'">
+            [(ngModel)]="condition.searchKey" [class]="'search_input'">
     <ng-template #addOnAfter>
       <i class="anticon anticon-search search" (click)="search()"></i>
     </ng-template>
   </nz-input>
-  <!--  <button nz-button [nzType]="'danger'" class="btn" (click)="delete()">
-      &lt;!&ndash;<i class="anticon anticon-close"></i>&ndash;&gt;
-      <span>删除</span>
-    </button>-->
   <button nz-button [nzType]="'danger'"  class="btn" (click)="batchGoodDown('OFF_SALE')">
     <span>下架</span>
   </button>

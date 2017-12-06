@@ -26,7 +26,8 @@ export class ActivityListComponent{
   idList:any=[];//批量操作id集合
   checkAll:boolean=false;
   constructor(private pageObj:PageService,private router:Router,private http:Http,private dataTool:DataTool,
-              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,private service:ActivityService){}
+              private route:ActivatedRoute,private nzMessage:NzMessageService,private nzModal:NzModalService,
+              private service:ActivityService){}
 
   ngOnInit(){
     this.init();
