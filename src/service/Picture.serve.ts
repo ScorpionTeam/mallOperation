@@ -19,7 +19,7 @@ export  class PictureServe{
    * 删除图片
    * @param url
    */
-  delPic(url) {
+  delPic(url:string) {
    return  this.http.get("file/deleteImage?imageName=" + url);
   }
 }

@@ -70,7 +70,7 @@ export class RoleService{
    * @param roleId
    * @returns {any}
    */
-  findMenuListByRoleId(roleId){
+  findMenuListByRoleId(roleId:number){
     let url = "backstage/menu/findByRoleId?roleId="+roleId;
     return this.http.get(url);
   }
