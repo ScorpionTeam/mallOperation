@@ -74,7 +74,7 @@ export class MenuService{
    * 根据用户id查询菜单
    * @param id
    */
-  findMenuByUserid(id){
+  findMenuByUserid(id:string){
     let url = "backstage/menu/findByUserId?userId="+id;
     return this.http.get(url);
   }

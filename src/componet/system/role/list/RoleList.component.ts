@@ -7,122 +7,125 @@ import {DataTool} from "../../../../common/data/DataTool";
 import {MenuService} from "../../../../service/menu/Menu.service";
 import {it} from "selenium-webdriver/testing";
 @Component({
-  selector:'role-list',
-  templateUrl:'RoleList.component.html',
-  styleUrls:['RoleList.component.css'],
-  providers:[RoleService,MenuService]
+  selector: 'role-list',
+  templateUrl: 'RoleList.component.html',
+  styleUrls: ['RoleList.component.css'],
+  providers: [RoleService, MenuService]
 })
 
-export class RoleListComponent implements OnInit{
-  constructor(private roleService:RoleService,private routerTool:RouterTool,private dataTool:DataTool,
-              private route:ActivatedRoute,private nzModal:NzModalService,private menuService:MenuService,
-              private nzMessage:NzMessageService){}
-  ngOnInit(){
+export class RoleListComponent implements OnInit {
+  constructor(private roleService: RoleService, private routerTool: RouterTool, private dataTool: DataTool,
+              private route: ActivatedRoute, private nzModal: NzModalService, private menuService: MenuService,
+              private nzMessage: NzMessageService) {
+  }
+  
+  ngOnInit() {
     this.pageChangeHandler(1);
     this.getMenuList();
   }
-  roleList:any=[];//角色列表
-  page:any={
-    pageNo:1,
-    pageSize:10,
-    total:0
+  
+  roleList: any = [];//角色列表
+  page: any = {
+    pageNo: 1,
+    pageSize: 10,
+    total: 0
   };
-  searchKey:string;//关键字
-  menuList:any=[];//菜单列表
-  menuIdList:any=[];菜单Id列表
-
+  searchKey: string; //关键字
+  menuList: any = []; //菜单列表
+  menuIdList: any = [];
+  
   /**
    * 跳转
    * @param url
    * @param val
    */
-  skipToPage(url:string,val?:any){
-    this.routerTool.skipToPage(url,this.route,val);
+  skipToPage(url: string, val?: any) {
+    this.routerTool.skipToPage(url, this.route, val);
   }
-
+  
   /**
    * 改变页码
    * @param val
    */
-  pageChangeHandler(val:any){
-    this.page.pageNo=val;
-    this.roleService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(
-      res=>{
+  pageChangeHandler(val: any) {
+    this.page.pageNo = val;
+    this.roleService.pageList(this.page.pageNo, this.page.pageSize, {searchKey: this.searchKey}).subscribe(
+      res=> {
         this.roleList = res["list"];
         this.page.total = res["total"];
       }
     )
   }
-
+  
   /**
    * 改变每页展现条数
    * @param val
    */
-  pageSizeChangeHandler(val:any){
+  pageSizeChangeHandler(val: any) {
     this.page.pageSize = val;
-    this.roleService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(
-      res=>{
+    this.roleService.pageList(this.page.pageNo, this.page.pageSize, {searchKey: this.searchKey}).subscribe(
+      res=> {
         this.roleList = res["list"];
         this.page.total = res["total"];
       }
     )
   }
-
+  
   /**
    * 搜索
    */
-  search(){
-    this.page.pageNo=1;
-    this.roleService.pageList(this.page.pageNo,this.page.pageSize,{searchKey:this.searchKey}).subscribe(
-      res=>{
+  search() {
+    this.page.pageNo = 1;
+    this.roleService.pageList(this.page.pageNo, this.page.pageSize, {searchKey: this.searchKey}).subscribe(
+      res=> {
         this.roleList = res["list"];
         this.page.total = res["total"];
       }
     )
   }
-
+  
   /**
    * 根据Id删除
    * @param id
    */
-  delConfirm(id:number){
+  delConfirm(id: number) {
     this.nzModal.warning({
-      title:"提示",
-      content:"确认删除?",
-      onOk:()=>{
+      title: "提示",
+      content: "确认删除?",
+      onOk: ()=> {
         this.delById(id);
       }
     })
   }
-
-  delById(id:number){
+  
+  delById(id: number) {
     this.roleService.delRoleById(id).subscribe(
-      res=>{
-        if(res["result"]==1){
+      res=> {
+        if (res["result"] == 1) {
           this.nzModal.success({
-            content:"删除成功"
+            content: "删除成功"
           });
-        }else {
+        } else {
           this.nzModal.error(res["error"].message);
         }
       }
     );
   }
-
+  
   /**
    * 打开模态
    * @param id
    * @param body
    */
-  openModal(id:number,body:any){
+  openModal(id: number, body: any) {
     this.nzModal.confirm({
-      title:"分配权限",
-      content:body,
-      maskClosable:false,
-      onOk:()=>{
-        this.roleService.assignMenuToRole(id,this.menuIdList).subscribe(
-          res=>{
-            if(res["result"]==1){
+      title: "分配权限",
+      content: body,
+      maskClosable: false,
+      onOk: ()=> {
+        this.roleService.assignMenuToRole(id, this.menuIdList).subscribe(
+          res=> {
+            if (res["result"] == 1) {
               this.nzMessage.success("分配成功");
             }
           }
@@ -130,72 +133,74 @@ export class RoleListComponent implements OnInit{
       }
     });
   }
-
+  
   /**
    * 获取菜单列表
    */
-  getMenuList(){
+  getMenuList() {
     this.menuService.getAllMenuList().subscribe(
-      res=>{
+      res=> {
         this.menuList = res["data"];
         this.menuList.forEach(
-          item=>{
+          (item: any)=> {
             item.leaf.forEach(
-              subItem=> {subItem.checked=false;}
+              (subItem:any)=> {
+                subItem.checked = false;
+              }
             )
           });
       }
     )
   }
-
+  
   /**
    * 获取菜单IdList
    */
-  getMenuIdList(idList:any){
-    let arry:number[]=[];
+  getMenuIdList(idList: any) {
+    let arry: number[] = [];
     this.menuList.forEach(
-      item=>{
-       item.leaf.forEach(
-         subItem=>{
-           if(subItem.checked){
-             arry.push(subItem.id);
-           }
-         }
-       )
+      (item:any)=> {
+        item.leaf.forEach(
+          (subItem:any)=> {
+            if (subItem.checked) {
+              arry.push(subItem.id);
+            }
+          }
+        )
       }
     );
     this.menuIdList = arry;
   }
-
+  
   /**
    * 初始化角色权限
    * @param id:角色id
    */
-  initRoleMenu(id:number,body:any){
+  initRoleMenu(id: number, body: any) {
     this.roleService.findMenuListByRoleId(id).subscribe(
-      res=>{
-        let curIdList=[];
+      res=> {
+        let curIdList:any = [];
         res["data"].forEach(
-          item=>{
-          curIdList=  curIdList.concat(item.leaf.map(
-              subItem=>{
+          (item:any)=> {
+            curIdList = curIdList.concat(item.leaf.map(
+              (subItem:any)=> {
                 return subItem.id;
               }
             ));
           });
         this.menuList.forEach(
-          item=>{
+          (item:any)=> {
             item.leaf.forEach(
-              subItem=>{
-                if(curIdList.includes(subItem.id)){
-                  subItem.checked=true;
-                }else {
-                  subItem.checked=false;
+              (subItem:any)=> {
+                if (curIdList.includes(subItem.id)) {
+                  subItem.checked = true;
+                } else {
+                  subItem.checked = false;
                 }
               }
             )
           });
-        this.openModal(id,body);
+        this.openModal(id, body);
       }
     );
   }
