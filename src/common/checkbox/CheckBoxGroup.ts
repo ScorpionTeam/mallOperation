@@ -33,9 +33,9 @@ export class CheckBoxGroup implements OnInit, OnChanges{
   updateAllChecked() {
     this.indeterminate = false;
     if (this.allChecked) {
-      this.groupList.forEach(item => item.checked = true);
+      this.groupList.forEach((item:any) => item.checked = true);
     } else {
-      this.groupList.forEach(item => item.checked = false);
+      this.groupList.forEach((item:any) => item.checked = false);
     }
     this.checkAllHanler.emit(this.groupList);
   }
@@ -44,10 +44,10 @@ export class CheckBoxGroup implements OnInit, OnChanges{
    * 单选
    */
   updateSingleChecked() {
-    if (this.groupList.every(item => item.checked === false)) {
+    if (this.groupList.every((item:any) => item.checked === false)) {
       this.allChecked = false;
       this.indeterminate = false;
-    } else if (this.groupList.every(item => item.checked === true)) {
+    } else if (this.groupList.every((item:any) => item.checked === true)) {
       this.allChecked = true;
       this.indeterminate = false;
     } else {
@@ -61,10 +61,10 @@ export class CheckBoxGroup implements OnInit, OnChanges{
    * @param groupList
    */
   initChang(groupList:any){
-    if (groupList.every(item => item.checked === false)) {
+    if (groupList.every((item:any) => item.checked === false)) {
       this.allChecked = false;
       this.indeterminate = false;
-    } else if (groupList.every(item => item.checked === true)) {
+    } else if (groupList.every((item:any) => item.checked === true)) {
       this.allChecked = true;
       this.indeterminate = false;
     } else {

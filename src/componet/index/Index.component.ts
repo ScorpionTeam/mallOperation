@@ -1,10 +1,11 @@
-import {Component, OnInit,enableProdMode} from "@angular/core";
+import {Component, OnInit, enableProdMode} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd";
 import {Http} from "../../common/http/Http";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {MenuService} from "../../service/menu/Menu.service";
+import {HMenu} from "../../common/menu/HMenu";
 enableProdMode();
 interface FlagState{
   loadFlag:boolean;
@@ -26,6 +27,11 @@ export class IndexComponent implements OnInit{
   ngOnInit(){
     this.name = localStorage.getItem("name");
     this.findMenuList();
+  }
+
+  menuClasses:any={
+    "menu_item":true,
+    "menu_item_selected":false
   }
 
   /**
@@ -68,4 +74,6 @@ export class IndexComponent implements OnInit{
       }
     )
   }
+
+
 }

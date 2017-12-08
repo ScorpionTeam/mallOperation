@@ -47,8 +47,10 @@ import {RoleListComponent} from "../componet/system/role/list/RoleList.component
 import {RoleComponent} from "../componet/system/role/detail/Role.component";
 import {CheckBoxGroup} from "../common/checkbox/CheckBoxGroup";
 import {PictureListComponent} from "../componet/picture/list/PictureList.component";
+import {HMenu} from "../common/menu/HMenu";
 @NgModule({
   declarations: [
+    HMenu,
     HKeditor,
     ImgUpload,
     CheckBoxGroup,

@@ -1,96 +1,133 @@
 <nz-layout class="layout index_container">
-  <nz-header>
-    <div class="logo"></div>
-    <div style="display: inline-block;font-size: 20px;color:#108ee9;">妆口袋后台运营管理系统</div>
-    <nz-dropdown style="float: right">
-      <a class="ant-dropdown-link" nz-dropdown>
-      {{name}} <i class="anticon anticon-down"></i>
-      </a>
-      <ul nz-menu>
-        <li nz-menu-item>
-          <a target="_blank" rel="noopener noreferrer" (click)="skipToPage('personal')">个人资料</a>
-        </li>
-        <li nz-menu-item>
-          <a target="_blank" rel="noopener noreferrer" (click)="logout()">退出</a>
-        </li>
-      </ul>
-    </nz-dropdown>
-  </nz-header>
+  <nz-sider  [nzWidth]="200" class="index_sider">
+    <div class="menu_logo">妆口袋</div>
+    <ul class="menu">
+      <div class="sidebar_top">
+        <div class="userlog">
+          <img src="https://zjhkhl.com/mall/goodimage/richtext/1512440181033.jpg" class="" alt="">
+          <div>
+            <nz-dropdown style="width: 100%">
+              <a class="ant-dropdown-link" nz-dropdown class="userlog_text">{{name}}</a>
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" (click)="skipToPage('personal')">个人资料</a>
+                </li>
+                <li nz-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" (click)="logout()">退出</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </div>
+        </div>
+      </div>
+      <h-menu [dataList]="menuList"></h-menu>
+      <!--<li class="menu_item menu_item_close" *ngFor="let menu of menuList;let index = index">
+        <div class="menu_item_warp" (click)="selectMenu(index)">
+         <span class="menu_item_content">
+           <span><i [class]="menu.icon"></i>{{menu.name}}</span>
+         </span>
+        </div>
+        <ul class="sub_menu">
+          <li class="sub_menu_item" *ngFor="let subMenu of menu.leaf" (click)="selectSubMenu($event,subMenu.url)">{{subMenu.name}}</li>
+        </ul>
+      </li>-->
+    </ul>
+    <!--<ul nz-menu [nzMode]="'inline'" class="menu" [nzTheme]="'dark'">
+      <div class="sidebar_top">
+        <div class="userlog">
+          <img src="https://zjhkhl.com/mall/goodimage/richtext/1512440181033.jpg" class="" alt="">
+          <div>
+            <nz-dropdown style="width: 100%">
+              <a class="ant-dropdown-link" nz-dropdown class="userlog_text">{{name}}</a>
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" (click)="skipToPage('personal')">个人资料</a>
+                </li>
+                <li nz-menu-item>
+                  <a target="_blank" rel="noopener noreferrer" (click)="logout()">退出</a>
+                </li>
+              </ul>
+            </nz-dropdown>
+          </div>
+        </div>
+      </div>
+      <li nz-submenu class="menu_item" *ngFor="let menu of menuList">
+        <div title style="padding: 0 20px 0 45px">
+          <span title class="menu_item_content"><i [class]="menu.icon"></i>{{menu.name}}</span>
+        </div>
+        <ul>
+          <li nz-menu-item (click)="skipToPage(subMenu.url)"
+              *ngFor="let subMenu of menu.leaf" class="sub_menu_item">{{subMenu.name}}</li>
+        </ul>
+      </li>
+      &lt;!&ndash;        <li nz-submenu>
+                <span title><i class="anticon anticon-user"></i>商品</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('good-list')">商品列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-laptop"></i> 订单</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('order-list')">订单列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-laptop"></i>活动</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('activity-list')">活动列表</li>
+                  <li nz-menu-item (click)="skipToPage('activity-good-concat')">新增商品关联</li>
+                  <li nz-menu-item (click)="skipToPage('activity-good-action')">关联商品操作</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-user"></i>用户</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('user-list')">用户列表</li>
+                  <li nz-menu-item (click)="skipToPage('brand-list')">品牌列表</li>
+                  <li nz-menu-item (click)="skipToPage('ticket-list')">优惠券列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-user"></i>角色</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('role-list')">角色列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-user"></i>广告</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('banner-list')">广告列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-setting"></i>类目</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('category-list')">类目列表</li>
+                </ul>
+              </li>
+              <li nz-submenu>
+                <span title><i class="anticon anticon-setting"></i>系统</span>
+                <ul>
+                  <li nz-menu-item (click)="skipToPage('menu-list')">菜单列表</li>
+                </ul>
+              </li>&ndash;&gt;
+    </ul>-->
+  </nz-sider>
   <nz-layout>
-    <nz-sider [nzWidth]="180" class="index_sider">
-      <ul nz-menu [nzMode]="'inline'" class="menu">
-        <li nz-submenu *ngFor="let menu of menuList">
-          <span title><i [class]="menu.icon"></i>{{menu.name}}</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage(subMenu.url)" *ngFor="let subMenu of menu.leaf">{{subMenu.name}}</li>
-          </ul>
-        </li>
-<!--        <li nz-submenu>
-          <span title><i class="anticon anticon-user"></i>商品</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('good-list')">商品列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-laptop"></i> 订单</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('order-list')">订单列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-laptop"></i>活动</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('activity-list')">活动列表</li>
-            <li nz-menu-item (click)="skipToPage('activity-good-concat')">新增商品关联</li>
-            <li nz-menu-item (click)="skipToPage('activity-good-action')">关联商品操作</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-user"></i>用户</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('user-list')">用户列表</li>
-            <li nz-menu-item (click)="skipToPage('brand-list')">品牌列表</li>
-            <li nz-menu-item (click)="skipToPage('ticket-list')">优惠券列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-user"></i>角色</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('role-list')">角色列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-user"></i>广告</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('banner-list')">广告列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-setting"></i>类目</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('category-list')">类目列表</li>
-          </ul>
-        </li>
-        <li nz-submenu>
-          <span title><i class="anticon anticon-setting"></i>系统</span>
-          <ul>
-            <li nz-menu-item (click)="skipToPage('menu-list')">菜单列表</li>
-          </ul>
-        </li>-->
-      </ul>
-    </nz-sider>
+    <div class="index_header">
+    </div>
     <nz-layout class="index_content">
       <div class="sub_out">
         <nz-content class="sub_container">
           <router-outlet></router-outlet>
-
         </nz-content>
       </div>
     </nz-layout>
+    <nz-footer style="text-align: center;background: #f9f9f9;">Ant Design ©2017 妆口袋</nz-footer>
     <div class="spin_warp" *ngIf="spinFlag|async"></div>
     <div class="spin" *ngIf="spinFlag|async">
       <nz-spin [nzSize]="'large'" [nzTip]="'加载中...'"></nz-spin>
     </div>
   </nz-layout>
-  <nz-footer style="text-align: center;">Ant Design ©2017 妆口袋</nz-footer>
 </nz-layout>

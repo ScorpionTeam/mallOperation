@@ -1,0 +1,12 @@
+<ul>
+  <li class="menu_item menu_item_close" *ngFor="let menu of dataList;let index = index">
+    <div class="menu_item_warp" (click)="selectMenu(index)">
+         <span class="menu_item_content">
+           <span><i [class]="menu.icon"></i>{{menu.name}}</span>
+         </span>
+    </div>
+    <ul class="sub_menu">
+      <li class="sub_menu_item" *ngFor="let subMenu of menu.leaf" (click)="selectSubMenu($event,subMenu.url)">{{subMenu.name}}</li>
+    </ul>
+  </li>
+</ul>

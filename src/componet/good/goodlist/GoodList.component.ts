@@ -6,11 +6,12 @@ import {DataTool} from "../../../common/data/DataTool";
 import {GoodService} from "../../../service/good/Good.service";
 import {CategoryService} from "../../../service/category/Category.service";
 import {TimePick} from "../../../common/data/TimePick";
+import {TableTool} from "../../../common/list/TableTool";
 @Component({
   selector:"good-list",
   templateUrl:"GoodList.component.html",
   styleUrls:["GoodList.component.css"],
-  providers:[GoodService,CategoryService]
+  providers:[GoodService,CategoryService,TableTool]
 })
 
 export class GoodListComponent implements OnInit{
@@ -29,9 +30,10 @@ export class GoodListComponent implements OnInit{
   //是否展开
   isCollapse:boolean = false;
   idList:any=[];//id集合
-  constructor(private dataTool:DataTool,private goodService:GoodService,private categoryService:CategoryService,
+  constructor( public dataTool:DataTool,private goodService:GoodService,private categoryService:CategoryService,
               private router:Router,private route :ActivatedRoute,private  PicUrl:HttpData,
-              private nzService :NzModalService ,private nzMessage:NzMessageService,private timePickTool:TimePick){}
+              private nzService :NzModalService ,private nzMessage:NzMessageService,
+              private timePickTool:TimePick,private tableTool:TableTool){}
 
   ngOnInit(){
     this.picUrl = this.PicUrl.PicUrl;
@@ -143,49 +145,22 @@ export class GoodListComponent implements OnInit{
   }
 
   /**
-   * 选择
-   * @param flag 选中标志
-   * @param val 商品id
-   * @param type 类型 0:全选，1:单选
+   * 选择复选框
+   * @param flag :boolean 是否选中
+   * @param type 0:全选  1:单选
+   * @param idList
+   * @param dataList
+   * @param val
+   * @param index
    */
-  selectItem(flag:any,val:any,type:any,index?:any){
-    if(type==1){
-      if(flag){
-        this.idList.push(val);
-        if(this.idList.length==this.goodList.length){
-          this.checkAll = true;
-        }
+    selectItem(flag:boolean,type:number,idList:any[],dataList:any[],val?:any,index?:any){
+      if(type==0){
+        this.tableTool.selectItem(flag,type,idList,dataList);
       }else {
-        let index = this.idList.indexOf(val);
-        this.idList.splice(index,1);
-        this.checkAll = false;
+        this.checkAll = this.tableTool.selectItem(flag,type,idList,dataList,val);
       }
-    }else {
-      /*全选或全不选*/
-      if(flag){
-        for(let i =0;i<val.length;i++){
-          if(this.idList.length==0){
-            this.goodList[i]['checked']=true;
-            this.idList.push(val[i].id);
-            continue;
-          }
-          //检测是否在idList中已存在
-          if(this.idList.indexOf(val[i].id)!=-1){
-            continue;
-          }else {
-            this.goodList[i]['checked']=true;
-            this.idList.push(val[i].id);
-          }
-        }
-      }else {
-        this.goodList.forEach(
-          item=>{item.checked=false}
-        );
-        this.idList=[]
-      }
+      console.log(this.idList);
     }
-    console.log(this.idList);
-  };
 
   /**
    * 禁止全选
@@ -239,32 +214,4 @@ export class GoodListComponent implements OnInit{
       this.nzMessage.error("系统错误");
     })
   }
-  /*  delete(){
-   if(this.idList.length==0){
-   this.nzService.warning({
-   title:"提示",
-   content:"请先选择要删除的商品!"
-   });
-   return;
-   }
-   let url = 'backstage/good/bathDeleteGoods';
-   let self = this;
-   this.nzService.confirm({
-   title:"删除提醒",
-   content:"确认进行删除吗?",
-   maskClosable:false,
-   onOk:function(){
-   self.http.post(url,{idList:self.idList}).subscribe(res=>{
-   if(res['result']==1){
-   self.nzMessage.success("删除成功");
-   self.pageChangeHandler(1);
-   }else {
-   self.nzMessage.error(res["error"].message);
-   }
-   },err=>{
-   console.log(err);
-   })
-   }
-   });
-   }*/
 }
